@@ -1,0 +1,11 @@
+Value                   LDAP Display Name
+Kenneth                 givenName
+J                       middleName
+Myer                    SN
+712 NE 40th Way         streetAddress
+Redmond                 L
+WA                      st
+98052                   postalCode
+USA                     c
+1-425-555-1234          telephoneNumber
+kmyer@fabrikam.com      mail
