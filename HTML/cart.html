@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+%%Panel.HTMLHead%%
+<body>
+    <script type="text/javascript" src="%%GLOBAL_ShopPath%%/javascript/cart.js?%%GLOBAL_JSCacheToken%%"></script>
+    <div id="Container">
+    %%Panel.Header%%
+
+    <div id="Wrapper">
+        %%Panel.WrapperBanner%%
+        <div class="Left" id="LayoutColumn1">
+            %%Panel.SideCategoryList%%
+            
+            
+        </div>
+        <div class="Content" id="LayoutColumn2" style="display:none">
+            %%Panel.CartBreadcrumb%%
+            %%Panel.CartHeader%%
+            %%Panel.CartStatusMessage%%
+            %%Panel.CartContent%%
+            %%Panel.SuggestiveCartContent%%
+
+        </div>
+        <div class="Content" id="NOJS" style="display:block">
+            <center>
+                <h2>
+                    JavaScripts are disabled<br/>
+                    Please enable JavaScripts to continue
+                </h2>            
+            </center>
+        </div>
+        
+        <div class="Right" id="LayoutColumn3">
+            %%Panel.SideCouponCodeBox%%
+            %%Panel.SideProductRecentlyViewed%%
+            %%Panel.SideTopSellers%%
+            
+        </div>
+        <br class="Clear" />
+    </div>
+    %%Panel.Footer%%
+</div>
+<script>
+jQuery(document).ready(function(){
+    $('#NOJS').css( "display", "none");
+    $('#LayoutColumn2').css( "display", "block");
+    var grandTotal = '%%GLOBAL_CartItemTotal%%';
+    processCartTotal(grandTotal);
+});
+</script>    
+
+<script type="text/javascript" src="http://timeapi.org/est/now.json?callback=PMCheckStoreHours">
+</script>
+
+    </body>
+</html> 

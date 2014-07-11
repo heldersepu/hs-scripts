@@ -1,0 +1,21 @@
+osatcnnt	constant
+rewkdyo		keyword
+nuiconft	function
+cejobt		object
+msxbog		msgbox
+rrore		error
+tricspc		cscript
+ddfefati		fadedit
+rnist		instr
+wlihe		while
+yptoprer	property
+lsaec		lcase
+ykeawed			awkeyed
+flaes		false
+mepty		empty
+rtiew		write
+ebudg		debug
+hgenlt		length
+cvipbtsr	vbscript
+sacls		class
+ 

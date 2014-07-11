@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.2">
+<Document>
+  <name>Cestra&#39;s Pizza Delivery Area</name>
+  <description><![CDATA[This is the area that Cestra's Pizza on East Tremont Avenue delivers to, If you are  outside of the shaded area, please call 718-518-7900 to see if we would be able to deliver to you.]]></description>
+  <Style id="style2">
+    <LineStyle>
+      <color>40000000</color>
+      <width>3</width>
+    </LineStyle>
+    <PolyStyle>
+      <color>33FF0000</color>
+      <fill>1</fill>
+      <outline>1</outline>
+    </PolyStyle>
+  </Style>
+  <Style id="style1">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/pink-pushpin.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Placemark>
+    <name>Cestra&#39;s Pizza Delivery Area</name>
+    <description><![CDATA[<div dir="ltr">This is the area that Cestra's Pizza delivers to. If you are outside of the shaded area, please call 718-518-7900 to see if we would be able to deliver to you.</div>]]></description>
+    <styleUrl>#style2</styleUrl>
+    <Polygon>
+      <outerBoundaryIs>
+        <LinearRing>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -73.790497,40.806110,0.000000
+            -73.790154,40.805363,0.000000
+            -73.790535,40.804714,0.000000
+            -73.791695,40.804260,0.000000
+            -73.825127,40.812088,0.000000
+            -73.826759,40.811504,0.000000
+            -73.828949,40.815140,0.000000
+            -73.823456,40.817024,0.000000
+            -73.826462,40.821671,0.000000
+            -73.833069,40.818874,0.000000
+            -73.835388,40.818649,0.000000
+            -73.835640,40.824657,0.000000
+            -73.836029,40.827190,0.000000
+            -73.835258,40.829006,0.000000
+            -73.833580,40.829494,0.000000
+            -73.835083,40.832775,0.000000
+            -73.836327,40.835697,0.000000
+            -73.837273,40.835667,0.000000
+            -73.838135,40.835567,0.000000
+            -73.838219,40.839073,0.000000
+            -73.837402,40.842255,0.000000
+            -73.836327,40.845600,0.000000
+            -73.835899,40.847610,0.000000
+            -73.835770,40.851185,0.000000
+            -73.835167,40.853165,0.000000
+            -73.833885,40.854492,0.000000
+            -73.830925,40.855694,0.000000
+            -73.828522,40.856117,0.000000
+            -73.826935,40.854462,0.000000
+            -73.826805,40.853294,0.000000
+            -73.827705,40.850533,0.000000
+            -73.827660,40.848747,0.000000
+            -73.826462,40.846348,0.000000
+            -73.826241,40.845242,0.000000
+            -73.820663,40.848488,0.000000
+            -73.816162,40.848488,0.000000
+            -73.815002,40.844433,0.000000
+            -73.798264,40.816700,0.000000
+            -73.798523,40.815563,0.000000
+            -73.790497,40.806110,0.000000
+          </coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Cestra&#39;s Pizza</name>
+    <description><![CDATA[<div dir="ltr">Cestra's Pizza is located at 3617 East Tremont Avenue on the corner of Lafayette. We are open  from Mon - Sat 11am - 10pm, Sunday from Noon - 9pm</div>]]></description>
+    <styleUrl>#style1</styleUrl>
+    <Point>
+      <coordinates>-73.825424,40.829918,0.000000</coordinates>
+    </Point>
+  </Placemark>
+</Document>
+</kml>

@@ -1,0 +1,161 @@
+<HTML>
+<HEAD>
+<TITLE>Advanced Event 10: Blackjack!</TITLE>
+<HTA:Application SELECTION="NO"/> 
+</HEAD>
+<SCRIPT language="VBScript">
+Dim arrCards, Resp, dHiddenCard
+
+Function doTotal(strCards)
+    intTotal = 0
+    arrCard = Split(strCards, VbCrLf) 
+    For Each dCard in arrCard
+        arrWords = Split(dCard, " ") 
+        If Ubound(arrWords) > 1 then    
+            Select Case arrWords(0)
+                Case "Two"  : intTotal = intTotal + 2
+                Case "Three": intTotal = intTotal + 3
+                Case "Four" : intTotal = intTotal + 4
+                Case "Five" : intTotal = intTotal + 5
+                Case "Six"  : intTotal = intTotal + 6
+                Case "Seven": intTotal = intTotal + 7
+                Case "Eight": intTotal = intTotal + 8
+                Case "Nine" : intTotal = intTotal + 9
+                Case "Jack" : intTotal = intTotal + 10
+                Case "Queen": intTotal = intTotal + 10
+                Case "King" : intTotal = intTotal + 10
+                Case "Ace"  : intTotal = intTotal + 11
+            End Select       
+        End IF
+    Next
+    doTotal = intTotal
+End Function
+
+Function RndNR
+    intRdn = (Timer*Rnd*100) Mod 48
+    Do	While (arrCards(intRdn) = "")
+        intRdn = (intRdn + 1) Mod 48
+    Loop
+    RndNR = intRdn
+End Function     
+
+Function AddString(dString1, dString2)
+    AddString = Left(dString1,Len(dString1)-6) & VbCrLf  & dString2 & Right(dString1,6) 
+    dString2 = ""
+End Function
+
+Function RevealHidden(dHidden)
+    one.innerHTML = Replace(one.innerHTML,"*****************",dHidden)
+    tot_one.innerHTML = doTotal(one.innerHTML)
+End Function
+
+Sub window_onload
+	'Initialise the Form
+    one.innerHTML = "<PRE> </PRE>"
+    two.innerHTML = "<PRE> </PRE>"
+    tot_one.innerHTML = "<PRE> </PRE>"
+    tot_two.innerHTML = "<PRE> </PRE>"
+    
+    'Initialize Cards         
+	AisEmpty = False
+	arrCards = Array("Two of Spades",   "Two of Hearts",   "Two of Diamonds",   "Two of Clubs",_
+                     "Three of Spades", "Three of Hearts", "Three of Diamonds", "Three of Clubs",_
+                     "Four of Spades",  "Four of Hearts",  "Four of Diamonds",  "Four of Clubs",_
+                     "Five of Spades",  "Five of Hearts",  "Five of Diamonds",  "Five of Clubs",_
+                     "Six of Spades",   "Six of Hearts",   "Six of Diamonds",   "Six of Clubs",_
+                     "Seven of Spades", "Seven of Hearts", "Seven of Diamonds", "Seven of Clubs",_
+                     "Eight of Spades", "Eight of Hearts", "Eight of Diamonds", "Eight of Clubs",_
+                     "Nine of Spades",  "Nine of Hearts",  "Nine of Diamonds",  "Nine of Clubs",_
+                     "Jack of Spades",  "Jack of Hearts",  "Jack of Diamonds",  "Jack of Clubs",_
+                     "Queen of Spades", "Queen of Hearts", "Queen of Diamonds", "Queen of Clubs",_
+                     "King of Spades",  "King of Hearts",  "King of Diamonds",  "King of Clubs",_
+                     "Ace of Spades",   "Ace of Hearts",   "Ace of Diamonds",   "Ace of Clubs")
+	
+    '
+    TempRnd = RndNR
+    dHiddenCard = arrCards(TempRnd)
+    arrCards(TempRnd) = ""
+    'dealing two cards
+    one.innerHTML = AddString(one.innerHTML, "*****************")    
+    two.innerHTML = AddString(two.innerHTML, arrCards(RndNR))
+    one.innerHTML = AddString(one.innerHTML, arrCards(RndNR))    
+    two.innerHTML = AddString(two.innerHTML, arrCards(RndNR))
+    
+    'Update totals
+    tot_one.innerHTML = doTotal(one.innerHTML)
+    tot_two.innerHTML = doTotal(two.innerHTML)
+    
+End Sub
+
+Sub showMessage(dMesage)
+    Resp = MsgBox (dMesage & VbCrLf & _
+        VbCrLf & "Do you want to try again?"_
+        , vbYesNO, "Blackjack!")
+    If Resp = vbYes then 
+        window_onload
+    Else
+        window.Close()                
+    End If
+End Sub
+
+Sub Click_Stay
+    Call RevealHidden(dHiddenCard)
+    tot_one.innerHTML = doTotal(one.innerHTML)
+
+    If Int(tot_one.innerHTML) <= 21 Then
+        If Int(tot_one.innerHTML) >= Int(tot_two.innerHTML) Then
+            Call showMessage("The dealer has " & tot_one.innerHTML & ", You just lost this hand")
+    	Else
+    		'Randomly draw the card 
+            one.innerHTML = AddString(one.innerHTML, arrCards(RndNR))
+            tot_one.innerHTML = doTotal(one.innerHTML)
+            Call Click_Stay
+    	End If
+    Else
+        Call showMessage("You are the Winner! ")
+    End If
+End Sub
+
+Sub Click_HitMe
+	'Randomly draw the card 
+	
+    two.innerHTML = AddString(two.innerHTML, arrCards(RndNR))
+    tot_two.innerHTML = doTotal(two.innerHTML)
+    
+    If Int(tot_two.innerHTML) > 21 Then
+        Call showMessage("Over 21. Sorry, you lose. ")
+    Else
+        If Int(tot_two.innerHTML) = 21 Then
+            Call showMessage("Total is 21, You are the Winner! ")
+        End If
+	End If
+End Sub
+
+</SCRIPT>
+<BODY>
+<Table Border=1 CELLSPACING=8 WIDTH="60%" HEIGHT="60%" ALIGN=center>
+<TR> 
+<TD WIDTH="50%" HEIGHT="10%" COLSPAN=2><H2>Dealer cards:</H2></TD>
+<TD WIDTH="50%" HEIGHT="10%" COLSPAN=2><H2>Your cards:  </H2></TD>
+</TR>
+<TR> 
+<TD  ID="one" WIDTH="50%" HEIGHT="90%" COLSPAN=2><PRE> </PRE></TD>
+<TD  ID="two" WIDTH="50%" HEIGHT="90%" COLSPAN=2><PRE> </PRE></TD>
+</TR>                                             
+<TR> 
+<TD  WIDTH="10%" HEIGHT="90%">Total:</TD>
+<TD  ID="tot_one" WIDTH="40%" HEIGHT="90%"><PRE> </PRE></TD>
+<TD  WIDTH="10%" HEIGHT="90%">Total:</TD>
+<TD  ID="tot_two" WIDTH="40%" HEIGHT="90%"><PRE> </PRE></TD>
+</TR>
+</Table>
+<Table Border=0 CELLSPACING=10  WIDTH="400" ALIGN=center>
+<TR>
+
+<TD ALIGN=center>
+<INPUT TYPE=SUBMIT VALUE="Stay"onClick="Click_Stay">
+<INPUT TYPE=SUBMIT VALUE="Hit Me!"onClick="Click_HitMe">
+</TD>
+</TR>
+</BODY>
+</HTML>

@@ -1,0 +1,280 @@
+<html><head>
+
+<HTA:APPLICATION
+	APPLICATIONNAME="HTANotePad" ID="oHTA" BORDER="thick"
+	BORDERSTYLE="normal" CAPTION="yes" CONTEXTMENU="yes"
+	INNERBORDER="no" MAXIMIZEBUTTON="yes" MINIMIZEBUTTON="yes"
+	NAVIGABLE="yes"
+	ICON="NOTEPAD.EXE" SCROLL="no" SCROLLFLAT="no"
+	SELECTION="no" SHOWINTASKBAR="yes" SINGLEINSTANCE="no"
+	SYSMENU="yes" VERSION="0.3" WINDOWSTATE="normal">
+
+<STYLE TYPE="text/css">
+<!--
+BODY	{	xfont-family: "Verdana, Arial, Helvetica, sans-serif";
+		font:menu;
+		background-color:Menu;
+		color:MenuText;
+		xfont-size: 10pt;
+		cursor:default; //auto, text, pointer
+	}
+TABLE	{	xfont-family:"Arial";
+		xfont-size:8pt;
+		font:menu;
+		padding:0pt;
+		border:0pt;
+		FILTER: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=90);
+	}
+IFrame	{	height:expression(document.body.clientHeight-MenuTable.clientHeight);
+		width:100%;
+	}
+TD	{	border:"1px solid Menu";}
+.submenu	{position:absolute;top=20;
+		background-color:Menu;
+		border="2px outset";}
+.MenuIn		{border:'1px inset';}
+.Menuover	{border:'1px outset';}
+.Menuout	{border:'1px solid';}
+.Submenuover	{background-color:highlight;color:highlighttext;}
+.Submenuout	{background-color:Menu;color:MenuText;}
+-->
+</STYLE>
+
+<script language=vbscript>
+option explicit
+Dim FileName,fModif,LastChildMenu,LastMenu
+fModif=False	'Not modified
+DisplayTitle
+Set LastChildMenu=Nothing
+Set LastMenu=Nothing
+Sub DisplayTitle
+	If FileName="" Then
+		document.Title="sans titre - " & oHTA.ApplicationName
+	Else
+		document.Title=FileName & " - " & oHTA.ApplicationName
+	End If
+End Sub
+
+'''''''''''''''''''
+' File management '
+'''''''''''''''''''
+Sub SaveAs
+	Dim oDLG
+	Set oDLG=CreateObject("MSComDlg.CommonDialog") 
+	With oDLG
+		.DialogTitle="SaveAs"
+		.Filter="Scripts|*.vbs;*.hta;*.wsf;*.js|Text Files|*.txt|All files|*.*"
+		.MaxFileSize=255
+		.ShowSave
+		If .FileName<>"" Then
+			FileName=.FileName
+			Save
+		End If
+	End With
+	Set oDLG=Nothing
+	DisplayTitle
+End Sub
+Sub Save()
+	Dim fso,f
+	If FileName<>"" Then
+		Set fso=CreateObject("Scripting.FileSystemObject")
+		Set f=fso.CreateTextFile(FileName,True)
+		f.Write MyFrame.MyText.Value
+		f.Close
+		Set f=Nothing
+		Set fso=Nothing
+	Else
+		SaveAs
+	End If
+End Sub
+Sub OpenIt
+	Dim fso,f
+	Set fso=CreateObject("Scripting.FileSystemObject")
+	Set f=fso.OpenTextFile(FileName,1)
+	MyFrame.MyText.Value=f.ReadAll
+	f.close
+	Set f=Nothing
+	Set fso=Nothing
+	DisplayTitle
+End Sub
+Sub Open()
+	If fModif Then
+		Select Case Msgbox("The text in the file " & FileName & " has been changed." _
+			& vbCrLf & "Do you want to save the changes ?",51,oHTA.ApplicationName)
+		Case 6	'Yes
+			Save
+		Case 7	'No
+		Case 2	'Cancel
+			Exit Sub
+		End Select
+	End If
+	Dim oDLG
+	Set oDLG=CreateObject("MSComDlg.CommonDialog") 
+	With oDLG
+		.DialogTitle="Open"
+		.Filter="Scripts|*.vbs;*.hta;*.wsf;*.js|Text Files|*.txt|All files|*.*"
+		.MaxFileSize=255
+		.Flags=.Flags Or &H1000	'FileMustExist (OFN_FILEMUSTEXIST)
+		.ShowOpen
+		If .FileName<>"" Then
+			FileName=.FileName
+			OpenIt
+		End If
+	End With
+	Set oDLG=Nothing
+End Sub
+Sub NewText
+	If fModif Then
+		Select Case Msgbox("The text in the file " & FileName & " has been changed." _
+			& vbCrLf & "Do you want to save the changes ?",51,oHTA.ApplicationName)
+		Case 6	'Yes
+			Save
+		Case 7	'No
+		Case 2	'Cancel
+			Exit Sub
+		End Select
+	End If
+	MyFrame.MyText.Value=""
+	FileName=""
+	DisplayTitle
+End Sub
+
+'''''''''''''''
+' Drag & Drop '
+'''''''''''''''
+Sub ChangeIFrame
+	'We use an Iframe to allow Drag&Drop
+	MyFrame.Document.Body.InnerHTML="<textarea ID=MyText WRAP=OFF onChange" & _
+		"='vbscript:parent.fModif=True' onclick='vbscript:parent.HideMenu' " & _
+		"style='width:100%;height:100%'></textarea>"
+	With MyFrame.Document.Body.Style
+		.marginleft=0
+		.margintop=0
+		.marginright=0
+		.marginbottom=0
+	End With
+	With MyFrame.MyText.Style
+		.fontfamily="Fixedsys, Verdana, Arial, sans-serif"
+		'.fontsize="7pt"
+	End With
+	Select Case UCase(MyFrame.location.href)
+	Case "ABOUT:BLANK"
+		FileName=""
+	Case Else
+		FileName=Replace(Mid(MyFrame.location.href,9),"/","\") 'suppress file:///
+		OpenIt
+	End Select
+End Sub
+
+'''''''''''''''''''
+' Menu management '
+'''''''''''''''''''
+Sub ShowSubMenu(Parent,Child)
+	If Child.style.display="block" Then
+		Parent.classname="Menuover"
+		Child.style.display="none"
+		Set LastChildMenu=Nothing
+	Else
+		Parent.classname="Menuin"
+		Child.style.display="block"
+		Set LastChildMenu=Child
+	End If
+	Set LastMenu=Parent
+End Sub
+Sub MenuOver(Parent,Child)
+	If LastChildMenu is Nothing Then
+		Parent.className="MenuOver"
+	Else
+		If LastMenu is Parent Then
+			Parent.className="MenuIn"
+		Else
+			HideMenu
+			ShowSubMenu Parent,Child
+		End If
+	End If
+End Sub
+Sub MenuOut(Menu)
+	If LastChildMenu is Nothing Then Menu.className="MenuOut"
+End Sub
+Sub HideMenu
+	If Not LastChildMenu is Nothing Then
+		LastChildMenu.style.display="none"
+		Set LastChildMenu=Nothing
+		LAstMenu.classname="Menuout"
+	End If
+End Sub
+Sub SubMenuOver(Menu)
+	Menu.className="SubMenuOver"
+	'LastMenu.classname="Menuin"
+End Sub
+Sub SubMenuOut(Menu)
+	Menu.className="SubMenuOut"
+End Sub
+
+</script>
+</head>
+
+<body leftmargin=0 topmargin=0 rightmargin=0>
+<TABLE id=MenuTable><TR>
+	<TD	onclick='ShowSubMenu Me,MyFileMenu'
+		onmouseover='MenuOver Me,MyFileMenu'
+		onmouseout='MenuOut Me'> File </TD>
+	<TD	onclick='ShowSubMenu Me,MyEditMenu'
+		onmouseover='MenuOver Me,MyEditMenu'
+		onmouseout='MenuOut Me'> Edit </TD>
+	<TD	onclick='ShowSubMenu Me,MyFindMenu'
+		onmouseover='MenuOver Me,MyFindMenu'
+		onmouseout='MenuOut Me'> Find </TD>
+	<TD	onclick='ShowSubMenu Me,MyHelpMenu'
+		onmouseover='MenuOver Me,MyHelpMenu'
+		onmouseout='MenuOut Me'> ? </TD>
+	<TD onclick="HideMenu" width=100% border=2></TD>
+	</TR></TABLE>
+<TABLE ID=MyFileMenu class=submenu style="left=2;display:none;"><TR>
+	<TD	onclick="HideMenu:NewText"
+		onmouseover='Submenuover Me'
+		onmouseout='Submenuout Me'> New</TD></TR>
+	<TR><TD	onclick="HideMenu:open"
+		onmouseover='Submenuover Me'
+		onmouseout='Submenuout Me'> Open</TD></TR>
+	<TR><TD	onclick="HideMenu:save"
+		onmouseover='Submenuover Me'
+		onmouseout='Submenuout Me'> Save</TD></TR>
+	<TR><TD	onclick="HideMenu:saveAs"
+		onmouseover='Submenuover Me'
+		onmouseout='Submenuout Me'> Save As</TD></TR>
+	<TR><TD><HR></TD></TR>
+	<TR><TD	onclick="HideMenu:window.close"
+		onmouseover='Submenuover Me'
+		onmouseout='Submenuout Me'> Quit</TD></TR>
+	</TABLE>
+<TABLE ID=MyEditMenu class=submenu style="left=30;display:none;"><TR>
+	<TD><HR width=50px></TD></TR>
+	</TABLE>
+<TABLE ID=MyFindMenu class=submenu style="left=60;display:none;"><TR>
+	<TD><HR width=50px></TD></TR>
+	</TABLE>
+<TABLE ID=MyHelpMenu class=submenu style="left=90;display:none;"><TR>
+	<TD	onclick='HideMenu:msgbox "No help available yet;under construction ;=)"'
+		onmouseover='Submenuover Me'
+		onmouseout='Submenuout Me'>Help</TD></TR>
+	<TR><TD	onclick='HideMenu:CreateObject("MSComDlg.CommonDialog").AboutBox'
+		onmouseover='Submenuover Me'
+		onmouseout='Submenuout Me'>About</TD></TR>
+	</TABLE>
+
+<iframe id=MyFrame application=yes scrolling=no onload="ChangeIFrame"></iframe>
+
+<script language=vbscript>
+'We can handle a file as a parameter to this HTA
+Dim x
+FileName=Trim(oHTA.CommandLine)
+x=Instr(2,FileName,"""")
+If x=Len(FileName) Then
+	FileName=""	'No File Loaded
+Else
+	FileName=Trim(Mid(FileName,x+1))
+	OpenIt
+End If
+</script>
+</body></html>

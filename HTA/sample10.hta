@@ -1,0 +1,93 @@
+<HTML>
+<HEAD>
+<TITLE>Pick a Color, Any Color</TITLE>
+<HTA:Application
+SELECTION="NO"/> 
+</HEAD>
+<SCRIPT language="VBScript">
+Dim A, Resp, RndNR
+Sub window_onload
+	'Initialize Cards
+	AisEmpty = False
+	A = Array(	"Yellow","Red","Blue","Green",_
+				"Yellow","Red","Blue","Green",_
+				"Yellow","Red","Blue","Green",_
+				"Yellow","Red","Blue","Green",_
+				"Yellow","Red","Blue","Green")
+	'Initialize Score
+	score.innerHTML = 0
+	tries.innerHTML = 0
+End Sub
+
+Sub Click_Submit
+	'Randomly draw the card 
+	If tries.innerHTML = 20 Then
+		Resp = MsgBox ("You have taken all 20 Cards"_
+					&vbcrlf&"Do you want to try again?"_
+					, vbYesNO, "Pick a Color, Any Color")
+		If Resp = vbYes then 
+			window_onload
+		End If
+	Else
+		RndNR = (Timer*Rnd) Mod 20
+		Do	While (A(RndNR) = "")
+			RndNR = (RndNR + 1) Mod 20
+		Loop
+		two.bgColor = A(RndNR)
+		If one.bgColor = two.bgColor then
+			MsgBox  " You are CORRECT :) ", vbOkOnly, "Try again" 
+			score.innerHTML = score.innerHTML + 1
+		Else
+			MsgBox  " You are WRONG :( ", vbOkOnly, "Try again"  
+		End IF
+		tries.innerHTML = tries.innerHTML + 1
+		two.bgColor = "white"
+		A(RndNR)= ""
+	End If
+End Sub
+
+Sub Click_Yellow 
+	one.bgColor = "Yellow" 
+End Sub
+Sub Click_Red
+	one.bgColor = "Red" 
+End Sub
+Sub Click_Blue
+	one.bgColor = "Blue" 
+End Sub
+Sub Click_Green
+	one.bgColor = "Green" 
+End Sub
+</SCRIPT>
+<BODY>
+<Table Border=2 CELLSPACING=5 width="60%" HEIGHT="40%" ALIGN=center>
+<TR ALIGN=center> 
+<TD  ID="one" width="50%" bgColor="Yellow"><H1>Your Guess</H1></TD>
+<TD  ID="two" width="50%"><H1>Actual</H1></TD>
+</TR>
+</Table>
+<Table Border=0 CELLSPACING=10  width="400" ALIGN=center>
+<TR>
+<TD>
+<INPUT TYPE=RADIO NAME="Color" onClick="Click_Yellow" CHECKED >Yellow
+<INPUT TYPE=RADIO NAME="Color" onClick="Click_Red">Red
+<INPUT TYPE=RADIO NAME="Color" onClick="Click_Blue">Blue
+<INPUT TYPE=RADIO NAME="Color" onClick="Click_Green">Green
+</TD>
+<TD ALIGN=center>
+<INPUT TYPE=SUBMIT VALUE="submit"onClick="Click_Submit">
+</TD>
+</TR>
+</Table>
+<Table Border=0 width="400" ALIGN=center>
+<TR ALIGN=center>
+<TD width="50"><B>Score:</B></TD>
+<TD width="10" ID="score">0</TD>
+<TD width="90">Correct out of </TD>
+<TD width="10" ID="tries">0</TD>
+<TD width="25">tries</TD>
+<TD></TD>
+</TR>
+</Table>
+</BODY>
+</HTML>
