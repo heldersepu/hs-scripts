@@ -1,0 +1,4 @@
+select spid from sysprocesses where dbid in(select db_id('dbname'))
+
+
+kill spid (you get from the above statement)

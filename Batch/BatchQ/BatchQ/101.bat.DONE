@@ -1,0 +1,21 @@
+:: Original FileName C:\BatchQ\ScheduleImageCopy.bat
+
+
+"%ProgramFiles%\TeraCopy\TeraCopy.exe" Copy G:\Conversion\Conversion_Projects\Agency_Pro_Sequel\Data\Previous\Images\CommClients R:\QQ010434\Converted
+
+updCreationDate.exe R:\QQ010434\Converted\CommClients
+
+::Pause before EXIT
+
+@COLOR 0A
+
+@ECHO.
+@ECHO.
+@ECHO.
+@ECHO     ALL DONE !
+@ECHO.
+@ECHO.
+
+
+ 
+

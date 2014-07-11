@@ -1,0 +1,75 @@
+<DIV style="BORDER-BOTTOM: #6d7b8d 1px solid; BORDER-LEFT: #6d7b8d 1px solid; BACKGROUND-COLOR: #ffffff; WIDTH: 250px; DISPLAY: none; HEIGHT: 80px; BORDER-TOP: #6d7b8d 1px solid; BORDER-RIGHT: #6d7b8d 1px solid" id=progressBar>
+<P class=statusText>Please Wait, Processing...</P>
+<CENTER style="PADDING-BOTTOM: 18px"><IMG alt=progressImage src="/webtop/images/indicator.gif"></CENTER></DIV>
+<FORM style="MARGIN: 0px" id=frmViewOnOffer method=post name=frmViewOnOffer action=offer_order_viewInfo.asp><!-- '********* Displaying all vendor offers with on offer status ******** -->
+<TABLE border=0 cellSpacing=0 cellPadding=0 width="98%">
+<TBODY>
+<TR width="100%">
+<TD>
+<DIV class=headertxtbl align=left>Offer List</DIV></TD></TR>
+<TR width="100%"></TR></TBODY></TABLE>
+<DIV class=instr><LABEL style="COLOR: red">&nbsp;Note :</LABEL>This list displays the orders which are currently put on offer. Orders on acceptance by any of the offered parties or on expiry of offer cycle, would be automatically removed out of this current list.<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** It may take few minutes for converting an offer(s) into an order(s).</DIV><BR><BR>
+<TABLE id=OfferCount cellSpacing=0 cellPadding=0 width="100%">
+<TBODY>
+<TR>
+<TD align=middle><B>Total Offers Found : <SPAN id=idSpan>1</SPAN></B></TD></TR></TBODY></TABLE>
+<TABLE id=Offer class=casetable border=1 cellSpacing=0 cellPadding=0 width="100%">
+<TBODY>
+<TR>
+<TD class=uihead height="15%" vAlign=top width="14%" align=middle>Case Number</TD>
+<TD class=uihead vAlign=top width="16%" align=middle>Product Type</TD>
+<TD class=uihead vAlign=top width="12%" align=middle>Requestor</TD>
+<TD class=uihead vAlign=top width="15%" align=middle>Property Address</TD>
+<TD class=uihead vAlign=top width="6%" align=middle>Order Price($)</TD>
+<TD class=uihead vAlign=top width="7%" align=middle>Order Turn Around Time(days)</TD>
+<TD class=uihead vAlign=top width="10%" align=middle>Offer Start Date</TD>
+<TD class=uihead vAlign=top width="10%" align=middle>Offer End Date</TD>
+<TD class=uihead vAlign=top width="6%" align=middle>Details</TD>
+<TD class=uihead vAlign=top width="4%" align=middle><INPUT id=chkOffer onclick=CheckAllOffer() type=checkbox name=chkOffer></TD></TR>
+<TR>
+<TD class=uilight align=middle>6368245_1</TD>
+<TD class=uilight align=middle>&nbsp;Ocwen BPO</TD>
+<TD class=uilight align=middle>&nbsp;Altisource Portfolio Solutions</TD>
+<TD class=uilight align=middle>&nbsp;1030 NE 140th Street,North Miami,FL,33161</TD>
+<TD class=uilight align=middle>&nbsp;40</TD>
+<TD class=uilight align=middle>&nbsp;2</TD>
+<TD class=uilight align=middle>&nbsp;4/27/2012 8:04:36 AM</TD>
+<TD class=uilight align=middle>&nbsp;4/30/2012 8:04:36 AM</TD>
+<TD class=uilight align=middle><A style="COLOR: blue" onclick="javascript:ViewOfferDetails('20120427::0001179190','Ocwen BPO')" href="javascript:void(0)"><B>View</B></A></TD>
+<TD class=uilight align=middle><INPUT id=chkOffer1 onclick=javascript:ChkIsAllSelected() value=20120427::0001179190 type=checkbox name=chkOffer></TD></TR></TBODY></TABLE>
+<TABLE class=casetable border=1 cellSpacing=0 cellPadding=0 width="100%">
+<TBODY>
+<TR>
+<TD class=CellClass colSpan=9 align=right><A style="COLOR: blue" onclick="ShowRespondDialog();return false;" href="javascript:void(0)"><B>Respond</B></A></TD></TR>
+<TR>
+<TD colSpan=9></TD></TR></TBODY></TABLE><BR><BR>
+<DIV style="DISPLAY: none" id=dvRespond align=center>
+<TABLE style="WIDTH: 50%" border=1 cellSpacing=0 cellPadding=0 align=center>
+<TBODY>
+<TR class=uihead>
+<TD>Respond to Offer :</TD>
+<TD class=close><A style="FLOAT: right" onclick="ProfileActionClick('cancel');return false;" href="javascript:void(0)">x</A></TD></TR>
+<TR>
+<TD style="WIDTH: 30%"><STRONG>Action</STRONG></TD>
+<TD style="WIDTH: 70%"><SELECT style="WIDTH: 100%" id=cboOfferStatus name=cboOfferStatus> <OPTION selected value=ACCEPTED>ACCEPT</OPTION> <OPTION value=OFFER_DECLINED>DECLINE</OPTION></SELECT></TD></TR>
+<TR>
+<TD><STRONG>Comments</STRONG></TD>
+<TD><TEXTAREA style="WIDTH: 100%" id=txtOfferComment rows=5 name=txtOfferComment></TEXTAREA></TD></TR>
+<TR>
+<TD colSpan=2 align=middle><A onmouseover="imgOn('btnSubmit', 'Submit');" onmouseout="imgOff('btnSubmit', 'Submit');" href="javascript:SubmitOfferStatus();"><IMG border=0 name=btnSubmit alt=Submit src="/webtop/images/buttons/submit_off.gif"></A><A onmouseover="imgOn('btnCancel','cancel');" onmouseout="imgOff('btnCancel','cancel');" href="javascript:ProfileActionClick('cancel');"> <IMG tabIndex=12 border=0 name=btnCancel alt=cancel src="/webtop/images/buttons/cancel_off.gif" width=54 height=20></A></TD></TR></TBODY></TABLE></DIV><INPUT id=hdnOfferId type=hidden name=hdnOfferId><BR><BR><!-- '********* Displaying status of Submitted offers ******** --></FORM>
+<SCRIPT type=text/javascript>
+        if(document.getElementById("idSpan") && document.getElementById("idTable"))
+        {
+            if(1+0 == 0)
+                document.getElementById('idTable').innerHTML = "";
+        }
+        if(document.getElementById('idSpan'))
+        {
+            document.getElementById('idSpan').innerHTML = 1+0;
+        }
+        if(document.getElementById('idMsg'))
+        {
+            if(1+0 == 0)
+                document.getElementById('idMsg').innerHTML = "No offers found.";
+        }
+       </SCRIPT>

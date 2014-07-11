@@ -1,0 +1,75 @@
+<table style="border:3px solid; width:100%;" cellspacing="10">
+    <tbody>
+        <tr>
+            <td>
+                <div>
+                    %%GLOBAL_NoPaymentTaken%%
+                    <table style="width:100%; font-family: Arial;"  >
+                        <tbody>
+                            <tr>
+                                <td id="Right" valign="top" width="40%" >
+                                    <h2 style="font-size: 22px; height: 30px;">
+                                        Invoice for Order #%%GLOBAL_OrderNumber%%
+                                    </h2>
+                                    %%GLOBAL_PendingPaymentNotice%%
+                                </td>
+                                <td width="20%" >
+                                </td>
+                                <td id="Left" valign="top" width="40%" >
+                                    <h3 style="font-size: 18px;">Shipping Details</h3>
+                                    <div style="font-size: 12px;">%%GLOBAL_ShippingAddress%%</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br />
+                    <table style="width:90%; font-family: Arial; font-size: 12px;" >
+                        <tbody>
+                            <tr>
+                                <td valign="top" align="right" width="20%"><b>Order:</b></td>
+                                <td valign="top" width="30%">#%%GLOBAL_OrderNumber%%</td>
+                                <td valign="top" align="right" width="20%"><b>Order Date:</b></td>
+                                <td valign="top" width="30%">%%GLOBAL_DatePlaced%%</td>
+                            </tr>
+                            <tr>
+                                <td valign="top" align="right" width="20%"><b>Payment Method:</b></td>
+                                <td valign="top" width="30%">%%GLOBAL_PaymentMethod%%</td>
+                                <td valign="top" align="right" width="20%"><b>Shipping Method:</b></td>
+                                <td valign="top" width="30%">DELIVERY order, but I will tip driver in cash.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    %%GLOBAL_PendingPaymentDetails%% 
+                    <br />
+                    %%GLOBAL_OrderCommentBlock%%
+                    <hr style="border:2px solid black;">
+                    <h3 style="font-size: 18px;">Order Items</h3>
+                    <table style="border:2px solid; width:100%;" cellspacing="0" cellpadding="5">
+                        <tbody>
+                            <tr >
+                                <td nowrap="" style="font-family:Arial;font-size:14px;font-weight:bold">Cart Items</td>
+                                <td width="100" nowrap=""style="font-family:Arial;font-size:14px;font-weight:bold">SKU</td>
+                                <td width="50" nowrap="" style="font-family:Arial;font-size:14px;font-weight:bold">Qty</td>
+                                <td width="100" nowrap="" style="font-family:Arial;font-size:14px;font-weight:bold">Item Price</td>
+                                <td width="100" nowrap="" align="right" style="font-family:Arial;font-size:14px;font-weight:bold">Item Total</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    %%SNIPPET_CartItems%%
+                    <hr style="border:2px solid black;">
+                    %%SNIPPET_TotalRows%%                    
+                    <br />
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+<div style="font-size: 10px;">
+    <hr style="height: 1px; border-style: none; color: #444; background: #000;" size="1" />
+    <div style="color: #444;">
+        <span class="xml-text"> PickUpKingsOnline Powered by </span>
+        <a href="http://www.PizzaMenus.com/"><span class="xml-text">PizzaMenus.com</span></a>
+        <span class="xml-text">. Let Us Build Your Online Store</span>
+    </div>
+</div>

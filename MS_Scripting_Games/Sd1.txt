@@ -1,0 +1,13 @@
+ProgID                    Description
+ADODB.Connection          6
+HNetCfg.FwMgr             1
+Microsoft.XMLDOM          17
+SAPI.SpVoice              7
+NameTranslate             20
+Scriptlet.TypeLib         19
+Outlook.Application       10
+WMPlayer.OCX              14
+WScript.Network           3
+WSMan.Automation          11
+CDO.Application           9
+Microsoft.ISAdm           13
