@@ -6,7 +6,7 @@ $site = Get-SPSite http://nyc-dc1
 $kg = New-Object Microsoft.Office.Server.Search.Query.KeywordQuery $site
 $kg.ResultTypes = [Microsoft.Office.Server.Search.Query.ResultType]::RelevantResults
 
-$kg.RowLimit = 1
+$kg.RowLimit = 5
 $kg.EnableFQL = 1
 $kg.QueryText = "cat"
 
