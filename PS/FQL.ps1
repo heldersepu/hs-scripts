@@ -13,7 +13,7 @@ $kg.ResultTypes = [Microsoft.Office.Server.Search.Query.ResultType]::RelevantRes
 
 $kg.RowLimit = 5
 $kg.EnableFQL = 1
-$kg.QueryText = "cat"
+$kg.QueryText = $args[0]
 
 $resTC = $kg.Execute()
 
@@ -22,4 +22,7 @@ Write-Host Total Hits: $resTC[1].TotalRows
 $rTab = $resTC.Item([Microsoft.Office.Server.Search.Query.ResultType]::RelevantResults)
 $relDataTable = $rTab.Table
 $relDataTable | Format-Table -AutoSize -Property title, url
+
+
+
 
