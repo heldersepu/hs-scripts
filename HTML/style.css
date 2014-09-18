@@ -4,8 +4,8 @@ html {
 	padding: 0;
 }
 body {
-	background-color: #F9E389;
-	color: #000000;
+	background-color: #E75C62;
+	color: #FFFFFF;
 	font-family: Arial, Helvetica, sans-serif;
 	margin: 0px;
 	padding: 0px;
@@ -33,7 +33,7 @@ p {
 	margin-bottom: 20px;
 }
 a, a:visited, a b {
-	color: #38B0E3;
+	color: #91070C;
 	text-decoration: underline;
 	cursor: pointer;
 }
@@ -139,12 +139,8 @@ label {
 	color: #000;
 	text-decoration: none;
 }
-#header #cart {
-	position: absolute;
-	top: 0px;
-	right: 145px;
-	z-index: 9;
-	min-width: 300px;
+#divTopright #cart {
+	color: #000;
 }
 #header #cart .heading {
 	float: right;
@@ -166,8 +162,8 @@ label {
 	margin-top: 0px;
 	margin-bottom: 3px;
 }
-#header #cart .heading a {
-	color: #38B0E3;
+#divTopright #cart .heading a {
+	color: #91070C;
 	text-decoration: none;
 }
 #header #cart .heading a span {
@@ -302,7 +298,7 @@ label {
 	z-index: 5;
 	width: 298px;
 	text-align: right;
-	color: #999999;
+	color: #FFFFFF;
 }
 #header .links {
 	position: absolute;
@@ -315,13 +311,14 @@ label {
 	float: left;
 	display: block;
 	padding: 0px 0px 0px 7px;
-	color: #38B0E3;
+	color: #91070C;
 	text-decoration: none;
 	font-size: 12px;
+	font-weight: bold;
 }
 #header .links a + a {
 	margin-left: 8px;
-	border-left: 1px solid #CCC;
+	border-left: 1px solid #91070C;
 }
 /* menu */
 #menu {
@@ -573,7 +570,7 @@ a.button, input.button {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	font-weight: bold;
-	background: url('../image/button.png') repeat-x;
+	background: #096929;
 	-webkit-border-radius: 7px 7px 7px 7px;
 	-moz-border-radius: 7px 7px 7px 7px;
 	-khtml-border-radius: 7px 7px 7px 7px;
@@ -594,7 +591,7 @@ input.button {
 	padding: 0px 12px 0px 12px;
 }
 a.button:hover, input.button:hover {
-	background-position: 0px -24px;
+	background: #6DB886;
 }
 .buttons {
 	background: #FFFFFF;
@@ -659,14 +656,13 @@ a.button:hover, input.button:hover {
 	-moz-border-radius: 7px 7px 0px 0px;
 	-khtml-border-radius: 7px 7px 0px 0px;
 	border-radius: 7px 7px 0px 0px;
-	border: 1px solid #DBDEE1;
-	background: url('../image/background.png') repeat-x;
+	background: #CB181F;
 	padding: 8px 10px 7px 10px;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
 	font-weight: bold;
 	line-height: 14px;
-	color: #333;
+	color: #FFFFFF;
 }
 .box .box-content {
 	background: #FFFFFF;
@@ -760,6 +756,7 @@ ul.box-category > li ul > li {
 ul.box-category > li ul > li > a {
 	text-decoration: none;
 	display: block;
+	color: #91070C;
 }
 ul.box-category > li ul > li > a.active {
 	font-weight: bold;
@@ -897,7 +894,7 @@ ul.box-filter > li ul {
 	margin-bottom: 3px;
 }
 .product-list .name a {
-	color: #38B0E3;
+	color: #91070C;
 	font-weight: bold;
 	text-decoration: none;
 }
