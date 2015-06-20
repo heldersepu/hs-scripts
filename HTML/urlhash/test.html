@@ -1,0 +1,21 @@
+<script type="text/javascript" src="urlhash.js"></script>
+<script>
+//#Services(SearchField=Email&SearchText=gmail&status=1,2,3)~CustomerSearch(SearchField=Address&SearchText=Miami)...
+UrlHash.set("Services", "SearchField", "Email");
+UrlHash.set("Services", "SearchText", "gmail");
+UrlHash.add("Services", "status", "1");
+UrlHash.add("Services", "status", "2");
+UrlHash.add("Services", "status", "3");
+
+UrlHash.set("CustomerSearch", "SearchField", "Address");
+UrlHash.set("CustomerSearch", "SearchText", "Miami");
+
+</script>
+
+<button onclick='UrlHash.set("Services", "SearchField", "City");'>Set Services + SearchField = City</button><br><br>
+<button onclick='UrlHash.set("CustomerSearch", "SearchField", "State");'>Set CustomerSearch + SearchField = State</button><br><br>
+<button onclick='UrlHash.add("Services", "status", "8");'>Add Services + status 8</button><br><br>
+<button onclick='UrlHash.del("Services", "status", "1");'>Delete Services + status 1</button><br><br>
+<button onclick='UrlHash.drop("Services", "status");'>Drop Services + status </button><br><br>
+<button onclick='UrlHash.drop("CustomerSearch");'>Drop CustomerSearch </button><br><br>
+<button onclick='UrlHash.drop("Services");'>Drop Services </button><br><br>
