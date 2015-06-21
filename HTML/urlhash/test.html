@@ -10,7 +10,74 @@ UrlHash.add("Services", "status", "3");
 UrlHash.set("CustomerSearch", "SearchField", "Address");
 UrlHash.set("CustomerSearch", "SearchText", "Miami");
 
+function set(){   UrlHash.set($("#gset").val(), $("#kset").val(), $("#vset").val())};
+function add(){   UrlHash.add($("#gadd").val(), $("#kadd").val(), $("#vadd").val())};
+function del(){   UrlHash.del($("#gdel").val(), $("#kdel").val(), $("#vdel").val())};
+function drop(){  UrlHash.drop($("#gdrop").val(), $("#kdrop").val())};
+function drop2(){ UrlHash.drop($("#gdrop2").val())};
 </script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+
+<table style="">
+<tr><td>
+<b>Set</b>
+</td><td>
+Group:
+<input id="gset" type="input">
+Key:
+<input id="kset" type="input">
+Value:
+<input id="vset" type="input">
+<button onclick='set()'>Set</button>
+</td></tr>
+
+<tr><td>
+<b>Add</b>
+</td><td>
+Group:
+<input id="gadd" type="input">
+Key:
+<input id="kadd" type="input">
+Value:
+<input id="vadd" type="input">
+<button onclick='add()'>Add</button>
+</td></tr>
+
+<tr><td>
+<b>Del</b>
+</td><td>
+Group:
+<input id="gdel" type="input">
+Key:
+<input id="kdel" type="input">
+Value:
+<input id="vdel" type="input">
+<button onclick='del()'>Del</button>
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+
+<tr><td>
+<b>Drop</b>
+</td><td>
+Group:
+<input id="gdrop" type="input">
+Key:
+<input id="kdrop" type="input">
+<button onclick='drop()'>Drop</button>
+</td></tr>
+
+<tr><td>
+<b>Drop</b>
+</td><td>
+Group:
+<input id="gdrop2" type="input">
+<button onclick='drop2()'>Drop</button>
+</td></tr>
+</table>
+
+<br><br>
 
 <button onclick='UrlHash.set("Services", "SearchField", "City");'>Set Services + SearchField = City</button><br><br>
 <button onclick='UrlHash.set("CustomerSearch", "SearchField", "State");'>Set CustomerSearch + SearchField = State</button><br><br>
