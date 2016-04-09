@@ -1,0 +1,52 @@
+<style>
+	@keyframes grayout {
+		from {
+			-webkit-filter: grayscale(100%);
+			filter: grayscale(100%);
+		}
+
+		to {
+			-webkit-filter: grayscale(0%);
+			filter: grayscale(0%);
+		}
+	}
+	@keyframes rotate {
+		from {
+			-webkit-transform: rotate(7deg);
+			transform: rotate(0deg);
+		}
+
+		to {
+			-webkit-transform: rotate(7deg);
+			transform: rotate(360deg);
+		}
+	}
+	.image, .sprite {
+		background-image: url("login-art.jpg");
+		background-repeat: no-repeat;
+	}
+	.image {
+		height: 478px;
+		width: 500px;
+		animation-duration: 1s;
+		animation-name: grayout;
+		animation-iteration-count: infinite;
+		animation-direction: alternate;
+	}
+	.sprite {
+		height: 80px;
+		width: 82px;
+		position: absolute;
+		top: 320px;
+		left: 72px;
+		background-position: -65px -312px;
+		animation-duration: 3s;
+		animation-name: rotate;
+		animation-iteration-count: infinite;
+	}
+</style>
+
+<div >
+	<div class="image"></div>
+	<div class="sprite"></div>
+</div>
