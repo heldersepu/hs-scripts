@@ -1,7 +1,7 @@
 @COLOR 0F
 @PROMPT $S
-@SET TFDIR="%ProgramFiles(x86)%\Microsoft Visual Studio 11.0\Common7\IDE"
-@IF NOT EXIST %TFDIR% SET TFDIR="%ProgramFiles%\Microsoft Visual Studio 11.0\Common7\IDE"
+@SET TFDIR="%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\Common7\IDE"
+@IF NOT EXIST %TFDIR% SET TFDIR="%ProgramFiles%\Microsoft Visual Studio 14.0\Common7\IDE"
 @SET PATH=%PATH%;%TFDIR%
 @CD C:\SecretAgent
 
