@@ -1,0 +1,44 @@
+<meta name="viewport" content="width=device-width" />
+<html>
+<head>
+    <style>body {margin: 0px;}</style>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>
+        var teams = [
+            {name:"Trio"    , guid:"39c0beb6-8169-448b-9878-b648a20f2076"},
+            {name:"Awesome" , guid:"f2c25391-1496-4a59-bb65-0e66abe2e57d"},
+            {name:"Chill"   , guid:"00c9fd9a-8b37-4125-8668-38fcea675f55"},
+            {name:"Core"    , guid:"e3d7261a-0285-40d4-9fc7-37ca17f4098b"},
+            
+        ];
+        var base = 'https://autonation.visualstudio.com/a6c05b37-4ffd-417a-a3a8-55fd634acca6/GUID/_api/_teamChart/Burndown?chartOptions={"Width":940,"Height":460,"ShowDetails":true,"Title":"NAME"}&counter=2&iterationPath=Global%5C2017%5CSprint+{{ID}}&__v=5'
+        
+        $(window).load(function () {
+            var hash = window.location.hash.replace("#", "");
+            var id = 25;
+            if ($.isNumeric(hash)) id = hash;
+            var image = base.replace("{{ID}}", id);
+            for (var i = 0; i < teams.length; i++) {
+                $("#t" + i).attr("src", image.replace("NAME", teams[i].name).replace("GUID", teams[i].guid));
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div>
+        <img src="" id="t0">
+        <img src="" id="t1">
+        <img src="" id="t2">
+        <img src="" id="t3">
+    </div>
+</body>
+</html>
+
+
+
+
+ 
+ 
+ 
+
