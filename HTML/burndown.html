@@ -14,9 +14,8 @@
         var base = 'https://autonation.visualstudio.com/a6c05b37-4ffd-417a-a3a8-55fd634acca6/GUID/_api/_teamChart/Burndown?chartOptions={"Width":940,"Height":460,"ShowDetails":true,"Title":"NAME"}&counter=2&iterationPath=Global%5C2017%5CSprint+{{ID}}&__v=5'
         
         $(window).load(function () {
-            var hash = window.location.hash.replace("#", "");
-            var id = 25;
-            if ($.isNumeric(hash)) id = hash;
+            var id = window.location.search.replace("?", "");
+            if (!$.isNumeric(id)) id = 25;
             var image = base.replace("{{ID}}", id);
             for (var i = 0; i < teams.length; i++) {
                 $("#t" + i).attr("src", image.replace("NAME", teams[i].name).replace("GUID", teams[i].guid));
