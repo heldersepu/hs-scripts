@@ -1,134 +1,14 @@
 Set oShell  = CreateObject("WScript.Shell")
-wscript.sleep 2000
-oShell.SendKeys "TERR"
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "ClassMM"
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "BI/PDMM" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "UMBIMM" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "UMPDMM" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "OTCMM" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "COLLMM" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "PIPMM" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "MEDMM" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "ClassMS"
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "BI/PDMS" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "UMBIMS" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "UMPDMS" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "OTCMS" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "COLLMS" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "PIPMS" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "MEDMS" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "ClassFM"
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "BI/PDFM" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "UMBIFM" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "UMPDFM" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "OTCFM" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "COLLFM" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "PIPFM" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "MEDFM" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "ClassFS"
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "BI/PDFS" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "UMBIFS" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "UMPDFS" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "OTCFS" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "COLLFS" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "PIPFS" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
-oShell.SendKeys "MEDFS" 
-wscript.sleep 200
- oShell.SendKeys "{DOWN}"
- wscript.sleep 200
+wscript.sleep 5000
+
+Do
+	for i = 1 to 10
+		oShell.SendKeys "{DOWN}"
+		wscript.sleep 50
+		oShell.SendKeys " "
+		wscript.sleep 100
+	next
+	result = MsgBox("Do you want to continue?",vbYesNo,"Continue Processing")
+Loop Until (result = vbNo)
+
 

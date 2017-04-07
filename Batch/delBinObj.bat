@@ -1,7 +1,7 @@
 @ECHO OFF
 
 @D:
-@CD "D:\SourceCode\Global"
+@CD "D:\SourceCode\Global\CompassServices\Hotfix\CompassServices"
 
 @FOR /F "tokens=1* delims=|" %%a IN ('DIR /AD /S /B obj') DO @(
 	ECHO "%%a"

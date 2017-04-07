@@ -266,14 +266,5 @@ def interact(msgList, mailfile):
 if __name__ == '__main__':
     print('[Pymail email client]')
     msgList = loadmessages(popmailserver, mailuser, mailpswd)     # load all
-    do_autorespond = False
-    toDelete = False
-    for arg in sys.argv:
-        if arg.startswith('autorespond'):
-            do_autorespond = True
-    if do_autorespond:
-        autorespond(msgList)
-    else:
-        toDelete = interact(msgList, mailfile)
-    if toDelete: deletemessages(popmailserver, mailuser, mailpswd, toDelete)
+    autorespond(msgList)
     print('Bye.')
