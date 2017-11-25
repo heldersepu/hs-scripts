@@ -1,6 +1,12 @@
-I:
-CD I:\Videos\YT
+J:
 
+MD J:\YT\Zecchino_dOro
+CD J:\YT\Zecchino_dOro
+C:\Windows\youtube-dl.exe --format mp4 https://www.youtube.com/watch?list=RDN6-kmEkThrE
+
+
+MD J:\YT\Canzoni_Per_Bambini
+CD J:\YT\Canzoni_Per_Bambini
 C:\Windows\youtube-dl.exe --format mp4 https://www.youtube.com/watch?v=uUOp8sK3LB8
 C:\Windows\youtube-dl.exe --format mp4 https://www.youtube.com/watch?v=Su01EalFJqA
 C:\Windows\youtube-dl.exe --format mp4 https://www.youtube.com/watch?v=Tcb_P5yQ5qU
@@ -45,7 +51,30 @@ C:\Windows\youtube-dl.exe --format mp4 https://www.youtube.com/watch?v=QvA4kRwoY
 C:\Windows\youtube-dl.exe --format mp4 https://www.youtube.com/watch?v=I4LsGtQZaT8
 C:\Windows\youtube-dl.exe --format mp4 https://www.youtube.com/watch?v=UBO6641Mwik
 C:\Windows\youtube-dl.exe --format mp4 https://www.youtube.com/watch?v=YvAwmF8Y7Ok
+
+MD J:\YT\Marsha_E_Orso
+CD J:\YT\Marsha_E_Orso
+C:\Windows\youtube-dl.exe --format mp4 https://www.youtube.com/watch?v=QXmmMtfcmxY
+C:\Windows\youtube-dl.exe --format mp4 https://www.youtube.com/watch?v=WBpJFF3_zDs
+C:\Windows\youtube-dl.exe --format mp4 https://www.youtube.com/watch?v=cgm7TTFM2YU
+C:\Windows\youtube-dl.exe --format mp4 https://www.youtube.com/watch?v=ICg88b8VD4I
+C:\Windows\youtube-dl.exe --format mp4 https://www.youtube.com/watch?v=ll0iWthNIY0
+C:\Windows\youtube-dl.exe --format mp4 https://www.youtube.com/watch?v=YD4BhrbRls8
+C:\Windows\youtube-dl.exe --format mp4 https://www.youtube.com/watch?v=N-5Mnok9sFA
+C:\Windows\youtube-dl.exe --format mp4 https://www.youtube.com/watch?v=DDHF39-Dssg
+C:\Windows\youtube-dl.exe --format mp4 https://www.youtube.com/watch?v=b8RLJ7-dkkg
+C:\Windows\youtube-dl.exe --format mp4 https://www.youtube.com/watch?v=TAFI5hW_KEI
+C:\Windows\youtube-dl.exe --format mp4 https://www.youtube.com/watch?v=jS5J5IqM4TQ
+C:\Windows\youtube-dl.exe --format mp4 https://www.youtube.com/watch?v=n5_yIiN9gcc
+C:\Windows\youtube-dl.exe --format mp4 https://www.youtube.com/watch?v=jfet_r9qgEw
+
+
+
+
+
 ::C:\Windows\youtube-dl.exe --format mp4 
+
+
 
 @ECHO.
 @ECHO    DONE !!
