@@ -1,0 +1,3 @@
+DECLARE @SPDATA TABLE ( ID INT identity, Val VARCHAR(MAX) )
+INSERT INTO @SPDATA (Val) EXEC sp_helptext 'p_GetGeoPoint'
+SELECT * FROM @SPDATA WHERE ID between 424  and 430 
