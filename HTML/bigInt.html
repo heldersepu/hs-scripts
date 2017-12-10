@@ -1,15 +1,32 @@
 <html>
 <head>
     <title>BigInt</title>
-    <script src="http://peterolson.github.io/BigInteger.js/BigInteger.min.js"></script>
+    <script src="https://peterolson.github.io/BigInteger.js/BigInteger.min.js"></script>
+    <script src="https://heldersepu.github.io/lossless-json/dist/lossless-json.js"></script>
+	
 </head>
 
 <body>
-    <div id="data"></div>
+    <h2>bigInt</h2>
+	<div id="bignum"></div>
+	
+	<h2>JSON.parse</h2>
+	<pre id="json1"></pre>
+	
+	<h2>LosslessJSON.parse</h2>
+	<pre id="json2"></pre>
+	
 	<script>
-	var largeNumber = bigInt("75643564363473453456342378564387956906736546456235346");
-	var num = largeNumber.multiply(2);
-	document.getElementById('data').innerHTML = num;
+		var largeNumber = bigInt("75643564363473453456342378564387956906736546456235346");
+		var num = largeNumber.multiply(2);
+		document.getElementById('bignum').innerHTML = num;
+		
+		var content = "{\"MyInt64\":1253261109769874438,\"MyData\":\"1253261109769874438\"}";
+		var jsonData = JSON.stringify(JSON.parse(content), null, "  ");
+		document.getElementById('json1').innerHTML = jsonData;
+		
+		jsonData = LosslessJSON.stringify(LosslessJSON.parse(content), null, "  ");
+		document.getElementById('json2').innerHTML = jsonData;
 	</script>  
 </body>
 </html>
