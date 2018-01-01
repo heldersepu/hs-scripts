@@ -144,6 +144,11 @@
             "name": "p",
             "in": "query",
             "required": true,
+			"schema": {
+				"items": {
+					"$ref": "#/definitions/Location"
+				}
+			},
             "type": "array",
             "items": {},
             "collectionFormat": "multi"
