@@ -1,0 +1,5785 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "V1",
+    "title": "Swagger_Test",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia."
+  },
+  "host": "swashbuckletest.azurewebsites.net",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/api/ApiExplorer": {
+      "get": {
+        "tags": [
+          "ApiExplorer"
+        ],
+        "operationId": "ApiExplorer_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/ArrayTest/list_string": {
+      "get": {
+        "tags": [
+          "ArrayTest"
+        ],
+        "operationId": "ArrayTest_Get1",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "p",
+            "in": "query",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/ArrayTest/list_int": {
+      "get": {
+        "tags": [
+          "ArrayTest"
+        ],
+        "operationId": "ArrayTest_Get2",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "p",
+            "in": "query",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/ArrayTest/list_location": {
+      "get": {
+        "tags": [
+          "ArrayTest"
+        ],
+        "operationId": "ArrayTest_Get3",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "p",
+            "in": "query",
+            "required": true,
+            "type": "array",
+            "items": {},
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Location"
+              },
+              "xml": {
+                "name": "Location",
+                "wrapped": true
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/Async": {
+      "get": {
+        "tags": [
+          "Async"
+        ],
+        "operationId": "Async_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Async"
+        ],
+        "operationId": "Async_Post",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/Async/MyService/{myParameter}": {
+      "get": {
+        "tags": [
+          "Async"
+        ],
+        "operationId": "Async_GetAsyncMyServiceByMyParameter",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "myParameter",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/Async/{id}": {
+      "put": {
+        "tags": [
+          "Async"
+        ],
+        "operationId": "Async_Put",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Async"
+        ],
+        "operationId": "Async_Delete",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/attrib/{payId}": {
+      "get": {
+        "tags": [
+          "Attribute"
+        ],
+        "operationId": "Attribute_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "payId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "default": 123
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/attrib/data": {
+      "get": {
+        "tags": [
+          "Attribute"
+        ],
+        "operationId": "Attribute_GetAttribData",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "data.integ",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "data.doub",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "data.boolea",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "data.guid",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "data.date",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Data"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/attrib/{name}": {
+      "post": {
+        "tags": [
+          "Attribute"
+        ],
+        "operationId": "Attribute_Post",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Data"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/BigString": {
+      "get": {
+        "tags": [
+          "BigString"
+        ],
+        "operationId": "BigString_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "max",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 10000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/bind/{id}": {
+      "post": {
+        "tags": [
+          "Binding"
+        ],
+        "operationId": "Binding_Post",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Blob": {
+      "get": {
+        "tags": [
+          "Blob"
+        ],
+        "summary": "Get a Bad Blob",
+        "operationId": "Blob_GetBad",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "x",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Blob"
+        ],
+        "summary": "Template object test",
+        "operationId": "Blob_Put",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "x",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnotherFoo[Foo]"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Blob"
+        ],
+        "summary": "Get an Ok Blob",
+        "operationId": "Blob_PostOk",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "x",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/ChildApi": {
+      "get": {
+        "tags": [
+          "ChildApi"
+        ],
+        "operationId": "GetData",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Data"
+              },
+              "xml": {
+                "name": "Data",
+                "wrapped": true
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Company": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "operationId": "Company_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Company123"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Company"
+        ],
+        "operationId": "Company_Put",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "companies",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Company"
+              },
+              "xml": {
+                "name": "Company",
+                "wrapped": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Company"
+        ],
+        "operationId": "Company_Post",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "companies",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Company"
+              },
+              "xml": {
+                "name": "Company",
+                "wrapped": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/ComplexRequest": {
+      "get": {
+        "tags": [
+          "ComplexRequest"
+        ],
+        "operationId": "ComplexRequest_Get",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "obj.person.description",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "obj.person.entityName.firstName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "obj.person.entityName.lastName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EntityRequest"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/CountingLock/Get1": {
+      "get": {
+        "tags": [
+          "CountingLock"
+        ],
+        "operationId": "CountingLock_Get1",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "c1.employeeID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "c1.employeeName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CountingLock1"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/CountingLock/Get2": {
+      "get": {
+        "tags": [
+          "CountingLock"
+        ],
+        "operationId": "CountingLock_Get2",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "c2.employeeID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "c2.employeeName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CountingLock2"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/CustomEnumerable": {
+      "get": {
+        "tags": [
+          "CustomEnumerable"
+        ],
+        "operationId": "CustomEnumerable_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Default": {
+      "get": {
+        "tags": [
+          "Default"
+        ],
+        "operationId": "Default_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Default"
+        ],
+        "operationId": "Default_Put",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewUserWriteModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Default"
+        ],
+        "operationId": "Default_Post",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "dayOffRule",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "None",
+              "OffAfter",
+              "OffBefore",
+              "InAfter"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KeyValuePair[Int32,ShiftDayOffRule]"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Default/{id}": {
+      "get": {
+        "tags": [
+          "Default"
+        ],
+        "operationId": "Default_GetById",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Default"
+        ],
+        "operationId": "Default_Delete",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Definitions": {
+      "get": {
+        "tags": [
+          "Definitions"
+        ],
+        "operationId": "Definitions_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CurrentTask"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Dictionary": {
+      "get": {
+        "tags": [
+          "Dictionary"
+        ],
+        "operationId": "Dictionary_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Test"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Dictionary"
+        ],
+        "operationId": "Dictionary_PutEcho",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "test",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Test"
+              },
+              "xml": {
+                "name": "Test",
+                "wrapped": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Test"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Dictionary"
+        ],
+        "operationId": "Dictionary_PostEcho",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "test",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Test"
+              },
+              "xml": {
+                "name": "Test",
+                "wrapped": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Test"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Dictionary"
+        ],
+        "operationId": "Dictionary_PatchEcho",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "values",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "xml": {
+                "name": "Dictionary`2",
+                "wrapped": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "xml": {
+                "name": "Dictionary`2",
+                "wrapped": true
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/EnumTest": {
+      "get": {
+        "tags": [
+          "EnumTest"
+        ],
+        "operationId": "EnumTest_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "rule",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "None",
+              "OffAfter",
+              "OffBefore",
+              "InAfter"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "enum": [
+                "None",
+                "OffAfter",
+                "OffBefore",
+                "InAfter"
+              ],
+              "type": "string",
+              "example": {
+                "None": 0,
+                "OffAfter": 1,
+                "InAfter": 3,
+                "OffBefore": -1
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/FromUri/Test0_WithFromUri": {
+      "get": {
+        "tags": [
+          "FromUri"
+        ],
+        "operationId": "FromUri_GetWith0",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "a.id",
+            "in": "query",
+            "description": "The super ID that will be used",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "a.name",
+            "in": "query",
+            "description": "Who needs a name?",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "a.abd",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "a.xyz",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "maxLength": 10
+          },
+          {
+            "name": "a.cde",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "a.bcd",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "maxLength": 5,
+            "minLength": 3
+          },
+          {
+            "name": "b.id",
+            "in": "query",
+            "description": "The super ID that will be used",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "b.name",
+            "in": "query",
+            "description": "Who needs a name?",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "b.abd",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "b.xyz",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "maxLength": 10
+          },
+          {
+            "name": "b.cde",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "b.bcd",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "maxLength": 5,
+            "minLength": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/FromUri/Test1_WithFromUri": {
+      "get": {
+        "tags": [
+          "FromUri"
+        ],
+        "operationId": "FromUri_GetWith",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "v.id",
+            "in": "query",
+            "description": "The super ID that will be used",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "v.name",
+            "in": "query",
+            "description": "Who needs a name?",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "v.abd",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "v.xyz",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "maxLength": 10
+          },
+          {
+            "name": "v.cde",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "v.bcd",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "maxLength": 5,
+            "minLength": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ViewModelTest"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/FromUri/Test2_NoFromUri": {
+      "get": {
+        "tags": [
+          "FromUri"
+        ],
+        "operationId": "FromUri_GetWithout",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "v.id",
+            "in": "query",
+            "description": "The super ID that will be used",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "v.name",
+            "in": "query",
+            "description": "Who needs a name?",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "v.abd",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "v.xyz",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "maxLength": 10
+          },
+          {
+            "name": "v.cde",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "v.bcd",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "maxLength": 5,
+            "minLength": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ViewModelTest"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/FromUri": {
+      "post": {
+        "tags": [
+          "FromUri"
+        ],
+        "operationId": "FromUri_Post",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "v",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ViewModelTest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ViewModelTest"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/HugeResponse": {
+      "get": {
+        "tags": [
+          "HugeResponse"
+        ],
+        "operationId": "HugeResponse_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "max",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 100000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/IActionResult": {
+      "get": {
+        "tags": [
+          "IActionResult"
+        ],
+        "operationId": "IActionResult_GetListStuff",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "foo",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "auditId",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "IActionResult"
+        ],
+        "operationId": "IActionResult_PostListStuff",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "foo",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "auditId",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/IHttpActionResult": {
+      "get": {
+        "tags": [
+          "IHttpActionResult"
+        ],
+        "operationId": "IHttpActionResult_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "IHttpActionResult"
+        ],
+        "operationId": "IHttpActionResult_Post",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MyData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of customers",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "404": {
+            "description": "NotFound",
+            "schema": {
+              "$ref": "#/definitions/NotFoundResult"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/IHttpActionResult/{id}": {
+      "get": {
+        "tags": [
+          "IHttpActionResult"
+        ],
+        "operationId": "IHttpActionResult_GetById",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of customers",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/BadRequestErrorMessageResult"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedResult"
+            }
+          },
+          "404": {
+            "description": "NotFound",
+            "schema": {
+              "$ref": "#/definitions/NotFoundResult"
+            }
+          },
+          "500": {
+            "description": "InternalServerError",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorResult"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Image": {
+      "get": {
+        "tags": [
+          "Image"
+        ],
+        "operationId": "Image_Get",
+        "consumes": [],
+        "produces": [
+          "image/png"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Image"
+        ],
+        "operationId": "Image_Put",
+        "consumes": [],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "image.png",
+            "schema": {
+              "type": "file"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Image"
+        ],
+        "operationId": "Image_Post",
+        "consumes": [],
+        "produces": [
+          "image/png"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Image"
+        ],
+        "operationId": "Image_Patch",
+        "consumes": [],
+        "produces": [
+          "image/svg"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "image.svg"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/ImportArray": {
+      "post": {
+        "tags": [
+          "ImportArray"
+        ],
+        "operationId": "ImportArray_Post",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Account"
+              },
+              "xml": {
+                "name": "Account",
+                "wrapped": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/InheritanceTest": {
+      "get": {
+        "tags": [
+          "InheritanceTest"
+        ],
+        "operationId": "InheritanceTest_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "imageFeature.imageUrl",
+            "in": "query",
+            "description": "Here goes your image URL",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "imageFeature.title",
+            "in": "query",
+            "description": "We all need a Title",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageFeature"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "InheritanceTest"
+        ],
+        "operationId": "InheritanceTest_Post",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "imageFeature",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageFeature"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageFeature"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Int64": {
+      "get": {
+        "tags": [
+          "Int64"
+        ],
+        "operationId": "Int64_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Int64Data"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/MemoryBarrier": {
+      "get": {
+        "tags": [
+          "MemoryBarrier"
+        ],
+        "operationId": "MemoryBarrier_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/MonthTest/{Id}": {
+      "get": {
+        "tags": [
+          "MonthTest"
+        ],
+        "operationId": "MonthTest_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "data.id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "data.month",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "January",
+              "February",
+              "March",
+              "April",
+              "May",
+              "June",
+              "July",
+              "August",
+              "September",
+              "October",
+              "November",
+              "December"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MData"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/MonthTest": {
+      "put": {
+        "tags": [
+          "MonthTest"
+        ],
+        "operationId": "MonthTest_Put",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "month",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "January",
+              "February",
+              "March",
+              "April",
+              "May",
+              "June",
+              "July",
+              "August",
+              "September",
+              "October",
+              "November",
+              "December"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "enum": [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+              ],
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "MonthTest"
+        ],
+        "operationId": "MonthTest_Post",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "month",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "January",
+              "February",
+              "March",
+              "April",
+              "May",
+              "June",
+              "July",
+              "August",
+              "September",
+              "October",
+              "November",
+              "December"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "enum": [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+              ],
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "MonthTest"
+        ],
+        "operationId": "MonthTest_Delete",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "month",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "January",
+              "February",
+              "March",
+              "April",
+              "May",
+              "June",
+              "July",
+              "August",
+              "September",
+              "October",
+              "November",
+              "December"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "enum": [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+              ],
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/MultiGet": {
+      "get": {
+        "tags": [
+          "MultiGet"
+        ],
+        "operationId": "MultiGet_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "bId",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/MultiGet/ByList": {
+      "get": {
+        "tags": [
+          "MultiGet"
+        ],
+        "operationId": "MultiGet_GetByList",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "cIds",
+            "in": "query",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/MultiGet/ByIList": {
+      "get": {
+        "tags": [
+          "MultiGet"
+        ],
+        "operationId": "MultiGet_GetByIList",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "cIds",
+            "in": "query",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/MultiGet/ByIdAndList": {
+      "get": {
+        "tags": [
+          "MultiGet"
+        ],
+        "operationId": "MultiGet_GetByIdAndList",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "bId",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "cIds",
+            "in": "query",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/NestedEnum": {
+      "put": {
+        "tags": [
+          "NestedEnum"
+        ],
+        "summary": "A nullable enum test",
+        "operationId": "NestedEnum_PutEnumNull",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Lunedi",
+              "Martedi",
+              "Venerdi"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "NestedEnum"
+        ],
+        "summary": "A non-null enum test",
+        "operationId": "NestedEnum_DeleteEnumNonNull",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Lunedi",
+              "Martedi",
+              "Venerdi"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/NodaTime": {
+      "get": {
+        "tags": [
+          "NodaTime"
+        ],
+        "operationId": "NodaTime_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/NodaTime/my/route1/{date}": {
+      "get": {
+        "tags": [
+          "NodaTime"
+        ],
+        "operationId": "NodaTime_GetByDate1",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "date",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/NodaTime/my/route2/{date}": {
+      "get": {
+        "tags": [
+          "NodaTime"
+        ],
+        "operationId": "NodaTime_GetByDate2",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "date",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/NodaTime/my/route3": {
+      "get": {
+        "tags": [
+          "NodaTime"
+        ],
+        "operationId": "NodaTime_GetByDate3",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/NodaTime/my/route4": {
+      "get": {
+        "tags": [
+          "NodaTime"
+        ],
+        "operationId": "NodaTime_GetByDate4",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "data.id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "data.date",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/NodaTime/my/route5/{date}": {
+      "get": {
+        "tags": [
+          "NodaTime"
+        ],
+        "operationId": "NodaTime_GetByDate5",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "date",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/NodaTime/my/route6": {
+      "get": {
+        "tags": [
+          "NodaTime"
+        ],
+        "operationId": "NodaTime_GetByDate6",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/OAuth": {
+      "get": {
+        "tags": [
+          "OAuth"
+        ],
+        "operationId": "OAuth_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/OAuth/{id}": {
+      "get": {
+        "tags": [
+          "OAuth"
+        ],
+        "operationId": "OAuth_GetById",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/PagedList": {
+      "get": {
+        "tags": [
+          "PagedList"
+        ],
+        "operationId": "PagedList_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Company"
+              },
+              "xml": {
+                "name": "Company",
+                "wrapped": true
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/PagedList/{id}": {
+      "get": {
+        "tags": [
+          "PagedList"
+        ],
+        "operationId": "PagedList_GetApiPagedListById",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Company"
+              },
+              "xml": {
+                "name": "Company",
+                "wrapped": true
+              }
+            }
+          },
+          "400": {
+            "description": "<p>Hello</p><p>World</p>",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/PngImage": {
+      "post": {
+        "tags": [
+          "PngImage"
+        ],
+        "operationId": "PngImage_Post",
+        "consumes": [],
+        "produces": [
+          "image/png"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/PolygonVolume": {
+      "get": {
+        "tags": [
+          "PolygonVolume"
+        ],
+        "operationId": "PolygonVolume_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "p.points",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {},
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "p.planId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PolygonVolumeInsideParameter"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "PolygonVolume"
+        ],
+        "operationId": "PolygonVolume_Post",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "p",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolygonVolumeInsideParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PolygonVolumeInsideParameter"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/RecursiveParam": {
+      "post": {
+        "tags": [
+          "RecursiveParam"
+        ],
+        "operationId": "RecursiveParam_Post",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CategoryModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/foo/widgets": {
+      "get": {
+        "tags": [
+          "RoutePrefix"
+        ],
+        "operationId": "RoutePrefix_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "RoutePrefix"
+        ],
+        "operationId": "RoutePrefix_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/foo/widgets/{id}": {
+      "get": {
+        "tags": [
+          "RoutePrefix"
+        ],
+        "operationId": "RoutePrefix_GetById",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "RoutePrefix"
+        ],
+        "operationId": "RoutePrefix_GetById",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/foo/widgets/{id}/{name}": {
+      "get": {
+        "tags": [
+          "RoutePrefix"
+        ],
+        "operationId": "RoutePrefix_GetByIdByName",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "RoutePrefix"
+        ],
+        "operationId": "RoutePrefix_GetByIdByName",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/foo/widgets/PostTest1": {
+      "post": {
+        "tags": [
+          "RoutePrefix"
+        ],
+        "operationId": "RoutePrefix_PostTest1",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "x",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/test1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/foo/widgets/PostTest2": {
+      "post": {
+        "tags": [
+          "RoutePrefix"
+        ],
+        "operationId": "RoutePrefix_PostTest2",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "x",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/test2"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/foo/widgets/my/put2": {
+      "put": {
+        "tags": [
+          "RoutePrefix"
+        ],
+        "operationId": "RoutePrefix_Put2",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/foo/widgets/my/post2": {
+      "post": {
+        "tags": [
+          "RoutePrefix"
+        ],
+        "operationId": "RoutePrefix_Post2",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/faux/RoutePrefix/{id}": {
+      "get": {
+        "tags": [
+          "Routes"
+        ],
+        "operationId": "Routes_GetById",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Routes": {
+      "get": {
+        "tags": [
+          "Routes"
+        ],
+        "operationId": "Routes_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/SvgImage": {
+      "get": {
+        "tags": [
+          "SvgImage"
+        ],
+        "operationId": "SvgImage_Get",
+        "consumes": [],
+        "produces": [
+          "image/svg+xml"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "image.svg"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "SvgImage"
+        ],
+        "operationId": "SvgImage_Post",
+        "consumes": [],
+        "produces": [
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "image.svg"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/TestEnum": {
+      "get": {
+        "tags": [
+          "TestEnum"
+        ],
+        "summary": "Simple GET echoing the given param",
+        "operationId": "TestEnum_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "query",
+            "description": "CustomEnum",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Text",
+              "Numeric",
+              "Date",
+              "Numeric_Function",
+              "Dropdown_List",
+              "Checkbox"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "enum": [
+                "Text",
+                "Numeric",
+                "Date",
+                "Numeric_Function",
+                "Dropdown_List",
+                "Checkbox"
+              ],
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "TestEnum"
+        ],
+        "summary": "Test POST lorem ipsum",
+        "description": "<ul>\r\n  <li>\r\n    <b>Item 1</b> - description 1</li>\r\n  <li>\r\n    <b>Item 2</b> - description 2</li>\r\n</ul>",
+        "operationId": "TestEnum_Post",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Text",
+              "Numeric",
+              "Date",
+              "Numeric_Function",
+              "Dropdown_List",
+              "Checkbox"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "enum": [
+                "Text",
+                "Numeric",
+                "Date",
+                "Numeric_Function",
+                "Dropdown_List",
+                "Checkbox"
+              ],
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/TestEnum/{Id}": {
+      "put": {
+        "tags": [
+          "TestEnum"
+        ],
+        "summary": "Testing a [FromUri]",
+        "operationId": "TestEnum_Put",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "viewModelTest.id",
+            "in": "query",
+            "description": "The super ID that will be used",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "viewModelTest.name",
+            "in": "query",
+            "description": "Who needs a name?",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "viewModelTest.abd",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "viewModelTest.xyz",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "maxLength": 10
+          },
+          {
+            "name": "viewModelTest.cde",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "viewModelTest.bcd",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "maxLength": 5,
+            "minLength": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ViewModelTest"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/TestPost": {
+      "get": {
+        "tags": [
+          "TestPost"
+        ],
+        "operationId": "TestPost_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "x",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double",
+            "default": 989898989898989898.0
+          },
+          {
+            "name": "y",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double",
+            "default": 1.0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "double",
+              "type": "number"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "TestPost"
+        ],
+        "operationId": "TestPost_CreateTest",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "test",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MyTest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MyTest"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/TestStringEnum": {
+      "get": {
+        "tags": [
+          "TestStringEnum"
+        ],
+        "operationId": "TestStringEnum_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "x",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "pattern": "^(uno|due)",
+            "enum": [
+              "uno",
+              "due"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "TestStringEnum"
+        ],
+        "operationId": "TestStringEnum_Post",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "r.stringEnumColor",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "pattern": "^(dark-blue|dark-red|light-blue|light-red)",
+            "enum": [
+              "dark-blue",
+              "dark-red",
+              "light-blue",
+              "light-red"
+            ]
+          },
+          {
+            "name": "r.transparency",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "pattern": "^(high|medium|low)",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          {
+            "name": "r.name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Users": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "Users_Post",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "users",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              },
+              "xml": {
+                "name": "User",
+                "wrapped": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/ValueProvider": {
+      "get": {
+        "tags": [
+          "ValueProvider"
+        ],
+        "operationId": "ValueProvider_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "ValueProvider"
+        ],
+        "operationId": "ValueProvider_Put",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "CID",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "default": "101"
+          },
+          {
+            "name": "QID",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "default": "102"
+          },
+          {
+            "name": "QID-V2",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "default": "1022"
+          },
+          {
+            "name": "Proxy-Authorization",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "default": "103"
+          },
+          {
+            "name": "Proxy_Authorization",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "default": "1031"
+          },
+          {
+            "name": "Proxy-CustomAuth",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "default": "1032"
+          },
+          {
+            "name": "Proxy-Test",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "default": "1033"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "ValueProvider"
+        ],
+        "operationId": "ValueProvider_Post",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/Fake/0/{id}": {
+      "get": {
+        "tags": [
+          "Fake"
+        ],
+        "operationId": "Fake_Get0",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "default": 8
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Fake/1/{id}": {
+      "get": {
+        "tags": [
+          "Fake"
+        ],
+        "operationId": "Fake_Get1",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "default": 8
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Fake/2/{id}": {
+      "get": {
+        "tags": [
+          "Fake"
+        ],
+        "operationId": "Fake_Get2",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "default": 8
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Fake/3/{id}": {
+      "get": {
+        "tags": [
+          "Fake"
+        ],
+        "operationId": "Fake_Get3",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "default": 8
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Fake/4/{id}": {
+      "get": {
+        "tags": [
+          "Fake"
+        ],
+        "operationId": "Fake_Get4",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "default": 8
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Fake/5/{id}": {
+      "get": {
+        "tags": [
+          "Fake"
+        ],
+        "operationId": "Fake_Get5",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "default": 8
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Fake/6/{id}": {
+      "get": {
+        "tags": [
+          "Fake"
+        ],
+        "operationId": "Fake_Get6",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "default": 8
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Fake/7/{id}": {
+      "get": {
+        "tags": [
+          "Fake"
+        ],
+        "operationId": "Fake_Get7",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "default": 8
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Fake/8/{id}": {
+      "get": {
+        "tags": [
+          "Fake"
+        ],
+        "operationId": "Fake_Get8",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "default": 8
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Fake/9/{id}": {
+      "get": {
+        "tags": [
+          "Fake"
+        ],
+        "operationId": "Fake_Get9",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "default": 8
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Location": {
+      "type": "object",
+      "properties": {
+        "Lat": {
+          "format": "double",
+          "type": "number",
+          "example": 9858.216
+        },
+        "Lon": {
+          "format": "double",
+          "type": "number",
+          "example": 9858.216
+        }
+      },
+      "xml": {
+        "name": "Location"
+      }
+    },
+    "Data": {
+      "type": "object",
+      "properties": {
+        "integ": {
+          "format": "int32",
+          "type": "integer",
+          "example": 123
+        },
+        "doub": {
+          "format": "double",
+          "type": "number",
+          "example": 9858.216
+        },
+        "boolea": {
+          "type": "boolean"
+        },
+        "guid": {
+          "format": "uuid",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "date": {
+          "format": "date-time",
+          "type": "string",
+          "example": "2018-01-01"
+        }
+      },
+      "xml": {
+        "name": "Data"
+      }
+    },
+    "AnotherFoo[Foo]": {
+      "type": "object",
+      "properties": {},
+      "xml": {
+        "name": "AnotherFoo`1"
+      }
+    },
+    "Company": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "int32",
+          "type": "integer",
+          "example": 123
+        },
+        "Name": {
+          "type": "string",
+          "example": "Acme co"
+        },
+        "Description": {
+          "type": "string",
+          "example": "Super duper company"
+        },
+        "TaxCode": {
+          "type": "string",
+          "example": "42rty"
+        },
+        "TaxCodeDisplayName": {
+          "type": "string",
+          "example": "Tax Code Display"
+        },
+        "lowercase": {
+          "type": "string"
+        },
+        "UPPERCASE": {
+          "type": "string"
+        },
+        "huNGariAnCASE": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Company"
+      }
+    },
+    "EntityRequest": {
+      "type": "object",
+      "properties": {
+        "person": {
+          "$ref": "#/definitions/Entity"
+        }
+      },
+      "xml": {
+        "name": "EntityRequest"
+      }
+    },
+    "Entity": {
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string"
+        },
+        "entityName": {
+          "$ref": "#/definitions/EntityName"
+        }
+      },
+      "xml": {
+        "name": "Entity"
+      }
+    },
+    "EntityName": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "EntityName"
+      }
+    },
+    "CountingLock1": {
+      "type": "object",
+      "properties": {
+        "EmployeeID": {
+          "format": "int32",
+          "type": "integer",
+          "example": 123
+        },
+        "EmployeeName": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "CountingLock1"
+      }
+    },
+    "CountingLock2": {
+      "type": "object",
+      "properties": {
+        "EmployeeID": {
+          "format": "int32",
+          "type": "integer",
+          "example": 123
+        },
+        "EmployeeName": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "CountingLock2"
+      }
+    },
+    "NewUserWriteModel": {
+      "type": "object",
+      "properties": {
+        "Email": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "NewUserWriteModel"
+      }
+    },
+    "KeyValuePair[Int32,ShiftDayOffRule]": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true,
+          "example": 123
+        },
+        "Value": {
+          "enum": [
+            "None",
+            "OffAfter",
+            "OffBefore",
+            "InAfter"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "example": {
+            "None": 0,
+            "OffAfter": 1,
+            "InAfter": 3,
+            "OffBefore": -1
+          }
+        }
+      },
+      "xml": {
+        "name": "KeyValuePair`2"
+      }
+    },
+    "CurrentTask": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Type": {
+          "type": "string"
+        },
+        "Payload": {
+          "type": "object"
+        }
+      },
+      "xml": {
+        "name": "CurrentTask"
+      }
+    },
+    "Test": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer",
+          "example": 123
+        },
+        "guid": {
+          "format": "uuid",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "did": {
+          "format": "double",
+          "type": "number",
+          "example": 9858.216
+        },
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "abc",
+            "def",
+            "ghi"
+          ]
+        },
+        "index": {
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "example": {
+            "1": "abc",
+            "2": "def"
+          }
+        }
+      },
+      "xml": {
+        "name": "Test"
+      }
+    },
+    "ViewModelTest": {
+      "description": "Testing POCO model",
+      "type": "object",
+      "properties": {
+        "abd": {
+          "type": "string",
+          "example": "aaabbbddd"
+        },
+        "bcd": {
+          "maxLength": 5,
+          "minLength": 3,
+          "type": "string"
+        },
+        "cde": {
+          "type": "string",
+          "example": "cccdddeee"
+        },
+        "Id": {
+          "format": "int32",
+          "description": "The super ID that will be used",
+          "type": "integer",
+          "example": 123
+        },
+        "Name": {
+          "description": "Who needs a name?",
+          "type": "string",
+          "example": "John Doe"
+        },
+        "xyz": {
+          "maxLength": 10,
+          "type": "string",
+          "example": "abcasdfasd"
+        }
+      },
+      "xml": {
+        "name": "ViewModelTest"
+      }
+    },
+    "MyData": {
+      "description": "My super duper data",
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "description": "The unique identifier",
+          "type": "integer",
+          "example": 123
+        },
+        "name": {
+          "description": "Everyone needs a name",
+          "type": "string"
+        },
+        "details": {
+          "description": "Details - testing anchor: <a href=\"?filter=TestPost\">TestPost</a>",
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "MyData"
+      }
+    },
+    "NotFoundResult": {
+      "type": "object",
+      "properties": {
+        "Request": {
+          "type": "object",
+          "readOnly": true
+        }
+      },
+      "xml": {
+        "name": "NotFoundResult"
+      }
+    },
+    "BadRequestErrorMessageResult": {
+      "type": "object",
+      "properties": {
+        "Message": {
+          "type": "string",
+          "readOnly": true
+        },
+        "ContentNegotiator": {
+          "$ref": "#/definitions/IContentNegotiator",
+          "readOnly": true
+        },
+        "Request": {
+          "type": "object",
+          "readOnly": true
+        },
+        "Formatters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MediaTypeFormatter"
+          },
+          "readOnly": true,
+          "xml": {
+            "name": "MediaTypeFormatter",
+            "wrapped": true
+          }
+        }
+      },
+      "xml": {
+        "name": "BadRequestErrorMessageResult"
+      }
+    },
+    "IContentNegotiator": {
+      "type": "object",
+      "properties": {},
+      "xml": {
+        "name": "IContentNegotiator"
+      }
+    },
+    "MediaTypeFormatter": {
+      "type": "object",
+      "properties": {
+        "SupportedMediaTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MediaTypeHeaderValue"
+          },
+          "readOnly": true,
+          "xml": {
+            "name": "MediaTypeHeaderValue",
+            "wrapped": true
+          }
+        },
+        "SupportedEncodings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Encoding"
+          },
+          "readOnly": true,
+          "xml": {
+            "name": "Encoding",
+            "wrapped": true
+          }
+        },
+        "MediaTypeMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MediaTypeMapping"
+          },
+          "readOnly": true,
+          "xml": {
+            "name": "MediaTypeMapping",
+            "wrapped": true
+          }
+        },
+        "RequiredMemberSelector": {
+          "$ref": "#/definitions/IRequiredMemberSelector"
+        }
+      },
+      "xml": {
+        "name": "MediaTypeFormatter"
+      }
+    },
+    "MediaTypeHeaderValue": {
+      "type": "object",
+      "properties": {
+        "CharSet": {
+          "type": "string"
+        },
+        "Parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NameValueHeaderValue"
+          },
+          "readOnly": true,
+          "xml": {
+            "name": "NameValueHeaderValue",
+            "wrapped": true
+          }
+        },
+        "MediaType": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "MediaTypeHeaderValue"
+      }
+    },
+    "Encoding": {
+      "type": "object",
+      "properties": {
+        "BodyName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "EncodingName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "HeaderName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "WebName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "WindowsCodePage": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true,
+          "example": 123
+        },
+        "IsBrowserDisplay": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "IsBrowserSave": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "IsMailNewsDisplay": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "IsMailNewsSave": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "IsSingleByte": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "EncoderFallback": {
+          "$ref": "#/definitions/EncoderFallback"
+        },
+        "DecoderFallback": {
+          "$ref": "#/definitions/DecoderFallback"
+        },
+        "IsReadOnly": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "CodePage": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true,
+          "example": 123
+        }
+      },
+      "xml": {
+        "name": "Encoding"
+      }
+    },
+    "MediaTypeMapping": {
+      "type": "object",
+      "properties": {
+        "MediaType": {
+          "$ref": "#/definitions/MediaTypeHeaderValue",
+          "readOnly": true
+        }
+      },
+      "xml": {
+        "name": "MediaTypeMapping"
+      }
+    },
+    "IRequiredMemberSelector": {
+      "type": "object",
+      "properties": {},
+      "xml": {
+        "name": "IRequiredMemberSelector"
+      }
+    },
+    "NameValueHeaderValue": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "NameValueHeaderValue"
+      }
+    },
+    "EncoderFallback": {
+      "type": "object",
+      "properties": {
+        "MaxCharCount": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true,
+          "example": 123
+        }
+      },
+      "xml": {
+        "name": "EncoderFallback"
+      }
+    },
+    "DecoderFallback": {
+      "type": "object",
+      "properties": {
+        "MaxCharCount": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true,
+          "example": 123
+        }
+      },
+      "xml": {
+        "name": "DecoderFallback"
+      }
+    },
+    "UnauthorizedResult": {
+      "type": "object",
+      "properties": {
+        "Challenges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthenticationHeaderValue"
+          },
+          "readOnly": true,
+          "xml": {
+            "name": "AuthenticationHeaderValue",
+            "wrapped": true
+          }
+        },
+        "Request": {
+          "type": "object",
+          "readOnly": true
+        }
+      },
+      "xml": {
+        "name": "UnauthorizedResult"
+      }
+    },
+    "AuthenticationHeaderValue": {
+      "type": "object",
+      "properties": {
+        "Scheme": {
+          "type": "string",
+          "readOnly": true
+        },
+        "Parameter": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "xml": {
+        "name": "AuthenticationHeaderValue"
+      }
+    },
+    "InternalServerErrorResult": {
+      "type": "object",
+      "properties": {
+        "Request": {
+          "type": "object",
+          "readOnly": true
+        }
+      },
+      "xml": {
+        "name": "InternalServerErrorResult"
+      }
+    },
+    "Account": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "int32",
+          "type": "integer",
+          "example": 123
+        },
+        "EntityId": {
+          "format": "int32",
+          "type": "integer",
+          "example": 123
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Symbol": {
+          "type": "string"
+        },
+        "Vat": {
+          "type": "string"
+        },
+        "Street1": {
+          "type": "string"
+        },
+        "Street2": {
+          "type": "string"
+        },
+        "Street3": {
+          "type": "string"
+        },
+        "PostalCode": {
+          "type": "string"
+        },
+        "Region": {
+          "type": "string"
+        },
+        "City": {
+          "type": "string"
+        },
+        "Country": {
+          "type": "string"
+        },
+        "Phone1": {
+          "type": "string"
+        },
+        "Phone2": {
+          "type": "string"
+        },
+        "Fax": {
+          "type": "string"
+        },
+        "Email1": {
+          "type": "string"
+        },
+        "Email2": {
+          "type": "string"
+        },
+        "Website": {
+          "type": "string"
+        },
+        "Contact": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Contact"
+          },
+          "xml": {
+            "name": "Contact",
+            "wrapped": true
+          }
+        },
+        "SupplyAgreement": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SupplyAgreement"
+          },
+          "xml": {
+            "name": "SupplyAgreement",
+            "wrapped": true
+          }
+        }
+      },
+      "xml": {
+        "name": "Account"
+      }
+    },
+    "Contact": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "int32",
+          "type": "integer",
+          "example": 123
+        },
+        "AccountId": {
+          "format": "int32",
+          "type": "integer",
+          "example": 123
+        },
+        "FirstName": {
+          "type": "string"
+        },
+        "LastName": {
+          "type": "string"
+        },
+        "JobTitle": {
+          "type": "string"
+        },
+        "Email": {
+          "type": "string"
+        },
+        "BusinessPhone": {
+          "type": "string"
+        },
+        "MobilePhone": {
+          "type": "string"
+        },
+        "Fax": {
+          "type": "string"
+        },
+        "Updated": {
+          "format": "date-time",
+          "type": "string",
+          "example": "2018-01-01"
+        },
+        "Account": {
+          "$ref": "#/definitions/Account"
+        }
+      },
+      "xml": {
+        "name": "Contact"
+      }
+    },
+    "SupplyAgreement": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "int32",
+          "type": "integer",
+          "example": 123
+        },
+        "EntityId": {
+          "format": "int32",
+          "type": "integer",
+          "example": 123
+        },
+        "AccountId": {
+          "format": "int32",
+          "type": "integer",
+          "example": 123
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Slaid": {
+          "format": "int32",
+          "type": "integer",
+          "example": 123
+        },
+        "Account": {
+          "$ref": "#/definitions/Account"
+        }
+      },
+      "xml": {
+        "name": "SupplyAgreement"
+      }
+    },
+    "ImageFeature": {
+      "type": "object",
+      "properties": {
+        "ImageUrl": {
+          "description": "Here goes your image URL",
+          "type": "string"
+        },
+        "Title": {
+          "description": "We all need a Title",
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "ImageFeature"
+      }
+    },
+    "Int64Data": {
+      "type": "object",
+      "properties": {
+        "MyInt64": {
+          "format": "int64",
+          "type": "integer",
+          "example": "1253261109769874438"
+        },
+        "MyData": {
+          "type": "string",
+          "example": "1253261109769874438"
+        }
+      },
+      "xml": {
+        "name": "Int64Data"
+      }
+    },
+    "MData": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "int32",
+          "type": "integer",
+          "example": 123
+        },
+        "Month": {
+          "enum": [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+          ],
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "MData"
+      }
+    },
+    "InputData": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "int32",
+          "type": "integer",
+          "example": 123
+        },
+        "Date": {
+          "format": "date-time",
+          "type": "string",
+          "example": "2018-01-01"
+        }
+      },
+      "xml": {
+        "name": "InputData"
+      }
+    },
+    "PolygonVolumeInsideParameter": {
+      "type": "object",
+      "properties": {
+        "Points": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Location"
+          },
+          "xml": {
+            "name": "Location",
+            "wrapped": true
+          },
+          "example": [
+            {
+              "Lat": 1.0,
+              "Lon": 2.0
+            },
+            {
+              "Lat": 5.0,
+              "Lon": 6.0
+            }
+          ]
+        },
+        "PlanId": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "PolygonVolumeInsideParameter"
+      }
+    },
+    "CategoryModel": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "int32",
+          "type": "integer",
+          "example": 123
+        },
+        "Parent": {
+          "$ref": "#/definitions/CategoryModel"
+        }
+      },
+      "xml": {
+        "name": "CategoryModel"
+      }
+    },
+    "test1": {
+      "type": "object",
+      "properties": {
+        "MyId": {
+          "format": "int32",
+          "type": "integer",
+          "example": 123
+        },
+        "data": {
+          "format": "uuid",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        }
+      },
+      "xml": {
+        "name": "test1"
+      }
+    },
+    "test2": {
+      "type": "object",
+      "properties": {
+        "MyId": {
+          "format": "int32",
+          "type": "integer",
+          "example": 123
+        },
+        "data": {
+          "format": "uuid",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        }
+      },
+      "xml": {
+        "name": "test2"
+      }
+    },
+    "LocalDate": {
+      "type": "object",
+      "properties": {},
+      "xml": {
+        "name": "LocalDate"
+      }
+    },
+    "InputModel": {
+      "type": "object",
+      "properties": {},
+      "xml": {
+        "name": "InputModel"
+      }
+    },
+    "MyTest": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "IsPassing": {
+          "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "MyTest"
+      }
+    },
+    "MyEndpointRequestClass": {
+      "type": "object",
+      "properties": {
+        "StringEnumColor": {
+          "pattern": "^(dark-blue|dark-red|light-blue|light-red)",
+          "type": "string"
+        },
+        "Transparency": {
+          "pattern": "^(high|medium|low)",
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "MyEndpointRequestClass"
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Age": {
+          "format": "int32",
+          "type": "integer",
+          "example": 123
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    },
+    "Company123": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "int32",
+          "type": "integer",
+          "example": 123
+        },
+        "Name": {
+          "type": "string",
+          "example": "Acme co"
+        },
+        "Description": {
+          "type": "string",
+          "example": "Super duper company"
+        },
+        "TaxCode": {
+          "type": "string",
+          "example": "42rty"
+        },
+        "TaxCodeDisplayName": {
+          "type": "string",
+          "example": "Tax Code Display"
+        },
+        "lowercase": {
+          "type": "string"
+        },
+        "UPPERCASE": {
+          "type": "string"
+        },
+        "huNGariAnCASE": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Company"
+      }
+    },
+    "Enums_Definitions": {
+      "properties": {
+        "ShiftDayOffRule": {
+          "example": {
+            "None": 0,
+            "OffAfter": 1,
+            "InAfter": 3,
+            "OffBefore": -1
+          }
+        },
+        "CustomEnum": {
+          "example": {
+            "Text": 1,
+            "Numeric": 2,
+            "Date": 4,
+            "Numeric_Function": 8,
+            "Dropdown_List": 16,
+            "Checkbox": 32
+          }
+        },
+        "MonthEnum": {
+          "example": {
+            "January": 0,
+            "February": 1,
+            "March": 2,
+            "April": 3,
+            "May": 4,
+            "June": 5,
+            "July": 6,
+            "August": 7,
+            "September": 8,
+            "October": 9,
+            "November": 10,
+            "December": 11
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "oauth2": {
+      "type": "oauth2",
+      "description": "OAuth2 Implicit Grant",
+      "flow": "accessCode",
+      "authorizationUrl": "http://www.facebook.com/dialog/oauth/?client_id=183620338840937&redirect_uri=http%3A%2F%2Fswashbuckletest.azurewebsites.net%2Fswagger",
+      "tokenUrl": "https://graph.facebook.com/oauth/access_token?client_id=183620338840937&redirect_uri=http%3A%2F%2Fswashbuckletest.azurewebsites.net%2Fswagger&client_secret=de81460e907d213dcc4271aa7b1ae88a&grant_type=client_credentials",
+      "scopes": {}
+    }
+  },
+  "tags": [
+    {
+      "name": "TestEnum",
+      "description": "Testing enums ..."
+    }
+  ]
+}
