@@ -37,10 +37,6 @@
                             "$ref": "#/definitions/Error Response"
                         }
                     }
-                },
-                "externalDocs": {
-                    "description": "Retrieving a Known Resource",
-                    "url": "https://tools.ietf.org/html/rfc7644#section-3.4.1"
                 }
             },
             "patch": {
@@ -76,10 +72,6 @@
                     "204": {
                         "description": "The resource was successfully modified but the access token scopes doesn't have permissions to retrieve the updated resource."
                     }
-                },
-                "externalDocs": {
-                    "description": "Modifying with PATCH",
-                    "url": "https://tools.ietf.org/html/rfc7644#section-3.5.2"
                 }
             }
         }
@@ -112,10 +104,6 @@
                     "type": "string",
                     "description": "A detailed, human readable message."
                 }
-            },
-            "externalDocs": {
-                "description": "HTTP Status and Error Response Handling",
-                "url": "https://tools.ietf.org/html/rfc7644#section-3.12"
             }
         },
         "Axxass": {
@@ -376,9 +364,5 @@
             "type": "string",
             "collectionFormat": "csv"
         }
-    },
-    "externalDocs": {
-        "description": "SCIM 2.0 Protocol (RFC7644)",
-        "url": "https://tools.ietf.org/html/rfc7644"
     }
 }
