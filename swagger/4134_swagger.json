@@ -201,7 +201,7 @@
                 },
                 "externalId": {
                     "type": "string",
-                    "x-returned": "by default",
+                    "x-returned": "by default"
                 },
                 "id": {
                     "type": "string",
