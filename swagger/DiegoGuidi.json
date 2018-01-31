@@ -7,25 +7,13 @@
 	"paths": {
 		"/v1/{ambiente}/{verticale?}/Iva": {
 			"post": {
-				"tags": ["Iva"],
+				"tags": [],
 				"summary": "Create 'CodIvaCODTO'",
 				"description": "Creazione di un nuovo oggetto di tipo 'CodIvaCODTO'",
 				"operationId": "Iva_Create",
-				"consumes": ["application/json", "application/xml"],
-				"produces": ["application/json", "application/xml"],
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
 				"parameters": [{
-						"name": "ambiente",
-						"in": "path",
-						"description": "L'ambiente di lavoro",
-						"required": true,
-						"type": "string"
-					}, {
-						"name": "verticale",
-						"in": "path",
-						"description": "Il verticale di lavoro",
-						"required": false,
-						"type": "string"
-					}, {
 						"in": "body",
 						"schema": {
 							"$ref": "#/definitions/CodIvaCODTO"
