@@ -28,18 +28,7 @@
 						"description": "Se l'oggetto è stato creato correttamente",
 						"schema": {
 							"$ref": "#/definitions/CodIvaCODTO"
-						},
-						"headers": {
-							"Location": {
-								"description": "L'id (in formato URI) della risorsa appena creata"
-							}
 						}
-					},
-					"400": {
-						"description": "Se l'oggetto non è stato creato: il contenuto della risposta contiene i messaggi di validazione prodotti"
-					},
-					"409": {
-						"description": "Se l'oggetto non è stato creato a causa di logiche di business non rispettate: il contenuto della risposta contiene i messaggi di validazione prodotti"
 					}
 				}
 			},
