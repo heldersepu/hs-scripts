@@ -1,0 +1,374 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"title": "Alyante Web API",
+		"description": "Servizio Alyante Web API",
+		"version": "v1"
+	},
+	"paths": {
+		"/v1/{ambiente}/{verticale?}/Iva/{id}": {
+			"get": {
+				"tags": ["Iva"],
+				"summary": "Get 'CodIvaCODTO'",
+				"description": "Recupero l'oggetto di tipo 'CodIvaCODTO' corrispondente all'id specificato",
+				"operationId": "Iva_GetById",
+				"consumes": ["application/json", "application/xml"],
+				"produces": ["application/json", "application/xml"],
+				"parameters": [{
+						"name": "ambiente",
+						"in": "path",
+						"description": "L'ambiente di lavoro",
+						"required": true,
+						"type": "string"
+					}, {
+						"name": "verticale",
+						"in": "path",
+						"description": "Il verticale di lavoro",
+						"required": false,
+						"type": "string"
+					}, {
+						"name": "id",
+						"in": "path",
+						"description": "L'id dell'oggetto di tipo 'CodIvaCODTO' da recuperare",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "L'oggetto di tipo 'CodIvaCODTO' richiesto",
+						"schema": {
+							"$ref": "#/definitions/CodIvaCODTO"
+						}
+					},
+					"404": {
+						"description": "Se l'oggetto richiesto non è stato trovato"
+					}
+				}
+			},
+			"put": {
+				"tags": ["Iva"],
+				"summary": "Update 'CodIvaCODTO'",
+				"description": "Aggiornamento di un oggetto di tipo 'CodIvaCODTO'",
+				"operationId": "Iva_Update",
+				"consumes": ["application/json", "application/xml"],
+				"produces": ["application/json", "application/xml"],
+				"parameters": [{
+						"name": "ambiente",
+						"in": "path",
+						"description": "L'ambiente di lavoro",
+						"required": true,
+						"type": "string"
+					}, {
+						"name": "verticale",
+						"in": "path",
+						"description": "Il verticale di lavoro",
+						"required": false,
+						"type": "string"
+					}, {
+						"name": "id",
+						"in": "path",
+						"description": "L'id dell'oggetto di tipo 'CodIvaCODTO' da aggiornare",
+						"required": true,
+						"type": "string"
+					}, {
+						"name": "force",
+						"in": "path",
+						"description": "Il codice (o i codici separati da ',') di errore da ignorare nell'esecuzione della operazione",
+						"required": false,
+						"type": "integer",
+						"collectionFormat": "csv"
+					}, {
+						"in": "body",
+						"schema": {
+							"$ref": "#/definitions/CodIvaCODTO"
+						},
+						"name": "body",
+						"description": "L'oggetto di tipo 'CodIvaCODTO' da aggiornare",
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Se l'oggetto è stato aggiornato correttamente"
+					},
+					"400": {
+						"description": "Se l'oggetto non è stato aggiornato: il contenuto della risposta contiene i messaggi di validazione prodotti"
+					},
+					"404": {
+						"description": "Se l'oggetto non è stato trovato"
+					},
+					"409": {
+						"description": "Se l'oggetto non è stato aggiornato a causa di logiche di business non rispettate: il contenuto della risposta contiene i messaggi di validazione prodotti"
+					}
+				}
+			},
+			"delete": {
+				"tags": ["Iva"],
+				"summary": "Delete 'CodIvaCODTO'",
+				"description": "Eliminazione di un oggetto di tipo 'CodIvaCODTO'",
+				"operationId": "Iva_Delete",
+				"consumes": ["application/json", "application/xml"],
+				"produces": ["application/json", "application/xml"],
+				"parameters": [{
+						"name": "ambiente",
+						"in": "path",
+						"description": "L'ambiente di lavoro",
+						"required": true,
+						"type": "string"
+					}, {
+						"name": "verticale",
+						"in": "path",
+						"description": "Il verticale di lavoro",
+						"required": false,
+						"type": "string"
+					}, {
+						"name": "id",
+						"in": "path",
+						"description": "L'id dell'oggetto di tipo 'CodIvaCODTO' da eliminare",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Se l'oggetto è stato eliminato correttamente"
+					},
+					"400": {
+						"description": "Se l'oggetto non è stato eliminato: il contenuto della risposta contiene i messaggi di validazione prodotti"
+					},
+					"404": {
+						"description": "Se l'oggetto non è stato trovato"
+					},
+					"409": {
+						"description": "Se l'oggetto non è stato eliminato a causa di logiche di business non rispettate: il contenuto della risposta contiene i messaggi di validazione prodotti"
+					}
+				}
+			},
+			"parameters": []
+		},		
+		"/v1/{ambiente}/{verticale?}/Iva{._op=validate?}": {
+			"post": {
+				"tags": ["Iva"],
+				"summary": "Validate 'CodIvaCODTO'",
+				"description": "Validazione di un oggetto di tipo 'CodIvaCODTO'",
+				"operationId": "Iva_Validate",
+				"consumes": ["application/json", "application/xml"],
+				"produces": ["text/html"],
+				"parameters": [{
+						"name": "ambiente",
+						"in": "path",
+						"description": "L'ambiente di lavoro",
+						"required": true,
+						"type": "string"
+					}, {
+						"name": "verticale",
+						"in": "path",
+						"description": "Il verticale di lavoro",
+						"required": false,
+						"type": "string"
+					}, {
+						"name": "_op",
+						"in": "query",
+						"description": "Da valorizzare obbligatoriamente a 'validate' per attivare la funzionalità di validazione",
+						"required": true,
+						"type": "string",
+						"enum": ["validate"]
+					}, {
+						"in": "body",
+						"schema": {
+							"$ref": "#/definitions/CodIvaCODTO"
+						},
+						"name": "body",
+						"description": "L'oggetto di tipo 'CodIvaCODTO' da validare",
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Se l'oggetto specificato risulta VALIDO"
+					},
+					"400": {
+						"description": "Se l'oggetto da validare non è stato specificato"
+					},
+					"409": {
+						"description": "Se l'oggetto specificato risulta NON VALIDO: il contenuto della risposta contiene i messaggi di validazione prodotti"
+					}
+				}
+			},
+			"parameters": []
+		},
+		"/v1/{ambiente}/{verticale?}/Iva{._op=validateproperties?}": {
+			"post": {
+				"tags": ["Iva"],
+				"summary": "ValidateProperties 'CodIvaCODTO'",
+				"description": "Validazione di una o più proprietà di un oggetto di tipo 'CodIvaCODTO'",
+				"operationId": "Iva_ValidateProperties",
+				"consumes": ["application/json", "application/xml"],
+				"produces": ["text/html"],
+				"parameters": [{
+						"name": "ambiente",
+						"in": "path",
+						"description": "L'ambiente di lavoro",
+						"required": true,
+						"type": "string"
+					}, {
+						"name": "verticale",
+						"in": "path",
+						"description": "Il verticale di lavoro",
+						"required": false,
+						"type": "string"
+					}, {
+						"name": "_op",
+						"in": "query",
+						"description": "Da valorizzare obbligatoriamente a 'validateproperties' per attivare la funzionalità di validazione delle proprietà",
+						"required": true,
+						"type": "string",
+						"enum": ["validateproperties"]
+					}, {
+						"name": "propertyName",
+						"in": "formData",
+						"description": "Una o più coppie 'chiave=valore' in cui la chiave è il nome della proprietà del DTO e il valore è il valore da assegnare prima di eseguire la validazione stessa",
+						"required": true,
+						"type": "string",
+						"collectionFormat": "csv"
+					}, {
+						"name": "id",
+						"in": "formData",
+						"description": "L'id di un oggetto esistente su cui validare le proprietà, oppure '' per la validazione delle proprietà nei confronti di un nuovo oggetto",
+						"required": false,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Se le proprietà dell'oggetto specificate risultano VALIDE"
+					},
+					"400": {
+						"description": "Se le proprietà dell'oggetto da validare non sono state specificate"
+					},
+					"409": {
+						"description": "Se una o più proprietà dell'oggetto specificate risultano NON VALIDE: il contenuto della risposta contiene i messaggi di validazione prodotti"
+					}
+				}
+			},
+			"parameters": []
+		},
+		"/v1/{ambiente}/{verticale?}/Iva": {
+			"post": {
+				"tags": ["Iva"],
+				"summary": "Create 'CodIvaCODTO'",
+				"description": "Creazione di un nuovo oggetto di tipo 'CodIvaCODTO'",
+				"operationId": "Iva_Create",
+				"consumes": ["application/json", "application/xml"],
+				"produces": ["application/json", "application/xml"],
+				"parameters": [{
+						"name": "ambiente",
+						"in": "path",
+						"description": "L'ambiente di lavoro",
+						"required": true,
+						"type": "string"
+					}, {
+						"name": "verticale",
+						"in": "path",
+						"description": "Il verticale di lavoro",
+						"required": false,
+						"type": "string"
+					}, {
+						"in": "body",
+						"schema": {
+							"$ref": "#/definitions/CodIvaCODTO"
+						},
+						"name": "body",
+						"description": "L'oggetto di tipo 'CodIvaCODTO' da creare",
+						"required": true
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Se l'oggetto è stato creato correttamente",
+						"schema": {
+							"$ref": "#/definitions/CodIvaCODTO"
+						},
+						"headers": {
+							"Location": {
+								"description": "L'id (in formato URI) della risorsa appena creata"
+							}
+						}
+					},
+					"400": {
+						"description": "Se l'oggetto non è stato creato: il contenuto della risposta contiene i messaggi di validazione prodotti"
+					},
+					"409": {
+						"description": "Se l'oggetto non è stato creato a causa di logiche di business non rispettate: il contenuto della risposta contiene i messaggi di validazione prodotti"
+					}
+				}
+			},
+			"parameters": []
+		}
+	},
+	"definitions": {
+		"CodIvaCODTO": {
+			"properties": {
+				"annotazioni": {
+					"description": "Annotazioni fatture",
+					"type": "string"
+				},
+				"codice": {
+					"description": "Codice",
+					"type": "string"
+				},
+				"codiceagr": {
+					"description": "Cod.IVA comp.",
+					"type": "string"
+				},
+				"codPlafond": {
+					"description": "Gestione plafond",
+					"type": "number"
+				},
+				"descrizione": {
+					"description": "Descrizione",
+					"type": "string"
+				},				
+				"flgAgri": {
+					"description": "Agricoltura",
+					"type": "number"
+				},
+				"flgAutoue": {
+					"description": "Vendita auto UE L. 286",
+					"type": "number"
+				},
+				"flgEscludiblacklist": {
+					"description": "Escludi da Black List",
+					"type": "number"
+				},
+				"flgIndet": {
+					"description": "IVA indetraibile",
+					"type": "number"
+				},
+				"flgNotvar": {
+					"description": "Codice per note variaz.IVA art.38 quater c.2 (tax-free)",
+					"type": "number"
+				},
+				"note": {
+					"description": "Note",
+					"type": "string"
+				},
+				"perciva": {
+					"description": "% IVA ventilazione",
+					"type": "number"
+				},
+				"tipologia": {
+					"description": "Tipologia",
+					"type": "number"
+				}
+			},
+			"required": ["codice", "codPlafond", "descrizione", "flgAgri", "flgAutoue", "flgEscludiblacklist", "flgIndet", "flgNotvar", "tipologia"],
+			"description": "Codice IVA",
+			"type": "object",
+			"$ref": "#/definitions/CodIvaCODTO"
+		}
+	},
+	"tags": [
+	]
+}
