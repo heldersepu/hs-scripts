@@ -1,0 +1,37 @@
+{
+  "swagger": "2.0",
+  "info": {
+   "title": "Kubernetes",
+   "version": "v1.8.8"
+  },
+  "paths": {
+    "/foo": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomResourceValidation"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "JSONSchemaProps": {
+      "description": "JSONSchemaProps is a JSON-Schema following Specification Draft 4 (http://json-schema.org/).",
+      "properties": {
+        "$ref": {"type": "string"}
+      }
+    },
+    "CustomResourceValidation": {
+      "description": "CustomResourceValidation is a list of validation methods for CustomResources.",
+      "properties": {
+        "openAPIV3Schema": {
+          "$ref": "#/definitions/JSONSchemaProps"
+        }
+      }
+    }
+  }
+}
