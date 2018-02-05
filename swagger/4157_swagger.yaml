@@ -1,0 +1,50 @@
+swagger: '2.0'
+info:
+  description: 'An API to publish, query, modify and delete stuff.'
+  version: v1.0.0.0
+  title: Some Title
+host: localhost
+basePath: /
+tags:
+  - name: stuff-controller
+    description: Stuff Controller
+schemes:
+  - http
+  - https
+paths:
+  /operation:
+    post:
+      tags:
+        - Stuff Update Interfaces
+      summary: Report new stuff or update existing stuff
+      description: Create or update some stuff.
+      operationId: operationUsingPOST
+      consumes:
+        - application/json;charset=UTF-8
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: Header containing user account id.
+          required: false
+          type: string
+        - in: body
+          name: stuffRequest
+          description: This is a description of some stuff
+          required: true
+          schema:
+            $ref: '#/definitions/StuffRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+definitions:
+  StuffRequest:
+    type: object
+    properties:
+      age:
+        type: number
+        format: float
+        description: Age of stuff.
