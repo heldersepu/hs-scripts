@@ -15,6 +15,8 @@
         "tags": [
           "ApiExplorer"
         ],
+        "summary": "Testing the summary on the ApiExplorerController",
+        "description": "Testing the description on the ApiExplorerController\r\nThis is a second line\r\nHere is a link to <a href=\"https://github.com/heldersepu\">my GitHub profile</a><br />\r\nSome HTML styling: <b>BOLD</b><i>italics</i><ul><li>Item one</li><li>Item two</li></ul><pre>Text in a pre element</pre><h1>Header1</h1><h2>Header2</h2><h3>Header3</h3>",
         "operationId": "ApiExplorer_Get",
         "consumes": [],
         "produces": [
@@ -46,6 +48,7 @@
         "tags": [
           "ArrayTest"
         ],
+        "description": "Testing Markdown\r\n*Italic*\r\n**Bold**\r\n# Heading 1\r\n## Heading 2\r\n[Link](http://a.com)\r\n* List abc\r\n* List def\r\n* List ghi\r\n            \r\n&gt; Blockquote\r\n`Inline code` with backticks\r\nHorizontal Rule\r\n---\r\nBlock1 Line1\r\nBlock1 Line2\r\n            \r\nBlock2 Line1\r\nBlock2 Line2",
         "operationId": "ArrayTest_Get1",
         "consumes": [],
         "produces": [
@@ -88,6 +91,7 @@
         "tags": [
           "ArrayTest"
         ],
+        "description": "HelloWorld\r\n<pre>{\r\n    \"demo\": \"val\", \r\n    \"demo2\": \"hello\"\r\n}</pre>",
         "operationId": "ArrayTest_Get2",
         "consumes": [],
         "produces": [
@@ -132,6 +136,7 @@
         "tags": [
           "ArrayTest"
         ],
+        "description": "<a href=\"#Int64Post\">See also the Int64 Post</a>\r\n<a href=\"#/IntParam/IntParam_Get\">See also the IntParam Get</a>",
         "operationId": "ArrayTest_Get3",
         "consumes": [],
         "produces": [
@@ -144,12 +149,6 @@
             "name": "p",
             "in": "query",
             "required": true,
-			"schema": {
-				"type": "array",
-				"items": {
-					"$ref": "#/definitions/Location"
-				}
-			},
             "type": "array",
             "items": {},
             "collectionFormat": "multi"
@@ -484,6 +483,7 @@
         "tags": [
           "BigString"
         ],
+        "description": "<h2>Testing html table</h2>\r\n<table border=\"1\">\r\n  <tr>\r\n    <td colspan=\"3\">\r\n      <span class=\"method\">ONE</span>\r\n    </td>\r\n  </tr>\r\n  <tr>\r\n    <td>ABC11</td>\r\n    <td>ABC22</td>\r\n    <td>ABC33</td>\r\n  </tr>\r\n</table>",
         "operationId": "BigString_Get",
         "consumes": [],
         "produces": [
@@ -703,6 +703,7 @@
         "tags": [
           "Company"
         ],
+        "description": "## TESTING MARKDOWN TABLES\r\n### start table\r\n            \r\n| Tables        | Are           | Cool  |\r\n| ------------- |:-------------:| -----:|\r\n| col 3 is      | right-aligned | $1600 |\r\n| col 2 is      | centered      |   $12 |\r\n| zebra stripes | are neat      |    $1 |\r\n            \r\n### end table",
         "operationId": "Company_Get",
         "consumes": [],
         "produces": [
@@ -1311,6 +1312,59 @@
           }
         ]
       },
+      "delete": {
+        "tags": [
+          "Dictionary"
+        ],
+        "operationId": "Dictionary_DeleteEcho",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "guids",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "uuid",
+                "type": "string",
+                "example": "00000000-0000-0000-0000-000000000000"
+              },
+              "example": [
+                "00000000-0000-0000-0000-000000000000",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "uuid",
+                "type": "string",
+                "example": "00000000-0000-0000-0000-000000000000"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
       "patch": {
         "tags": [
           "Dictionary"
@@ -1462,8 +1516,7 @@
             "name": "a.xyz",
             "in": "query",
             "required": false,
-            "type": "string",
-            "maxLength": 10
+            "type": "string"
           },
           {
             "name": "a.cde",
@@ -1504,8 +1557,7 @@
             "name": "b.xyz",
             "in": "query",
             "required": false,
-            "type": "string",
-            "maxLength": 10
+            "type": "string"
           },
           {
             "name": "b.cde",
@@ -1575,8 +1627,7 @@
             "name": "v.xyz",
             "in": "query",
             "required": false,
-            "type": "string",
-            "maxLength": 10
+            "type": "string"
           },
           {
             "name": "v.cde",
@@ -1650,8 +1701,7 @@
             "name": "v.xyz",
             "in": "query",
             "required": false,
-            "type": "string",
-            "maxLength": 10
+            "type": "string"
           },
           {
             "name": "v.cde",
@@ -1949,6 +1999,7 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "x-example": "123456",
             "type": "integer",
             "format": "int32"
           }
@@ -2233,6 +2284,93 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Int64Data"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Int64"
+        ],
+        "description": "<h2>\r\n  <a name=\"Int64Post\">Int64 Post</a>\r\n</h2>",
+        "operationId": "Int64_Post",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Int64Data"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Int64Data"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/IntParam": {
+      "get": {
+        "tags": [
+          "IntParam"
+        ],
+        "operationId": "IntParam_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "data.name",
+            "in": "query",
+            "description": "Payload Name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "data.timeout",
+            "in": "query",
+            "description": "Timeout in ms (Range 15000 to 60000. Default set to 50000)",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 50000,
+            "maximum": 60000,
+            "minimum": 15000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Payload"
             }
           }
         },
@@ -3182,17 +3320,69 @@
         ]
       }
     },
+    "/api/upc-a": {
+      "post": {
+        "tags": [
+          "PngImage"
+        ],
+        "operationId": "PngImage_UPCA",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "image/png"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Image in image/png format"
+          },
+          "417": {
+            "description": "Invalid UPC code."
+          },
+          "500": {
+            "description": "Empty UPC code."
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
     "/api/PngImage": {
       "post": {
         "tags": [
           "PngImage"
         ],
         "operationId": "PngImage_Post",
-        "consumes": [],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "produces": [
           "image/png"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "ImportImage",
+            "in": "formData",
+            "description": "Upload image file",
+            "required": true,
+            "type": "file"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -3708,6 +3898,78 @@
         ]
       }
     },
+    "/faux/RoutePrefix/one": {
+      "post": {
+        "tags": [
+          "Routes"
+        ],
+        "operationId": "Routes_Post",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/faux/RoutePrefix/two": {
+      "post": {
+        "tags": [
+          "Routes"
+        ],
+        "operationId": "Routes_PostFauxRoutePrefixTwo",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
     "/api/Routes": {
       "get": {
         "tags": [
@@ -3726,6 +3988,52 @@
             "description": "OK",
             "schema": {
               "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/RouteTest/test/{itemid}": {
+      "get": {
+        "tags": [
+          "RouteTest"
+        ],
+        "operationId": "RouteTest_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "itemid",
+            "in": "path",
+            "description": "Secret ID for your object",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "default": 123
+          },
+          {
+            "name": "note",
+            "in": "query",
+            "description": "Notes about your object",
+            "required": false,
+            "type": "string",
+            "default": "HelloWorld"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DTOv2"
             }
           }
         },
@@ -3923,8 +4231,7 @@
             "name": "viewModelTest.xyz",
             "in": "query",
             "required": false,
-            "type": "string",
-            "maxLength": 10
+            "type": "string"
           },
           {
             "name": "viewModelTest.cde",
@@ -4713,7 +5020,7 @@
         "date": {
           "format": "date-time",
           "type": "string",
-          "example": "2018-01-01"
+          "example": "2018-02-05"
         }
       },
       "xml": {
@@ -4733,7 +5040,7 @@
         "Id": {
           "format": "int32",
           "type": "integer",
-          "example": 123
+          "example": "123"
         },
         "Name": {
           "type": "string",
@@ -4750,6 +5057,9 @@
         "TaxCodeDisplayName": {
           "type": "string",
           "example": "Tax Code Display"
+        },
+        "allOf": {
+          "type": "string"
         },
         "lowercase": {
           "type": "string"
@@ -4963,7 +5273,7 @@
           "format": "int32",
           "description": "The super ID that will be used",
           "type": "integer",
-          "example": 123
+          "example": "123"
         },
         "Name": {
           "description": "Who needs a name?",
@@ -4971,9 +5281,8 @@
           "example": "John Doe"
         },
         "xyz": {
-          "maxLength": 10,
           "type": "string",
-          "example": "abcasdfasd"
+          "example": "xxxyyyzzz"
         }
       },
       "xml": {
@@ -5421,10 +5730,13 @@
         "Fax": {
           "type": "string"
         },
+        "allOf": {
+          "type": "string"
+        },
         "Updated": {
           "format": "date-time",
           "type": "string",
-          "example": "2018-01-01"
+          "example": "2018-02-05"
         },
         "Account": {
           "$ref": "#/definitions/Account"
@@ -5487,10 +5799,15 @@
     "Int64Data": {
       "type": "object",
       "properties": {
-        "MyInt64": {
+        "MyLong": {
           "format": "int64",
           "type": "integer",
           "example": "1253261109769874438"
+        },
+        "MyInt64": {
+          "format": "int64",
+          "type": "integer",
+          "example": "21474836470"
         },
         "MyData": {
           "type": "string",
@@ -5499,6 +5816,27 @@
       },
       "xml": {
         "name": "Int64Data"
+      }
+    },
+    "Payload": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "Payload Name",
+          "type": "string"
+        },
+        "Timeout": {
+          "format": "int32",
+          "description": "Timeout in ms (Range 15000 to 60000. Default set to 50000)",
+          "default": 50000,
+          "maximum": 60000,
+          "minimum": 15000,
+          "type": "integer",
+          "example": 123
+        }
+      },
+      "xml": {
+        "name": "Payload"
       }
     },
     "MData": {
@@ -5542,7 +5880,7 @@
         "Date": {
           "format": "date-time",
           "type": "string",
-          "example": "2018-01-01"
+          "example": "2018-02-05"
         }
       },
       "xml": {
@@ -5646,10 +5984,33 @@
         "name": "InputModel"
       }
     },
+    "DTOv2": {
+      "type": "object",
+      "properties": {
+        "itemid": {
+          "format": "int32",
+          "description": "Secret ID for your object",
+          "default": 123,
+          "type": "integer",
+          "example": "234"
+        },
+        "note": {
+          "description": "Notes about your object",
+          "default": "HelloWorld",
+          "type": "string",
+          "example": "MyNote"
+        }
+      },
+      "xml": {
+        "name": "DTOv2"
+      }
+    },
     "MyTest": {
       "type": "object",
       "properties": {
         "Name": {
+          "default": "HelloWorld",
+          "maxLength": 250,
           "type": "string"
         },
         "IsPassing": {
@@ -5695,13 +6056,66 @@
         "name": "User"
       }
     },
+    "GeolocateResponse": {
+      "description": "Geolocation result",
+      "type": "object",
+      "properties": {
+        "CountryName": {
+          "description": "Country name of IP address",
+          "type": "string"
+        },
+        "City": {
+          "description": "City of IP address",
+          "type": "string",
+          "example": "Miami"
+        },
+        "RegionCode": {
+          "description": "State/region code of IP address",
+          "type": "string",
+          "example": "FL"
+        },
+        "RegionName": {
+          "description": "State/region of IP address",
+          "type": "string",
+          "example": "Florida"
+        },
+        "ZipCode": {
+          "description": "Zip or postal code of IP address",
+          "type": "string",
+          "example": "33323"
+        },
+        "TimezoneStandardName": {
+          "description": "Timezone of IP address",
+          "type": "string"
+        },
+        "Latitude": {
+          "format": "double",
+          "description": "Latitude of IP address",
+          "type": "number",
+          "example": "25.85"
+        },
+        "Longitude": {
+          "format": "double",
+          "description": "Longitude of IP address",
+          "type": "number",
+          "example": "-80.27"
+        },
+        "CountryCode": {
+          "description": "Two-letter country code of IP address",
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "GeolocateResponse"
+      }
+    },
     "Company123": {
       "type": "object",
       "properties": {
         "Id": {
           "format": "int32",
           "type": "integer",
-          "example": 123
+          "example": "123"
         },
         "Name": {
           "type": "string",
@@ -5718,6 +6132,9 @@
         "TaxCodeDisplayName": {
           "type": "string",
           "example": "Tax Code Display"
+        },
+        "allOf": {
+          "type": "string"
         },
         "lowercase": {
           "type": "string"
@@ -5784,8 +6201,138 @@
   },
   "tags": [
     {
+      "name": "ApiExplorer"
+    },
+    {
+      "name": "ArrayTest"
+    },
+    {
+      "name": "Async"
+    },
+    {
+      "name": "Attribute"
+    },
+    {
+      "name": "BigString"
+    },
+    {
+      "name": "Binding"
+    },
+    {
+      "name": "Blob"
+    },
+    {
+      "name": "ChildApi"
+    },
+    {
+      "name": "Company"
+    },
+    {
+      "name": "ComplexRequest"
+    },
+    {
+      "name": "CountingLock"
+    },
+    {
+      "name": "CustomEnumerable"
+    },
+    {
+      "name": "Default"
+    },
+    {
+      "name": "Definitions"
+    },
+    {
+      "name": "Dictionary"
+    },
+    {
+      "name": "EnumTest"
+    },
+    {
+      "name": "FromUri"
+    },
+    {
+      "name": "HugeResponse"
+    },
+    {
+      "name": "IActionResult"
+    },
+    {
+      "name": "IHttpActionResult"
+    },
+    {
+      "name": "Image"
+    },
+    {
+      "name": "ImportArray"
+    },
+    {
+      "name": "InheritanceTest"
+    },
+    {
+      "name": "Int64"
+    },
+    {
+      "name": "IntParam"
+    },
+    {
+      "name": "MemoryBarrier"
+    },
+    {
+      "name": "MonthTest"
+    },
+    {
+      "name": "MultiGet"
+    },
+    {
+      "name": "NestedEnum"
+    },
+    {
+      "name": "NodaTime"
+    },
+    {
+      "name": "OAuth"
+    },
+    {
+      "name": "PagedList"
+    },
+    {
+      "name": "PngImage"
+    },
+    {
+      "name": "PolygonVolume"
+    },
+    {
+      "name": "RecursiveParam"
+    },
+    {
+      "name": "RoutePrefix"
+    },
+    {
+      "name": "Routes"
+    },
+    {
+      "name": "RouteTest",
+      "description": "Testing a controller with param in the Route"
+    },
+    {
+      "name": "SvgImage"
+    },
+    {
       "name": "TestEnum",
       "description": "Testing enums ..."
+    },
+    {
+      "name": "TestPost"
+    },
+    {
+      "name": "TestStringEnum"
+    },
+    {
+      "name": "Users"
+    },
+    {
+      "name": "ValueProvider"
     }
   ]
 }
