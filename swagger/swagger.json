@@ -1999,7 +1999,9 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "x-example": "123456",
+            "schema": {
+              "example": "123456"
+            },            
             "type": "integer",
             "format": "int32"
           }
