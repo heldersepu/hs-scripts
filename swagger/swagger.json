@@ -5059,10 +5059,7 @@
         "TaxCodeDisplayName": {
           "type": "string",
           "example": "Tax Code Display"
-        },
-        "allOf": {
-          "type": "string"
-        },
+        },        
         "lowercase": {
           "type": "string"
         },
@@ -5731,10 +5728,7 @@
         },
         "Fax": {
           "type": "string"
-        },
-        "allOf": {
-          "type": "string"
-        },
+        },       
         "Updated": {
           "format": "date-time",
           "type": "string",
@@ -6134,10 +6128,7 @@
         "TaxCodeDisplayName": {
           "type": "string",
           "example": "Tax Code Display"
-        },
-        "allOf": {
-          "type": "string"
-        },
+        },        
         "lowercase": {
           "type": "string"
         },
