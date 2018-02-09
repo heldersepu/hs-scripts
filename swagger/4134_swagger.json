@@ -17,8 +17,8 @@
                 "summary": "Retrieve the resource",
                 "responses": {
                     "200": {
+						"description": "OK",
                         "schema": {
-							"description": "OK",
 							"$ref": "#/definitions/Axxass"
                         }
                     }
