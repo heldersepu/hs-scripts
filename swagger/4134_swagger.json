@@ -17,7 +17,6 @@
                 "summary": "Retrieve the resource",
                 "responses": {
                     "200": {
-                        "description": "The retrieved resource is included in the response body",
                         "schema": {
                             "$ref": "#/definitions/Axxass"
                         }
@@ -30,28 +29,6 @@
         "Axxass": {
             "required": ["schemas"],
             "properties": {
-                "extendedMeta": {
-                    "type": "object",
-                    "readOnly": true,
-                    "properties": {
-                        "createdByClient": {
-                            "type": "string",
-                            "readOnly": true
-                        },
-                        "createdByUser": {
-                            "type": "string",
-                            "readOnly": true
-                        },
-                        "lastModifiedByClient": {
-                            "type": "string",
-                            "readOnly": true
-                        },
-                        "lastModifiedByUser": {
-                            "type": "string",
-                            "readOnly": true
-                        }
-                    }
-                },
                 "indirectMemberOf": {
                     "type": "array",
                     "readOnly": true,
