@@ -6,7 +6,7 @@
     },
     "basePath": "/scim/v2",
     "tags": [{
-        "name": "Axxass Resource Type",
+        "name": "Axxass Resource Type"
     }],
     "consumes": ["application/scim+json"],
     "produces": ["application/scim+json"],
@@ -29,24 +29,16 @@
         "Axxass": {
             "required": ["schemas"],
             "properties": {
-                "indirectMemberOf": {
+                "schemas1": {
                     "type": "array",
-                    "readOnly": true,
+                    "uniqueItems": true,
+					"description": "Test",
                     "items": {
-                        "type": "object",
-                        "properties": {
-                            "axxassId": {
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "displayName": {
-                                "type": "string",
-                                "readOnly": true
-                            }
-                        }
+					
+                        "type": "string"
                     }
                 },
-                "schemas": {
+                "schemas2": {
                     "type": "array",
                     "uniqueItems": true,
                     "items": {
