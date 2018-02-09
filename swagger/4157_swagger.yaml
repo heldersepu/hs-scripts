@@ -1,0 +1,33 @@
+swagger: '2.0'
+info:
+  version: v1.0.0.0
+  title: Some Title
+host: localhost
+basePath: /
+tags:
+  - name: stuff-controller1
+  - name: stuff-controller2
+schemes:
+  - http
+paths:
+  /operation:
+    post:
+      tags:
+        - Stuff Update Interfaces
+      summary: Report new stuff or update existing stuff
+      operationId: operationUsingPOST
+      consumes:
+        - application/json;charset=UTF-8
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: Header containing user account id.
+          required: false
+          type: string        
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
