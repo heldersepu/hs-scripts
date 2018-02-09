@@ -1,14 +1,12 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "Description text.",
         "version": "2.0",
         "title": "API Explorer"
     },
     "basePath": "/scim/v2",
     "tags": [{
         "name": "Axxass Resource Type",
-        "description": "Operations on the Axxass resource type"
     }],
     "consumes": ["application/scim+json"],
     "produces": ["application/scim+json"],
@@ -34,54 +32,38 @@
             "properties": {
                 "extendedMeta": {
                     "type": "object",
-					"description": "Additional object metadata specific to the User entry",
-                    "x-returned": "by default",
                     "readOnly": true,
                     "properties": {
                         "createdByClient": {
                             "type": "string",
-                            "description": "The OAuth2 Client that created this record",
-                            "x-returned": "by default",
                             "readOnly": true
                         },
                         "createdByUser": {
                             "type": "string",
-                            "description": "The User created this object",
-                            "x-returned": "by default",
                             "readOnly": true
                         },
                         "lastModifiedByClient": {
                             "type": "string",
-                            "description": "The OAuth Client that last modified the object",
-                            "x-returned": "by default",
                             "readOnly": true
                         },
                         "lastModifiedByUser": {
                             "type": "string",
-                            "description": "ID of the user who last modified this object",
-                            "x-returned": "by default",
                             "readOnly": true
                         }
                     }
                 },
                 "indirectMemberOf": {
                     "type": "array",
-					"x-searchable": true,
-                    "x-returned": "on request",
                     "readOnly": true,
                     "items": {
                         "type": "object",
                         "properties": {
                             "axxassId": {
                                 "type": "string",
-                                "example": "j7azaxwsejmbbykktyse4jow5o4rsisf",
-                                "x-returned": "when \"indirectMemberOf\" is explicitly requested",
                                 "readOnly": true
                             },
                             "displayName": {
                                 "type": "string",
-                                "example": "MyApp Parent Container",
-                                "x-returned": "when \"indirectMemberOf\" is explicitly requested",
                                 "readOnly": true
                             }
                         }
@@ -89,7 +71,6 @@
                 },
                 "schemas": {
                     "type": "array",
-                    "x-returned": "always",
                     "uniqueItems": true,
                     "items": {
                         "type": "string"
