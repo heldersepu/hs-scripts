@@ -1,0 +1,49 @@
+swagger: '2.0'
+info:
+  title: Swagger UI 3 Bug Report
+  version: 1.0.0
+host: localhost
+schemes:
+  - https
+basePath: /v1
+produces:
+  - application/json
+paths:
+  /resolver-error:
+    get:
+      tags:
+        - Bug Report
+      responses:
+        200:
+          description: The trouble maker
+          schema:
+            $ref: '#/definitions/foo-bar'
+
+definitions:
+  foo-bar:
+    allOf:
+      - $ref: '#/definitions/baz'
+      - properties:
+          data:
+            type: array
+            items:
+              $ref: '#/definitions/foo'
+
+  foo:
+    allOf:
+      - $ref: '#/definitions/bar'
+      - properties:
+          foo:
+            type: string
+
+  bar:
+    properties:
+      bar:
+        type: string
+      foo:
+        $ref: '#/definitions/foo'
+
+  baz:
+    properties:
+      baz:
+        type: string
