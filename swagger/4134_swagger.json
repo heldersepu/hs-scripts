@@ -18,7 +18,8 @@
                 "responses": {
                     "200": {
                         "schema": {
-                            "$ref": "#/definitions/Axxass"
+							"description": "OK",
+							"$ref": "#/definitions/Axxass"
                         }
                     }
                 }
