@@ -17,144 +17,21 @@
             "get": {
                 "tags": ["Axxass Resource Type"],
                 "summary": "Retrieve the resource",
-                "parameters": [{
-                    "$ref": "#/parameters/id"
-                }, {
-                    "$ref": "#/parameters/attributes"
-                }, {
-                    "$ref": "#/parameters/excludedAttributes"
-                }],
                 "responses": {
                     "200": {
                         "description": "The retrieved resource is included in the response body",
                         "schema": {
                             "$ref": "#/definitions/Axxass"
                         }
-                    },
-                    "default": {
-                        "description": "An error occurred while executing the operation",
-                        "schema": {
-                            "$ref": "#/definitions/Error Response"
-                        }
-                    }
-                }
-            },
-            "patch": {
-                "tags": ["Axxass Resource Type"],
-                "summary": "Update one or more attributes of the resource",
-                "parameters": [{
-                    "$ref": "#/parameters/id"
-                }, {
-                    "in": "body",
-                    "name": "SCIM 2.0 Patch Request Message",
-                    "required": false,
-                    "schema": {
-                        "$ref": "#/definitions/Patch Request"
-                    }
-                }, {
-                    "$ref": "#/parameters/attributes"
-                }, {
-                    "$ref": "#/parameters/excludedAttributes"
-                }],
-                "responses": {
-                    "200": {
-                        "description": "The resource was successfully modified and the updated resource is included in the response body.",
-                        "schema": {
-                            "$ref": "#/definitions/Axxass"
-                        }
-                    },
-                    "default": {
-                        "description": "An error occurred while executing the operation",
-                        "schema": {
-                            "$ref": "#/definitions/Error Response"
-                        }
-                    },
-                    "204": {
-                        "description": "The resource was successfully modified but the access token scopes doesn't have permissions to retrieve the updated resource."
                     }
                 }
             }
         }
     },
     "definitions": {
-        "Error Response": {
+        "Axxass": {
             "required": ["schemas"],
             "properties": {
-                "schemas": {
-                    "type": "array",
-                    "description": "Contains a list of one or more URIs that indicate included SCIM schemas that are used to indicate the attributes contained within a resource.",
-                    "uniqueItems": true,
-                    "items": {
-                        "type": "string",
-                        "format": "urn",
-                        "enum": ["urn:ietf:params:scim:api:messages:2.0:Error"],
-                        "default": "urn:ietf:params:scim:api:messages:2.0:Error"
-                    }
-                },
-                "status": {
-                    "type": "string",
-                    "description": "The HTTP status code (see Section 6 [RFC7231]) expressed as a JSON String.",
-                    "readOnly": true
-                },
-                "scimType": {
-                    "type": "string",
-                    "description": "A SCIM detailed error keyword."
-                },
-                "detail": {
-                    "type": "string",
-                    "description": "A detailed, human readable message."
-                }
-            }
-        },
-        "Axxass": {
-            "required": ["displayName", "domainName", "isArchived", "schemas"],
-            "properties": {
-                "admins": {
-                    "type": "array",
-                    "description": "List of administrators of the Axxass",
-                    "x-searchable": true,
-                    "x-returned": "by default",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "type": "string",
-                                "description": "ID of the Admin Entity",
-                                "example": "61uh6ac374ujhqcmk5hp477pmf198nuu",
-                                "x-returned": "by default"
-                            },
-                            "type": {
-							    "type": "string",
-                                "enum": [
-                                    "apple",
-                                    "banana"
-                                ],
-								"description": "Administrator types",
-                                "x-returned": "by default"
-                            }
-                        }
-                    }
-                },
-                "description": {
-                    "type": "string",
-                    "description": "Optional description of the Axxass",
-                    "example": "My Axxass",
-                    "x-returned": "by default"
-                },
-                "displayName": {
-                    "type": "string",
-                    "description": "Human readable name of the Axxass",
-                    "example": "Orange Parakeets",
-                    "x-searchable": true,
-                    "x-returned": "by default"
-                },
-                "domainName": {
-                    "type": "string",
-                    "description": "Name of the domain this Axxass will be part of",
-                    "x-readOnly": "after being set",
-                    "example": "hpid",
-                    "x-returned": "by default"
-                },
                 "extendedMeta": {
                     "type": "object",
 					"description": "Additional object metadata specific to the User entry",
@@ -187,19 +64,9 @@
                         }
                     }
                 },
-                "externalId": {
-                    "type": "string",
-                    "x-returned": "by default"
-                },
-                "id": {
-                    "type": "string",
-                    "example": "uoo9msii5mitbror3btiw8inqab6hiu3",
-                    "x-returned": "always",
-                    "readOnly": true
-                },
                 "indirectMemberOf": {
                     "type": "array",
-		    "x-searchable": true,
+					"x-searchable": true,
                     "x-returned": "on request",
                     "readOnly": true,
                     "items": {
@@ -220,76 +87,6 @@
                         }
                     }
                 },
-                "isArchived": {
-                    "type": "boolean",
-                    "description": "This flag is used to identity a deleted Axxass",
-                    "example": false,
-                    "x-returned": "by default"
-                },
-                "memberOf": {
-                    "type": "array",
-                    "description": "The list of Axxass this Axxass is member of",
-                    "x-searchable": true,
-                    "x-returned": "on request",
-                    "readOnly": true,
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "axxassId": {
-                                "type": "string",
-                                "example": "c49kmkhkt8xz19yegu8r9ih4wrk7mk6n",
-                                "x-returned": "when \"memberOf\" is explicitly requested",
-                                "readOnly": true
-                            },
-                            "displayName": {
-                                "type": "string",
-                                "example": "MyApp Admin Users",
-                                "x-returned": "when \"memberOf\" is explicitly requested",
-                                "readOnly": true
-                            }
-                        }
-                    }
-                },
-                "meta": {
-                    "type": "object",
-                    "x-returned": "always",
-                    "readOnly": true,
-                    "properties": {
-                        "created": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "Date and time the resource was created",
-                            "x-returned": "always",
-                            "readOnly": true
-                        },
-                        "lastModified": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "Date and time the resource was last modified",
-                            "x-returned": "always",
-                            "readOnly": true
-                        },
-                        "location": {
-                            "type": "string",
-                            "format": "uri",
-                            "description": "The location (URI) of the resource",
-                            "x-returned": "always",
-                            "readOnly": true
-                        },
-                        "resourceType": {
-                            "type": "string",
-                            "description": "The resource Type",
-                            "x-returned": "always",
-                            "readOnly": true
-                        },
-                        "version": {
-                            "type": "string",
-                            "description": "The version of the resource",
-                            "x-returned": "always",
-                            "readOnly": true
-                        }
-                    }
-                },
                 "schemas": {
                     "type": "array",
                     "x-returned": "always",
@@ -298,71 +95,7 @@
                         "type": "string"
                     }
                 }
-            },
-            "description": "This schema represents the Axxass object in SCIM"
-        },
-        "Patch Request": {
-            "required": ["Operations", "schemas"],
-            "properties": {
-                "schemas": {
-                    "type": "array",
-                    "description": "Contains a list of one or more URIs that indicate included SCIM schemas that are used to indicate the attributes contained within a resource.",
-                    "uniqueItems": true,
-                    "items": {
-                        "type": "string",
-                        "format": "urn",
-                        "enum": ["urn:ietf:params:scim:api:messages:2.0:PatchOp"],
-                        "default": "urn:ietf:params:scim:api:messages:2.0:PatchOp"
-                    }
-                },
-                "Operations": {
-                    "type": "array",
-                    "description": "Array of one or more patch operations.",
-                    "uniqueItems": true,
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "op": {
-                                "type": "string",
-                                "description": "Indicates the operation to perform and MAY be one of \"add\", \"remove\", or \"replace\".",
-                                "enum": ["add", "remove", "replace"]
-                            },
-                            "path": {
-                                "type": "string",
-                                "description": "Contains an attribute path describing the target of the operation. Optional for \"add\" and \"replace\" and is required for \"remove\" operations."
-                            },
-                            "value": {
-                                "description": "Specifies the attributes and/or values to be added or replaced. Only required for \"add\" and \"replace\" operations."
-                            }
-                        }
-                    }
-                }
             }
-        }
-    },
-    "parameters": {
-        "attributes": {
-            "name": "attributes",
-            "in": "query",
-            "description": "A comma separated list of strings indicating the names of resource attributes to return in the response, overriding the set of attributes that would be returned by default. \"excludedAttributes\" must not also be specified if this is specified.",
-            "required": false,
-            "type": "string",
-            "collectionFormat": "csv"
-        },
-        "id": {
-            "name": "id",
-            "in": "path",
-            "description": "The resource identifier (value of the \"id\" attribute).",
-            "required": true,
-            "type": "string"
-        },
-        "excludedAttributes": {
-            "name": "excludedAttributes",
-            "in": "query",
-            "description": "A comma separated list of strings indicating the names of resource attributes to be removed from the default set of attributes to return. \"attributes\" must not also be specified if this is specified.",
-            "required": false,
-            "type": "string",
-            "collectionFormat": "csv"
         }
     }
 }
