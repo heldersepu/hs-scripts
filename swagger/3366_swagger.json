@@ -1,0 +1,39 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Test API"
+  },
+  "basePath": "/",
+  "paths": {
+    "/test": {
+      "get": {
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/List"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "List": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Test"
+      }
+    },
+    "Test": {
+      "type": "object",
+      "properties": {
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Test"
+          }
+        }
+      }
+    }
+  }
+}
