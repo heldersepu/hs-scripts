@@ -1,6 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
+	"version": "V1",
     "title": "Test API"
   },
   "basePath": "/",
@@ -9,6 +10,7 @@
       "get": {
         "responses": {
           "200": {
+			"description": "OK",
             "schema": {
               "$ref": "#/definitions/List"
             }
