@@ -29,7 +29,7 @@
     "Test": {
       "type": "object",
       "properties": {
-        "children": {
+        "children1": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Test"
