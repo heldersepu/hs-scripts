@@ -1,0 +1,198 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "V1",
+    "title": "FromHeaderAttribute.Sample"
+  },
+  "host": "localhost:42731",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/demo/headers": {
+      "get": {
+        "tags": [
+          "Demo"
+        ],
+        "operationId": "Demo_EchoHeaders",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "headers.userAgent",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "headers.accept",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "description": "Defines a command that asynchronously creates an {System.Net.Http.HttpResponseMessage}.",
+              "type": "object"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Demo"
+        ],
+        "operationId": "Demo_PostEchoHeaders",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "test",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/demo/penguinOnlyInformation": {
+      "get": {
+        "tags": [
+          "Demo"
+        ],
+        "operationId": "Demo_GetPenguinOnlyInformation",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "headers.userAgent",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "pattern": "Penguin"
+          },
+          {
+            "name": "headers.xPenguinCodeName",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "description": "Defines a command that asynchronously creates an {System.Net.Http.HttpResponseMessage}.",
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/demo/body": {
+      "post": {
+        "tags": [
+          "Demo"
+        ],
+        "operationId": "Demo_PostEchoBody",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "test",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PenguinProofHeaders"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "description": "Defines a command that asynchronously creates an {System.Net.Http.HttpResponseMessage}.",
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "StandardHeaders": {
+      "properties": {
+        "UserAgent": {
+          "type": "string"
+        },
+        "Accept": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "StandardHeaders"
+      },
+      "type": "object"
+    },
+    "PenguinProofHeaders": {
+      "required": [
+        "XPenguinCodeName"
+      ],
+      "properties": {
+        "UserAgent": {
+          "type": "string",
+          "pattern": "Penguin"
+        },
+        "XPenguinCodeName": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "PenguinProofHeaders"
+      },
+      "type": "object"
+    }
+  },
+  "tags": [
+    {
+      "name": "Demo"
+    }
+  ]
+}
