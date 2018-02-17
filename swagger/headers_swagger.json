@@ -24,16 +24,9 @@
         ],
         "parameters": [
           {
-            "name": "headers.userAgent",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "headers.accept",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "name": "headers",
+            "in": "header",
+            "required": true
           }
         ],
         "responses": {
@@ -61,7 +54,7 @@
         "parameters": [
           {
             "name": "test",
-            "in": "query",
+            "in": "header",
             "required": true,
             "type": "string"
           }
@@ -91,17 +84,9 @@
         ],
         "parameters": [
           {
-            "name": "headers.userAgent",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "pattern": "Penguin"
-          },
-          {
-            "name": "headers.xPenguinCodeName",
-            "in": "query",
-            "required": true,
-            "type": "string"
+            "name": "headers",
+            "in": "header",
+            "required": true
           }
         ],
         "responses": {
