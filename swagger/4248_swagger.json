@@ -35,24 +35,6 @@
 "dataEdicao":{"format":"date-time","type":"string"},
 "arquivosOrigem":{"type":"array","items":{"$ref":"#/definitions/Arquivos"}}}},
 
-"Conta":{"type":"object","properties":{"codigo":{"format":"int32","type":"integer"},
-"loja":{"$ref":"#/definitions/Empresa"},
-"setor":{"$ref":"#/definitions/Setor"},
-"funcionario":{"$ref":"#/definitions/IFuncionarioUsuario"},
-"contacontabel":{"$ref":"#/definitions/Planocontabil"},
-"planodespesa":{"$ref":"#/definitions/Planoconta"},
-"subplanodespesa":{"$ref":"#/definitions/Subplano"},
-"planoreceita":{"$ref":"#/definitions/Planoconta"},
-"subplanoreceita":{"$ref":"#/definitions/Subplano"},
-"empresafuncionario":{"$ref":"#/definitions/Empresa"},
-"cdLimite":{"format":"double","type":"number"},
-"cdUtilizado":{"format":"double","type":"number"},
-"cdSaldo":{"format":"double","type":"number"},
-"saldo":{"format":"double","type":"number"},
-"saldoDisponivel":{"format":"double","type":"number"},
-"dataEdicao":{"format":"date-time","type":"string"},
-"horaEdicao":{"type":"string"}}},
-
 "Empresa":{"type":"object","properties":{"codigo":{"format":"int32","type":"integer"},
 "fpas":{"$ref":"#/definitions/Fpas"},
 "naturezajuridica":{"$ref":"#/definitions/Naturezajuridica"},
@@ -142,6 +124,7 @@
 "cidade":{"$ref":"#/definitions/Codigouf"},
 "dataEdicao":{"format":"date-time","type":"string"},
 "horaEdicao":{"type":"string"}}},
+
 "Cliente":{"type":"object","properties":{"codigo":{"format":"int32","type":"integer"},
 "categoria":{"$ref":"#/definitions/Categoriacliente"},
 "vendedor":{"$ref":"#/definitions/Vendedor"},
@@ -183,6 +166,7 @@
 "saldoContaCorrente":{"format":"double","type":"number"},
 "dataEdicao":{"format":"date-time","type":"string"},
 "arquivosOrigem":{"type":"array","items":{"$ref":"#/definitions/Arquivos"}}}},
+
 "Equipe":{"type":"object","properties":{"codigo":{"format":"int32","type":"integer"},
 "setor":{"$ref":"#/definitions/Setor"},
 "centrooperacional":{"$ref":"#/definitions/Centrooperacional"},
@@ -198,6 +182,7 @@
 "processamentoDespesa":{"format":"double","type":"number"},
 "dataEdicao":{"format":"date-time","type":"string"},
 "subEquipe":{"type":"array","items":{"$ref":"#/definitions/Subequipe"}}}},
+
 "Gestor":{"type":"object","properties":{"codigo":{"format":"int32","type":"integer"},
 "empresa":{"$ref":"#/definitions/Empresa"},
 "funcionario":{"$ref":"#/definitions/Funcionario"},
@@ -347,6 +332,7 @@
 "valorkmr":{"format":"double","type":"number"},
 "dataEdicao":{"format":"date-time","type":"string"},
 "arquivosOrigem":{"type":"array","items":{"$ref":"#/definitions/Arquivos"}}}},
+
 "Subequipe":{"type":"object","properties":{"codigo":{"format":"int32","type":"integer"},
 "equipe":{"$ref":"#/definitions/Equipe"},
 "funcionario":{"$ref":"#/definitions/Funcionario"},
@@ -358,6 +344,7 @@
 "comissaoequipe":{"format":"double","type":"number"},
 "dataEdicao":{"format":"date-time","type":"string"},
 "horaEdicao":{"type":"string"}}},
+
 "Tipogestor":{"type":"object","properties":{"codigo":{"format":"int32","type":"integer"},
 "dataEdicao":{"format":"date-time","type":"string"},
 "horaEdicao":{"type":"string"}}},
