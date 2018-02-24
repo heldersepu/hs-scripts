@@ -298,7 +298,6 @@
 "cubagem":{"format":"double","type":"number"},
 "dataEdicao":{"format":"date-time","type":"string"},
 "detalheGradeProduto":{"type":"array","items":{"$ref":"#/definitions/DetalheGradeProduto"}},
-"estoqueProduto":{"type":"array","items":{"$ref":"#/definitions/Estoqueproduto"}},
 "especificacaoProdutoOrigem":{"type":"array","items":{"$ref":"#/definitions/EspecificacaoProduto"}}}},
 
 "Grupoproduto":{"type":"object","properties":{"codigo":{"format":"int32","type":"integer"},
@@ -336,20 +335,7 @@
 "dataEdicao":{"format":"date-time","type":"string"},
 "especificacaoProdutoOrigem":{"type":"array","items":{"$ref":"#/definitions/EspecificacaoProduto"}}}},
 
-"Estoqueproduto":{"type":"object","properties":{"codigo":{"format":"int32","type":"integer"},
-"estoque":{"$ref":"#/definitions/Cadastroestoque"},
-"produto":{"$ref":"#/definitions/Produto"},
-"grade":{"$ref":"#/definitions/Grade"},
-"quantidade":{"format":"double","type":"number"},
-"reservado":{"format":"double","type":"number"},
-"quantidadeAReceber":{"format":"double","type":"number"},
-"estoqueminimo":{"format":"double","type":"number"},
-"estoquemaximo":{"format":"double","type":"number"},
-"gr01":{"format":"double","type":"number"},
-"usuarioInclusao":{"format":"int32","type":"integer"},
-"ultimoUsuario":{"format":"int32","type":"integer"},
-"dataEdicao":{"format":"date-time","type":"string"},
-"horaEdicao":{"type":"string"}}},
+
 "EspecificacaoProduto":{"type":"object","properties":{"codigo":{"format":"int32","type":"integer"},
 "tipoOrigem":{"enum":["produto","detalhegradeproduto"],"type":"string"},
 "ultimoUsuario":{"format":"int32","type":"integer"},
@@ -454,6 +440,7 @@
 "ultimoUsuario":{"format":"int32","type":"integer"},
 "dataEdicao":{"format":"date-time","type":"string"},
 "arquivosOrigem":{"type":"array","items":{"$ref":"#/definitions/Arquivos"}}}},
+
 "Compra":{"type":"object","properties":{"codigo":{"format":"int32","type":"integer"},
 "setor":{"$ref":"#/definitions/Setor"},
 "centrooperacional":{"$ref":"#/definitions/Centrooperacional"},
