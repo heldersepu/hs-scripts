@@ -29,4 +29,4 @@ components:
         api1prop:
           $ref: '#/components/schemas/Api1Prop'
         api2prop:
-          $ref: 'api2.yaml#/components/schemas/Api2Prop'
+          $ref: './api2.yaml#/components/schemas/Api2Prop'
