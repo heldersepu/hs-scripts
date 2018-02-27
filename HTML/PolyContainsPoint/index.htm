@@ -1,0 +1,32 @@
+<head>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAL9sk01UBGdizpWQSLJy7Y8Q1tUfMNfPo&sensor=false" ></script>
+    <script src="js/map.js" language="javascript"></script>
+</head>
+<body onload="loadGoogleMap('map', 40.836704,-73.817017, 12)">
+    <div>        
+        <table border=1 cellpadding=10><tr><td>
+        
+            <form onsubmit="return false;">
+                <div>
+                    <b>DELIVERY AREA - Enter address and zip code:<b><br>
+                    <input id="searchInput" type="text" style="width:345px">
+                    <input value="Search" type="submit" onclick="checkAddress(document.getElementById('searchInput').value)" >
+                </div>
+            </form>
+
+            <div id="map" style="width: 650px; height: 500px;">
+            </div>
+            
+        </td></tr></table>
+        <div>
+            <br>
+            <H2>Test cases:</H2>
+            <ul>
+            <li>4510 104th Street, Flushing, NY 11368
+            <li>524 Main Street New York, NY 10044
+            <li>1102 38th Avenue Long Island City, NY 11101
+            <li>6910 34th Avenue Woodside, NY 11377
+            </ul>
+        </div>
+    </div>
+</body>

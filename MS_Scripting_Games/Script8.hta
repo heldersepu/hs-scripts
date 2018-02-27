@@ -1,0 +1,62 @@
+<html>
+<title>Random Guess</title>
+<HTA:APPLICATION 
+     ID="objMyHTA" 
+     APPLICATIONNAME="Random Guess"
+     SINGLEINSTANCE="yes">
+<head>
+<script language="vbscript">
+Dim rndNumb, Tot_Guesses
+
+Sub Window_OnLoad
+   rndNumb = ((Timer*Rnd) Mod 49) +1 
+   Tot_Guesses = 0
+   dGuesses.innerHTML = Tot_Guesses
+   dMessage.innerHTML = ""
+End Sub
+
+Sub btnOK_OnClick
+    If txtname.Value <> "" then 
+        if IsNumeric(txtname.Value) then
+            dMessage.innerHTML = ""
+            Tot_Guesses = Tot_Guesses + 1
+            dGuesses.innerHTML = Tot_Guesses 
+            if Int(txtname.Value) = rndNumb then
+                msgbox "Random: " & rndNumb & VbCrLf & _
+                       "Total Guesses: " & Tot_Guesses
+                Tot_Guesses = 0
+                window.close() 
+            else
+                if Int(txtname.Value) > rndNumb then
+                    msgbox "Too High"
+                else 
+                    msgbox "Too Low"
+                end if 
+            end if 
+        Else
+            dMessage.innerHTML = txtname.Value & " is not a Number"
+
+        end if 
+        txtname.Value = ""
+    end if     
+End Sub
+
+</script>
+</head>
+
+<body>
+<p>Enter a number between 1 and 50: 
+   <input id="txtName" type="text" name="txtName" size="10"></p>
+<p><input id="btnOK" type="button" value="Guess" name="btnOK"></p>
+
+<Table Border=0 width="250" >
+    <TR ALIGN=RIGHT>
+    <TD>Guesses: </TD>
+    <TD ID="dGuesses"></TD>
+    </TR>
+    <TR ALIGN=center>
+    <TD ID="dMessage"></TD>
+    </TR>
+</Table>
+
+</body>

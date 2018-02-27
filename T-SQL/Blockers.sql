@@ -1,0 +1,12 @@
+CREATE TABLE #Temp (
+	[SPID] INT	,[Status] VARCHAR(255)
+	,[Login] VARCHAR(255)	,[HostName] VARCHAR(255)
+	,[BlkBy] CHAR(255)	,[DBName] VARCHAR(255)
+	,[Command] VARCHAR(255)	,[CPUTime] INT
+	,[DiskIO] INT	,[LastBatch] VARCHAR(255)
+	,[ProgramName] VARCHAR(255)	,[SPID_] INT,[SPID2] INT
+)
+
+INSERT #Temp EXEC sp_who2
+SELECT * FROM #Temp ORDER BY 9 DESC
+DROP TABLE #TEMP

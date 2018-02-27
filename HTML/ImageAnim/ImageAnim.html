@@ -1,0 +1,61 @@
+<style>
+	@keyframes blur {
+		from {
+			-webkit-filter: blur(0px);
+			filter: blur(0px);
+		}
+
+		to {
+			-webkit-filter: blur(1px);
+			filter: blur(1px);
+		}
+	}
+	@keyframes grayout {
+		from {
+			-webkit-filter: grayscale(100%);
+			filter: grayscale(100%);
+		}
+
+		to {
+			-webkit-filter: grayscale(0%);
+			filter: grayscale(0%);
+		}
+	}
+	@keyframes rotate {
+		from {
+			-webkit-transform: rotate(0deg);
+			transform: rotate(0deg);
+		}
+
+		to {
+			-webkit-transform: rotate(30deg);
+			transform: rotate(30deg);
+		}
+	}
+	.image, .sprite {
+		background-image: url("login-art.jpg");
+		background-repeat: no-repeat;
+		animation-duration: 1s;
+		animation-iteration-count: infinite;
+		animation-direction: alternate;
+	}
+	.image {
+		height: 478px;
+		width: 500px;
+		animation-name: blur;
+	}
+	.sprite {
+		height: 80px;
+		width: 82px;
+		position: absolute;
+		top: 320px;
+		left: 72px;
+		background-position: -65px -312px;
+		animation-name: rotate;
+	}
+</style>
+
+<div >
+	<div class="image"></div>
+	<div class="sprite"></div>
+</div>

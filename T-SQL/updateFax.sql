@@ -1,0 +1,5 @@
+UPDATE    CLNMAS
+SET              Phone2 = CLNMAS_NEW.Phone2
+FROM         CLNMAS INNER JOIN
+                      CLNMAS_NEW ON CLNMAS.[UNIQUE] = CLNMAS_NEW.[UNIQUE]
+WHERE     (CLNMAS.CSTATUS = 'A')

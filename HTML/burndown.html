@@ -1,0 +1,39 @@
+<meta name="viewport" content="width=device-width" />
+<html>
+<head>
+    <style>body {margin: 0px;}</style>    
+</head>
+
+<body>
+    <div id="images"></div>
+</body>
+
+<script>
+    var teams = [
+        {name:"Trio"    , guid:"39c0beb6-8169-448b-9878-b648a20f2076"},
+        {name:"Awesome" , guid:"f2c25391-1496-4a59-bb65-0e66abe2e57d"},
+        {name:"Chill"   , guid:"00c9fd9a-8b37-4125-8668-38fcea675f55"},
+        {name:"Core"    , guid:"e3d7261a-0285-40d4-9fc7-37ca17f4098b"},
+    ];
+    var base = 'https://autonation.visualstudio.com/a6c05b37-4ffd-417a-a3a8-55fd634acca6/GUID/_api/_teamChart/Burndown?chartOptions={"Width":940,"Height":460,"ShowDetails":true,"Title":"NAME"}&counter=2&iterationPath=Global%5C2017%5CSprint+{{ID}}&__v=5'
+    
+    var regex = /(\d{1,})/gmi
+    var match = regex.exec(window.location.search)
+    var id = match === null? 25 : match[1]
+    var image = base.replace("{{ID}}", id);
+    var images = document.getElementById("images")
+    for (var i in teams) {
+        var img = document.createElement("img");
+        img.src = image.replace("NAME", teams[i].name).replace("GUID", teams[i].guid)
+        images.appendChild(img);
+    }
+</script>
+</html>
+
+
+
+
+ 
+ 
+ 
+

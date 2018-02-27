@@ -1,0 +1,88 @@
+<script type="text/javascript" src="urlhash.js"></script>
+<script>
+//#Services(SearchField=Email&SearchText=gmail&status=1,2,3)~CustomerSearch(SearchField=Address&SearchText=Miami)...
+UrlHash.set("Services", "SearchField", "Email");
+UrlHash.set("Services", "SearchText", "gmail");
+UrlHash.add("Services", "status", "1");
+UrlHash.add("Services", "status", "2");
+UrlHash.add("Services", "status", "3");
+
+UrlHash.set("CustomerSearch", "SearchField", "Address");
+UrlHash.set("CustomerSearch", "SearchText", "Miami");
+
+function set(){   UrlHash.set($("#gset").val(), $("#kset").val(), $("#vset").val())};
+function add(){   UrlHash.add($("#gadd").val(), $("#kadd").val(), $("#vadd").val())};
+function del(){   UrlHash.del($("#gdel").val(), $("#kdel").val(), $("#vdel").val())};
+function drop(){  UrlHash.drop($("#gdrop").val(), $("#kdrop").val())};
+function drop2(){ UrlHash.drop($("#gdrop2").val())};
+</script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+
+<table style="">
+<tr><td>
+<b>Set</b>
+</td><td>
+Group:
+<input id="gset" type="input">
+Key:
+<input id="kset" type="input">
+Value:
+<input id="vset" type="input">
+<button onclick='set()'>Set</button>
+</td></tr>
+
+<tr><td>
+<b>Add</b>
+</td><td>
+Group:
+<input id="gadd" type="input">
+Key:
+<input id="kadd" type="input">
+Value:
+<input id="vadd" type="input">
+<button onclick='add()'>Add</button>
+</td></tr>
+
+<tr><td>
+<b>Del</b>
+</td><td>
+Group:
+<input id="gdel" type="input">
+Key:
+<input id="kdel" type="input">
+Value:
+<input id="vdel" type="input">
+<button onclick='del()'>Del</button>
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+
+<tr><td>
+<b>Drop</b>
+</td><td>
+Group:
+<input id="gdrop" type="input">
+Key:
+<input id="kdrop" type="input">
+<button onclick='drop()'>Drop</button>
+</td></tr>
+
+<tr><td>
+<b>Drop</b>
+</td><td>
+Group:
+<input id="gdrop2" type="input">
+<button onclick='drop2()'>Drop</button>
+</td></tr>
+</table>
+
+<br><br>
+
+<button onclick='UrlHash.set("Services", "SearchField", "City");'>Set Services + SearchField = City</button><br><br>
+<button onclick='UrlHash.set("CustomerSearch", "SearchField", "State");'>Set CustomerSearch + SearchField = State</button><br><br>
+<button onclick='UrlHash.add("Services", "status", "8");'>Add Services + status 8</button><br><br>
+<button onclick='UrlHash.del("Services", "status", "1");'>Delete Services + status 1</button><br><br>
+<button onclick='UrlHash.drop("Services", "status");'>Drop Services + status </button><br><br>
+<button onclick='UrlHash.drop("CustomerSearch");'>Drop CustomerSearch </button><br><br>
+<button onclick='UrlHash.drop("Services");'>Drop Services </button><br><br>

@@ -1,0 +1,52 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "2.0",
+        "title": "API Explorer"
+    },
+    "basePath": "/scim/v2",
+    "tags": [{
+        "name": "Axxass Resource Type"
+    }],
+    "consumes": ["application/scim+json"],
+    "produces": ["application/scim+json"],
+    "paths": {
+        "/Axxass/{id}": {
+            "get": {
+                "tags": ["Axxass Resource Type"],
+                "summary": "Retrieve the resource",
+                "responses": {
+                    "200": {
+						"description": "OK",
+                        "schema": {
+							"$ref": "#/definitions/Axxass"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Axxass": {
+            "required": ["schemas"],
+            "properties": {
+                "schemas1": {
+                    "type": "array",
+                    "uniqueItems": true,
+					"description": "Test",
+                    "items": {
+					
+                        "type": "string"
+                    }
+                },
+                "schemas2": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

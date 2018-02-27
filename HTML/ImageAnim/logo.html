@@ -1,0 +1,38 @@
+<style>
+	@keyframes anim {
+		from {
+			-webkit-filter: grayscale(100%);
+			filter: grayscale(100%);
+			-webkit-transform: rotate(-5deg);
+			transform: rotate(-5deg);
+		}
+
+		to {			
+			-webkit-filter: grayscale(0%);
+			filter: grayscale(0%);
+			-webkit-transform: rotate(8deg);
+			transform: rotate(8deg);
+		}
+	}
+	.image {
+		background-image: url("logo.png");
+		background-repeat: no-repeat;
+		animation-duration: 1s;
+		animation-iteration-count: infinite;
+		animation-direction: alternate;
+		transition: height 4s;
+		height: 300px;
+		width: 150px;
+		animation-name: anim;
+	}
+	.image:hover {
+		animation-duration: 0.2s;
+		height: 180px;		
+	}
+	body {background-color: #e9e9eb;}
+
+</style>
+
+<div >
+	<div class="image"></div>	
+</div>

@@ -1,0 +1,100 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"title": "Alyante Web API",
+		"version": "v1"
+	},
+	"paths": {
+		"/v1/{ambiente}/{verticale?}/Iva": {
+			"post": {
+				"tags": [],
+				"summary": "Create 'CodIvaCODTO'",
+				"description": "Creazione di un nuovo oggetto di tipo 'CodIvaCODTO'",
+				"operationId": "Iva_Create",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+						"in": "body",
+						"schema": {
+							"$ref": "#/definitions/CodIvaCODTO"
+						},
+						"name": "body",
+						"description": "L'oggetto di tipo 'CodIvaCODTO' da creare",
+						"required": true
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Se l'oggetto è stato creato correttamente",
+						"schema": {
+							"$ref": "#/definitions/CodIvaCODTO"
+						}
+					}
+				}
+			},
+			"parameters": []
+		}
+	},
+	"definitions": {
+		"CodIvaCODTO": {
+            "type": "object",
+			"required": ["codice", "codPlafond", "descrizione", "flgAgri", "flgAutoue", "flgEscludiblacklist", "flgIndet", "flgNotvar", "tipologia"],
+			"properties": {
+				"annotazioni": {
+					"description": "Annotazioni fatture",
+					"type": "string"
+				},
+				"codice": {
+					"description": "Codice",
+					"type": "string"
+				},
+				"codiceagr": {
+					"description": "Cod.IVA comp.",
+					"type": "string"
+				},
+				"codPlafond": {
+					"description": "Gestione plafond",
+					"type": "number"
+				},
+				"descrizione": {
+					"description": "Descrizione",
+					"type": "string"
+				},				
+				"flgAgri": {
+					"description": "Agricoltura",
+					"type": "number"
+				},
+				"flgAutoue": {
+					"description": "Vendita auto UE L. 286",
+					"type": "number"
+				},
+				"flgEscludiblacklist": {
+					"description": "Escludi da Black List",
+					"type": "number"
+				},
+				"flgIndet": {
+					"description": "IVA indetraibile",
+					"type": "number"
+				},
+				"flgNotvar": {
+					"description": "Codice per note variaz.IVA art.38 quater c.2 (tax-free)",
+					"type": "number"
+				},
+				"note": {
+					"description": "Note",
+					"type": "string"
+				},
+				"perciva": {
+					"description": "% IVA ventilazione",
+					"type": "number"
+				},
+				"tipologia": {
+					"description": "Tipologia",
+					"type": "number"
+				}
+			},
+			"description": "Codice IVA"
+		}
+	},
+	"tags": []
+}

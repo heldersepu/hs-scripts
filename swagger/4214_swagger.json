@@ -1,0 +1,2398 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "OData Service for namespace PeopleService",
+        "version": ""
+    },
+    "servers": [
+        {
+            "url": "http://localhost/People.svc"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Suppliers"
+        },
+        {
+            "name": "People"
+        },
+        {
+            "name": "PersonDetails"
+        }
+    ],
+    "paths": {
+        "/Suppliers": {
+            "get": {
+                "summary": "Get entities from Suppliers",
+                "tags": [
+                    "Suppliers"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/top"
+                    },
+                    {
+                        "$ref": "#/components/parameters/skip"
+                    },
+                    {
+                        "$ref": "#/components/parameters/search"
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "$ref": "#/components/parameters/count"
+                    },
+                    {
+                        "name": "$orderby",
+                        "in": "query",
+                        "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "ID",
+                                    "ID desc",
+                                    "Name",
+                                    "Name desc",
+                                    "Address",
+                                    "Address desc",
+                                    "Location",
+                                    "Location desc",
+                                    "Concurrency",
+                                    "Concurrency desc"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "ID",
+                                    "Name",
+                                    "Address",
+                                    "Location",
+                                    "Concurrency"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "Products"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of Supplier",
+                                    "type": "object",
+                                    "properties": {
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/PeopleService.Supplier"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add new entity to Suppliers",
+                "tags": [
+                    "Suppliers"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "New entity",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PeopleService.Supplier-create"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PeopleService.Supplier"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/Suppliers({ID})": {
+            "get": {
+                "summary": "Get entity from Suppliers by key",
+                "tags": [
+                    "Suppliers"
+                ],
+                "parameters": [
+                    {
+                        "name": "ID",
+                        "in": "path",
+                        "required": true,
+                        "description": "key: ID",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "ID",
+                                    "Name",
+                                    "Address",
+                                    "Location",
+                                    "Concurrency"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "Products"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PeopleService.Supplier"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update entity in Suppliers",
+                "tags": [
+                    "Suppliers"
+                ],
+                "parameters": [
+                    {
+                        "name": "ID",
+                        "in": "path",
+                        "required": true,
+                        "description": "key: ID",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "New property values",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PeopleService.Supplier-update"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete entity from Suppliers",
+                "tags": [
+                    "Suppliers"
+                ],
+                "parameters": [
+                    {
+                        "name": "ID",
+                        "in": "path",
+                        "required": true,
+                        "description": "key: ID",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "If-Match",
+                        "in": "header",
+                        "description": "ETag",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/People": {
+            "get": {
+                "summary": "Get entities from People",
+                "tags": [
+                    "People"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/top"
+                    },
+                    {
+                        "$ref": "#/components/parameters/skip"
+                    },
+                    {
+                        "$ref": "#/components/parameters/search"
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "$ref": "#/components/parameters/count"
+                    },
+                    {
+                        "name": "$orderby",
+                        "in": "query",
+                        "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "ID",
+                                    "ID desc",
+                                    "Name",
+                                    "Name desc"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "ID",
+                                    "Name"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "PersonDetail"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of Person",
+                                    "type": "object",
+                                    "properties": {
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/PeopleService.Person"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add new entity to People",
+                "tags": [
+                    "People"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "New entity",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PeopleService.Person-create"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PeopleService.Person"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/People({ID})": {
+            "get": {
+                "summary": "Get entity from People by key",
+                "tags": [
+                    "People"
+                ],
+                "parameters": [
+                    {
+                        "name": "ID",
+                        "in": "path",
+                        "required": true,
+                        "description": "key: ID",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "ID",
+                                    "Name"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "PersonDetail"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PeopleService.Person"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update entity in People",
+                "tags": [
+                    "People"
+                ],
+                "parameters": [
+                    {
+                        "name": "ID",
+                        "in": "path",
+                        "required": true,
+                        "description": "key: ID",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "New property values",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PeopleService.Person-update"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete entity from People",
+                "tags": [
+                    "People"
+                ],
+                "parameters": [
+                    {
+                        "name": "ID",
+                        "in": "path",
+                        "required": true,
+                        "description": "key: ID",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "If-Match",
+                        "in": "header",
+                        "description": "ETag",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/PersonDetails": {
+            "get": {
+                "summary": "Get entities from PersonDetails",
+                "tags": [
+                    "PersonDetails"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/top"
+                    },
+                    {
+                        "$ref": "#/components/parameters/skip"
+                    },
+                    {
+                        "$ref": "#/components/parameters/search"
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "$ref": "#/components/parameters/count"
+                    },
+                    {
+                        "name": "$orderby",
+                        "in": "query",
+                        "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "PersonID",
+                                    "PersonID desc",
+                                    "Age",
+                                    "Age desc",
+                                    "Gender",
+                                    "Gender desc",
+                                    "Phone",
+                                    "Phone desc",
+                                    "Address",
+                                    "Address desc",
+                                    "Photo",
+                                    "Photo desc"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "PersonID",
+                                    "Age",
+                                    "Gender",
+                                    "Phone",
+                                    "Address",
+                                    "Photo"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "Person"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of PersonDetail",
+                                    "type": "object",
+                                    "properties": {
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/PeopleService.PersonDetail"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add new entity to PersonDetails",
+                "tags": [
+                    "PersonDetails"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "New entity",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PeopleService.PersonDetail-create"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PeopleService.PersonDetail"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/PersonDetails({PersonID})": {
+            "get": {
+                "summary": "Get entity from PersonDetails by key",
+                "tags": [
+                    "PersonDetails"
+                ],
+                "parameters": [
+                    {
+                        "name": "PersonID",
+                        "in": "path",
+                        "required": true,
+                        "description": "key: PersonID",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "PersonID",
+                                    "Age",
+                                    "Gender",
+                                    "Phone",
+                                    "Address",
+                                    "Photo"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "Person"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PeopleService.PersonDetail"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update entity in PersonDetails",
+                "tags": [
+                    "PersonDetails"
+                ],
+                "parameters": [
+                    {
+                        "name": "PersonID",
+                        "in": "path",
+                        "required": true,
+                        "description": "key: PersonID",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "New property values",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PeopleService.PersonDetail-update"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete entity from PersonDetails",
+                "tags": [
+                    "PersonDetails"
+                ],
+                "parameters": [
+                    {
+                        "name": "PersonID",
+                        "in": "path",
+                        "required": true,
+                        "description": "key: PersonID",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "If-Match",
+                        "in": "header",
+                        "description": "ETag",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PeopleService.Supplier": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "Name": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "Address": {
+                        "nullable": true,
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/PeopleService.Address"
+                            }
+                        ]
+                    },
+                    "Location": {
+                        "nullable": true,
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/Edm.GeographyPoint"
+                            }
+                        ]
+                    },
+                    "Concurrency": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "Products": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ProductService.Product"
+                        }
+                    }
+                },
+                "title": "Supplier"
+            },
+            "PeopleService.Supplier-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "Name": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "Address": {
+                        "nullable": true,
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/PeopleService.Address-create"
+                            }
+                        ]
+                    },
+                    "Location": {
+                        "nullable": true,
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/Edm.GeographyPoint"
+                            }
+                        ]
+                    },
+                    "Concurrency": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "Products": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ProductService.Product"
+                        }
+                    }
+                },
+                "title": "Supplier (for create)"
+            },
+            "PeopleService.Supplier-update": {
+                "type": "object",
+                "properties": {
+                    "Name": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "Address": {
+                        "nullable": true,
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/PeopleService.Address"
+                            }
+                        ]
+                    },
+                    "Location": {
+                        "nullable": true,
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/Edm.GeographyPoint"
+                            }
+                        ]
+                    },
+                    "Concurrency": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "title": "Supplier (for update)"
+            },
+            "PeopleService.Address": {
+                "type": "object",
+                "properties": {
+                    "Street": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "City": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "State": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "ZipCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "Country": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    }
+                },
+                "title": "Address"
+            },
+            "PeopleService.Address-create": {
+                "type": "object",
+                "properties": {
+                    "Street": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "City": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "State": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "ZipCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "Country": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    }
+                },
+                "title": "Address (for create)"
+            },
+            "PeopleService.Address-update": {
+                "type": "object",
+                "properties": {
+                    "Street": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "City": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "State": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "ZipCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "Country": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    }
+                },
+                "title": "Address (for update)"
+            },
+            "PeopleService.Person": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "Name": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "PersonDetail": {
+                        "nullable": true,
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/PeopleService.PersonDetail"
+                            }
+                        ]
+                    }
+                },
+                "title": "Person"
+            },
+            "PeopleService.Person-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "Name": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "PersonDetail": {
+                        "nullable": true,
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/PeopleService.PersonDetail-create"
+                            }
+                        ]
+                    }
+                },
+                "title": "Person (for create)"
+            },
+            "PeopleService.Person-update": {
+                "type": "object",
+                "properties": {
+                    "Name": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    }
+                },
+                "title": "Person (for update)"
+            },
+            "PeopleService.Customer": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/PeopleService.Person"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "TotalExpense": {
+                                "anyOf": [
+                                    {
+                                        "type": "number"
+                                    },
+                                    {
+                                        "type": "string"
+                                    }
+                                ],
+                                "format": "decimal",
+                                "multipleOf": 1
+                            }
+                        }
+                    }
+                ],
+                "title": "Customer"
+            },
+            "PeopleService.Customer-create": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/PeopleService.Person-create"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "TotalExpense": {
+                                "anyOf": [
+                                    {
+                                        "type": "number"
+                                    },
+                                    {
+                                        "type": "string"
+                                    }
+                                ],
+                                "format": "decimal",
+                                "multipleOf": 1
+                            }
+                        }
+                    }
+                ],
+                "title": "Customer (for create)"
+            },
+            "PeopleService.Customer-update": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/PeopleService.Person-update"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "TotalExpense": {
+                                "anyOf": [
+                                    {
+                                        "type": "number"
+                                    },
+                                    {
+                                        "type": "string"
+                                    }
+                                ],
+                                "format": "decimal",
+                                "multipleOf": 1
+                            }
+                        }
+                    }
+                ],
+                "title": "Customer (for update)"
+            },
+            "PeopleService.Employee": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/PeopleService.Person"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "EmployeeID": {
+                                "anyOf": [
+                                    {
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "type": "string"
+                                    }
+                                ],
+                                "format": "int64",
+                                "example": "42"
+                            },
+                            "HireDate": {
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "2017-04-13T15:51:04Z"
+                            },
+                            "Salary": {
+                                "anyOf": [
+                                    {
+                                        "type": "number"
+                                    },
+                                    {
+                                        "type": "string"
+                                    }
+                                ],
+                                "format": "float",
+                                "example": 3.14
+                            }
+                        }
+                    }
+                ],
+                "title": "Employee"
+            },
+            "PeopleService.Employee-create": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/PeopleService.Person-create"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "EmployeeID": {
+                                "anyOf": [
+                                    {
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "type": "string"
+                                    }
+                                ],
+                                "format": "int64",
+                                "example": "42"
+                            },
+                            "HireDate": {
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "2017-04-13T15:51:04Z"
+                            },
+                            "Salary": {
+                                "anyOf": [
+                                    {
+                                        "type": "number"
+                                    },
+                                    {
+                                        "type": "string"
+                                    }
+                                ],
+                                "format": "float",
+                                "example": 3.14
+                            }
+                        }
+                    }
+                ],
+                "title": "Employee (for create)"
+            },
+            "PeopleService.Employee-update": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/PeopleService.Person-update"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "EmployeeID": {
+                                "anyOf": [
+                                    {
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "type": "string"
+                                    }
+                                ],
+                                "format": "int64",
+                                "example": "42"
+                            },
+                            "HireDate": {
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "2017-04-13T15:51:04Z"
+                            },
+                            "Salary": {
+                                "anyOf": [
+                                    {
+                                        "type": "number"
+                                    },
+                                    {
+                                        "type": "string"
+                                    }
+                                ],
+                                "format": "float",
+                                "example": 3.14
+                            }
+                        }
+                    }
+                ],
+                "title": "Employee (for update)"
+            },
+            "PeopleService.PersonDetail": {
+                "type": "object",
+                "properties": {
+                    "PersonID": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "Age": {
+                        "type": "integer",
+                        "format": "uint8"
+                    },
+                    "Gender": {
+                        "type": "boolean"
+                    },
+                    "Phone": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "Address": {
+                        "nullable": true,
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/PeopleService.Address"
+                            }
+                        ]
+                    },
+                    "Photo": {
+                        "$ref": "#/definitions/Edm.Stream"
+                    },
+                    "Person": {
+                        "nullable": true,
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/PeopleService.Person"
+                            }
+                        ]
+                    }
+                },
+                "title": "PersonDetail"
+            },
+            "PeopleService.PersonDetail-create": {
+                "type": "object",
+                "properties": {
+                    "PersonID": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "Age": {
+                        "type": "integer",
+                        "format": "uint8"
+                    },
+                    "Gender": {
+                        "type": "boolean"
+                    },
+                    "Phone": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "Address": {
+                        "nullable": true,
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/PeopleService.Address-create"
+                            }
+                        ]
+                    },
+                    "Photo": {
+                        "$ref": "#/definitions/Edm.Stream"
+                    },
+                    "Person": {
+                        "nullable": true,
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/PeopleService.Person-create"
+                            }
+                        ]
+                    }
+                },
+                "title": "PersonDetail (for create)"
+            },
+            "PeopleService.PersonDetail-update": {
+                "type": "object",
+                "properties": {
+                    "Age": {
+                        "type": "integer",
+                        "format": "uint8"
+                    },
+                    "Gender": {
+                        "type": "boolean"
+                    },
+                    "Phone": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "Address": {
+                        "nullable": true,
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/PeopleService.Address"
+                            }
+                        ]
+                    },
+                    "Photo": {
+                        "$ref": "#/definitions/Edm.Stream"
+                    }
+                },
+                "title": "PersonDetail (for update)"
+            },
+            "ProductService.Product": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "Name": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "Description": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "ReleaseDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2017-04-13T15:51:04Z"
+                    },
+                    "DiscontinuedDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date-time",
+                        "example": "2017-04-13T15:51:04Z"
+                    },
+                    "Rating": {
+                        "type": "integer",
+                        "format": "int16"
+                    },
+                    "Price": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "double",
+                        "example": 3.14
+                    },
+                    "Categories": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ProductService.Category"
+                        }
+                    },
+                    "Supplier": {
+                        "nullable": true,
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/PeopleService.Supplier"
+                            }
+                        ]
+                    },
+                    "ProductDetail": {
+                        "nullable": true,
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/ProductService.ProductDetail"
+                            }
+                        ]
+                    }
+                },
+                "title": "Product"
+            },
+            "ProductService.Product-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "Name": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "Description": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "ReleaseDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2017-04-13T15:51:04Z"
+                    },
+                    "DiscontinuedDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date-time",
+                        "example": "2017-04-13T15:51:04Z"
+                    },
+                    "Rating": {
+                        "type": "integer",
+                        "format": "int16"
+                    },
+                    "Price": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "double",
+                        "example": 3.14
+                    },
+                    "Categories": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ProductService.Category-create"
+                        }
+                    },
+                    "Supplier": {
+                        "nullable": true,
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/PeopleService.Supplier"
+                            }
+                        ]
+                    },
+                    "ProductDetail": {
+                        "nullable": true,
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/ProductService.ProductDetail-create"
+                            }
+                        ]
+                    }
+                },
+                "title": "Product (for create)"
+            },
+            "ProductService.Product-update": {
+                "type": "object",
+                "properties": {
+                    "Name": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "Description": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "ReleaseDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2017-04-13T15:51:04Z"
+                    },
+                    "DiscontinuedDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date-time",
+                        "example": "2017-04-13T15:51:04Z"
+                    },
+                    "Rating": {
+                        "type": "integer",
+                        "format": "int16"
+                    },
+                    "Price": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "double",
+                        "example": 3.14
+                    }
+                },
+                "title": "Product (for update)"
+            },
+            "ProductService.FeaturedProduct": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/ProductService.Product"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "Advertisement": {
+                                "nullable": true,
+                                "anyOf": [
+                                    {
+                                        "$ref": "#/components/schemas/ProductService.Advertisement"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "title": "FeaturedProduct"
+            },
+            "ProductService.FeaturedProduct-create": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/ProductService.Product-create"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "Advertisement": {
+                                "nullable": true,
+                                "anyOf": [
+                                    {
+                                        "$ref": "#/components/schemas/ProductService.Advertisement-create"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "title": "FeaturedProduct (for create)"
+            },
+            "ProductService.FeaturedProduct-update": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/ProductService.Product-update"
+                    },
+                    {
+                        "type": "object"
+                    }
+                ],
+                "title": "FeaturedProduct (for update)"
+            },
+            "ProductService.ProductDetail": {
+                "type": "object",
+                "properties": {
+                    "ProductID": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "Details": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "Product": {
+                        "nullable": true,
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/ProductService.Product"
+                            }
+                        ]
+                    }
+                },
+                "title": "ProductDetail"
+            },
+            "ProductService.ProductDetail-create": {
+                "type": "object",
+                "properties": {
+                    "ProductID": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "Details": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "Product": {
+                        "nullable": true,
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/ProductService.Product-create"
+                            }
+                        ]
+                    }
+                },
+                "title": "ProductDetail (for create)"
+            },
+            "ProductService.ProductDetail-update": {
+                "type": "object",
+                "properties": {
+                    "Details": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    }
+                },
+                "title": "ProductDetail (for update)"
+            },
+            "ProductService.Category": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "Name": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "Products": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ProductService.Product"
+                        }
+                    }
+                },
+                "title": "Category"
+            },
+            "ProductService.Category-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "Name": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "Products": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ProductService.Product-create"
+                        }
+                    }
+                },
+                "title": "Category (for create)"
+            },
+            "ProductService.Category-update": {
+                "type": "object",
+                "properties": {
+                    "Name": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    }
+                },
+                "title": "Category (for update)"
+            },
+            "ProductService.Advertisement": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    },
+                    "Name": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "AirDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2017-04-13T15:51:04Z"
+                    },
+                    "FeaturedProduct": {
+                        "nullable": true,
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/ProductService.FeaturedProduct"
+                            }
+                        ]
+                    }
+                },
+                "title": "Advertisement"
+            },
+            "ProductService.Advertisement-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    },
+                    "Name": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "AirDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2017-04-13T15:51:04Z"
+                    },
+                    "FeaturedProduct": {
+                        "nullable": true,
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/ProductService.FeaturedProduct-create"
+                            }
+                        ]
+                    }
+                },
+                "title": "Advertisement (for create)"
+            },
+            "ProductService.Advertisement-update": {
+                "type": "object",
+                "properties": {
+                    "Name": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "string"
+                    },
+                    "AirDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2017-04-13T15:51:04Z"
+                    }
+                },
+                "title": "Advertisement (for update)"
+            },
+            "odata.error": {
+                "type": "object",
+                "required": [
+                    "error"
+                ],
+                "properties": {
+                    "error": {
+                        "$ref": "#/components/schemas/odata.error.main"
+                    }
+                }
+            },
+            "odata.error.main": {
+                "type": "object",
+                "required": [
+                    "code",
+                    "message"
+                ],
+                "properties": {
+                    "code": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "target": {
+                        "type": "string"
+                    },
+                    "details": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/odata.error.detail"
+                        }
+                    },
+                    "innererror": {
+                        "type": "object",
+                        "description": "The structure of this object is service-specific"
+                    }
+                }
+            },
+            "odata.error.detail": {
+                "type": "object",
+                "required": [
+                    "code",
+                    "message"
+                ],
+                "properties": {
+                    "code": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "target": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "parameters": {
+            "top": {
+                "name": "$top",
+                "in": "query",
+                "description": "Show only the first n items, see [OData Paging - Top](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374630)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "example": 50
+            },
+            "skip": {
+                "name": "$skip",
+                "in": "query",
+                "description": "Skip the first n items, see [OData Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374631)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            },
+            "count": {
+                "name": "$count",
+                "in": "query",
+                "description": "Include count of items, see [OData Count](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374632)",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "filter": {
+                "name": "$filter",
+                "in": "query",
+                "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "search": {
+                "name": "$search",
+                "in": "query",
+                "description": "Search items by search phrases, see [OData Searching](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374633)",
+                "schema": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses": {
+            "error": {
+                "description": "Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/odata.error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+  "definitions": {
+    "Edm.ComplexType": {
+      "type": "object"
+    },
+    "Edm.EntityType": {
+      "type": "object"
+    },
+    "Edm.PrimitiveType": {
+      "type": [
+        "boolean",
+        "number",
+        "string"
+      ]
+    },
+    "Edm.AnnotationPath": {
+      "type": "object",
+      "properties": {
+        "@odata.annotationPath": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "@odata.annotationPath"
+      ]
+    },
+    "Edm.NavigationPropertyPath": {
+      "type": "object",
+      "properties": {
+        "@odata.navigationPropertyPath": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "@odata.navigationPropertyPath"
+      ]
+    },
+    "Edm.PropertyPath": {
+      "type": "object",
+      "properties": {
+        "@odata.propertyPath": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "@odata.propertyPath"
+      ]
+    },
+    "Edm.Binary": {
+      "type": "string",
+      "format": "base64url",
+      "pattern": "^([A-Za-z0-9_-]{4})*([A-Za-z0-9_-]{3}[A-Za-z0-9_-]|[A-Za-z0-9_-]{2}[AEIMQUYcgkosw048]=?|[A-Za-z0-9_-][AQgw](==)?)?$"
+    },
+    "Edm.Byte": {
+      "type": "integer",
+      "format": "uint8",
+      "minimum": 0,
+      "maximum": 255
+    },
+    "Edm.Date": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$"
+    },
+    "Edm.DateTimeOffset": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$"
+    },
+    "Edm.Double": {
+      "anyOf": [
+        {
+          "type": "number",
+          "format": "double"
+        },
+        {
+          "enum": [
+            "-INF",
+            "INF",
+            "NaN"
+          ]
+        }
+      ]
+    },
+    "Edm.Duration": {
+      "type": "string",
+      "format": "duration",
+      "pattern": "^-?P([0-9]+D)?(T([0-9]+H)?([0-9]+M)?([0-9]+([.][0-9]+)?S)?)?$"
+    },
+    "Edm.Guid": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    },
+    "Edm.Int16": {
+      "type": "integer",
+      "format": "int16",
+      "minimum": -32768,
+      "maximum": 32767
+    },
+    "Edm.Int32": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": -2147483648,
+      "maximum": 2147483647
+    },
+    "Edm.Int64": {
+      "type": "integer",
+      "format": "int64",
+      "minimum": -9223372036854775808,
+      "maximum": 9223372036854775807
+    },
+    "Edm.SByte": {
+      "type": "integer",
+      "format": "int8",
+      "minimum": -128,
+      "maximum": 127
+    },
+    "Edm.Single": {
+      "anyOf": [
+        {
+          "type": "number",
+          "format": "single"
+        },
+        {
+          "enum": [
+            "-INF",
+            "INF",
+            "NaN"
+          ]
+        }
+      ]
+    },
+    "Edm.Stream": {
+      "type": "string",
+      "format": "base64url"
+    },
+    "Edm.TimeOfDay": {
+      "type": "string",
+      "format": "time",
+      "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?$"
+    },
+    "Edm.Geography": {
+      "$ref": "#/definitions/Edm.Geometry"
+    },
+    "Edm.GeographyPoint": {
+      "$ref": "#/definitions/Edm.GeometryPoint"
+    },
+    "Edm.GeographyLineString": {
+      "$ref": "#/definitions/Edm.GeometryLineString"
+    },
+    "Edm.GeographyPolygon": {
+      "$ref": "#/definitions/Edm.GeometryPolygon"
+    },
+    "Edm.GeographyMultiPoint": {
+      "$ref": "#/definitions/Edm.GeometryMultiPoint"
+    },
+    "Edm.GeographyMultiLineString": {
+      "$ref": "#/definitions/Edm.GeometryMultiLineString"
+    },
+    "Edm.GeographyMultiPolygon": {
+      "$ref": "#/definitions/Edm.GeometryMultiPolygon"
+    },
+    "Edm.GeographyCollection": {
+      "$ref": "#/definitions/Edm.GeometryCollection"
+    },
+    "Edm.Geometry": {
+      "type": "object",
+      "@TODO": "This is not allowed in OpenAPI 2.0 - place it in description and reduce the structure to type property with enum list of all seven subtypes",
+      "anyOf": [
+        {
+          "$ref": "#/definitions/Edm.GeometryPoint"
+        },
+        {
+          "$ref": "#/definitions/Edm.GeometryLineString"
+        },
+        {
+          "$ref": "#/definitions/Edm.GeometryPolygon"
+        },
+        {
+          "$ref": "#/definitions/Edm.GeometryMultiPoint"
+        },
+        {
+          "$ref": "#/definitions/Edm.GeometryMultiLineString"
+        },
+        {
+          "$ref": "#/definitions/Edm.GeometryMultiPolygon"
+        },
+        {
+          "$ref": "#/definitions/Edm.GeometryCollection"
+        }
+      ]
+    },
+    "Edm.GeometryPoint": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Point"
+          ],
+          "default": "Point"
+        },
+        "coordinates": {
+          "$ref": "#/definitions/GeoJSON.position"
+        }
+      },
+      "required": [
+        "type",
+        "coordinates"
+      ]
+    },
+    "Edm.GeometryLineString": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "LineString"
+          ]
+        },
+        "coordinates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoJSON.position"
+          },
+          "minItems": 2
+        }
+      },
+      "required": [
+        "type",
+        "coordinates"
+      ]
+    },
+    "Edm.GeometryPolygon": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "Polygon"
+          ]
+        },
+        "coordinates": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/GeoJSON.position"
+            },
+            "minItems": 4
+          }
+        }
+      },
+      "required": [
+        "type",
+        "coordinates"
+      ]
+    },
+    "Edm.GeometryMultiPoint": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "MultiPoint"
+          ]
+        },
+        "coordinates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoJSON.position"
+          }
+        }
+      },
+      "required": [
+        "type",
+        "coordinates"
+      ]
+    },
+    "Edm.GeometryMultiLineString": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "MultiLineString"
+          ]
+        },
+        "coordinates": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/GeoJSON.position"
+            },
+            "minItems": 2
+          }
+        }
+      },
+      "required": [
+        "type",
+        "coordinates"
+      ]
+    },
+    "Edm.GeometryMultiPolygon": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "MultiPolygon"
+          ]
+        },
+        "coordinates": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GeoJSON.position"
+              },
+              "minItems": 4
+            }
+          }
+        }
+      },
+      "required": [
+        "type",
+        "coordinates"
+      ]
+    },
+    "Edm.GeometryCollection": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "GeometryCollection"
+          ]
+        },
+        "geometries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Edm.Geometry"
+          }
+        }
+      }
+    },
+    "GeoJSON.position": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2
+    },
+    "odata.error": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/odata.error.main"
+        }
+      }
+    },
+    "odata.error.main": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/odata.error.detail"
+          }
+        },
+        "innererror": {
+          "type": "object",
+          "description": "The structure of this object is service-specific"
+        }
+      }
+    },
+    "odata.error.detail": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        }
+      }
+    }
+  }    
+}

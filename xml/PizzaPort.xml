@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<data>
+  <active>True</active>
+  <ncrypt>False</ncrypt>
+  <store>
+    <name>PizzaPort</name>
+    <phone>718-843-9186</phone>
+    <user>myUser</user>
+    <api>cedf71019ffa94a4b1d00d8re7d51363e48afaa4</api>
+    <url>https://store-7cpvf.mybigcommerce.com</url>
+    <orders>
+      <lastid>1</lastid>
+    </orders>
+  </store>
+  <sms>
+    <message>@CUSTOMER_FIRST_NAME@, @STORE_NAME@ has your order for @ORDER_ITEMS_TOTAL@ items -> total of $@ORDER_TOTAL_INC_TAX@. Have ???, Call @STORE_PHONE@. Thank you! Please tell your friends about our new site.</message>
+    <url>http://www.smsglobal.com/http-api.php?</url>
+    <user>myUser</user>
+    <pass>passw</pass>
+  </sms>
+</data>
