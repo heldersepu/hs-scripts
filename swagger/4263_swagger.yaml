@@ -1,0 +1,37 @@
+swagger: '2.0'
+info:
+ title: XML test
+ version: '0.1'
+host: httpbin.org
+schemes:
+  - http
+paths:
+  /post test:
+    post:
+      consumes:
+        - application/xml
+      produces:
+        - application/xml
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/user'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/user'
+
+definitions:
+  user:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    required:
+      - id
+      - name
