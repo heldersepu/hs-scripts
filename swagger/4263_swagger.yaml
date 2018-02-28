@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
- title: XML test
+ title: test
  version: '0.1'
 host: httpbin.org
 schemes:
@@ -9,9 +9,9 @@ paths:
   /post test:
     post:
       consumes:
-        - application/xml
+        - application/json
       produces:
-        - application/xml
+        - application/json
       parameters:
         - in: body
           name: body
