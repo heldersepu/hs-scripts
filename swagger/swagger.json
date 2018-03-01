@@ -1906,7 +1906,7 @@
             "schema": {
               "type": "string"
             },
-            "examples": "\n            <!DOCTYPE html>\n            <html>\n                <head></head>\n                <body>\n                    <h1>hello</h1>\n                </body>\n            </html>"
+            "examples": {"text/html": "\n            <!DOCTYPE html>\n            <html>\n                <head></head>\n                <body>\n                    <h1>hello</h1>\n                </body>\n            </html>"}
           }
         },
         "security": [
