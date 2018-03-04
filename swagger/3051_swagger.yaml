@@ -1,0 +1,70 @@
+swagger: '2.0'
+info:
+  version: "1.0.0"
+  title: Contracts API
+basePath: /localhost:8080/alfresco/service/api
+host: localhost:1337
+schemes: 
+  - http
+  - https
+tags:
+  - name: "Contracts"
+  description: "Retrieve, create and update contracts"
+securityDefinitions:
+  BasicAuth:
+    type: basic
+paths:
+  /contracts/{contractId}:
+    get:
+      tags:
+      - "Contracts"
+      produces:
+        - application/json
+      security:
+        - BasicAuth: []
+      description: |
+        Gets `Contracts` objects.
+      parameters:
+        - name: contractId
+          in: path
+          description: Contract ID
+          required: true
+          type: string
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/Contract"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+definitions:
+  Contract:
+    type: object
+    properties:
+      contractID:
+        type: string
+        description: Contract ID
+      templateDocument:
+        description: Template Document
+        allOf:
+          - $ref: '#/definitions/TemplateDocument'
+  TemplateDocument:
+    properties:
+      orderTemplateDocument:
+        allOf:
+          - $ref: '#/definitions/TemplateDocument'
+  ErrorResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+      message:
+        type: string
+      code:
+        type: string
+    required:
+      - code
+      - message
+      - success
