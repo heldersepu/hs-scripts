@@ -9,7 +9,7 @@ schemes:
   - https
 tags:
   - name: "Contracts"
-  description: "Retrieve, create and update contracts"
+    description: "Retrieve, create and update contracts"
 securityDefinitions:
   BasicAuth:
     type: basic
