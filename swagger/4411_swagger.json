@@ -22,6 +22,7 @@
 					{
 						"schema":
 						{
+                            "description": "OK",
 							"$ref": "#/definitions/Practitioner"
 						}
 					}
