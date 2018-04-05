@@ -3,11 +3,12 @@
 	"schemes": ["http"],
 	"info":
 	{
-		"contact":
+		"version": "V1",
+        "contact":
 		{
 			"email": "test@test.com"
 		},
-		"title": "sdfsdfsf"
+		"title": "test"
 	},
 	"paths":
 	{
@@ -15,15 +16,13 @@
 		{
 			"get":
 			{
-				"description": "sdfsdfsdfdsf",
 				"responses":
 				{
 					"200":
 					{
-						"description": "sdfsdf",
 						"schema":
 						{
-							"$ref": "./fhir.schema.json/Practitioner.schema.json"
+							"$ref": "#/definitions/Practitioner"
 						}
 					}
 				}
