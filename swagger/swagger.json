@@ -4,7 +4,7 @@
     "version": "V1",
     "title": "Swagger_Test",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.",
-    "x-swagger-net-version": "8.3.11.004"
+    "x-swagger-net-version": "8.3.13.201"
   },
   "host": "swagger-net-test.azurewebsites.net",
   "schemes": [
@@ -34,6 +34,45 @@
                 "type": "string"
               },
               "type": "array"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "ApiExplorer"
+        ],
+        "operationId": "ApiExplorer_Post",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "x",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScopeResponseModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScopeResponseModel"
             }
           }
         },
@@ -94,7 +133,7 @@
           "ArrayTest"
         ],
         "summary": "Get2 `Get2`",
-        "description": "HelloWorld\r\n<pre>{\r\n    \"demo\": \"val\", \r\n    \"demo2\": \"hello\"\r\n}</pre>",
+        "description": "HelloWorld\r\n<pre>{\r\n    \"demo\": \"val\",\r\n    \"demo2\": \"hello\"\r\n}</pre>",
         "operationId": "ArrayTest_Get2",
         "consumes": [],
         "produces": [
@@ -185,6 +224,7 @@
         "tags": [
           "ArrayTest"
         ],
+        "summary": "This endpoint will no longer be supported. Use /api/somepath instead",
         "operationId": "ArrayTest_Get4",
         "consumes": [],
         "produces": [
@@ -201,6 +241,7 @@
             }
           }
         },
+        "deprecated": true,
         "security": [
           {
             "oauth2": []
@@ -254,6 +295,8 @@
         "tags": [
           "ArrayTest"
         ],
+        "summary": "Put",
+        "description": "### This is a list\r\n- Item one\r\n- Item 2\r\n  - Sub item 1\r\n  - Sub item 2\r\n- Item 3",
         "operationId": "ArrayTest_Put",
         "consumes": [
           "application/json",
@@ -510,6 +553,7 @@
           {
             "name": "data.integ",
             "in": "query",
+            "description": "Sample integer",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -517,6 +561,7 @@
           {
             "name": "data.doub",
             "in": "query",
+            "description": "Sample double",
             "required": false,
             "type": "number",
             "format": "double"
@@ -524,12 +569,14 @@
           {
             "name": "data.boolea",
             "in": "query",
+            "description": "Sample boolean",
             "required": false,
             "type": "boolean"
           },
           {
             "name": "data.guid",
             "in": "query",
+            "description": "Sample guid",
             "required": false,
             "type": "string",
             "format": "uuid"
@@ -537,6 +584,7 @@
           {
             "name": "data.date",
             "in": "query",
+            "description": "Sample DateTime",
             "required": false,
             "type": "string",
             "format": "date-time"
@@ -597,7 +645,7 @@
         "tags": [
           "BigString"
         ],
-        "description": "<h2>Testing html table</h2>\r\n<table border=\"1\">\r\n  <tr>\r\n    <td colspan=\"3\">\r\n      <span class=\"method\">ONE</span>\r\n    </td>\r\n  </tr>\r\n  <tr>\r\n    <td>ABC11</td>\r\n    <td>ABC22</td>\r\n    <td>ABC33</td>\r\n  </tr>\r\n</table>",
+        "description": "<h2>Testing html table</h2>\r\n<table border=\"1\">\r\n  <tr>\r\n    <td colspan=\"3\">\r\n      <span class=\"method\">ONE</span>\r\n    </td>\r\n  </tr>\r\n  <tr>\r\n    <td>ABC11</td>\r\n    <td>ABC22</td>\r\n    <td>ABC33</td>\r\n  </tr>\r\n</table>\r\n<img src=\"https://yuml.me/diagram/class/%5BSupplier%7Bbg:orange%7D%5D,%5BSupplier%5D-0..1%3E%5BAddress%5D,%5BSupplier%5D\" />\r\n<img src=\"data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==\" alt=\"Red dot\" />",
         "operationId": "BigString_Get",
         "consumes": [],
         "produces": [
@@ -802,6 +850,105 @@
                 "wrapped": true
               },
               "type": "array"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Company/Get2": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "operationId": "Company_Get2",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "c.id",
+            "in": "query",
+            "description": "The Unique Company ID",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 456
+          },
+          {
+            "name": "c.name",
+            "in": "query",
+            "description": "The Company Name",
+            "required": false,
+            "type": "string",
+            "default": "My Company"
+          },
+          {
+            "name": "c.description",
+            "in": "query",
+            "description": "An optional description of the company",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "c.taxCode",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "c.taxCodeDisplayName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "c.allOf",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "c.properties",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "c.lowercase",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "c.uPPERCASE",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "c.huNGariAnCASE",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Company"
             }
           }
         },
@@ -1906,7 +2053,9 @@
             "schema": {
               "type": "string"
             },
-            "examples": {"text/html": "\n            <!DOCTYPE html>\n            <html>\n                <head></head>\n                <body>\n                    <h1>hello</h1>\n                </body>\n            </html>"}
+            "examples": {
+              "text/html": "\n            <!DOCTYPE html>\n            <html>\n                <head></head>\n                <body>\n                    <h1>hello</h1>\n                </body>\n            </html>"
+            }
           }
         },
         "security": [
@@ -2504,8 +2653,8 @@
             "type": "integer",
             "format": "int32",
             "default": 50000,
-            "maximum": 60000.0,
-            "minimum": 15000.0
+            "maximum": 60000,
+            "minimum": 15000
           }
         ],
         "responses": {
@@ -2513,6 +2662,293 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Payload"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/Location/Get1": {
+      "get": {
+        "tags": [
+          "Location"
+        ],
+        "operationId": "Location_Get1",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "x.countryName",
+            "in": "query",
+            "description": "Country name of IP address",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x.city",
+            "in": "query",
+            "description": "City of IP address",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x.regionCode",
+            "in": "query",
+            "description": "State/region code of IP address",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x.regionName",
+            "in": "query",
+            "description": "State/region of IP address",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x.zipCode",
+            "in": "query",
+            "description": "Zip or postal code of IP address",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x.timezoneStandardName",
+            "in": "query",
+            "description": "Timezone of IP address",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x.latitude",
+            "in": "query",
+            "description": "Latitude of IP address",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "x.longitude",
+            "in": "query",
+            "description": "Longitude of IP address",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "x.bigErrorMargin",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double",
+            "maximum": 110.99,
+            "minimum": 10.1
+          },
+          {
+            "name": "x.countryCode",
+            "in": "query",
+            "description": "Two-letter country code of IP address",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x.errorMargin",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double",
+            "maximum": 0.99,
+            "minimum": 0.1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GeolocateResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/Location/Get2": {
+      "get": {
+        "tags": [
+          "Location"
+        ],
+        "operationId": "Location_Get2",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "x.lat",
+            "in": "query",
+            "description": "**Latitude**: a geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
+            "required": false,
+            "type": "number",
+            "format": "float",
+            "maximum": 90,
+            "minimum": -90
+          },
+          {
+            "name": "x.lon",
+            "in": "query",
+            "description": "**Longitude**: a geographic coordinate that specifies the east-west position of a point on the Earth's surface.",
+            "required": false,
+            "type": "number",
+            "format": "float",
+            "maximum": 180,
+            "minimum": -180
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Location"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/Location/Get3": {
+      "get": {
+        "tags": [
+          "Location"
+        ],
+        "operationId": "Location_Get3",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "x.point1.lat",
+            "in": "query",
+            "description": "**Latitude**: a geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
+            "required": false,
+            "type": "number",
+            "format": "float",
+            "maximum": 90,
+            "minimum": -90
+          },
+          {
+            "name": "x.point1.lon",
+            "in": "query",
+            "description": "**Longitude**: a geographic coordinate that specifies the east-west position of a point on the Earth's surface.",
+            "required": false,
+            "type": "number",
+            "format": "float",
+            "maximum": 180,
+            "minimum": -180
+          },
+          {
+            "name": "x.point2.lat",
+            "in": "query",
+            "description": "**Latitude**: a geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
+            "required": false,
+            "type": "number",
+            "format": "float",
+            "maximum": 90,
+            "minimum": -90
+          },
+          {
+            "name": "x.point2.lon",
+            "in": "query",
+            "description": "**Longitude**: a geographic coordinate that specifies the east-west position of a point on the Earth's surface.",
+            "required": false,
+            "type": "number",
+            "format": "float",
+            "maximum": 180,
+            "minimum": -180
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SomeRequest"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/Location/Get4": {
+      "get": {
+        "tags": [
+          "Location"
+        ],
+        "operationId": "Location_Get4",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "x.elev",
+            "in": "query",
+            "description": "**Elevation**: is the height above or below a fixed reference point.",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "x.lat",
+            "in": "query",
+            "description": "**Latitude**: a geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
+            "required": false,
+            "type": "number",
+            "format": "float",
+            "maximum": 90,
+            "minimum": -90
+          },
+          {
+            "name": "x.lon",
+            "in": "query",
+            "description": "**Longitude**: a geographic coordinate that specifies the east-west position of a point on the Earth's surface.",
+            "required": false,
+            "type": "number",
+            "format": "float",
+            "maximum": 180,
+            "minimum": -180
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Coordinate"
             }
           }
         },
@@ -4522,6 +4958,70 @@
         ]
       }
     },
+    "/api/TestMultiGet": {
+      "get": {
+        "tags": [
+          "TestMultiGet"
+        ],
+        "operationId": "TestMultiGet_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/TestMultiGet/{id}": {
+      "get": {
+        "tags": [
+          "TestMultiGet"
+        ],
+        "operationId": "TestMultiGet_GetApiTestMultiGetById",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
     "/api/TestPost": {
       "get": {
         "tags": [
@@ -4915,6 +5415,34 @@
         ]
       }
     },
+    "/api/ValueTuple": {
+      "get": {
+        "tags": [
+          "ValueTuple"
+        ],
+        "operationId": "ValueTuple_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
     "/Fake/0/{id}": {
       "get": {
         "tags": [
@@ -5237,21 +5765,52 @@
     }
   },
   "definitions": {
+    "ScopeResponseModel": {
+      "properties": {
+        "Id": {
+          "description": "Id of the administrative scope.",
+          "type": "string"
+        },
+        "Name": {
+          "description": "Name of the administrative scope.",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of the administrative scope.",
+          "type": "string"
+        },
+        "IsBuiltIn": {
+          "description": "Whether the administrative scope is built-in.",
+          "type": "boolean"
+        },
+        "IsAllScope": {
+          "description": "Indicates the built-in \"All\" scope.  There will be\r\nexactly one scope with this property set to true.",
+          "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "ScopeResponseModel"
+      },
+      "type": "object"
+    },
     "Location": {
+      "description": "## Geographic coordinates\r\n___\r\nA **geographic coordinate system** is a coordinate system used in geography that enables every location on Earth",
       "properties": {
         "Lat": {
+          "description": "**Latitude**: a geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
           "example": "25.85",
           "type": "number",
-          "format": "double",
-          "maximum": 90.0,
-          "minimum": -90.0
+          "format": "float",
+          "maximum": 90,
+          "minimum": -90
         },
         "Lon": {
+          "description": "**Longitude**: a geographic coordinate that specifies the east-west position of a point on the Earth's surface.",
           "example": "-80.27",
           "type": "number",
-          "format": "double",
-          "maximum": 180.0,
-          "minimum": -180.0
+          "format": "float",
+          "maximum": 180,
+          "minimum": -180
         }
       },
       "xml": {
@@ -5301,25 +5860,30 @@
     "Data": {
       "properties": {
         "integ": {
+          "description": "Sample integer",
           "example": 123,
           "type": "integer",
           "format": "int32"
         },
         "doub": {
+          "description": "Sample double",
           "example": 9858.216,
           "type": "number",
           "format": "double"
         },
         "boolea": {
+          "description": "Sample boolean",
           "type": "boolean"
         },
         "guid": {
+          "description": "Sample guid",
           "example": "00000000-0000-0000-0000-000000000000",
           "type": "string",
           "format": "uuid"
         },
         "date": {
-          "example": "2018-03-01",
+          "description": "Sample DateTime",
+          "example": "2018-04-06",
           "type": "string",
           "format": "date-time"
         }
@@ -5339,15 +5903,20 @@
     "Company": {
       "properties": {
         "Id": {
+          "description": "The Unique Company ID",
           "example": "123",
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 456
         },
         "Name": {
+          "description": "The Company Name",
           "example": "Acme co",
-          "type": "string"
+          "type": "string",
+          "default": "My Company"
         },
         "Description": {
+          "description": "An optional description of the company",
           "example": "Super duper company",
           "type": "string"
         },
@@ -6053,7 +6622,7 @@
           "$ref": "#/definitions/TheProps"
         },
         "Updated": {
-          "example": "2018-03-01",
+          "example": "2018-04-06",
           "type": "string",
           "format": "date-time"
         },
@@ -6173,12 +6742,123 @@
           "type": "integer",
           "format": "int32",
           "default": 50000,
-          "maximum": 60000.0,
-          "minimum": 15000.0
+          "maximum": 60000,
+          "minimum": 15000
         }
       },
       "xml": {
         "name": "Payload"
+      },
+      "type": "object"
+    },
+    "GeolocateResponse": {
+      "description": "Geolocation result",
+      "properties": {
+        "CountryName": {
+          "description": "Country name of IP address",
+          "type": "string"
+        },
+        "City": {
+          "description": "City of IP address",
+          "example": "Miami",
+          "type": "string"
+        },
+        "RegionCode": {
+          "description": "State/region code of IP address",
+          "example": "FL",
+          "type": "string"
+        },
+        "RegionName": {
+          "description": "State/region of IP address",
+          "example": "Florida",
+          "type": "string"
+        },
+        "ZipCode": {
+          "description": "Zip or postal code of IP address",
+          "example": "33323",
+          "type": "string"
+        },
+        "TimezoneStandardName": {
+          "description": "Timezone of IP address",
+          "type": "string"
+        },
+        "Latitude": {
+          "description": "Latitude of IP address",
+          "example": "25.85",
+          "type": "number",
+          "format": "double"
+        },
+        "Longitude": {
+          "description": "Longitude of IP address",
+          "example": "-80.27",
+          "type": "number",
+          "format": "double"
+        },
+        "BigErrorMargin": {
+          "example": 9858.216,
+          "type": "number",
+          "format": "double",
+          "maximum": 110.99,
+          "minimum": 10.1
+        },
+        "CountryCode": {
+          "description": "Two-letter country code of IP address",
+          "type": "string"
+        },
+        "ErrorMargin": {
+          "example": 9858.216,
+          "type": "number",
+          "format": "double",
+          "maximum": 0.99,
+          "minimum": 0.1
+        }
+      },
+      "xml": {
+        "name": "GeolocateResponse"
+      },
+      "type": "object"
+    },
+    "SomeRequest": {
+      "properties": {
+        "Point1": {
+          "$ref": "#/definitions/Location"
+        },
+        "Point2": {
+          "$ref": "#/definitions/Location"
+        }
+      },
+      "xml": {
+        "name": "SomeRequest"
+      },
+      "type": "object"
+    },
+    "Coordinate": {
+      "properties": {
+        "Elev": {
+          "description": "**Elevation**: is the height above or below a fixed reference point.",
+          "example": "2.6",
+          "type": "number",
+          "format": "float"
+        },
+        "Lat": {
+          "description": "**Latitude**: a geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
+          "example": "25.85",
+          "type": "number",
+          "format": "float",
+          "maximum": 90,
+          "minimum": -90
+        },
+        "Lon": {
+          "description": "**Longitude**: a geographic coordinate that specifies the east-west position of a point on the Earth's surface.",
+          "example": "-80.27",
+          "type": "number",
+          "format": "float",
+          "maximum": 180,
+          "minimum": -180
+        }
+      },
+      "xml": {
+        "name": "Coordinate"
       },
       "type": "object"
     },
@@ -6220,7 +6900,7 @@
           "format": "int32"
         },
         "Date": {
-          "example": "2018-03-01",
+          "example": "2018-04-06",
           "type": "string",
           "format": "date-time"
         }
@@ -6430,78 +7110,23 @@
       },
       "type": "object"
     },
-    "GeolocateResponse": {
-      "description": "Geolocation result",
-      "properties": {
-        "CountryName": {
-          "description": "Country name of IP address",
-          "type": "string"
-        },
-        "City": {
-          "description": "City of IP address",
-          "example": "Miami",
-          "type": "string"
-        },
-        "RegionCode": {
-          "description": "State/region code of IP address",
-          "example": "FL",
-          "type": "string"
-        },
-        "RegionName": {
-          "description": "State/region of IP address",
-          "example": "Florida",
-          "type": "string"
-        },
-        "ZipCode": {
-          "description": "Zip or postal code of IP address",
-          "example": "33323",
-          "type": "string"
-        },
-        "TimezoneStandardName": {
-          "description": "Timezone of IP address",
-          "type": "string"
-        },
-        "Latitude": {
-          "description": "Latitude of IP address",
-          "example": "25.85",
-          "type": "number",
-          "format": "double"
-        },
-        "Longitude": {
-          "description": "Longitude of IP address",
-          "example": "-80.27",
-          "type": "number",
-          "format": "double"
-        },
-        "CountryCode": {
-          "description": "Two-letter country code of IP address",
-          "type": "string"
-        },
-        "ErrorMargin": {
-          "example": 9858.216,
-          "type": "number",
-          "format": "double",
-          "maximum": 0.99,
-          "minimum": 0.1
-        }
-      },
-      "xml": {
-        "name": "GeolocateResponse"
-      },
-      "type": "object"
-    },
     "Company123": {
       "properties": {
         "Id": {
+          "description": "The Unique Company ID",
           "example": "123",
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 456
         },
         "Name": {
+          "description": "The Company Name",
           "example": "Acme co",
-          "type": "string"
+          "type": "string",
+          "default": "My Company"
         },
         "Description": {
+          "description": "An optional description of the company",
           "example": "Super duper company",
           "type": "string"
         },
@@ -6663,6 +7288,9 @@
       "name": "IntParam"
     },
     {
+      "name": "Location"
+    },
+    {
       "name": "MemoryBarrier"
     },
     {
@@ -6713,6 +7341,9 @@
       "description": "Testing enums ..."
     },
     {
+      "name": "TestMultiGet"
+    },
+    {
       "name": "TestPost"
     },
     {
@@ -6723,6 +7354,9 @@
     },
     {
       "name": "ValueProvider"
+    },
+    {
+      "name": "ValueTuple"
     }
   ]
 }
