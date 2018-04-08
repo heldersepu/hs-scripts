@@ -27,6 +27,34 @@
 						}
 					}
 				}
+			},
+			"put":
+			{
+				"responses":
+				{
+					"200":
+					{
+                        "description": "OK",
+						"schema":
+						{
+							"$ref": "#/definitions/Period"
+						}
+					}
+				}
+			},
+			"post":
+			{
+				"responses":
+				{
+					"200":
+					{
+                        "description": "OK",
+						"schema":
+						{
+							"$ref": "#/definitions/Element"
+						}
+					}
+				}
 			}
 		}
 	},
