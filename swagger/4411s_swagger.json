@@ -673,7 +673,7 @@
 								"secondary"
 							],
 							"type": "string"
-						}
+						},
 						"system":
 						{
 							"description": "Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
