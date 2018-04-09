@@ -3,7 +3,7 @@
 	"info":
 	{
 		"version": "V1",
-		"title": "Swagger_Test",
+		"title": "Swagger_Test"
 	},
 	"host": "swagger-net-test.azurewebsites.net",
 	"schemes": [
@@ -42,18 +42,18 @@
 				"Lat":
 				{
 					"type": "number",
-					"format": "float",
+					"format": "float"
 				},
 				"Lon":
 				{
 					"type": "number",
-					"format": "float",
+					"format": "float"
 				}
 			},
 			"xml":
 			{
 				"name": "Location"
-			},
+			}
 		},
 		"Test1K":
 		{
