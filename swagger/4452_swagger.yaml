@@ -1,34 +1,65 @@
 swagger: '2.0'
 info:
-  version: 0.1.0
-  title: Service
+  version: 0.2.0
+  title: Search Service
   description: |
-    # REST API of Service
-basePath: /testpath
+    # REST API of the search service
 paths:
-  /samplepath/{collection_name}:
+  /samplepath/{samplepathquery1}:
     parameters:
-      - $ref: "#/parameters/collection_name"
+      - $ref: "#/parameters/sample1"
+      - $ref: "#/parameters/sample2"
+      - $ref: "#/parameters/sample3"
+      - $ref: "#/parameters/sample4"
+    delete:
+      summary: Sample
+      responses:
+        204:
+          description: Sample
+        400:
+          description: bad request
+        404:
+          description: not found    
+        500:
+          description: internal server error 
     post:
-      summary: sample
-      responses:
-        200:
-          description: OK
-    get:
+      summary: Sample
       parameters:
-        - name: sample
+        - name: samplemethod1
           in: query
-          description: sample. 
-          required: false
-          type: boolean
+          description: samplemethod1
+          required: true
+          type: string
       responses:
-        200:
-          description: OK
+        201:
+          description: created
+        400:
+          description: bad request
+        500:
+          description: internal server error
 
 parameters:
-  collection_name:
-    name: collection_name
+  sample2:
+    name: x-samplepath2
+    in: header
+    description: sample2
+    required: false
+    type: string
+  sample4:
+    name: samplepath4
+    in: header
+    description: sample4
+    required: true
+    type: string
+  sample3:
+    name: x-samplepath3
+    in: header
+    description: sample3
+    required: false
+    type: string
+  sample1:
+    name: samplepathquery1
     in: path
-    description: sample
+    description: Name of the alias
     type: string
     required: true
