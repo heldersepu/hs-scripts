@@ -1,0 +1,34 @@
+swagger: '2.0'
+info:
+  version: 0.1.0
+  title: Service
+  description: |
+    # REST API of Service
+basePath: /testpath
+paths:
+  /samplepath/{collection_name}:
+    parameters:
+      - $ref: "#/parameters/collection_name"
+    post:
+      summary: sample
+      responses:
+        200:
+          description: OK
+    get:
+      parameters:
+        - name: sample
+          in: query
+          description: sample. 
+          required: false
+          type: boolean
+      responses:
+        200:
+          description: OK
+
+parameters:
+  collection_name:
+    name: collection_name
+    in: path
+    description: sample
+    type: string
+    required: true
