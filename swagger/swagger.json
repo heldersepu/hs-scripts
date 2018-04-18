@@ -1931,7 +1931,7 @@
       }
     },
     "/api/FromBody": {
-      "post": {
+      "get": {
         "tags": [
           "FromBody"
         ],
