@@ -4,7 +4,7 @@
     "version": "V1",
     "title": "Swagger_Test",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.",
-    "x-swagger-net-version": "8.3.13.201"
+    "x-swagger-net-version": "8.3.13.403"
   },
   "host": "swagger-net-test.azurewebsites.net",
   "schemes": [
@@ -678,6 +678,42 @@
         ]
       }
     },
+    "/api/BigSwag/{id}": {
+      "get": {
+        "tags": [
+          "BigSwag"
+        ],
+        "operationId": "BigSwag_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
     "/bind/{id}": {
       "post": {
         "tags": [
@@ -920,7 +956,13 @@
             "type": "string"
           },
           {
-            "name": "c.properties",
+            "name": "c.properties.aaa",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "c.properties.bbb",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1740,6 +1782,195 @@
         ]
       }
     },
+    "/api/FromBody/Test1_WithFromBody": {
+      "get": {
+        "tags": [
+          "FromBody"
+        ],
+        "operationId": "FromBody_GetWith",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "v.id",
+            "in": "query",
+            "description": "The super ID that will be used",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "v.name",
+            "in": "query",
+            "description": "Who needs a name?",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "v.abd",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "v.xyz",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "v.cde",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "v.bcd",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "maxLength": 5,
+            "minLength": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ViewModelTest"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/FromBody/Test2_NoFromBody": {
+      "get": {
+        "tags": [
+          "FromBody"
+        ],
+        "operationId": "FromBody_GetWithout",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "v.id",
+            "in": "query",
+            "description": "The super ID that will be used",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "v.name",
+            "in": "query",
+            "description": "Who needs a name?",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "v.abd",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "v.xyz",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "v.cde",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "v.bcd",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "maxLength": 5,
+            "minLength": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ViewModelTest"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/FromBody": {
+      "post": {
+        "tags": [
+          "FromBody"
+        ],
+        "operationId": "FromBody_Post",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "v",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ViewModelTest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ViewModelTest"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
     "/api/FromUri/Test0_WithFromUri": {
       "get": {
         "tags": [
@@ -2372,7 +2603,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "image.png",
+            "description": "Download an image",
             "schema": {
               "type": "file"
             }
@@ -2959,6 +3190,34 @@
         ]
       }
     },
+    "/api/Log": {
+      "get": {
+        "tags": [
+          "Log"
+        ],
+        "operationId": "Log_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
     "/api/MemoryBarrier": {
       "get": {
         "tags": [
@@ -3419,6 +3678,61 @@
         ]
       }
     },
+    "/MultiParamPost/{id}": {
+      "post": {
+        "tags": [
+          "MultiParamPost"
+        ],
+        "operationId": "MultiParamPost_Post",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "companies",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/Company"
+              },
+              "xml": {
+                "name": "Company",
+                "wrapped": true
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Company"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
     "/api/NestedEnum": {
       "put": {
         "tags": [
@@ -3489,6 +3803,42 @@
             "description": "OK",
             "schema": {
               "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/NestedSwag/{id}": {
+      "get": {
+        "tags": [
+          "NestedSwag"
+        ],
+        "operationId": "NestedSwag_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
             }
           }
         },
@@ -3831,6 +4181,44 @@
             "description": "OK",
             "schema": {
               "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/NumCalc": {
+      "get": {
+        "tags": [
+          "NumCalc"
+        ],
+        "operationId": "NumCalc_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "max",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1000000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "number",
+              "format": "double"
             }
           }
         },
@@ -5450,10 +5838,7 @@
         ],
         "operationId": "Fake_Get0",
         "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "application/json"
         ],
         "parameters": [
           {
@@ -5482,10 +5867,7 @@
         ],
         "operationId": "Fake_Get1",
         "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "application/json"
         ],
         "parameters": [
           {
@@ -5514,10 +5896,7 @@
         ],
         "operationId": "Fake_Get2",
         "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "application/json"
         ],
         "parameters": [
           {
@@ -5546,10 +5925,7 @@
         ],
         "operationId": "Fake_Get3",
         "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "application/json"
         ],
         "parameters": [
           {
@@ -5578,10 +5954,7 @@
         ],
         "operationId": "Fake_Get4",
         "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "application/json"
         ],
         "parameters": [
           {
@@ -5610,10 +5983,7 @@
         ],
         "operationId": "Fake_Get5",
         "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "application/json"
         ],
         "parameters": [
           {
@@ -5642,10 +6012,7 @@
         ],
         "operationId": "Fake_Get6",
         "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "application/json"
         ],
         "parameters": [
           {
@@ -5674,10 +6041,7 @@
         ],
         "operationId": "Fake_Get7",
         "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "application/json"
         ],
         "parameters": [
           {
@@ -5706,10 +6070,7 @@
         ],
         "operationId": "Fake_Get8",
         "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "application/json"
         ],
         "parameters": [
           {
@@ -5738,10 +6099,123 @@
         ],
         "operationId": "Fake_Get9",
         "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "default": 8
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Space Sample/0/{id}": {
+      "get": {
+        "tags": [
+          "Space Sample"
+        ],
+        "operationId": "Space Sample_Get0",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "default": 8
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Space Sample/1/{id}": {
+      "get": {
+        "tags": [
+          "Space Sample"
+        ],
+        "operationId": "Space Sample_Get1",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "default": 8
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Hash#Sample/0/{id}": {
+      "get": {
+        "tags": [
+          "Hash#Sample"
+        ],
+        "operationId": "Hash#Sample_Get0",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "default": 8
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Hash#Sample/1/{id}": {
+      "get": {
+        "tags": [
+          "Hash#Sample"
+        ],
+        "operationId": "Hash#Sample_Get1",
+        "produces": [
+          "application/json"
         ],
         "parameters": [
           {
@@ -5883,7 +6357,7 @@
         },
         "date": {
           "description": "Sample DateTime",
-          "example": "2018-04-06",
+          "example": "2018-04-18",
           "type": "string",
           "format": "date-time"
         }
@@ -5932,7 +6406,7 @@
           "type": "string"
         },
         "properties": {
-          "type": "string"
+          "$ref": "#/definitions/Props"
         },
         "lowercase": {
           "type": "string"
@@ -5946,6 +6420,20 @@
       },
       "xml": {
         "name": "Company"
+      },
+      "type": "object"
+    },
+    "Props": {
+      "properties": {
+        "aaa": {
+          "type": "string"
+        },
+        "bbb": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Props"
       },
       "type": "object"
     },
@@ -6622,7 +7110,7 @@
           "$ref": "#/definitions/TheProps"
         },
         "Updated": {
-          "example": "2018-04-06",
+          "example": "2018-04-18",
           "type": "string",
           "format": "date-time"
         },
@@ -6900,7 +7388,7 @@
           "format": "int32"
         },
         "Date": {
-          "example": "2018-04-06",
+          "example": "2018-04-18",
           "type": "string",
           "format": "date-time"
         }
@@ -7142,7 +7630,7 @@
           "type": "string"
         },
         "properties": {
-          "type": "string"
+          "$ref": "#/definitions/Props"
         },
         "lowercase": {
           "type": "string"
@@ -7225,6 +7713,9 @@
       "name": "BigString"
     },
     {
+      "name": "BigSwag"
+    },
+    {
       "name": "Binding"
     },
     {
@@ -7256,6 +7747,9 @@
     },
     {
       "name": "EnumTest"
+    },
+    {
+      "name": "FromBody"
     },
     {
       "name": "FromUri"
@@ -7291,6 +7785,9 @@
       "name": "Location"
     },
     {
+      "name": "Log"
+    },
+    {
       "name": "MemoryBarrier"
     },
     {
@@ -7300,13 +7797,22 @@
       "name": "MultiGet"
     },
     {
+      "name": "MultiParamPost"
+    },
+    {
       "name": "NestedEnum"
+    },
+    {
+      "name": "NestedSwag"
     },
     {
       "name": "NewUser"
     },
     {
       "name": "NodaTime"
+    },
+    {
+      "name": "NumCalc"
     },
     {
       "name": "OAuth"
