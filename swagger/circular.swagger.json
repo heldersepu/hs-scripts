@@ -1,0 +1,71 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "0.1.0_inProgress",
+    "title": "API Circular-reference"
+  },
+  "host": "api.orange.com",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/node": {
+      "post": {
+        "tags": [
+          "node"
+        ],
+        "operationId": "nodeCreate",
+        "summary": "create node",
+        "description": "",
+        "deprecated": false,
+        "parameters": [
+          {
+            "name": "node",
+            "required": true,
+            "in": "body",
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/node"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/node"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "node": {
+      "required": [
+        "id",
+        "nodes"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/node"
+          }
+        }
+      }
+    }
+  }
+}
