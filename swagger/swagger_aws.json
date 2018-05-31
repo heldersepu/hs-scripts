@@ -3,6 +3,7 @@
   "info": {
     "version": "V1",
     "title": "JobsManagement",
+    "description": "Lorem ipsum dolor sit amet"
   },
   "host": "879www.my-api.us-east-1.amazonaws.com",
   "schemes": [
@@ -25,7 +26,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "## MARKDOWN DoubleHash \n### MARKDOWN TripleHash \n`MARKDOWN code` ",
+            "description": "## MARKDOWN DoubleHash \n`MARKDOWN code` ",
             "schema": {
               "$ref": "#/definitions/MyData"
             }
