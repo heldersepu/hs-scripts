@@ -2,6 +2,10 @@ output "aws_availability_zones_names" {
   value = "${data.aws_availability_zones.available.names}"
 }
 
+output "aws_availability_zones_names_len" {
+  value = "${length(data.aws_availability_zones.available.names)}"
+}
+
 output "aws_s3_bucket_name" {
   value = "${aws_s3_bucket.sample_bucket12629.id}"
 }
