@@ -7,7 +7,7 @@
 	"host": "tfswebapi.azurewebsites.net",
 	"schemes": ["http"],
 	"paths": {
-		"/API/test.php": {
+		"/APIX/test.php": {
 			"post": {
 				"produces": ["application/json"],
 				"parameters": [{
