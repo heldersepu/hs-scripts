@@ -4,7 +4,7 @@
 		"version": "V1",
 		"title": "Swagger_Test"
 	},
-	"host": "tfswebapi.scm.azurewebsites.net",
+	"host": "tfswebapi.azurewebsites.net",
 	"schemes": ["http"],
 	"paths": {
 		"/API/test.php": {
