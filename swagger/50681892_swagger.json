@@ -1,0 +1,41 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "V1",
+		"title": "Swagger_Test",
+		"description": "Lorem ipsum.",
+	},
+	"host": "tfswebapi.scm.azurewebsites.net",
+	"schemes": ["http"],
+	"paths": {
+		"/API/GetTieredInventory": {
+			"post": {
+				"summary": "Get Tiered inventory from ID",
+				"description": "Gets Tiered inventory for passed ID/IC combination",
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "id",
+					"in": "body",
+					"description": "ID to retrieve Tiered inventory for",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "ic",
+					"in": "body",
+					"description": "IC to retrieve Tiered inventory for",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "successful operation"
+					},
+					"500": {
+						"description": "Internal error"
+					}
+				}
+			}
+		}
+	}
+}
