@@ -8,7 +8,7 @@
 	"host": "tfswebapi.scm.azurewebsites.net",
 	"schemes": ["http"],
 	"paths": {
-		"/API/GetTieredInventory": {
+		"/API/test.php": {
 			"post": {
 				"summary": "Get Tiered inventory from ID",
 				"description": "Gets Tiered inventory for passed ID/IC combination",
