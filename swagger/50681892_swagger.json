@@ -2,25 +2,21 @@
 	"swagger": "2.0",
 	"info": {
 		"version": "V1",
-		"title": "Swagger_Test",
-		"description": "Lorem ipsum."
+		"title": "Swagger_Test"
 	},
 	"host": "tfswebapi.scm.azurewebsites.net",
 	"schemes": ["http"],
 	"paths": {
 		"/API/test.php": {
 			"post": {
-				"summary": "Get Tiered inventory from ID",
-				"description": "Gets Tiered inventory for passed ID/IC combination",
 				"produces": ["application/json"],
 				"parameters": [{
-					"name": "id",
+					"name": "body",
 					"in": "body",
-					"description": "ID to retrieve Tiered inventory for",
 					"required": true,
 					"schema": {
-                      "type": "string"
-                    }
+						"$ref": "#/definitions/data"
+					}
 				}],
 				"responses": {
 					"200": {
@@ -31,6 +27,25 @@
 					}
 				}
 			}
+		}
+	},
+	"definitions": {
+		"data": {
+			"properties": {
+				"Id": {
+					"type": "string"
+				},
+				"Name": {
+					"type": "string"
+				},
+				"Description": {
+					"type": "string"
+				}
+			},
+			"xml": {
+				"name": "data"
+			},
+			"type": "object"
 		}
 	}
 }
