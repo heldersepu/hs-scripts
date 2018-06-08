@@ -3,7 +3,7 @@
 	"info": {
 		"version": "V1",
 		"title": "Swagger_Test",
-		"description": "Lorem ipsum.",
+		"description": "Lorem ipsum."
 	},
 	"host": "tfswebapi.scm.azurewebsites.net",
 	"schemes": ["http"],
