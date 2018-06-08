@@ -18,14 +18,18 @@
 					"in": "body",
 					"description": "ID to retrieve Tiered inventory for",
 					"required": true,
-					"type": "string"
+					"schema": {
+                      "type": "string"
+                    }
 				},
 				{
 					"name": "ic",
 					"in": "body",
 					"description": "IC to retrieve Tiered inventory for",
 					"required": true,
-					"type": "string"
+					"schema": {
+                      "type": "string"
+                    }
 				}],
 				"responses": {
 					"200": {
