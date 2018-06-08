@@ -21,15 +21,6 @@
 					"schema": {
                       "type": "string"
                     }
-				},
-				{
-					"name": "ic",
-					"in": "body",
-					"description": "IC to retrieve Tiered inventory for",
-					"required": true,
-					"schema": {
-                      "type": "string"
-                    }
 				}],
 				"responses": {
 					"200": {
