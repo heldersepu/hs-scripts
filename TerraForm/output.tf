@@ -25,3 +25,7 @@ output "aws_vpc_cidr_block" {
 output "aws_vpc_name" {
   value = "${aws_vpc.myvpc.id}"
 }
+
+output "testing_lookup" {
+  value = "${lookup(var.ip_ranges, "de", "10.10.10.0/24")}"
+}
