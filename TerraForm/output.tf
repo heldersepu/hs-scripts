@@ -7,23 +7,23 @@ output "aws_availability_zones_names_len" {
 }
 
 output "aws_s3_bucket_name" {
-  value = "${aws_s3_bucket.sample_bucket12629.id}"
+  value = "${aws_s3_bucket.sample_bucket12629.*.id}"
 }
 
 output "aws_subnet_cidr_block" {
-  value = "${aws_subnet.app1.cidr_block}"
+  value = "${aws_subnet.app1.*.cidr_block}"
 }
 
 output "aws_subnet_name" {
-  value = "${aws_subnet.app1.id}"
+  value = "${aws_subnet.app1.*.id}"
 }
 
 output "aws_vpc_cidr_block" {
-  value = "${aws_vpc.myvpc.cidr_block}"
+  value = "${aws_vpc.myvpc.*.cidr_block}"
 }
 
 output "aws_vpc_name" {
-  value = "${aws_vpc.myvpc.id}"
+  value = "${aws_vpc.myvpc.*.id}"
 }
 
 output "testing_lookup" {
