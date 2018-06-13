@@ -9,5 +9,5 @@ variable "ip_ranges" {
 }
 
 variable "enabled" {
-  default = 1
+  default = 0
 }
