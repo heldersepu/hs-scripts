@@ -1,0 +1,51 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "V1",
+		"title": "Swagger_Test"
+	},
+	"host": "tfswebapi.azurewebsites.net",
+	"schemes": ["http"],
+	"paths": {
+		"/APIX/test.php": {
+			"post": {
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "body",
+					"in": "body",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/data"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "successful operation"
+					},
+					"500": {
+						"description": "Internal error"
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"data": {
+			"properties": {
+				"Id": {
+					"type": "string"
+				},
+				"Name": {
+					"type": "string"
+				},
+				"Description": {
+					"type": "string"
+				}
+			},
+			"xml": {
+				"name": "data"
+			},
+			"type": "object"
+		}
+	}
+}
