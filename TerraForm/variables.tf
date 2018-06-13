@@ -7,3 +7,7 @@ variable "ip_ranges" {
     "pr" = "10.13.136.0/21"
   }
 }
+
+variable "enabled" {
+  default = 1
+}
