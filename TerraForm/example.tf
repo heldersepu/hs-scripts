@@ -1,9 +1,9 @@
 provider "aws" {
-  region = "us-east-1"
+  region = "us-west-2"
 }
 
 resource "aws_s3_bucket" "sample_bucket12629" {
-  count  = 1
+  count  = "${var.enabled}"
   bucket = "my-tf-test-bucket12629"
   acl    = "private"
 
@@ -14,7 +14,7 @@ resource "aws_s3_bucket" "sample_bucket12629" {
 }
 
 resource "aws_vpc" "myvpc" {
-  count                = 1
+  count                = "${var.enabled}"
   cidr_block           = "10.0.128.0/24"
   instance_tenancy     = "default"
   enable_dns_support   = true
@@ -31,7 +31,7 @@ data "aws_availability_zones" "available" {
 }
 
 resource "aws_subnet" "app1" {
-  count                   = 1
+  count                   = "${var.enabled}"
   vpc_id                  = "${aws_vpc.myvpc.id}"
   cidr_block              = "${cidrsubnet("10.0.128.0/24",2,0)}"
   availability_zone       = "${data.aws_availability_zones.available.names[0]}"
