@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "sample_bucket12629" {
-  count  = "${var.enabled}"
+  count  = "${var.enabled * var.buckets}"
   bucket = "my-tf-test-bucket12629"
   acl    = "private"
 

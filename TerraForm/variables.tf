@@ -11,3 +11,7 @@ variable "ip_ranges" {
 variable "enabled" {
   default = 0
 }
+
+variable "buckets" {
+  default = 1
+}
