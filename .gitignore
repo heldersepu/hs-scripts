@@ -1,2 +1,8 @@
 *.zip
 *.rar
+
+TerraForm/terraform\.tfstate
+
+TerraForm/terraform\.tfstate\.backup
+
+TerraForm/\.terraform/
