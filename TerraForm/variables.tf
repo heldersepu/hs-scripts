@@ -15,3 +15,8 @@ variable "enabled" {
 variable "buckets" {
   default = 1
 }
+
+variable "prevent_destroy" {
+  type = "string"
+  default = "false"
+}
