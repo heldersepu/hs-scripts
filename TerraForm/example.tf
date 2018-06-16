@@ -7,6 +7,10 @@ resource "aws_s3_bucket" "sample_bucket12629" {
   bucket = "my-tf-test-bucket12629"
   acl    = "private"
 
+  lifecycle {
+    prevent_destroy = "false"
+  }
+
   tags {
     Name        = "My bucket"
     Environment = "Dev"
