@@ -18,7 +18,7 @@ data "aws_availability_zones" "available" {
 resource "aws_subnet" "app1" {
   count                   = "${var.vpc_enabled}"
   vpc_id                  = "${aws_vpc.myvpc.id}"
-  cidr_block              = "${pc.myvpc.cidr_block}"
+  cidr_block              = "${aws_vpc.myvpc.cidr_block}"
   availability_zone       = "${data.aws_availability_zones.available.names[0]}"
   map_public_ip_on_launch = false
 }
