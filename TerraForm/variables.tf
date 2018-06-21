@@ -21,6 +21,10 @@ variable "enabled" {
   default = 0
 }
 
+variable "vpc_enabled" {
+  default = 0
+}
+
 variable "buckets" {
   default = 1
 }
