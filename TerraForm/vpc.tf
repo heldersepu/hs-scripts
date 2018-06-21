@@ -1,6 +1,6 @@
 resource "aws_vpc" "myvpc" {
   count                = "${var.vpc_enabled}"
-  cidr_block           = "10.35.112.0/21"
+  cidr_block           = "${var.cidr}"
   instance_tenancy     = "default"
   enable_dns_support   = true
   enable_dns_hostnames = true

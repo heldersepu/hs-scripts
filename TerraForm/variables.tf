@@ -22,7 +22,7 @@ variable "enabled" {
 }
 
 variable "vpc_enabled" {
-  default = 0
+  default = 1
 }
 
 variable "buckets" {
@@ -32,4 +32,8 @@ variable "buckets" {
 variable "prevent_destroy" {
   type    = "string"
   default = "false"
+}
+
+variable "cidr" {
+  default = "10.35.112.0/21"
 }

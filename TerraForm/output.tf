@@ -17,14 +17,22 @@ output "aws_availability_zones_names_len" {
 # output "aws_subnet_name" {
 #   value = "${aws_subnet.app1.*.id}"
 # }
-#
-# output "aws_vpc_cidr_block" {
-#   value = "${aws_vpc.myvpc.*.cidr_block}"
-# }
-#
-# output "aws_vpc_name" {
-#   value = "${aws_vpc.myvpc.*.id}"
-# }
+
+output "var_aws_vpc_cidr_block_0" {
+  value = "${cidrsubnet(var.cidr,2,0)}"
+}
+
+output "var_aws_vpc_cidr_block_1" {
+  value = "${cidrsubnet(var.cidr,2,1)}"
+}
+
+output "aws_vpc_cidr_block" {
+  value = "${aws_vpc.myvpc.*.cidr_block}"
+}
+
+output "aws_vpc_name" {
+  value = "${aws_vpc.myvpc.*.id}"
+}
 
 output "testing_lookup" {
   value = "${lookup(var.ip_ranges, "de", "10.10.10.0/24")}"
