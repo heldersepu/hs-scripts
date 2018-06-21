@@ -8,6 +8,15 @@ variable "ip_ranges" {
   }
 }
 
+variable "some_ips" {
+  type = "list"
+
+  default = [
+    "127.0.0.0/32",
+    "192.168.0.0/32",
+  ]
+}
+
 variable "enabled" {
   default = 0
 }
@@ -17,6 +26,6 @@ variable "buckets" {
 }
 
 variable "prevent_destroy" {
-  type = "string"
+  type    = "string"
   default = "false"
 }
