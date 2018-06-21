@@ -29,3 +29,7 @@ output "aws_availability_zones_names_len" {
 output "testing_lookup" {
   value = "${lookup(var.ip_ranges, "de", "10.10.10.0/24")}"
 }
+
+output "testing_zipmap" {
+  value = "${zipmap(data.aws_availability_zones.available.names, data.aws_availability_zones.available.names)}"
+}
