@@ -41,3 +41,7 @@ output "testing_lookup" {
 output "testing_zipmap" {
   value = "${zipmap(data.aws_availability_zones.available.names, data.aws_availability_zones.available.names)}"
 }
+
+output "test_subnets" {
+  value = "${data.template_file.test_subnets.*.rendered}"
+}
