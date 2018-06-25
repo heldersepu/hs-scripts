@@ -21,3 +21,9 @@ resource "aws_s3_bucket" "sample_bucket12629" {
     Environment = "Dev"
   }
 }
+
+resource "aws_ebs_volume" "data" {
+  count             = "1"
+  availability_zone = "us-east-1a"
+  size              = "5"
+}
