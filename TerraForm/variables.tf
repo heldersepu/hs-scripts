@@ -21,6 +21,10 @@ variable "enabled" {
   default = 0
 }
 
+variable "ec2_enabled" {
+  default = 0
+}
+
 variable "vpc_enabled" {
   default = 1
 }
@@ -36,4 +40,8 @@ variable "prevent_destroy" {
 
 variable "cidr" {
   default = "10.35.112.0/21"
+}
+
+variable "testkey" {
+  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDG1KKtTN8KdDNiU+w+cj8OReRLECe0gH+btKpazbHX6w0M"
 }
