@@ -45,3 +45,7 @@ output "testing_zipmap" {
 output "test_subnets" {
   value = "${data.template_file.test_subnets.*.rendered}"
 }
+
+output "list_test" {
+  value = "${var.some_ips[0]}"
+}
