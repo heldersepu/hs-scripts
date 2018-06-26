@@ -28,8 +28,8 @@ resource "aws_ebs_volume" "data" {
   size              = "5"
 }
 
-resource "aws_key_pair" "testkey" {
+resource "aws_key_pair" "sshkey" {
   count      = "${var.ec2_enabled}"
-  key_name   = "testkey"
-  public_key = "${var.testkey}"
+  key_name   = "sshkey"
+  public_key = "${var.sshkey}"
 }
