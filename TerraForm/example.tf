@@ -27,3 +27,9 @@ resource "aws_ebs_volume" "data" {
   availability_zone = "us-east-1a"
   size              = "5"
 }
+
+resource "aws_key_pair" "testkey" {
+  count      = "${var.ec2_enabled}"
+  key_name   = "testkey"
+  public_key = "${var.testkey}"
+}
