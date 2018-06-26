@@ -1,5 +1,5 @@
 locals {
-  "cidr_range" = "10.35.112.0/21"
+  "cidr_range" = "10.35.136.0/21"
 }
 
 output "cidr_1__4-0" {
