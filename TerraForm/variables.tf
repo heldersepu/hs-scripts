@@ -22,7 +22,7 @@ variable "enabled" {
 }
 
 variable "ec2_enabled" {
-  default = 0
+  default = 1
 }
 
 variable "vpc_enabled" {
@@ -42,6 +42,6 @@ variable "cidr" {
   default = "10.35.112.0/21"
 }
 
-variable "testkey" {
-  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDG1KKtTN8KdDNiU+w+cj8OReRLECe0gH+btKpazbHX6w0M"
+variable "sshkey" {
+  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDUq96zDCVftHlPeNMVTI5R6CSBR0t9nueeol73293PjryEql2pq5YyHRBOrck6AUlB6pspVp6ib6bT0wwdK0ppwoK4BeGeoaTNTP4Hy2xh6JgvoNSbHT3raXyuhuqCZa8o42hxSWalnaUU3VBONO4MXuISD98QI8v7VqbKmhCZ5w== mk@mk3"
 }
