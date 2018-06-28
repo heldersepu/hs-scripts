@@ -7,4 +7,4 @@ terraform.tfstate.backup
 
 .terraform
 
-
+*.lock.info
