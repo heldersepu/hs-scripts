@@ -21,7 +21,7 @@ resource "aws_instance" "suse12" {
   ebs_block_device {
     device_name           = "/dev/sdg"
     volume_type           = "gp2"
-    volume_size           = "25"
+    volume_size           = "27"
     delete_on_termination = true
   }
 
@@ -33,6 +33,10 @@ resource "aws_instance" "suse12" {
   volume_tags {
     Terraformed = "true"
     Name        = "suse12 volume"
+  }
+
+  lifecycle {
+    prevent_destroy = false
   }
 }
 
