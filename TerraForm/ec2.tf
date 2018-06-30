@@ -37,7 +37,7 @@ resource "aws_instance" "suse12" {
 
   lifecycle {
     ignore_changes  = ["ami", "user_data", "instance_type", "ebs_optimized"]
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 
