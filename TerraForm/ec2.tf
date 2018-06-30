@@ -32,7 +32,7 @@ resource "aws_instance" "suse12" {
 
   volume_tags {
     Terraformed = "true"
-    Name        = "suse12 volume"
+    Name        = "suse12 volume root"
   }
 
   lifecycle {
