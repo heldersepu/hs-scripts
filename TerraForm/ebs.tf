@@ -10,7 +10,7 @@ resource "aws_ebs_volume" "data-ndj" {
 
   lifecycle {
     ignore_changes  = ["type"]
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 
