@@ -43,10 +43,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
+              "$ref": "#/definitions/Data"
             }
           }
         },
@@ -54,7 +51,34 @@
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "Data": {
+      "properties": {
+        "date0": {
+          "description": "Sample DateTime 0",
+          "example": "2018-04-18",
+          "type": "string",
+          "format": "date-time"
+        },
+        "date1": {
+          "description": "Sample DateTime 1",
+          "example": "2018-06-22T08:00:19.130Z",
+          "type": "string",
+          "format": "date-time"
+        },
+        "date2": {
+          "description": "Sample DateTime 2",
+          "example": "2018-06-22T08:00:19Z",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "xml": {
+        "name": "Data"
+      },
+      "type": "object"
+    }
+  },
   "securityDefinitions": {},
   "tags": [
     {
