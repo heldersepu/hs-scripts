@@ -1,5 +1,5 @@
 resource "aws_ebs_volume" "data-ndj" {
-  count             = 1
+  count             = "${var.ec2_enabled}"
   type              = "gp2"
   size              = 200
   availability_zone = "${data.aws_availability_zones.available.names[0]}"
@@ -15,7 +15,7 @@ resource "aws_ebs_volume" "data-ndj" {
 }
 
 resource "aws_volume_attachment" "data-ndj" {
-  count       = 1
+  count       = "${var.ec2_enabled}"
   device_name = "/dev/sdj"
   instance_id = "${aws_instance.suse12.*.id[0]}"
   volume_id   = "${aws_ebs_volume.data-ndj.*.id[0]}"

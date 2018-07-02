@@ -22,7 +22,7 @@ variable "enabled" {
 }
 
 variable "ec2_enabled" {
-  default = 1
+  default = 0
 }
 
 variable "vpc_enabled" {
@@ -43,5 +43,5 @@ variable "cidr" {
 }
 
 variable "sshkey" {
-  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDUq96zDCVftHlPeNMVTI5R6CSBR0t9nueeol73293PjryEql2pq5YyHRBOrck6AUlB6pspVp6ib6bT0wwdK0ppwoK4BeGeoaTNTP4Hy2xh6JgvoNSbHT3raXyuhuqCZa8o42hxSWalnaUU3VBONO4MXuISD98QI8v7VqbKmhCZ5w== mk@mk3"
+  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCnf/P+jNQU5tqfVTfdAd92jwWCE6NZKJLxuvJB+zog/PV1rZpLMcKuGICNQt1ksU/yZR0Xq2oSiDIy4tYH7QzCMjMpRiZvdQINJZDeidtPDNSQWGn3dfKS5yHfge3/4taZ0cfnkZ4qHcLVZzfq+PvPmQn9gB1nqYZeHEPK59dWHaa8QLOnrE/IDJ8wPE/yMd1W4xitjkaTrEOC4xbyOiZFtgo/mpR97Z2uKn/nx8nWLg1nwhPhQOffYkReIji8FY67d7bbBpgGerYjEmZijgtW3aIjtKTBdiOu5E012RoCxXD4sO/cElqU/TJKg3djXyvAze/WmKafEgL499Zqty0J hsepulveda@mlla1851.magicleap.ds"
 }
