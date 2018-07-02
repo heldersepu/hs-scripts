@@ -22,3 +22,11 @@ resource "aws_subnet" "app1" {
   availability_zone       = "${data.aws_availability_zones.available.names[0]}"
   map_public_ip_on_launch = false
 }
+
+resource "aws_default_network_acl" "default" {
+  default_network_acl_id = "${aws_vpc.myvpc.default_network_acl_id}"
+
+  tags {
+    Name = "default_network_acl"
+  }
+}
