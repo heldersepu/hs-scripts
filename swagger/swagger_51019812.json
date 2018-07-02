@@ -26,7 +26,7 @@
             "type": "string",
             "format": "date-time",
             "default": "2018-06-22T08:00:19.130Z",
-            "example": "2018-06-22T08:00:19.130Z"
+            "x-example": "2018-06-22T08:00:19.130Z"
           },
           {
             "name": "data.d2",
@@ -36,7 +36,7 @@
             "type": "string",
             "format": "date-time",
             "default": "2018-06-22T08:00:19Z",
-            "example": "2018-06-22T08:00:19Z"
+            "x-example": "2018-06-22T08:00:19Z"
           }
         ],
         "responses": {
