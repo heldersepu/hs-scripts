@@ -1,0 +1,64 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "V1",
+    "title": "Test"
+  },
+  "host": "test.azurewebsites.net",
+  "schemes": ["http"],
+  "paths": {
+    "/api/ApiExplorer": {
+      "get": {
+        "tags": [
+          "ApiExplorer"
+        ],
+        "operationId": "ApiExplorer_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "data.d1",
+            "in": "query",
+            "description": "Sample date One",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "default": "2018-06-22T08:00:19.130Z",
+            "example": "2018-06-22T08:00:19.130Z"
+          },
+          {
+            "name": "data.d2",
+            "in": "query",
+            "description": "Sample date Two",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "default": "2018-06-22T08:00:19Z",
+            "example": "2018-06-22T08:00:19Z"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "definitions": {},
+  "securityDefinitions": {},
+  "tags": [
+    {
+      "name": "ApiExplorer"
+    }
+  ]
+}
