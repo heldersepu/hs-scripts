@@ -26,6 +26,10 @@ resource "aws_ebs_volume" "data" {
   count             = "1"
   availability_zone = "us-east-1a"
   size              = "5"
+
+  tags {
+    Name = "Test volume"
+  }
 }
 
 resource "aws_key_pair" "sshkey" {
