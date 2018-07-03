@@ -25,6 +25,10 @@ variable "ec2_enabled" {
   default = 1
 }
 
+variable "win_ec2_enabled" {
+  default = 0
+}
+
 variable "vpn_enabled" {
   default = 0
 }
