@@ -9,6 +9,11 @@ resource "aws_instance" "win2016" {
     Terraformed = "true"
     Name        = "win2016"
   }
+
+  volume_tags {
+    Terraformed = "true"
+    Name        = "win2016 volume root"
+  }
 }
 
 resource "aws_instance" "suse12" {
