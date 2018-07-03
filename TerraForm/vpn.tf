@@ -9,6 +9,8 @@ resource "aws_customer_gateway" "gate" {
 }
 
 resource "aws_vpn_gateway" "west" {
+  count = "${var.vpn_enabled}"
+
   tags = {
     Name = "west_vpn_gateway"
   }
@@ -26,6 +28,8 @@ resource "aws_vpn_connection" "west" {
 }
 
 resource "aws_vpn_gateway" "east" {
+  count = "${var.vpn_enabled}"
+
   tags = {
     Name = "east_vpn_gateway"
   }
