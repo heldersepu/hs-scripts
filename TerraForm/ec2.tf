@@ -26,6 +26,11 @@ resource "aws_instance" "suse12" {
     delete_on_termination = true
   }
 
+  ephemeral_block_device {
+    virtual_name = "ephemeral0"
+    device_name  = "xvdb"
+  }
+
   tags {
     Terraformed = "true"
     Name        = "suse12"
