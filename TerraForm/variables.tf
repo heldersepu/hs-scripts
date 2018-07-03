@@ -22,6 +22,10 @@ variable "enabled" {
 }
 
 variable "ec2_enabled" {
+  default = 1
+}
+
+variable "vpn_enabled" {
   default = 0
 }
 
