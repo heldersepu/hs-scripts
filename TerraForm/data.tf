@@ -1,11 +1,14 @@
 data "aws_ami" "suse12" {
-  #ami-316d094e
   most_recent = true
-  owners      = ["amazon"]
 
   filter {
     name   = "name"
-    values = ["suse-sles-sap-12-sp3-byos-v20180523*"]
+    values = ["suse*12-*"]
+  }
+
+  filter {
+    name   = "image-id"
+    values = ["ami-1c761163"] #["ami-388f9642"]
   }
 
   filter {
@@ -15,13 +18,16 @@ data "aws_ami" "suse12" {
 }
 
 data "aws_ami" "win2016" {
-  #ami-0327667c
   most_recent = true
-  owners      = ["amazon"]
 
   filter {
     name   = "name"
     values = ["Windows_Server-2016-English-Full-Base-2018.06.13*"]
+  }
+
+  filter {
+    name   = "image-id"
+    values = ["ami-0327667c"]
   }
 
   filter {
