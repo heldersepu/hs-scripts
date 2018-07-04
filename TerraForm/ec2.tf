@@ -34,6 +34,7 @@ resource "aws_instance" "suse12" {
   ephemeral_block_device {
     virtual_name = "ephemeral0"
     device_name  = "/dev/sde"
+    no_device    = false
   }
 
   tags {
