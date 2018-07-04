@@ -5,6 +5,12 @@ resource "aws_instance" "win2016" {
   key_name               = "${aws_key_pair.sshkey.key_name}"
   vpc_security_group_ids = ["${aws_security_group.allow_all.id}"]
 
+  ephemeral_block_device {
+    virtual_name = "ephemeral0"
+    device_name  = "xvde"
+    no_device    = false
+  }
+
   tags {
     Terraformed = "true"
     Name        = "win2016"
