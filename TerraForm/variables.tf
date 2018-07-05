@@ -25,6 +25,10 @@ variable "ec2_enabled" {
   default = 1
 }
 
+variable "ec2_add_volume" {
+  default = 0
+}
+
 variable "win_ec2_enabled" {
   default = 0
 }
