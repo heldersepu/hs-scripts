@@ -4,8 +4,9 @@ provider "aws" {
 }
 
 module "bucket11" {
-  source  = "environment"
-  enabled = 0
+  source    = "environment"
+  enabled   = 0
+  ip_ranges = "${var.ip_ranges}"
 }
 
 resource "aws_s3_bucket" "sample_bucket12629" {
