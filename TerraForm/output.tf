@@ -49,3 +49,11 @@ output "test_subnets" {
 output "list_test" {
   value = "${var.some_ips[0]}"
 }
+
+output "ip" {
+  value = "${var.ip_ranges["de"]}"
+}
+
+output "b11_ips" {
+  value = "${module.bucket11.ips}"
+}
