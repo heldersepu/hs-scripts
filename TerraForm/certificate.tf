@@ -1,4 +1,4 @@
-resource "aws_iam_server_certificate" "cert" {
+resource "aws_iam_server_certificate" "dummy" {
   name = "alt_test_cert"
 
   certificate_body = <<EOF
