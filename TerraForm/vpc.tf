@@ -34,3 +34,12 @@ resource "aws_default_network_acl" "default" {
     Name = "default_network_acl"
   }
 }
+
+resource "aws_internet_gateway" "igw" {
+  vpc_id = "${aws_vpc.myvpc.id}"
+
+  tags {
+    Name        = "my_igw"
+    Terraformed = "true"
+  }
+}
