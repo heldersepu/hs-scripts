@@ -36,6 +36,10 @@ resource "aws_load_balancer_policy" "policy_tls_1_1" {
     name  = "Reference-Security-Policy"
     value = "ELBSecurityPolicy-TLS-1-1-2017-01"
   }
+
+  lifecycle {
+    ignore_changes = ["policy_attribute"]
+  }
 }
 
 resource "aws_load_balancer_listener_policy" "vault_server_listener_policies" {
