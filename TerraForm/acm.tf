@@ -14,6 +14,7 @@ resource "aws_acm_certificate" "default" {
 }
 
 resource "aws_route53_zone" "zone" {
+  count         = 0
   name          = "test.azurewebsites.net"
   force_destroy = true
 }
