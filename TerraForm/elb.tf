@@ -17,7 +17,7 @@ resource "aws_elb" "elb" {
     instance_protocol  = "https"
     lb_port            = 443
     lb_protocol        = "https"
-    ssl_certificate_id = "${var.acm_cert_arn}"
+    #ssl_certificate_id = "${var.acm_cert_arn}"
   }
   */
 
@@ -29,4 +29,10 @@ resource "aws_elb" "elb" {
     Terraformed = "true"
     Name        = "elb"
   }
+}
+
+resource "aws_subnet" "test_app1" {
+  count      = 0
+  vpc_id     = "${aws_vpc.myvpc.id}"
+  cidr_block = "10.0.1.0/24"
 }

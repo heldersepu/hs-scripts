@@ -20,7 +20,7 @@ resource "aws_subnet" "app1" {
   vpc_id                  = "${aws_vpc.myvpc.id}"
   cidr_block              = "${aws_vpc.myvpc.cidr_block}"
   availability_zone       = "${data.aws_availability_zones.available.names[0]}"
-  map_public_ip_on_launch = false
+  map_public_ip_on_launch = true
 }
 
 resource "aws_default_network_acl" "default" {
