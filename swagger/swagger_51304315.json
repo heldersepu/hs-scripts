@@ -1,0 +1,91 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "V1",
+		"title": "51304315",
+		"description": "Lorem ipsum dolor sit amet"
+	},
+	"host": "51304315www.my-api.us-east-1.amazonaws.com",
+	"schemes": ["http"],
+	"paths": {
+		"/dev/51304315": {
+			"get": {
+				"tags": ["51304315"],
+				"operationId": "51304315_Get",
+				"consumes": [],
+				"produces": ["application/json"],
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/MyData"
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"TestModel": {
+			"properties": {
+				"id": {
+					"example": 123,
+					"type": "integer",
+					"format": "int32"
+				},
+				"guid": {
+					"example": "00000000-0000-0000-0000-000000000000",
+					"type": "string",
+					"format": "uuid"
+				},
+				"did": {
+					"example": 9858.216,
+					"type": "number",
+					"format": "double"
+				},
+				"keys": {
+					"items": {
+						"type": "string"
+					},
+					"example": [
+						"abc",
+						"def",
+						"ghi"
+					],
+					"type": "array"
+				}
+			},
+			"xml": {
+				"name": "Test"
+			},
+			"type": "object"
+		},
+		"MyData": {
+			"description": "My super duper data",
+			"properties": {
+				"id": {
+					"description": "The unique identifier",
+					"example": 123,
+					"type": "integer",
+					"format": "int32"
+				},
+				"name": {
+					"description": "Everyone needs a name",
+					"type": "string"
+				},
+				"details": {
+					"description": "Details",
+					"type": "string"
+				}
+			},
+			"xml": {
+				"name": "MyData"
+			},
+			"type": "object"
+		}
+	},
+	"tags": [{
+		"name": "51304315"
+	}]
+}
