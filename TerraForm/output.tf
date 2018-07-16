@@ -57,3 +57,7 @@ output "ip" {
 output "b11_ips" {
   value = "${module.bucket11.ips}"
 }
+
+output "zzz" {
+  value = "${local.test}"
+}
