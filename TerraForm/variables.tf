@@ -57,3 +57,7 @@ variable "cidr" {
 variable "sshkey" {
   default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCnf/P+jNQU5tqfVTfdAd92jwWCE6NZKJLxuvJB+zog/PV1rZpLMcKuGICNQt1ksU/yZR0Xq2oSiDIy4tYH7QzCMjMpRiZvdQINJZDeidtPDNSQWGn3dfKS5yHfge3/4taZ0cfnkZ4qHcLVZzfq+PvPmQn9gB1nqYZeHEPK59dWHaa8QLOnrE/IDJ8wPE/yMd1W4xitjkaTrEOC4xbyOiZFtgo/mpR97Z2uKn/nx8nWLg1nwhPhQOffYkReIji8FY67d7bbBpgGerYjEmZijgtW3aIjtKTBdiOu5E012RoCxXD4sO/cElqU/TJKg3djXyvAze/WmKafEgL499Zqty0J hsepulveda@mlla1851.magicleap.ds"
 }
+
+locals {
+  test = "${var.cidr}"
+}
