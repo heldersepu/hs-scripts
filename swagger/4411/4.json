@@ -1,0 +1,11 @@
+{
+  "definitions": {
+    "Extension": {
+      "allOf": [
+        {
+          "$ref": "3.json#/definitions/Element"
+        }
+      ]
+    }
+  }
+}

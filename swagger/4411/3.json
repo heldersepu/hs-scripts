@@ -1,0 +1,23 @@
+{
+  "swagger": "2.0",
+  "paths": {
+    "/foo": {
+      "get": {
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#definitions/Element"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Element": {
+      "allOf": [
+        { "$ref": "4.json#/definitions/Extension" }
+      ]
+    }
+  }
+}
