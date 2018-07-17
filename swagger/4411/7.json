@@ -1,0 +1,29 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "version": "V1",
+        "contact":{"email": "test@test.com"},
+        "title": "test"
+    },
+    "paths": {
+        "/foo": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#definitions/Element" }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Element": {
+            "allOf": [ { "$ref": "#/definitions/Extension" } ]
+        },
+        "Extension": {
+            "allOf": [ { "$ref": "#/definitions/Element" } ]
+        }
+    }
+}
