@@ -1,5 +1,11 @@
 {
   "swagger": "2.0",
+  "info":
+  {
+	  "version": "V1",
+	  "contact":{"email": "test@test.com"},
+	  "title": "test"
+  },
   "paths": {
     "/foo": {
       "get": {
