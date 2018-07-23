@@ -37,5 +37,5 @@ resource "aws_ebs_volume" "data" {
 resource "aws_key_pair" "sshkey" {
   count      = "${var.ec2_enabled || var.win_ec2_enabled ? 1: 0}"
   key_name   = "sshkey"
-  public_key = "${var.sshkey}"
+  public_key = "${local.sshkey}"
 }
