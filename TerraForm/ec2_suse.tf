@@ -33,4 +33,15 @@ resource "aws_instance" "suse12" {
     ignore_changes  = ["ami", "user_data", "instance_type", "ebs_optimized", "volume_tags", "ebs_block_device"]
     prevent_destroy = false
   }
+
+  provisioner "remote-exec" {
+    inline = ["ls -la > test.log"]
+
+    connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      private_key = "${file("~/Downloads/AWS_keys/test.pem")}"
+      host        = "${self.public_dns}"
+    }
+  }
 }
