@@ -10,6 +10,7 @@ resource "aws_security_group" "allow_all" {
   }
 
   tags {
-    Name = "allow_all"
+    Name        = "allow_all"
+    Terraformed = "true"
   }
 }
