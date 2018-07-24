@@ -5,6 +5,7 @@ resource "aws_instance" "suse12" {
   key_name               = "${aws_key_pair.sshkey.key_name}"
   vpc_security_group_ids = ["${aws_security_group.allow_all.id}"]
   availability_zone      = "${data.aws_availability_zones.available.names[0]}"
+  user_data              = "echo `date` > user_data.log"
 
   ebs_block_device {
     device_name           = "/dev/sdg"
@@ -30,7 +31,7 @@ resource "aws_instance" "suse12" {
   }
 
   lifecycle {
-    ignore_changes  = ["ami", "user_data", "instance_type", "ebs_optimized", "volume_tags", "ebs_block_device"]
+    ignore_changes  = ["ami", "instance_type", "ebs_optimized", "volume_tags", "ebs_block_device"]
     prevent_destroy = false
   }
 
