@@ -17,11 +17,15 @@ resource "aws_instance" "ubuntu" {
   }
 
   provisioner "remote-exec" {
-    inline = ["ls -la > test.log"]
+    inline = [
+      "ls -la > test.log",
+      "sudo apt-get update",
+      "sudo apt-get -y install gdebi-core python-minimal",
+    ]
 
     connection {
       type        = "ssh"
-      user        = "ec2-user"
+      user        = "ubuntu"
       private_key = "${file("~/Downloads/AWS_keys/test.pem")}"
       host        = "${self.public_dns}"
     }
