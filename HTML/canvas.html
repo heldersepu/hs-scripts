@@ -1,0 +1,69 @@
+<canvas id="test"></canvas>
+
+<script>
+const canvas = document.getElementById('test');
+const ctx = canvas.getContext('2d');
+const width = canvas.width = 1000;
+const height = canvas.height = 500;
+ctx.beginPath();
+ctx.fillStyle = 'blue';
+
+function plotPoints() {
+  const pts = generatePoints(10);
+  pts.forEach((pt, index, pointArray) => {
+    drawCurvedLine(ctx, pt, index, pointArray)
+  });
+
+  ctx.stroke();
+
+  const maxY = Math.max.apply(null, pts.map(pt => pt.y));
+  ctx.lineTo(pts[pts.length - 1].x, maxY);
+  ctx.lineTo(pts[0].x, maxY);
+  // Area Color
+  ctx.fillStyle = 'rgba(255, 148, 136, .6)';
+  ctx.fill();
+}
+plotPoints();
+
+function generatePoints(nbOfPoints) {
+  const pts = [];
+  for (let i = 0; i <= nbOfPoints; i++) {
+    pts.push({
+      x: i * (width / nbOfPoints),
+      y: Math.random() * height
+    });
+  }
+  return pts;
+}
+
+function drawCurvedLine(ctx, point, index, pointArray) {
+  if (typeof pointArray[index + 1] !== 'undefined') {
+    var x_mid = (point.x + pointArray[index + 1].x) / 2;
+    var y_mid = (point.y + pointArray[index + 1].y) / 2;
+    var cp_x1 = (x_mid + point.x) / 2;
+    var cp_x2 = (x_mid + pointArray[index + 1].x) / 2;
+    // Point fill color crimson
+    // Point stroke style blue for example
+    ctx.beginPath();
+    ctx.fillStyle = 'crimson';
+    ctx.strokeStyle = 'blue';
+    ctx.arc(point.x, point.y, 10, 2 * Math.PI, false);
+    ctx.stroke();
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.quadraticCurveTo(cp_x1, point.y, x_mid, y_mid);
+    ctx.quadraticCurveTo(cp_x2, pointArray[index + 1].y, pointArray[index + 1].x, pointArray[index + 1].y);
+    ctx.fillStyle = 'rgba(255, 148, 136, .6)';
+    ctx.strokeStyle = 'salmon';
+    ctx.lineWidth = 5;
+    ctx.stroke();
+    ctx.fill();
+  }
+}
+</script>
+
+
+
+
+
