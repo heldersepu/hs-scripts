@@ -1,7 +1,7 @@
 
 declare -a arr=(
-    "-hana-"
     "-app-"
+    "-hana-"
     "-scs-"
     )
 
@@ -12,6 +12,14 @@ NC='\033[0m' # No Color
 for i in "${arr[@]}"
 do
     echo "${GRN} ${i} ${NC}"
-    aws ec2 describe-instances --filters "Name=tag:Name,Values=*${i}*" | jq -r '.Reservations[].Instances[].PrivateIpAddress'
+    json=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=*${i}*")
+    arrids=($(echo $json | jq -r '.Reservations[].Instances[].InstanceId'))
+    prvips=($(echo $json | jq -r '.Reservations[].Instances[].PrivateIpAddress'))
     echo ""
+    for id in "${arrids[@]}"
+    do
+        echo "${RED} ${id} ${NC}"
+        #aws ec2 start-instances --instance-ids ${id} | jq -r '.StartingInstances[].CurrentState.Name'
+        #echo ""
+    done
 done
