@@ -20,6 +20,7 @@ do
     do
         echo "${RED} ${id} ${NC}"
         #aws ec2 start-instances --instance-ids ${id} | jq -r '.StartingInstances[].CurrentState.Name'
+        #aws ec2 stop-instances --instance-ids ${id} | jq -r '.StoppingInstances[].CurrentState.Name'
         #echo ""
     done
 done
