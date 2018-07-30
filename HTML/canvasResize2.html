@@ -1,0 +1,45 @@
+<style>body{margin:0}</style>
+<canvas id="mainCanvas"></canvas>
+
+
+<script>
+var canvas = document.getElementById("mainCanvas");
+var ctx = canvas.getContext("2d");
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  var gridOptions = {
+    majorLines: {
+      separation: 20,
+      color: '#e8e8e8'
+    }
+  };
+  drawGridLines(canvas, gridOptions.majorLines);
+}
+
+function drawGridLines(canvas, lineOptions) {
+  ctx.strokeStyle = lineOptions.color;
+  ctx.strokeWidth = 1;
+  ctx.beginPath();
+
+  var size = Math.floor(canvas.width / lineOptions.separation);
+  for (var i = 1; i <= lineOptions.separation; i++) {
+    var x = (i * size);
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, canvas.height);
+    ctx.stroke();
+  }
+  for (var i = 1; i <= Math.floor(canvas.height / size); i++) {
+    var y = (i * size);
+    ctx.moveTo(0, y);
+    ctx.lineTo(canvas.width, y);
+    ctx.stroke();
+  }
+  ctx.closePath();
+}
+
+window.onresize = function() { resize(); }
+resize();
+</script>
