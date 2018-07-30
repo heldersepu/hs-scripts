@@ -1,0 +1,14 @@
+openapi: 3.0.0
+
+paths:
+  /feature-b:
+    get:
+      summary: Feature B
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { type: string }
