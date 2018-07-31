@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.rawgit.com/konvajs/konva/2.1.7/konva.min.js"></script>
+</head>
+<body>
+<div id="container"></div>
+<script>
+    function KonvaRect(x, y, fill, draggable) {
+        return new Konva.Rect({
+            x: x, y: y,
+            width: 50,
+            height: 50,
+            fill: fill,
+            stroke: 'black',
+            strokeWidth: 4,
+            draggable: draggable
+        });
+    }
+    var box1 = KonvaRect(20, 20, '#00D2FF', true);
+    var box2 = KonvaRect(100, 60, '#00D2FF', true);
+    var center = KonvaRect(60, 40, '#FF0000', false);
+
+    var layer = new Konva.Layer();
+    layer.add(box1);
+    layer.add(box2);
+    layer.add(center);
+
+    var stage = new Konva.Stage({
+        container: 'container', width: 600, height: 170
+    });
+    stage.add(layer);
+
+    function moveCenter() {
+        var x = ((box1.x() + box2.x() ) / 2) - center.x();
+        var y = ((box1.y() + box2.y() ) / 2) - center.y();
+        if (x != 0 || y != 0) {
+            center.move({  x: x,  y: y })
+            layer.batchDraw();
+        }
+    }
+
+    stage.on('contentMousemove', function () {
+        moveCenter();
+    });
+    box1.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+        box1.moveToTop();
+        layer.batchDraw();
+    });
+    box1.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+    box2.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+        box2.moveToTop();
+        layer.batchDraw();
+    });
+    box2.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+    center.on('mouseover', function() {
+        center.moveToTop();
+        layer.batchDraw();
+    });
+</script>
+
+</body>
+</html>
