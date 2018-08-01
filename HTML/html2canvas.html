@@ -53,7 +53,7 @@
 
 <script>
     function saveMask() {
-        html2canvas(document.querySelector("body"), {allowTaint = true}).then(canvas => {
+        html2canvas(document.querySelector("body"), {allowTaint: true}).then(canvas => {
             document.body.appendChild(canvas)
             $("#mask").hide()
             $("#blurred").hide()
