@@ -1,0 +1,30 @@
+<style>body{margin:0}</style>
+<canvas id="can"></canvas>
+
+<script>
+var canvas = document.getElementById('can');
+var ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    drawDots();
+}
+
+function drawDots() {
+    for (var x = 40; x < canvas.width; x += 60)
+        for (var y = 40; y < canvas.height; y += 60)
+            ctx.rect(x, y, 20, 20);
+    ctx.stroke();
+}
+
+canvas.onmousemove = function(e) {
+    if (ctx.isPointInPath(e.clientX, e.clientY)) {
+        r = 10
+        ctx.fillRect(e.clientX - r/2, e.clientY - r/2, r, r );
+    }
+}
+
+window.addEventListener('resize', resizeCanvas, false);
+resizeCanvas();
+</script>
