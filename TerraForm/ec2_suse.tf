@@ -1,7 +1,7 @@
 resource "aws_instance" "suse12" {
   count                  = "${var.ec2_enabled}"
   ami                    = "${data.aws_ami.suse12.id}"
-  instance_type          = "m4.large"
+  instance_type          = "m5.large"
   key_name               = "${aws_key_pair.sshkey.key_name}"
   vpc_security_group_ids = ["${aws_security_group.allow_all.id}"]
   availability_zone      = "${data.aws_availability_zones.available.names[0]}"
