@@ -54,6 +54,11 @@
 <script>
     function saveMask() {
         html2canvas(document.querySelector("body"), {allowTaint: true}).then(canvas => {
+            const ctx = canvas.getContext('2d')
+            ctx.filter = 'blur(2px)'
+            ctx.font = '48px serif';
+            ctx.strokeText('Hello world', 50, 100);
+
             document.body.appendChild(canvas)
             $("#mask").hide()
             $("#blurred").hide()
