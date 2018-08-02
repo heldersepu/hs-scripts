@@ -3,13 +3,37 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
 <div id="mask">
-  123456<br>678901<br>234567
   <div id="unblurred">
     <img src="https://i.ytimg.com/vi/LRVsxe5OJVY/maxresdefault.jpg">
   </div>
 </div>
-
 <img id="blurred" src="https://i.ytimg.com/vi/LRVsxe5OJVY/maxresdefault.jpg">
+
+<script>
+    function saveMask() {
+        $("#blurred").hide()
+        html2canvas(document.querySelector("#mask"), {allowTaint: true}).then(h2c => {
+            var pos = $("#mask")[0].getBoundingClientRect();
+            $("#mask").hide()
+            var image = document.getElementById('blurred');
+            var canvas = document.createElement("canvas");
+            canvas.height = image.height;
+            canvas.width = image.width;
+
+            var ctx = canvas.getContext('2d')
+            ctx.filter = 'blur(20px)'
+            ctx.drawImage(image, 0, 0);
+            ctx.filter = 'none'
+            ctx.drawImage(h2c, pos.x, pos.y);
+
+            document.body.appendChild(canvas);
+        });
+    }
+    $(function() {
+        $("#mask").draggable({ containment: "parent" });
+        setTimeout(saveMask, 2000);
+    });
+</script>
 
 <style>
 * {
@@ -22,7 +46,7 @@
 #mask {
   width: 50px;
   height: 50px;
-  border-radius: 100%;
+  border-radius: 1%;
   overflow: hidden;
   position: absolute;
   top: calc(50% - 25px);
@@ -50,24 +74,3 @@
   -webkit-filter: blur(20px);
 }
 </style>
-
-<script>
-    function saveMask() {
-        html2canvas(document.querySelector("body"), {allowTaint: true}).then(canvas => {
-            const ctx = canvas.getContext('2d')
-            ctx.filter = 'blur(2px)'
-            ctx.font = '48px serif';
-            ctx.strokeText('Hello world', 50, 100);
-
-            document.body.appendChild(canvas)
-            $("#mask").hide()
-            $("#blurred").hide()
-        });
-    }
-    $(function() {
-        $("#mask").draggable({
-            containment: "parent"
-        });
-        setTimeout(saveMask, 2000);
-    });
-</script>
