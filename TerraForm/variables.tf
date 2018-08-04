@@ -17,6 +17,15 @@ variable "some_ips" {
   ]
 }
 
+variable "device_names" {
+  default = [
+    "/dev/sdj",
+    "/dev/sdk",
+    "/dev/sdl",
+    "/dev/sdm",
+  ]
+}
+
 variable "enabled" {
   default = 0
 }
