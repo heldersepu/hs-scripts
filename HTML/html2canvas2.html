@@ -1,0 +1,40 @@
+<style>
+  @import url('https://fonts.googleapis.com/css?family=Pacifico');
+  body * { margin: 0; }
+</style>
+
+<h4>Source</h4>
+<svg id="test" width="300px" height="30px" style="font-family: 'Pacifico', 'Verdana'; font-size: 15px;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g xmlns="http://www.w3.org/2000/svg">
+    <rect fill="#67b7dc" transform="translate(-0.5,-0.5)" width="300" height="50" />
+    <text fill="#fff"  font-size="25" dy="20">
+     <tspan>Some text using font</tspan>
+    </text>
+  </g>
+</svg>
+<h4>Image</h4>
+<img id="image"/>
+
+<h4>Canvas1</h4>
+<canvas id="result1" width="300" height="30"></canvas>
+
+<h4>Canvas2</h4>
+<canvas id="result2" width="300" height="120"></canvas>
+
+<script>
+  window.onload = function() {
+    var DOMURL = self.URL || self.webkitURL || self;
+    var data = new XMLSerializer().serializeToString(document.getElementById("test"));
+
+    var svg = new Blob([data], { type: "image/svg+xml" });
+    var url = DOMURL.createObjectURL(svg);
+
+    var canvas = document.getElementById("result1");
+    var ctx = canvas.getContext("2d");
+
+    var img = document.getElementById("image");
+    img.src = url;
+  }
+</script>
+
+
