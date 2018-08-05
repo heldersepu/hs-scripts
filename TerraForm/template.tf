@@ -6,3 +6,11 @@ data "template_file" "test_subnets" {
     cidr = "${cidrsubnet(var.cidr, 3, count.index)}"
   }
 }
+
+data "template_file" "user_data" {
+  template = "${file("user_data.sh")}"
+
+  vars {
+    data  = "${jsonencode(var.cidr)}"
+  }
+}

@@ -5,7 +5,7 @@ resource "aws_instance" "suse12" {
   key_name               = "${aws_key_pair.sshkey.key_name}"
   vpc_security_group_ids = ["${aws_security_group.allow_all.id}"]
   availability_zone      = "${data.aws_availability_zones.available.names[0]}"
-  user_data              = "echo `date` > user_data.log"
+  user_data              = "${data.template_file.user_data.rendered}"
 
   ebs_block_device {
     device_name           = "/dev/sdg"
