@@ -16,6 +16,8 @@ while [ ! -b /dev/nvme2n1 ] || [ ! -b /dev/nvme3n1 ] || [ ! -b /dev/nvme4n1 ]; d
 done
 echo "Completed in $tries tries = `date`" >> /home/ec2-user/bin/userdata.log
 
+lsblk -o NAME,UUID,SIZE >> /home/ec2-user/bin/userdata.log
+echo ""  >> /home/ec2-user/bin/userdata.log
 
 volume_mount "110G" "/abc"
 volume_mount "111G" "/def"
