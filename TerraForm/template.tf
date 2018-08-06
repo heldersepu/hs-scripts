@@ -8,7 +8,7 @@ data "template_file" "test_subnets" {
 }
 
 data "template_file" "user_data" {
-  template = "${file("user_data.sh")}"
+  template = "${format("%s%s", file("scripts/common.sh"), file("scripts/user_data.sh"))}"
 
   vars {
     data  = "${jsonencode(var.cidr)}"
