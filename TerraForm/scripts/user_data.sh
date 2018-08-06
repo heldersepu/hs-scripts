@@ -1,4 +1,4 @@
-echo "init `date`" >> /home/ec2-user/bin/userdata.log
+echo "userdata `date`" >> /home/ec2-user/bin/userdata.log
 # ${data}"
 
 echo "Wait for EBS volumes to attach = `date`" >> /home/ec2-user/bin/userdata.log
@@ -15,4 +15,9 @@ while [ ! -b /dev/nvme2n1 ] || [ ! -b /dev/nvme3n1 ] || [ ! -b /dev/nvme4n1 ]; d
   sleep 60
 done
 echo "Completed in $tries tries = `date`" >> /home/ec2-user/bin/userdata.log
+
+
+volume_mount "110G" "/abc"
+volume_mount "111G" "/def"
+volume_mount "111G" "/ghi"
 
