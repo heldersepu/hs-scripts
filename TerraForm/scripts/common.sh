@@ -2,6 +2,34 @@
 logfile='/home/ec2-user/bin/userdata.log'
 echo "init `date`" >> $logfile
 
+function bin_exists() {
+    arr=("$@")
+    for i in $${arr[@]}; do
+        if [[ ! -b $i ]]; then return; fi
+    done
+    echo OK
+}
+
+function attach_wait() {
+    echo "Wait for EBS volumes to attach = `date`" >> $logfile
+    listblock=$(lsblk)
+    tries=0
+    while [ ! $(bin_exists $@) ]; do
+        if [[ $tries -ge 20 ]]; then
+            echo "ERROR: attaching volumes! = `date`" >> $logfile
+            lsblk >> $logfile
+            exit 1;
+        elif [[ $listblock != $(lsblk) ]]; then
+            listblock=$(lsblk)
+            tries=0
+        fi
+        let "tries++"
+        echo $tries
+        sleep 60
+    done
+    echo "Completed in $tries tries = `date`" >> $logfile
+}
+
 function volume_mount() {
     dsize=$1;  dmount=$2;
     if [ $(cat /etc/fstab | grep -c "$dmount ext4") == 0 ]
