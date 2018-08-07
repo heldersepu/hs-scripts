@@ -1,12 +1,13 @@
 #!/bin/bash
-echo "init `date`" >> /home/ec2-user/bin/userdata.log
+logfile='/home/ec2-user/bin/userdata.log'
+echo "init `date`" >> $logfile
 
 function volume_mount() {
     dsize=$1;  dmount=$2;
     if [ $(cat /etc/fstab | grep -c "$dmount ext4") == 0 ]
     then
         DNAME=$(lsblk -o NAME,SIZE -x NAME | grep "$dsize" | awk '{print $1}')
-        echo "volume $DNAME = `date`" >> /home/ec2-user/bin/userdata.log
+        echo "volume $DNAME = `date`" >> $logfile
         yes | mkfs -t ext4 /dev/$DNAME
         mkdir -p $dmount
         DUUID=$(lsblk -o UUID,SIZE -x NAME | grep "$dsize" | awk '{print $1}')
