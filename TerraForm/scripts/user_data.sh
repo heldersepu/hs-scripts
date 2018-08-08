@@ -7,7 +7,7 @@ attach_wait $${volumes[@]}
 lsblk -o NAME,UUID,SIZE >> $logfile
 echo ""  >> $logfile
 
-volume_mount "110G" "/abc"
-volume_mount "111G" "/def"
-volume_mount "111G" "/ghi"
+size_mount "110G" "/abc"
+size_mount "111G" "/def"
+size_mount "111G" "/ghi"
 
