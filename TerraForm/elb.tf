@@ -27,26 +27,8 @@ resource "aws_subnet" "test_app1" {
   cidr_block = "10.0.1.0/24"
 }
 
-resource "aws_load_balancer_policy" "policy_tls_1_1" {
-  load_balancer_name = "${aws_elb.elb.name}"
-  policy_name        = "policy-tls-1-1"
-  policy_type_name   = "SSLNegotiationPolicyType"
-
-  policy_attribute {
-    name  = "Reference-Security-Policy"
-    value = "ELBSecurityPolicy-TLS-1-1-2017-01"
-  }
-
-  lifecycle {
-    ignore_changes = ["policy_attribute"]
-  }
-}
-
-resource "aws_load_balancer_listener_policy" "vault_server_listener_policies" {
-  load_balancer_name = "${aws_elb.elb.name}"
-  load_balancer_port = 443
-
-  policy_names = [
-    "${aws_load_balancer_policy.policy_tls_1_1.policy_name}",
-  ]
+ module "elb_policy_internal" {
+  source   = "./elb_policy"
+  enabled = 1
+  elb_name = "${aws_elb.elb.name}"
 }
