@@ -1,0 +1,34 @@
+    <div id="chartContainer" style="height: 180px; width:100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    <script type="text/javascript">
+    window.onload = function() {
+        var dps = [];
+        var chart = new CanvasJS.Chart("chartContainer", {
+        exportEnabled: true,
+        axisX: { includeZero: false, lineThickness: 0, labelFormatter: function(){return ""} },
+        axisY: { includeZero: false, lineThickness: 0, labelFormatter: function(){return ""} },
+        data: [{ type: "spline", markerSize: 0, dataPoints: dps }]
+        });
+
+        var xVal = 0;
+        var yVal = 100;
+        var dataLength = 50; // number of dataPoints visible at any point
+
+        var updateChart = function(count) {
+        count = count || 1;
+        // count is number of times loop runs to generate random dataPoints.
+        for (var j = 0; j < count; j++) {
+            yVal = yVal + Math.round(5 + Math.random() * (-5 - 5));
+            dps.push({ x: xVal++, y: yVal });
+        }
+        if (dps.length > dataLength) {
+            dps.shift();
+        }
+        chart.render();
+        };
+
+        updateChart(dataLength);
+        setInterval(updateChart, 1000);
+    }
+    </script>
