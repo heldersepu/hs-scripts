@@ -1,0 +1,29 @@
+<canvas id="canvas" width="300" height="300"></canvas>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/2.3.4/fabric.min.js"></script>
+<script>
+    var image;
+    var canvas = new fabric.Canvas('canvas');
+    var url = "http://swagger-net-test.azurewebsites.net/api/SvgImage?"
+
+    function loadSVG(url) {
+        fabric.loadSVGFromURL(url, function (objects, options) {
+            if (image) canvas.remove(image);
+            image = fabric.util.groupSVGElements(objects, options);
+            image.name = 'sticker';
+            canvas.add(image);
+            image.scaleToHeight(100);
+            image.center();
+            image.setCoords();
+            canvas.renderAll();
+        });
+    }
+
+    loadSVG(url + "color=red")
+    setTimeout(
+        function(){
+            loadSVG(url + "color=blue")
+        },
+        3000
+    );
+</script>
