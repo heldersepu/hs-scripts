@@ -12,7 +12,10 @@
 <script>
     function saveMask() {
         $("#blurred").hide()
-        html2canvas(document.querySelector("#mask"), {allowTaint: true}).then(h2c => {
+        html2canvas(document.querySelector("#mask"), {
+          backgroundColor: null,
+          allowTaint: true
+        }).then(h2c => {
             var pos = $("#mask")[0].getBoundingClientRect();
             $("#mask").hide()
             var image = document.getElementById('blurred');
@@ -46,7 +49,8 @@
 #mask {
   width: 50px;
   height: 50px;
-  border-radius: 1%;
+  box-shadow: 1px 1px 1px 1px grey;
+  border-radius:100%;
   overflow: hidden;
   position: absolute;
   top: calc(50% - 25px);
