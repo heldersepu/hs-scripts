@@ -2,29 +2,47 @@
 <canvas id="can"></canvas>
 
 <script>
-var canvas = document.getElementById('can');
-var ctx = canvas.getContext('2d');
+    var canvas = document.getElementById('can');
+    var ctx = canvas.getContext('2d');
 
-function resizeCanvas() {
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
-    drawDots();
-}
-
-function drawDots() {
-    for (var x = 40; x < canvas.width; x += 60)
-        for (var y = 40; y < canvas.height; y += 60)
-            ctx.rect(x, y, 20, 20);
-    ctx.stroke();
-}
-
-canvas.onmousemove = function(e) {
-    if (ctx.isPointInPath(e.clientX, e.clientY)) {
-        r = 10
-        ctx.fillRect(e.clientX - r/2, e.clientY - r/2, r, r );
+    function resizeCanvas() {
+        canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth;
+        drawRectangles();
     }
-}
 
-window.addEventListener('resize', resizeCanvas, false);
-resizeCanvas();
+    function drawRectangles() {
+        ctx.rect(0, 0, 5, 5);
+        var fraction = canvas.width / 9
+        for (var x = fraction; x < canvas.width - fraction/2; x += fraction)
+            for (var y = fraction; y < canvas.height; y += fraction)
+                ctx.rect(x, y, 20, 20);
+        ctx.stroke();
+    }
+
+    canvas.onmousemove = function(e) {
+        if (ctx.isPointInPath(e.clientX, e.clientY)) {
+            r = 10
+            ctx.fillRect(e.clientX - r/2, e.clientY - r/2, r, r );
+        }
+    }
+
+    canvas.onmousedown = function(e) {
+        if (!ctx.isPointInPath(e.clientX, e.clientY)) {
+            var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            var copiedCanvas = document.createElement("canvas");
+            copiedCanvas.height = canvas.height;
+            copiedCanvas.width = canvas.width;
+            copiedCanvas.getContext("2d").putImageData(imageData, 0, 0);
+
+            ctx.save();
+            ctx.scale(2, 2)
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(copiedCanvas, 0, 0);
+            ctx.restore();
+        }
+    }
+
+    window.addEventListener('resize', resizeCanvas, false);
+    resizeCanvas();
 </script>
