@@ -1,0 +1,13 @@
+Hello World
+<canvas id="can" style="border:1px solid #000000;" ></canvas>
+
+<script>
+    var canvas = document.getElementById('can');
+    var ctx = canvas.getContext('2d');
+    canvas.height = canvas.width = 100;
+    ctx.fillRect(50, 50, 2, 2);
+
+    canvas.onclick = function(e) {
+        ctx.fillRect(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop, 10, 10);
+    }
+</script>
