@@ -1,0 +1,19 @@
+<style>body{margin:0}</style>
+<canvas id="mainCanvas"></canvas>
+
+
+<script>
+  var canvas = document.getElementById("mainCanvas");
+  var ctx = canvas.getContext("2d");
+  canvas.width = canvas.height = 90;
+  ctx.beginPath();
+
+  ctx.moveTo(0, 30);
+  ctx.lineTo(90, 30);
+
+  ctx.moveTo(0, 60.5);
+  ctx.lineTo(89.5, 60.5);
+
+  ctx.stroke();
+  ctx.closePath();
+</script>
