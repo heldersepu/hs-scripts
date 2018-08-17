@@ -1,10 +1,8 @@
 OpenLayers.Util.OSM = {};
-OpenLayers.Util.OSM.TILE_404 = "http://ipmia.dyndns.org/img/404.png";
-OpenLayers.Util.OSM.originalOnImageLoadError = OpenLayers.Util.onImageLoadError;
-OpenLayers.Util.onImageLoadError = function() {this.src = OpenLayers.Util.OSM.TILE_404;};
+
 OpenLayers.Layer.OSM.Map = OpenLayers.Class(OpenLayers.Layer.OSM, {
 	initialize: function(name, folder, opt) {
-		var url = ["http://ipmia.dyndns.org/" + folder + "/${z}/${x}/${y}.png"];
+		var url = ["http://swagger-net-test.azurewebsites.net/MapTiles/${z}/${x}/${y}"];
 		opt = OpenLayers.Util.extend({numZoomLevels:19, buffer:0, transitionEffect: "resize"}, opt);
 		var newArg = [name, url, opt];
 		OpenLayers.Layer.OSM.prototype.initialize.apply(this, newArg);
@@ -17,8 +15,7 @@ function mapInit(divName, lat, lon, zoom) {
 	map = new OpenLayers.Map(divName, {
 		controls:[
 			new OpenLayers.Control.Navigation(),
-			new OpenLayers.Control.PanZoomBar(),
-			new OpenLayers.Control.LayerSwitcher()],
+			new OpenLayers.Control.PanZoomBar()],
 		maxExtent: new OpenLayers.Bounds(-b, -b, b, b),
 		maxResolution: 156543.0399, numZoomLevels: 19, units: 'm',
 		projection: new OpenLayers.Projection("EPSG:900913"),
@@ -32,8 +29,6 @@ function mapInit(divName, lat, lon, zoom) {
 function addMap_Layers() {
 	layerMap = new OpenLayers.Layer.OSM.Map("my Map", "tiles");
 	map.addLayer(layerMap);
-	layerTer = new OpenLayers.Layer.OSM.Map("my Ter", "ter_tiles");
-	map.addLayer(layerTer);
 }
 
 // Move the center of the map to the given coordinates
