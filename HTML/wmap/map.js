@@ -1,5 +1,4 @@
 OpenLayers.Util.OSM = {};
-var markers;
 
 OpenLayers.Layer.OSM.Map = OpenLayers.Class(OpenLayers.Layer.OSM, {
 	initialize: function(name, folder, opt) {
@@ -16,7 +15,9 @@ function mapInit(divName, lat, lon, zoom) {
 	map = new OpenLayers.Map(divName, {
 		controls:[
 			new OpenLayers.Control.Navigation(),
-			new OpenLayers.Control.PanZoomBar()],
+			new OpenLayers.Control.PanZoomBar(),
+			new OpenLayers.Control.LayerSwitcher(),
+		],
 		maxExtent: new OpenLayers.Bounds(-b, -b, b, b),
 		maxResolution: 156543.0399, numZoomLevels: 19, units: 'm',
 		projection: new OpenLayers.Projection("EPSG:900913"),
@@ -30,8 +31,18 @@ function mapInit(divName, lat, lon, zoom) {
 function addMap_Layers() {
 	layerMap = new OpenLayers.Layer.OSM.Map("Map", "tiles");
 	map.addLayer(layerMap);
-	markers = new OpenLayers.Layer.Text( "Markers", { location:"markers.txt"} );
-	map.addLayer(markers);
+
+	//markers = new OpenLayers.Layer.Text( "Markers", { location:"markers.txt"} );
+	//map.addLayer(markers);
+
+
+	var start_point = new OpenLayers.Geometry.Point(0,0);
+	var end_point = new OpenLayers.Geometry.Point(80,80);
+	var line = new OpenLayers.Geometry.LineString([start_point, end_point]);
+
+	var vector = new OpenLayers.Layer.Vector( "Lines" );
+	vector.addFeatures([new OpenLayers.Feature.Vector(line)]);
+	map.addLayer(vector);
 }
 
 // Move the center of the map to the given coordinates
