@@ -1,4 +1,5 @@
 OpenLayers.Util.OSM = {};
+var markers;
 
 OpenLayers.Layer.OSM.Map = OpenLayers.Class(OpenLayers.Layer.OSM, {
 	initialize: function(name, folder, opt) {
@@ -20,15 +21,17 @@ function mapInit(divName, lat, lon, zoom) {
 		maxResolution: 156543.0399, numZoomLevels: 19, units: 'm',
 		projection: new OpenLayers.Projection("EPSG:900913"),
 		displayProjection: new OpenLayers.Projection("EPSG:4326")
-	} );
+	});
 	addMap_Layers();
 	osmMapCenter(lat, lon, zoom);
 }
 
 // Define the map layers
 function addMap_Layers() {
-	layerMap = new OpenLayers.Layer.OSM.Map("my Map", "tiles");
+	layerMap = new OpenLayers.Layer.OSM.Map("Map", "tiles");
 	map.addLayer(layerMap);
+	markers = new OpenLayers.Layer.Text( "Markers", { location:"markers.txt"} );
+	map.addLayer(markers);
 }
 
 // Move the center of the map to the given coordinates
@@ -37,4 +40,8 @@ function osmMapCenter(lat, lon, zoom) {
 		new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()
 	);
 	map.setCenter(lonLat, zoom);
+}
+
+function addMarker() {
+
 }
