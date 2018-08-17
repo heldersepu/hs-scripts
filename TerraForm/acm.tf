@@ -2,7 +2,7 @@ resource "aws_acm_certificate" "default" {
   count       = 0
   domain_name = "test.azurewebsites.net"
 
-  # Which method to use for validation. DNS or EMAIL are valid, 
+  # Which method to use for validation. DNS or EMAIL are valid,
   # NONE can be used for certificates that were imported into ACM and then into Terraform.
   validation_method = "NONE"
 
@@ -14,7 +14,7 @@ resource "aws_acm_certificate" "default" {
 }
 
 resource "aws_route53_zone" "zone" {
-  count         = 0
+  count         = 1
   name          = "test.azurewebsites.net"
   force_destroy = true
 }
@@ -34,5 +34,32 @@ resource "aws_acm_certificate_validation" "cert" {
 
   timeouts {
     create = "20m"
+  }
+}
+
+
+resource "aws_route53_record" "elb_external_p" {
+  count   = 1
+  zone_id = "${aws_route53_zone.zone.id}"
+  name    = "pi-3.test.azurewebsites.net"
+  type    = "A"
+
+  alias {
+    name                   = "p-external-802436749.us-east-1.elb.amazonaws.com"
+    zone_id                = "${aws_elb.elb.zone_id}"
+    evaluate_target_health = false
+  }
+}
+
+resource "aws_route53_record" "elb_external_s" {
+  count   = 1
+  zone_id = "${aws_route53_zone.zone.id}"
+  name    = "s4-3.test.azurewebsites.net"
+  type    = "A"
+
+  alias {
+    name                   = "s-external-1555626742.us-east-1.elb.amazonaws.com"
+    zone_id                = "${aws_elb.elb.zone_id}"
+    evaluate_target_health = false
   }
 }
