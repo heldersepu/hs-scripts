@@ -1,27 +1,21 @@
 
-var features = new ol.format.GeoJSON().readFeatures(geojsonObject, {
-    featureProjection: 'EPSG:3857'
-});
-var vectorSource = new ol.source.Vector({           
-  features: features
-});
-var vectorLayer = new ol.layer.Vector({
-    source: vectorSource,
-    style: function(feature, resolution){
-        return styles[feature.getGeometry().getType()];
-    }
+var dataLayer = new ol.layer.Vector({
+    source: new ol.source.Vector({ 
+        features: new ol.format.GeoJSON().readFeatures(
+            geojsonObject, {featureProjection: 'EPSG:3857'}
+        )
+    }),
 });
 
 var map = new ol.Map({
     target: 'map',
     layers: [
         new ol.layer.Tile({
-            source: new ol.source.MapQuest({layer: 'sat'})
+            source: new ol.source.BingMaps({layer: 'sat'})
         }),
-        vectorLayer
+        dataLayer
     ],
     view: new ol.View({
-        center: ol.proj.fromLonLat([21.54967, 38.70250]),
-        zoom: 5
+        center: ol.proj.fromLonLat([21, 38]), zoom: 7
     })
 });
