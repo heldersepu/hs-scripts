@@ -14,7 +14,7 @@ resource "aws_acm_certificate" "default" {
 }
 
 resource "aws_route53_zone" "zone" {
-  count         = 1
+  count         = "${var.enabled}"
   name          = "test.azurewebsites.net"
   force_destroy = true
 }
@@ -39,7 +39,7 @@ resource "aws_acm_certificate_validation" "cert" {
 
 
 resource "aws_route53_record" "elb_external_p" {
-  count   = 1
+  count   = "${var.enabled}"
   zone_id = "${aws_route53_zone.zone.id}"
   name    = "pi-3.test.azurewebsites.net"
   type    = "A"
@@ -52,7 +52,7 @@ resource "aws_route53_record" "elb_external_p" {
 }
 
 resource "aws_route53_record" "elb_external_s" {
-  count   = 1
+  count   = "${var.enabled}"
   zone_id = "${aws_route53_zone.zone.id}"
   name    = "s4-3.test.azurewebsites.net"
   type    = "A"
