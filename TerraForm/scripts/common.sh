@@ -72,6 +72,6 @@ zypper install -y libreadline7 liblzma5-5.2.4-1.1.x86_64
 zypper install -y bc curl
 zypper install -y nvme-cli
 zypper install -y --replacefiles gdbm-lang-1.14.1-1.5.noarch
-zypper install -y xfsprogs
+zypper install -y xfsprogs xfsdump
 echo "Dependencies installed `date`" >> $logfile
 
