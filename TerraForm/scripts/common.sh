@@ -75,3 +75,5 @@ zypper install -y --replacefiles gdbm-lang-1.14.1-1.5.noarch
 zypper install -y xfsprogs xfsdump
 echo "Dependencies installed `date`" >> $logfile
 
+echo 1 > sudo tee /sys/module/xfs/parameters/allow_unsupported
+

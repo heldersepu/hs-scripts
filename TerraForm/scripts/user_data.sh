@@ -6,7 +6,7 @@ attach_wait $${volumes[@]}
 
 lsblk -o NAME,UUID,SIZE >> $logfile
 echo ""  >> $logfile
-exit
+
 
 name_mount "/dev/xvdj" "/abcd" "xfs"
 # size_mount "110G" "/abc"
