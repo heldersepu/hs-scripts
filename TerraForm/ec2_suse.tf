@@ -35,14 +35,14 @@ resource "aws_instance" "suse12" {
     prevent_destroy = false
   }
 
-  # provisioner "remote-exec" {
-  #   inline = ["ls -la > test.log"]
-  #
-  #   connection {
-  #     type        = "ssh"
-  #     user        = "ec2-user"
-  #     private_key = "${file("~/Downloads/AWS_keys/test.pem")}"
-  #     host        = "${self.public_dns}"
-  #   }
-  # }
+  provisioner "remote-exec" {
+    inline = ["ls -la > test.log"]
+
+    connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      private_key = "${file("~/Downloads/AWS_keys/test.pem")}"
+      host        = "${self.public_dns}"
+    }
+  }
 }
