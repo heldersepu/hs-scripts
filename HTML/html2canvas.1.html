@@ -1,0 +1,20 @@
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<img id="img" src="https://i.ytimg.com/vi/LRVsxe5OJVY/maxresdefault.jpg">
+
+<script>
+    function saveMask() {
+        var element = document.getElementById('img');
+        html2canvas(element, {allowTaint: true}).then(h2c => {
+            var canvas = document.createElement("canvas");
+            canvas.height = 170;
+            canvas.width = element.width - 300;
+
+            var ctx = canvas.getContext('2d')
+            ctx.drawImage(h2c, -150, 0);
+
+            document.body.appendChild(canvas);
+            element.parentNode.removeChild(element);
+        });
+    }
+    setTimeout(saveMask, 2000);
+</script>
