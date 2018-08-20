@@ -23,6 +23,7 @@ variable "device_names" {
     "/dev/sdk",
     "/dev/sdl",
     "/dev/sdm",
+    "/dev/sdn",
   ]
 }
 
@@ -35,7 +36,7 @@ variable "ec2_enabled" {
 }
 
 variable "ec2_add_volume" {
-  default = 3
+  default = 4
 }
 
 variable "ubuntu_ec2_enabled" {
