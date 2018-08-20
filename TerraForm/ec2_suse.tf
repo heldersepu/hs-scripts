@@ -1,7 +1,7 @@
 resource "aws_instance" "suse12" {
   count                  = "${var.ec2_enabled}"
   ami                    = "${data.aws_ami.suse12.id}"
-  instance_type          = "m5.large"
+  instance_type          = "r4.4xlarge" #"m5.large"
   key_name               = "${aws_key_pair.sshkey.key_name}"
   vpc_security_group_ids = ["${aws_security_group.allow_all.id}"]
   availability_zone      = "${data.aws_availability_zones.available.names[0]}"
@@ -35,14 +35,14 @@ resource "aws_instance" "suse12" {
     prevent_destroy = false
   }
 
-  provisioner "remote-exec" {
-    inline = ["ls -la > test.log"]
-
-    connection {
-      type        = "ssh"
-      user        = "ec2-user"
-      private_key = "${file("~/Downloads/AWS_keys/test.pem")}"
-      host        = "${self.public_dns}"
-    }
-  }
+  # provisioner "remote-exec" {
+  #   inline = ["ls -la > test.log"]
+  #
+  #   connection {
+  #     type        = "ssh"
+  #     user        = "ec2-user"
+  #     private_key = "${file("~/Downloads/AWS_keys/test.pem")}"
+  #     host        = "${self.public_dns}"
+  #   }
+  # }
 }
