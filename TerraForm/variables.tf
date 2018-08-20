@@ -35,7 +35,7 @@ variable "ec2_enabled" {
 }
 
 variable "ec2_add_volume" {
-  default = 0
+  default = 3
 }
 
 variable "ubuntu_ec2_enabled" {
