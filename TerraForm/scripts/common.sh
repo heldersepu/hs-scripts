@@ -63,13 +63,7 @@ function efs_mount() {
 }
 
 echo "Installing dependencies `date`" >> $logfile
-zypper install -y mdadm libncurses6-6.1-6.5.x86_64 libcurl4-7.61.0-1.1.x86_64
-zypper install -y glibc-2.27-6.1.x86_64 glibc-locale-2.27-6.1.x86_64 nscd-2.27-6.1.x86_64
-zypper install -y device-mapper-1.02.146-7.1.x86_64 grub2-2.02-31.1.x86_64 libparted0-3.2-22.1.x86_64 grub2-i386-pc-2.02-31.1.x86_64
-zypper install -y libreadline7 liblzma5-5.2.4-1.1.x86_64
-zypper install -y bc curl
-zypper install -y nvme-cli
-zypper install -y --replacefiles gdbm-lang-1.14.1-1.5.noarch
+zypper install -y mdadm bc curl nvme-cli
 zypper install -y xfsprogs xfsdump
 echo "Dependencies installed `date`" >> $logfile
 
