@@ -1,7 +1,6 @@
 #!/bin/bash
 logfile='/home/ec2-user/bin/userdata.log'
 echo "init `date`" >> $logfile
-exit
 
 function bin_exists() {
     arr=("$@")
