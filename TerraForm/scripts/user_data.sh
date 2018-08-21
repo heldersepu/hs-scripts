@@ -13,6 +13,8 @@ name_mount "/dev/xvdj" "/abcd" "xfs"
 # size_mount "111G" "/def"
 # size_mount "111G" "/ghi"
 
+efs_mount "${efs_url}:/data" "/data"
+
 mount -a
 
 # remove docker
