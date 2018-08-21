@@ -24,7 +24,7 @@ data "aws_ami" "suse12" {
 
   filter {
     name   = "image-id"
-    values = ["ami-1c761163"] #["ami-2a497955"] #["ami-388f9642"]
+    values = ["ami-3c062943"] #["ami-1c761163"] #["ami-2a497955"] #["ami-388f9642"]
   }
 
   filter {
