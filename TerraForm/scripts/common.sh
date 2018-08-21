@@ -1,6 +1,7 @@
 #!/bin/bash
 logfile='/home/ec2-user/bin/userdata.log'
 echo "init `date`" >> $logfile
+exit
 
 function bin_exists() {
     arr=("$@")
@@ -63,9 +64,7 @@ function efs_mount() {
 }
 
 echo "Installing dependencies `date`" >> $logfile
-zypper ar -C http://download.opensuse.org/tumbleweed/repo/oss/ Tumbleweed1
-zypper --gpg-auto-import-keys refresh
-zypper install -y libncurses6-6.1-6.5.x86_64 libcurl4-7.61.0-1.1.x86_64
+zypper install -y mdadm libncurses6-6.1-6.5.x86_64 libcurl4-7.61.0-1.1.x86_64
 zypper install -y glibc-2.27-6.1.x86_64 glibc-locale-2.27-6.1.x86_64 nscd-2.27-6.1.x86_64
 zypper install -y device-mapper-1.02.146-7.1.x86_64 grub2-2.02-31.1.x86_64 libparted0-3.2-22.1.x86_64 grub2-i386-pc-2.02-31.1.x86_64
 zypper install -y libreadline7 liblzma5-5.2.4-1.1.x86_64
