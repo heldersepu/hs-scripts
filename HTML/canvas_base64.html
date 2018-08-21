@@ -1,0 +1,66 @@
+<canvas id="test" ></canvas>
+<br><br>
+<form action="" method="post">
+    <input type="text" id="data" name="data" style="width: 540px;">
+    <input type="submit" value="Submit">
+</form>
+
+<script>
+    const canvas = document.getElementById('test');
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width = 600;
+    const height = canvas.height = 250;
+    ctx.fillStyle = 'blue';
+    plotPoints();
+    var b64data = canvas.toDataURL('image/jpeg', 1.0);
+    document.getElementById('data').value = b64data
+
+
+    function plotPoints() {
+        const pts = generatePoints(50 + Math.floor(Math.random() * 30));
+        ctx.strokeStyle = 'salmon';
+        ctx.fillStyle = 'rgba(255, 148, 136, .6)';
+        ctx.lineWidth = 5;
+
+        ctx.beginPath();
+        pts.forEach((pt, index, pointArray) => {
+            drawCurvedLine(pt, pointArray[index + 1])
+        });
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2;
+        for (i = 5; i < pts.length-5; i++) {
+            ctx.beginPath();
+            ctx.fillStyle = 'rgba(0,'+ pts[i].y +','+ pts[i].x/2 +')';
+            ctx.arc(pts[i].x, pts[i].y, 5, 2 * Math.PI, false)
+            ctx.stroke();
+            ctx.fill();
+        }
+    }
+
+    function generatePoints(nbOfPoints) {
+        const pts = [{x:0, y: height}];
+        for (let i = 0; i <= nbOfPoints; i++) {
+            pts.push({
+                x: i * (width / nbOfPoints),
+                y: Math.sin(i/2.6) * height/3 + 100
+            });
+        }
+        pts.push({x:width, y: height});
+        return pts;
+    }
+
+    function drawCurvedLine(point, next) {
+        if (typeof next !== 'undefined') {
+            var x_mid = (point.x + next.x) / 2;
+            var y_mid = (point.y + next.y) / 2;
+            var cp_x1 = (x_mid + point.x) / 2;
+            var cp_x2 = (x_mid + next.x) / 2;
+
+            ctx.quadraticCurveTo(cp_x1, point.y, x_mid, y_mid);
+            ctx.quadraticCurveTo(cp_x2, next.y, next.x, next.y);
+        }
+    }
+</script>
