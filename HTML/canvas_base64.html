@@ -2,10 +2,10 @@
 
 <canvas id="test" ></canvas>
 <br><br>
-<form>
+<div>
     <input type="text" id="data" name="data" style="width: 540px;">
     <input type="submit" value="Submit" onclick="postImage()">
-</form>
+</div>
 
 <script>
     const canvas = document.getElementById('test');
@@ -71,7 +71,7 @@
             type: "POST",
             contentType: "application/json; charset=utf-8",
             url: "http://swagger-net-test.azurewebsites.net/api/Image",
-            data: b64data
+            data: '{"data":"' + b64data + '"}'
         });
     }
 </script>
