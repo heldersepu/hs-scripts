@@ -67,11 +67,14 @@
     }
 
     function postImage() {
+        var url = "http://swagger-net-test.azurewebsites.net/api/Image"
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
-            url: "http://swagger-net-test.azurewebsites.net/api/Image",
+            url: url,
             data: '{"data":"' + b64data + '"}'
+        }).done(function() {
+            window.location.replace(url);
         });
     }
 </script>
