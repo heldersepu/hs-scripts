@@ -1,9 +1,11 @@
+<script  src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 <canvas id="test" ></canvas>
 <br><br>
-<form action="http://swagger-net-test.azurewebsites.net/api/Image" method="post">
+<div>
     <input type="text" id="data" name="data" style="width: 540px;">
-    <input type="submit" value="Submit">
-</form>
+    <input type="submit" value="Submit" onclick="postImage()">
+</div>
 
 <script>
     const canvas = document.getElementById('test');
@@ -62,5 +64,17 @@
             ctx.quadraticCurveTo(cp_x1, point.y, x_mid, y_mid);
             ctx.quadraticCurveTo(cp_x2, next.y, next.x, next.y);
         }
+    }
+
+    function postImage() {
+        var url = "http://swagger-net-test.azurewebsites.net/api/Image"
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: url,
+            data: '{"data":"' + b64data + '"}'
+        }).done(function() {
+            window.location.replace(url);
+        });
     }
 </script>
