@@ -1,0 +1,25 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+<style> canvas { max-width: 200px; } </style>
+
+<canvas id="myChart" width="20" height="20"></canvas>
+
+<script>
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: [0, 1, 2, 3, 4],
+    datasets: [{
+      label: 'Group A',
+      data: [4, 9, 2, 5],
+      backgroundColor: 'rgba(250, 100, 130, 1)',
+    }]
+  },
+  options: {
+    scales: {
+      xAxes: [{ display: false, barPercentage: 1.30, }, { display: true, }],
+      yAxes: [{ ticks: { beginAtZero:true } }]
+    }
+  }
+});
+</script>
