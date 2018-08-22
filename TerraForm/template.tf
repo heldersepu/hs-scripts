@@ -12,6 +12,6 @@ data "template_file" "user_data" {
 
   vars {
     data    = "${jsonencode(var.cidr)}"
-    efs_url = "${aws_efs_mount_target.data.dns_name}"
+    efs_url = "" # "${aws_efs_mount_target.data.dns_name}"
   }
 }
