@@ -1,0 +1,172 @@
+<canvas id="ctx"></canvas>
+
+<script>
+var canv = document.getElementById("ctx");
+var ctx = canv.getContext('2d');
+canv.setAttribute("height", "500px");
+canv.setAttribute("width", "500px");
+ctx.font = "20px verdana";
+canv.style.border = "2px solid #000000";
+// var space = new Image();
+// space.src = "images/space.jpg";
+// canv.style.backgroundImage = "url('images/space.jpg')";
+var numOfTiles, tileList, score, bulletList, timer, isPaused;
+var WIDTH = 500;
+var HEIGHT = 500;
+
+var tile = {
+  height: 10,
+  width: 10,
+  color: 'red'
+};
+
+var base = {
+  x: 150,
+  y: 400,
+  height: 20,
+  width: 30,
+  color: 'orange',
+  pressingLeft: false,
+  pressingRight: false,
+  //lives:3,
+};
+
+var bullet = {
+  height: 20,
+  width: 2,
+  color: 'blue',
+  spdX: 0,
+  spdY: -1
+};
+
+document.onkeydown = (event) => {
+  if (event.keyCode == 37) {
+    base.pressingLeft = true;
+    base.pressingRight = false;
+  } else if (event.keyCode == 39) {
+    base.pressingLeft = false;
+    base.pressingRight = true;
+  }
+
+  if (event.keyCode == 88) {
+    isPaused = !isPaused;
+  }
+};
+
+document.onkeyup = (event) => {
+  if (event.keyCode == 37) {
+    base.pressingLeft = false;
+  } else if (event.keyCode == 39) {
+    base.pressingRight = false;
+  }
+};
+
+
+drawTile = (t, i) => {
+  ctx.save();
+  ctx.beginPath();
+  ctx.fillStyle = tile.color;
+  ctx.arc(t.x, t.y, tile.width, 2 * Math.PI, 0);
+  ctx.fill();
+};
+
+drawBase = () => {
+  ctx.save();
+  ctx.fillStyle = base.color;
+  ctx.fillRect(base.x, base.y, base.width, base.height);
+  ctx.restore();
+};
+
+drawBullet = (b, i) => {
+  ctx.save();
+  ctx.fillStyle = bullet.color;
+  ctx.fillRect(b.x, b.y, bullet.width, bullet.height);
+  ctx.restore();
+};
+
+
+updateBasePosition = () => {
+  if (base.pressingLeft) {
+    base.x = base.x - 1;
+  } else if (base.pressingRight) {
+    base.x = base.x + 1;
+  }
+  if (base.x < 0) {
+    base.x = 0;
+  }
+  if (base.x > WIDTH - base.width) {
+    base.x = WIDTH - base.width;
+  }
+};
+
+updateBullets = () => {
+  for (key in bulletList) {
+    bulletList[key].x += bullet.spdX;
+    bulletList[key].y += bullet.spdY;
+    if (bulletList[key].y < 10) {
+        delete bulletList[key];
+        bulletList.splice(key, 1);
+    }
+  }
+}
+
+testCollision = function(enemy, bullet) {
+  return Math.sqrt(Math.pow(enemy.x - bullet.x, 2) + Math.pow(enemy.y - bullet.y, 2)) < tile.width  ;
+}
+
+update = () => {
+  if (!isPaused) {
+    ctx.clearRect(0, 0, WIDTH, HEIGHT);
+    drawBase();
+
+    tileList.forEach(drawTile);
+    bulletList.forEach(drawBullet);
+    for (tkey in tileList) {
+        for (bkey in bulletList) {
+            if (testCollision(tileList[tkey], bulletList[bkey])) {
+                delete tileList[tkey];
+                tileList.splice(tkey, 1);
+                delete bulletList[bkey];
+                bulletList.splice(bkey, 1);
+            }
+        }
+    }
+
+    updateBasePosition();
+    updateBullets();
+  } else {
+    ctx.fillText('Game Over', 200, 250);
+  }
+};
+
+addBullets = () => {
+    if (!isPaused) {
+        bulletList.push({
+            x: base.x + 15,
+            y: base.y
+        });
+    }
+};
+
+startGame = () => {
+  numOfTiles = 0;
+  var tileX = 10;
+  var tileY = 150;
+  tileList = [];
+  bulletList = [];
+  for (var j = 1; j <= 9; j++) {
+    tileList[numOfTiles] = {
+      x: tileX,
+      y: tileY
+    };
+    numOfTiles++;
+    tileX += 55;
+  }
+  timer = 0;
+  isPaused = false;
+  intervalVar = setInterval(update, 2);
+  intervalVar = setInterval(addBullets, 800);
+};
+
+startGame();
+</script>
