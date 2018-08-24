@@ -61,3 +61,7 @@ output "b11_ips" {
 output "zzz" {
   value = "${local.test}"
 }
+
+output "complex_map" {
+  value = "${var.complex_map}"
+}
