@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.8.1/pixi.min.js"></script>
+        <script> PIXI.utils.skipHello(); </script>
+    </head>
+    <body>
+        <input id="base" size="60">
+        <button id="exportButton">Export</button>
+        <br><br>
+
+        <script>
+            var app = new PIXI.Application({width: 500, height: 140});
+            document.body.appendChild(app.view);
+
+            var url = 'http://cdn.shopify.com/s/files/1/0496/1029/files/Freesample.svg?5153'
+            var loader = PIXI.loader;
+            loader.add(url);
+            loader.load(function () {
+                var sprite = new PIXI.Sprite(new PIXI.Texture.fromImage(url))
+                app.stage.addChild(sprite)
+            });
+
+
+            // Clicking on the export button will populate the input
+            $("#exportButton").on("click", function() {
+                $('#base').val($('canvas')[0].toDataURL('image/jpeg', 1.0));
+            });
+        </script>
+    </body>
+</html>
