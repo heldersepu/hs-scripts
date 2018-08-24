@@ -1,0 +1,40 @@
+<canvas id="canvas" width="300" height="150"></canvas>
+
+<script>
+    function drawDoor(ctx, color, sx, sy, ex, ey, offset) {
+        var mx = (sx + (sx + ex) / 2) / 2
+        var my = (sy + (sy + ey) / 2) / 2
+        var iniAng = Math.atan2(ey-sy, ex-sx)/Math.PI - offset;
+        var endAng = (iniAng + offset);
+
+        ctx.beginPath();
+        ctx.moveTo(sx, sy);
+        ctx.strokeStyle = color;
+        ctx.lineWidth=3;
+        ctx.lineTo(mx, my);
+        ctx.arc(mx, my, 45, iniAng * Math.PI, endAng * Math.PI, offset<0);
+        ctx.lineTo(ex, ey);
+        ctx.stroke();
+        ctx.closePath();
+    }
+
+    var canvas = document.getElementById("canvas");
+    var activeLineDrawing = canvas.getContext("2d");
+
+
+    // Door opening to the left
+    drawDoor(activeLineDrawing, "black", 210, 60, 300, 60, 0.5);
+
+    // Door opening to the right
+    drawDoor(activeLineDrawing, "red", 190, 100, 280, 100, -0.5);
+
+    // Diagonal door opening right
+    drawDoor(activeLineDrawing, "blue", 20, 20, 75, 80, -0.5);
+
+    // Diagonal door opening left
+    drawDoor(activeLineDrawing, "green", 50, 30, 130, 75, 0.5);
+
+    // Closet doors double opening
+    drawDoor(activeLineDrawing, "orange", 145, 30, 145, 90, 0.4);
+    drawDoor(activeLineDrawing, "orange", 145, 150, 145, 90, -0.4);
+</script>
