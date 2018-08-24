@@ -32,7 +32,7 @@ variable "enabled" {
 }
 
 variable "ec2_enabled" {
-  default = 1
+  default = 0
 }
 
 variable "ec2_add_volume" {
@@ -71,4 +71,30 @@ variable "cidr" {
 locals {
   test   = "${var.cidr}"
   sshkey = "${file("~/Downloads/AWS_keys/test.pem.pub")}"
+}
+
+
+variable "complex_map" {
+  type = "map"
+
+  default = {
+
+    staging = {
+      value1 = [20,12]
+      value2 = false
+      maps = {
+        one = 111
+        two = 222
+      }
+    }
+
+    production = {
+      value1 = [50,52]
+      value2 = true
+      maps = {
+        uno = 111
+        due = 222
+      }
+    }
+  }
 }
