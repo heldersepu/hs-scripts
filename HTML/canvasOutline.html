@@ -1,5 +1,6 @@
 <canvas id=canvas1 width=350 height=500></canvas>
 <canvas id=canvas2 width=350 height=500></canvas>
+<canvas id=canvas3 width=350 height=500></canvas>
 
 <script>
     var s = 20, // thickness scale
@@ -16,13 +17,13 @@
         ctx1.globalAlpha = 0.05
         for (i = 0; i < 360; i++)
             ctx1.drawImage(img1, x + Math.sin(i) * s, y + Math.cos(i) * s);
-
         ctx1.globalCompositeOperation = "source-in";
         ctx1.globalAlpha = 1
         ctx1.globalCompositeOperation = "source-over";
         ctx1.drawImage(img1, x, y);
     }
 
+    
     var ctx2 = document.getElementById('canvas2').getContext('2d'),
     img2 = new Image;
     img2.onload = draw2;
@@ -33,10 +34,26 @@
         ctx2.globalAlpha = 0.3
         for(var i = 0 ; i < dArr.length; i += 2)
             ctx2.drawImage(img2, x + dArr[i]*s, y + dArr[i+1]*s);
-
-        ctx2.globalCompositeOperation = "source-in";
+        ctx2.globalCompositeOperation = "source-in";        
         ctx2.globalAlpha = 1
         ctx2.globalCompositeOperation = "source-over";
         ctx2.drawImage(img2, x, y);
+    }
+
+
+    var ctx3 = document.getElementById('canvas3').getContext('2d'),
+    img3 = new Image;
+    img3.onload = draw3;
+    img3.src = "http://i.stack.imgur.com/UFBxY.png";
+
+    function draw3() {
+        ctx3.scale(1.6, 1.6)
+        ctx3.globalAlpha = 0.5        
+        ctx3.drawImage(img3, -50 , 0);
+        ctx3.globalCompositeOperation = "source-in";
+        ctx3.scale(0.6, 0.6)
+        ctx3.globalAlpha = 1
+        ctx3.globalCompositeOperation = "source-over";
+        ctx3.drawImage(img3, x, y);
     }
 </script>
