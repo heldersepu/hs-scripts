@@ -1,0 +1,42 @@
+<canvas id=canvas1 width=350 height=500></canvas>
+<canvas id=canvas2 width=350 height=500></canvas>
+
+<script>
+    var s = 20, // thickness scale
+        x = 25, // final position
+        y = 25;
+
+    var ctx1 = document.getElementById('canvas1').getContext('2d'),
+        img1 = new Image;
+
+    img1.onload = draw1;
+    img1.src = "http://i.stack.imgur.com/UFBxY.png";
+
+    function draw1() {
+        ctx1.globalAlpha = 0.05
+        for (i = 0; i < 360; i++)
+            ctx1.drawImage(img1, x + Math.sin(i) * s, y + Math.cos(i) * s);
+
+        ctx1.globalCompositeOperation = "source-in";
+        ctx1.globalAlpha = 1
+        ctx1.globalCompositeOperation = "source-over";
+        ctx1.drawImage(img1, x, y);
+    }
+
+    var ctx2 = document.getElementById('canvas2').getContext('2d'),
+    img2 = new Image;
+    img2.onload = draw2;
+    img2.src = "http://i.stack.imgur.com/UFBxY.png";
+
+    function draw2() {
+        var dArr = [-1,-1, 0,-1, 1,-1, -1,0, 1,0, -1,1, 0,1, 1,1] // offset array
+        ctx2.globalAlpha = 0.3
+        for(var i = 0 ; i < dArr.length; i += 2)
+            ctx2.drawImage(img2, x + dArr[i]*s, y + dArr[i+1]*s);
+
+        ctx2.globalCompositeOperation = "source-in";
+        ctx2.globalAlpha = 1
+        ctx2.globalCompositeOperation = "source-over";
+        ctx2.drawImage(img2, x, y);
+    }
+</script>
