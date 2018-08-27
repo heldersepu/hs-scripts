@@ -75,20 +75,20 @@ locals {
 
 
 variable "complex_map" {
-  type = "map"
+  type = "list"
 
-  default = {
-
-    staging = {
+  default = [
+    {
+      name = "staging"
       value1 = [20,12]
       value2 = false
       maps = {
         one = 111
         two = 222
       }
-    }
-
-    production = {
+    },
+    {
+      name = "production"
       value1 = [50,52]
       value2 = true
       maps = {
@@ -96,5 +96,5 @@ variable "complex_map" {
         due = 222
       }
     }
-  }
+  ]
 }

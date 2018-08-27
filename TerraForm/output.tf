@@ -65,3 +65,11 @@ output "zzz" {
 output "complex_map" {
   value = "${var.complex_map}"
 }
+
+output "complex_map__length" {
+  value = "${length(var.complex_map)}"
+}
+
+output "complex_map__first" {
+  value = "${var.complex_map[0]}"
+}
