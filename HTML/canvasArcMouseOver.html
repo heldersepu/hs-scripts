@@ -1,0 +1,60 @@
+<style>body{margin:0}</style>
+<canvas id="mainCanvas"></canvas>
+
+
+<script>
+var canvas = document.getElementById("mainCanvas");
+var ctx = canvas.getContext("2d");
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  draw();
+}
+
+function draw(event) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  var rad = Math.min(canvas.width, canvas.height)/2.4
+  var center = {x: canvas.width/2, y: canvas.height/2}
+  var lineWidth = rad/4
+  var color = "red"
+  
+
+  if (event) {
+    var _x = event.clientX - center.x;
+    var _y = event.clientY - center.y;
+    var distance = Math.sqrt(_x * _x + _y * _y); 
+    if (distance < (rad + lineWidth/2)) {      
+      ctx.beginPath();
+      ctx.font = "30px Arial";
+      ctx.fillText(Math.round(distance), center.x +10, center.y);      
+      ctx.beginPath();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "black";  
+      ctx.setLineDash([3, 3]);
+      ctx.moveTo(center.x, center.y);
+      ctx.lineTo(event.clientX, event.clientY);
+      ctx.stroke();
+      if ((rad - lineWidth/2) < distance)
+        color = "blue"
+    }
+  }
+
+  ctx.setLineDash([]);
+  ctx.beginPath();
+  ctx.lineWidth = lineWidth;
+  ctx.strokeStyle = color;  
+  ctx.arc(center.x, center.y, rad, 8, 0, true);
+  ctx.stroke();
+  
+  ctx.beginPath();
+  ctx.lineWidth = 4;
+  ctx.strokeStyle = "black";
+  ctx.arc(center.x, center.y, 2, 8, 0, true);
+  ctx.stroke();
+}
+
+resize();
+window.onresize = resize;
+window.onmousemove = draw;
+</script>
