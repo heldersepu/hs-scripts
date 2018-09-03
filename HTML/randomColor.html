@@ -1,0 +1,29 @@
+<body></body>
+<script>
+function randomColor() {
+
+    const hexColor = ['#'];
+    const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
+
+    for(let digit = 0; digit < 6; digit++) {
+        let value = Math.floor(Math.random() * 15);
+        if(value > 9) {
+            value = letters[value - 9];
+        }
+        hexColor.push(value);
+    }
+
+    return  hexColor.join('');
+
+}
+
+for(let i = 0; i < 60; i++) {
+    var color = randomColor()
+    var div = document.createElement('div');
+    div.style = "color:" + color
+    div.innerHTML = color
+    document.body.appendChild(div)
+    console.log( color )
+}
+
+</script>
