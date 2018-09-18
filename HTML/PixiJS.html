@@ -10,6 +10,10 @@
         <br><br>
 
         <script>
+            function toDataURL() {
+                $('#base').val($('canvas')[0].toDataURL('image/jpeg', 1.0));
+            }
+
             var app = new PIXI.Application({width: 500, height: 140});
             document.body.appendChild(app.view);
 
@@ -19,13 +23,9 @@
             loader.load(function () {
                 var sprite = new PIXI.Sprite(new PIXI.Texture.fromImage(url))
                 app.stage.addChild(sprite)
+                toDataURL()
             });
-
-
-            // Clicking on the export button will populate the input
-            $("#exportButton").on("click", function() {
-                $('#base').val($('canvas')[0].toDataURL('image/jpeg', 1.0));
-            });
+            $("#exportButton").on("click", toDataURL);
         </script>
     </body>
 </html>
