@@ -1,0 +1,25 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+<div>
+  <canvas id="canvas" style="border:1px solid #000000;"></canvas>
+</div>
+
+<script>
+    var ctx = document.getElementById('canvas').getContext('2d');
+
+    var myChart = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: {
+            labels: ["Days to recive your product"],
+            datasets: [{
+                backgroundColor: ["red"],
+                data: [3]
+            }]
+        },
+        options: {
+            legend: { display: false },
+            scales: {
+                xAxes: [{ display: true, barPercentage: 1, ticks: {min: 0, max: 10}}, { display: false, }]
+            }
+        }
+    });
+</script>
