@@ -1,0 +1,169 @@
+<html>
+<meta charset="utf-8"/>
+<body></body>
+
+<script src="inflate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/96/three.min.js"></script>
+<script src="https://threejs.org/examples/js/loaders/FBXLoader.js"></script>
+
+<script>
+var boxmanURL = 'box1.fbx';
+var poseURL = 'Pose3.fbx';
+var scene = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+scene.add(camera);
+var renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth -50, window.innerHeight -50);
+document.body.appendChild(renderer.domElement);
+
+window.addEventListener('resize', function() {
+  var width = window.innerWidth -50;
+  var height = window.innerHeight -50;
+  renderer.setSize(width, height);
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+});
+
+camera.position.z = 4;
+
+//add the lighting to the scene
+var light = new THREE.HemisphereLight(0xffffff, 0x444444);
+light.position.set(0, 200, 0);
+scene.add(light);
+light = new THREE.DirectionalLight(0xffffff);
+light.position.set(0, 200, 100);
+light.castShadow = true;
+light.shadow.camera.top = 180;
+light.shadow.camera.bottom = -100;
+light.shadow.camera.left = -120;
+light.shadow.camera.right = 120;
+scene.add(light);
+
+var loader = new THREE.FBXLoader();
+
+loader.load(boxmanURL, function(object) {
+  var counter = 0;
+  object.traverse(function(child) {
+    if (child.material) {
+      child.material = new THREE.MeshStandardMaterial({
+        color: 0xC0C0C0
+      });
+    }
+    if (child.isMesh) {
+      object[counter] = new THREE.SkinnedMesh(child, new THREE.MeshStandardMaterial({
+        color: 0xC0C0C0
+      }));
+      child.castShadow = true;
+      child.receiveShadow = true;
+    }
+    counter++;
+  });
+
+  object.castShadow = true;
+  object.scale.set(.013, .013, .013);
+  object.position.y = -1;
+  object.name = "boxman";
+  scene.add(object);
+});
+
+
+function createBones(root, array) {
+  if (root === null && root === undefined) {
+    return;
+  } else {
+    let bone = new THREE.Bone();
+
+    bone.position.set(root.position.x, root.position.y, root.position.z);
+    bone.name = root.name;
+    bone.setRotationFromQuaternion(root.quaternion);
+    bone.scale.set(root.scale.x, root.scale.y, root.scale.z);
+    if (root.parent !== null && root.parent !== undefined) {
+      bone.parent = root.parent;
+    }
+    array.push(bone);
+
+    for (let i = 0, count = root.children.length; i < count; i++) {
+      createBones(root.children[i], array);
+    }
+    return;
+  }
+}
+//load the skeletons
+loader.load(poseURL, function(object) {
+  object.name = "pose";
+  scene.add(object);
+  addPoseToModel();
+});
+
+function addPoseToModel() {
+  bones = [];
+  var model = scene.getObjectByName("boxman");
+  var pose = scene.getObjectByName("pose");
+  model.updateMatrixWorld();
+  pose.updateMatrixWorld();
+  console.log(model);
+  console.log(pose);
+  createBones(pose.children[0], bones);
+  addBonesToParents(bones);
+  model[1].add(bones[0]);
+  let skeleton = new THREE.Skeleton(bones, undefined, true);
+  model[1].bind(skeleton);
+  model[1].pose();
+
+}
+
+
+function addBonesToParents(bones) {
+  for (let i = 0; i < bones.length; i++) {
+    for (let j = 0; j < bones.length; j++) {
+      if (bones[i].parent.name === bones[j].name) {
+        bones[j].add(bones[i]);
+        break;
+      }
+    }
+  }
+}
+
+
+//add the ground
+var geometry = new THREE.CircleBufferGeometry(5, 32);
+var material = new THREE.MeshBasicMaterial({
+  color: 0xffff00
+});
+var circle = new THREE.Mesh(geometry, material);
+circle.rotation.x = Math.PI / 2;
+scene.add(circle);
+
+
+//game logic
+var update = function() {
+  //cube.rotation.x += 0.01;
+  //cube.rotation.y += 0.005;
+};
+
+//run game loop (update, render, repeat)
+var render = function() {
+  renderer.render(scene, camera);
+  //console.log("4");
+};
+
+var animate = function() {
+  const v = Date.now() / 2000
+  var hips = scene.getObjectByName("hips");
+  if (hips) {
+    hips.position.x = Math.sin(v)
+    hips.position.z = Math.cos(v)
+  }
+  //console.log(hips);
+}
+
+//run game loop
+var GameLoop = function() {
+  requestAnimationFrame(GameLoop);
+  update();
+  animate();
+  render();
+};
+GameLoop();
+</script>
+</html>
