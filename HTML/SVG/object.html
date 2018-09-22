@@ -1,0 +1,14 @@
+<button id="btnColor">change color</button><br>
+<object id="svgContent" type="image/svg+xml" data="cat.svg#redcat"></object>
+
+<script>
+    var i = 0
+    var colors = ["lime", "cyan", "red", "pink", "blue"]
+    var object = document.querySelector("object");
+
+    btnColor.addEventListener("click", function (e) {
+        var svg = object.contentDocument.documentElement
+        svg.getElementById("redcat").children[0].setAttribute('fill', colors[i])
+        i = (i+1) % colors.length   
+    })
+</script>
