@@ -18,11 +18,11 @@ do
     arrids=($(echo $json | jq -r '.Reservations[].Instances[].InstanceId'))
     prvips=($(echo $json | jq -r '.Reservations[].Instances[].PrivateIpAddress'))
     echo ""
-    for id in "${arrids[@]}"
+    for id in "${prvips[@]}"
     do
-        echo "${RED} ${id} ${NC}"
+        echo "${RED}${id}${NC}"
         #aws ec2 start-instances --instance-ids ${id} | jq -r '.StartingInstances[].CurrentState.Name'
-        aws ec2 stop-instances --instance-ids ${id} | jq -r '.StoppingInstances[].CurrentState.Name'
+        #aws ec2 stop-instances --instance-ids ${id} | jq -r '.StoppingInstances[].CurrentState.Name'
         #echo ""
     done
 done
