@@ -7,6 +7,20 @@ resource "aws_s3_bucket" "sample_bucket12629" {
     prevent_destroy = false
   }
 
+  lifecycle_rule {
+    id      = "ColdStorage"
+    enabled = true
+
+    transition {
+      days          = 2
+      storage_class = "GLACIER"
+    }
+
+    expiration {
+      days = 10
+    }
+  }
+
   tags {
     Name        = "My bucket"
     Environment = "Dev"
