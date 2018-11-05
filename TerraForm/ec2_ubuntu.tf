@@ -34,6 +34,19 @@ resource "aws_instance" "ubuntu" {
   }
 
   provisioner "local-exec" {
-    command = "ping -c 4 ${self.private_ip}"
+    command = <<EOF
+    tries=0
+    while true; do
+      if [[ $tries -ge 30 ]]; then
+        echo "ERROR !"
+        exit 1;
+      elif [[ $(nslookup google.com | grep -c "Server") -ge 1 ]]; then
+        echo "GOOD TO GO"
+        exit 0;
+      fi
+      let "tries++"
+      sleep 10
+    done
+EOF
   }
 }
