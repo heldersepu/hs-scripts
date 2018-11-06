@@ -41,7 +41,7 @@ resource "aws_instance" "ubuntu" {
         if [[ $tries -ge 30 ]]; then
           echo "ERROR !"
           exit 1;
-        elif [[ $(nslookup ${var.nslookup_check} | grep -c "can't find") == 0 ]]; then
+        elif [[ $(nslookup ${var.nslookup_check} | egrep -c "(can't find|timed out)") == 0 ]]; then
           echo "GOOD TO GO"
           exit 0;
         fi
