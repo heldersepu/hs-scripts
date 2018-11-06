@@ -35,18 +35,21 @@ resource "aws_instance" "ubuntu" {
 
   provisioner "local-exec" {
     command = <<EOF
-    tries=0
-    while true; do
-      if [[ $tries -ge 30 ]]; then
-        echo "ERROR !"
-        exit 1;
-      elif [[ $(nslookup google.com | grep -c "Server") -ge 1 ]]; then
-        echo "GOOD TO GO"
-        exit 0;
-      fi
-      let "tries++"
-      sleep 10
-    done
+    if [ "${var.nslookup_check}" != "" ]; then
+      tries=0
+      while true; do
+        if [[ $tries -ge 30 ]]; then
+          echo "ERROR !"
+          exit 1;
+        elif [[ $(nslookup ${var.nslookup_check} | grep -c "can't find") == 0 ]]; then
+          echo "GOOD TO GO"
+          exit 0;
+        fi
+        let "tries++"
+        echo "Invalid response, will try again in 10 seconds. ($tries/30)"
+        sleep 10
+      done
+    fi
 EOF
   }
 }
