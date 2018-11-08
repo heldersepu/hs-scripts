@@ -44,7 +44,7 @@ variable "nslookup_check" {
 }
 
 variable "ubuntu_ec2_enabled" {
-  default = 1
+  default = 0
 }
 
 variable "win_ec2_enabled" {
