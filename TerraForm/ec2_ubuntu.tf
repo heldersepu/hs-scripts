@@ -43,5 +43,6 @@ data "template_file" "nslookup_check" {
 
   vars {
     nslookup_record = "${var.nslookup_record}"
+    nslookup_server = "${count.index}"
   }
 }
