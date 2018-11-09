@@ -39,12 +39,12 @@ variable "ec2_add_volume" {
   default = 4
 }
 
-variable "nslookup_check" {
+variable "nslookup_record" {
   default = "google.com"
 }
 
 variable "ubuntu_ec2_enabled" {
-  default = 0
+  default = 1
 }
 
 variable "win_ec2_enabled" {
