@@ -35,15 +35,31 @@ data "aws_ami" "suse12" {
 
 data "aws_ami" "win2016" {
   most_recent = true
+  owners      = ["amazon"]
 
   filter {
     name   = "name"
-    values = ["Windows_Server-2016-English-Full-Base-2018.06.13*"]
+    values = ["Windows_Server-2016-English-Full-Base*"]
   }
 
   filter {
-    name   = "image-id"
-    values = ["ami-0327667c"]
+    name   = "platform"
+    values = ["windows"]
+  }
+
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
   }
 
   filter {
