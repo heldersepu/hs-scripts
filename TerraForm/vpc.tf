@@ -1,5 +1,4 @@
 resource "aws_vpc" "myvpc" {
-  count                = "${var.vpc_enabled}"
   cidr_block           = "${var.cidr}"
   instance_tenancy     = "default"
   enable_dns_support   = true
@@ -16,7 +15,6 @@ data "aws_availability_zones" "available" {
 }
 
 resource "aws_subnet" "app1" {
-  count                   = "${var.vpc_enabled}"
   vpc_id                  = "${aws_vpc.myvpc.id}"
   cidr_block              = "${aws_vpc.myvpc.cidr_block}"
   availability_zone       = "${data.aws_availability_zones.available.names[0]}"
