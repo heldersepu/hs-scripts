@@ -55,10 +55,6 @@ variable "vpn_enabled" {
   default = 0
 }
 
-variable "vpc_enabled" {
-  default = 1
-}
-
 variable "buckets" {
   default = 1
 }
