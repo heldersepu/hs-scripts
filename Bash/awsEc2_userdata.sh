@@ -1,8 +1,13 @@
 
 declare -a arr=(
-    "-app-sap"
-    "-hana-sap"
-    "-scs-sap"
+        "10.35.12.11"
+        "10.35.12.53"
+        "10.35.12.59"
+        "10.35.12.80"
+        "10.35.12.175"
+        "10.35.12.179"
+        "10.35.12.182"
+        "10.35.12.242"
     )
 
 RED='\033[0;31m'
@@ -14,7 +19,7 @@ do
     echo "${GRN}${i}${NC}"
     # https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html#options
     # ( pending | running | shutting-down | terminated | stopping | stopped )
-    json=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=*${i}*" "Name=instance-state-name,Values=running")
+    json=$(aws ec2 describe-instances --filters "Name=network-interface.addresses.private-ip-address,Values=${i}")
     arrids=($(echo $json | jq -r '.Reservations[].Instances[].InstanceId'))
     echo ""
     for id in "${arrids[@]}"
