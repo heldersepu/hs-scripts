@@ -32,7 +32,7 @@ variable "enabled" {
 }
 
 variable "ec2_enabled" {
-  default = 0
+  default = 1
 }
 
 variable "ec2_add_volume" {
@@ -44,7 +44,11 @@ variable "nslookup_record" {
 }
 
 variable "ubuntu_ec2_enabled" {
-  default = 0
+  default = 1
+}
+
+variable "alpine_ec2_enabled" {
+  default = 1
 }
 
 variable "win_ec2_enabled" {
