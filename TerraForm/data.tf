@@ -33,6 +33,20 @@ data "aws_ami" "suse12" {
   }
 }
 
+data "aws_ami" "alpine" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["Alpine*Hardened*"]
+  }
+
+  filter {
+    name   = "state"
+    values = ["available"]
+  }
+}
+
 data "aws_ami" "win2016" {
   most_recent = true
   owners      = ["amazon"]
