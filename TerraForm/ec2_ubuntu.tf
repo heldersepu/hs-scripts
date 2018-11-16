@@ -13,9 +13,9 @@ resource "aws_instance" "ubuntu" {
   }
 
   lifecycle {
-    ignore_changes  = ["ami", "instance_type", "ebs_optimized", "volume_tags", "ebs_block_device"]
+    ignore_changes        = ["ami", "instance_type", "ebs_optimized", "volume_tags", "ebs_block_device"]
     create_before_destroy = true
-    prevent_destroy = false
+    prevent_destroy       = false
   }
 
   provisioner "remote-exec" {
@@ -23,7 +23,7 @@ resource "aws_instance" "ubuntu" {
       "ls -la > test.log",
       "sudo apt-get update",
       "sudo apt-get -y install gdebi-core python-minimal",
-      "cat /var/log/cloud-init-output.log"
+      "cat /var/log/cloud-init-output.log",
     ]
 
     connection {

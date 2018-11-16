@@ -37,7 +37,6 @@ resource "aws_acm_certificate_validation" "cert" {
   }
 }
 
-
 resource "aws_route53_record" "elb_external_p" {
   count   = "${var.enabled}"
   zone_id = "${aws_route53_zone.zone.id}"
