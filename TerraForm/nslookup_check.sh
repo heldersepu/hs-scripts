@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [ "${nslookup_record}" != "" ]; then
     for tries in $(seq 1 30); do
         if [[ $(nslookup ${nslookup_record} | egrep -c "(can't find|timed out)") == 0 ]]; then
