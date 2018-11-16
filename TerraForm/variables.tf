@@ -77,28 +77,29 @@ locals {
   sshkey = "${file("~/Downloads/AWS_keys/test.pem.pub")}"
 }
 
-
 variable "complex_map" {
   type = "list"
 
   default = [
     {
-      name = "staging"
-      value1 = [20,12]
+      name   = "staging"
+      value1 = [20, 12]
       value2 = false
+
       maps = {
         one = 111
         two = 222
       }
     },
     {
-      name = "production"
-      value1 = [50,52]
+      name   = "production"
+      value1 = [50, 52]
       value2 = true
+
       maps = {
         uno = 111
         due = 222
       }
-    }
+    },
   ]
 }
