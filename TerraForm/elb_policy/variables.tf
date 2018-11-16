@@ -3,7 +3,7 @@ variable "elb_name" {
 }
 
 variable "elb_arn" {
-  type = "string"
+  type    = "string"
   default = ""
 }
 

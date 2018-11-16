@@ -27,8 +27,8 @@ resource "aws_subnet" "test_app1" {
   cidr_block = "10.0.1.0/24"
 }
 
- module "elb_policy_internal" {
+module "elb_policy_internal" {
   source   = "./elb_policy"
-  enabled = 1
+  enabled  = 1
   elb_name = "${aws_elb.elb.name}"
 }

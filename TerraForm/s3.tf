@@ -28,6 +28,6 @@ resource "aws_s3_bucket" "sample_bucket12629" {
 }
 
 resource "aws_glacier_vault" "glacier_vault" {
-  count  = "${var.buckets}"
-  name = "ColdStorage"
+  count = "${var.buckets}"
+  name  = "ColdStorage"
 }
