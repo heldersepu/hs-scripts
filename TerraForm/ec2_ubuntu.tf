@@ -5,7 +5,7 @@ resource "aws_instance" "ubuntu" {
   key_name               = "${aws_key_pair.sshkey.key_name}"
   vpc_security_group_ids = ["${aws_security_group.allow_all.id}"]
   availability_zone      = "${data.aws_availability_zones.available.names[0]}"
-  user_data              = "echo test"
+  user_data              = "echo test; date"
 
   tags {
     Terraformed = "true"
@@ -23,6 +23,7 @@ resource "aws_instance" "ubuntu" {
       "ls -la > test.log",
       "sudo apt-get update",
       "sudo apt-get -y install gdebi-core python-minimal",
+      "cat /var/log/cloud-init-output.log"
     ]
 
     connection {
