@@ -8,6 +8,7 @@ data "aws_iam_policy_document" "drole" {
       identifiers = [
         "logs.us-east-1.amazonaws.com",
         "logs.us-east-2.amazonaws.com",
+        "ecs-tasks.amazonaws.com"
       ]
     }
 
