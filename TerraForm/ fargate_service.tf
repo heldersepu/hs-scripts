@@ -6,18 +6,18 @@ resource "aws_ecs_task_definition" "test" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = 256
   memory                   = 512
-  execution_role_arn       = "${aws_iam_role.iam_role.arn}"
-  task_role_arn            = "${aws_iam_role.iam_role.arn}"
+  execution_role_arn       = "${aws_iam_role.role.arn}"
+  task_role_arn            = "${aws_iam_role.role.arn}"
 
   container_definitions = <<DEFINITION
 [
   {
     "name": "testscheduler",
     "essential": true,
-    "image": "${var.image_address}",
+    "image": "andyshinn/dnsmasq:latest",
     "cpu": 256,
     "memory": 512,
-    "networkMode": "awsvpc",
+    "networkMode": "awsvpc"
   }
 ]
 DEFINITION
@@ -33,9 +33,31 @@ resource "aws_ecs_service" "test" {
   task_definition = "${aws_ecs_task_definition.test.arn}"
   desired_count   = 1
   launch_type     = "FARGATE"
+  depends_on      = ["aws_iam_role.role"]
 
   network_configuration {
     security_groups = ["${aws_security_group.allow_all.id}"]
     subnets         = ["${aws_subnet.app1.id}"]
   }
+}
+
+data "aws_iam_policy_document" "role" {
+  statement {
+    effect = "Allow"
+
+    principals {
+      type = "Service"
+
+      identifiers = [
+        "ecs-tasks.amazonaws.com",
+      ]
+    }
+
+    actions = ["sts:AssumeRole"]
+  }
+}
+
+resource "aws_iam_role" "role" {
+  name               = "iam_role"
+  assume_role_policy = "${data.aws_iam_policy_document.role.json}"
 }
