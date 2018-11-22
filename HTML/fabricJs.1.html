@@ -1,0 +1,27 @@
+
+<canvas id="canvas" width="300" height="300"></canvas>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/2.3.4/fabric.min.js"></script>
+<script>
+    var canvas = new fabric.Canvas('canvas');
+
+    var rect = new fabric.Rect({
+        top : 100, left : 100,
+        width : 60, height : 70,
+        fill : 'red'
+    });
+    canvas.add(rect);
+
+    setTimeout(
+        function(){
+            canvas.remove(rect)
+            rect = new fabric.Rect({
+                top : 80, left : 80,
+                width : 60, height : 70,
+                fill : 'blue'
+            });
+            canvas.add(rect);
+        },
+        3000
+    );
+</script>
