@@ -1,0 +1,64 @@
+<style> * { margin: 0px; } </style>
+<canvas id="canvas"></canvas>
+
+<script>
+var cnv = document.getElementById("canvas");
+var ctx = cnv.getContext("2d");
+cnv.width = cnv.height = 500;
+
+var objects = [
+    { w: 60, h: 60, x: 10,  y: 20, fillColor: "black" },
+    { w: 60, h: 60, x: 80,  y: 20, fillColor: "blue" },
+    { w: 60, h: 60, x: 150, y: 20, fillColor: "red" },
+]
+
+var selectedItem;
+function onMove(e) {
+  if (selectedItem) {
+    cx = e.pageX;  cy = e.pageY;
+    selectedItem.x = cx - (selectedItem.w / 2) -15;
+    selectedItem.y = cy - (selectedItem.h / 2) -15;
+    var hovering = false
+    objects.forEach(function(o) {
+      if (o != selectedItem) {
+        if ((selectedItem.x + selectedItem.w) >o.x && selectedItem.x >o.x && selectedItem.x < (o.x +o.w)) {
+          hovering = true
+        }
+      }
+    })
+    if (hovering) {
+      if (selectedItem.fillColor != "lime") {
+        selectedItem.color = selectedItem.fillColor
+        selectedItem.fillColor = "lime"
+      }      
+    } else if (selectedItem.color) {
+      selectedItem.fillColor = selectedItem.color
+    }
+    ctx.clearRect(0, 0, cnv.width, cnv.height);
+    drawFigure();
+  }
+}
+
+function onDown(e) {
+    cx = e.pageX; cy = e.pageY;    
+    objects.forEach(function(o) {
+        if ( cx >o.x && cy >o.y && cx < (o.x +o.w) && cy < (o.y +o.h) ) {
+            selectedItem =o;
+        }
+    });
+}
+
+function drawFigure() { 
+  objects.forEach(function(o) {
+    ctx.fillStyle = o.fillColor;
+    ctx.fillRect(o.x,o.y,o.w,o.h);
+    ctx.strokeRect(o.x,o.y,o.w,o.h);
+  });
+}
+
+window.onload = drawFigure
+cnv.addEventListener("mousemove", onMove, false);
+cnv.addEventListener("mousedown", onDown, false);
+cnv.addEventListener("mouseup", function () { selectedItem = null });
+
+</script>
