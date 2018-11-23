@@ -36,7 +36,7 @@ resource "aws_ecs_service" "test" {
   depends_on      = ["aws_iam_role.role"]
 
   network_configuration {
-    security_groups = ["${aws_security_group.allow_all.id}"]
+    #security_groups = ["${aws_security_group.allow_all.id}"]
     subnets         = ["${aws_subnet.app1.id}"]
   }
 }
