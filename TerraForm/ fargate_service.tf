@@ -37,7 +37,8 @@ resource "aws_ecs_service" "test" {
 
   network_configuration {
     #security_groups = ["${aws_security_group.allow_all.id}"]
-    subnets         = ["${aws_subnet.app1.id}"]
+    subnets          = ["${aws_subnet.app1.id}"]
+    assign_public_ip = true
   }
 }
 
