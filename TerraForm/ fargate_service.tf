@@ -15,6 +15,7 @@ resource "aws_ecs_task_definition" "test" {
     "name": "testscheduler",
     "essential": true,
     "image": "andyshinn/dnsmasq:latest",
+    "command": ["--cap-add=NET_ADMIN", "--net=host"],
     "cpu": 256,
     "memory": 512,
     "networkMode": "awsvpc"
