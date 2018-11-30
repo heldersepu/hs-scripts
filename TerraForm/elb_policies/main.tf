@@ -37,16 +37,25 @@ resource "aws_load_balancer_policy" "policy_tls_1_1" {
   }
 }
 
-
 resource "null_resource" "listener_policy" {
   depends_on = ["aws_lb_cookie_stickiness_policy.cookie_stickiness_policy", "aws_load_balancer_policy.policy_tls_1_1"]
+
   triggers {
     load_balancer_name = "${aws_elb.elb.name}"
   }
 
   provisioner "local-exec" {
-    when    = "create"
-    command = "aws elb set-load-balancer-policies-of-listener --load-balancer-name ${aws_elb.elb.name} --load-balancer-port 443 --policy-names policy-tls-1-1 cookieStickinessPolicy"
+    when = "create"
+
+    command = <<SCRIPT
+        #!/bin/bash
+        pName=""
+        if [ "1" -eq 1 ]; then pName="cookieStickinessPolicy"; fi
+        aws elb set-load-balancer-policies-of-listener \
+          --load-balancer-name ${aws_elb.elb.name} \
+          --load-balancer-port 443 \
+          --policy-names policy-tls-1-1 $pName
+        echo "load-balancer-policies updated"
+    SCRIPT
   }
 }
-
