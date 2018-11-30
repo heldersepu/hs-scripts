@@ -27,6 +27,13 @@ resource "aws_subnet" "test_app1" {
   cidr_block = "10.0.1.0/24"
 }
 
+resource "aws_lb_cookie_stickiness_policy" "cookie_stickiness_policy" {
+  name                     = "cookie_stickiness_policy"
+  load_balancer            = "${aws_elb.elb.id}"
+  lb_port                  = "443"
+  cookie_expiration_period = "600"
+}
+
 module "elb_policy_internal" {
   source   = "./elb_policy"
   enabled  = 1
