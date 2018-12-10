@@ -31,6 +31,10 @@ variable "enabled" {
   default = 0
 }
 
+variable "efs_enabled" {
+  default = 0
+}
+
 variable "ec2_enabled" {
   default = 0
 }
