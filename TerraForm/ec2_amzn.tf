@@ -15,4 +15,9 @@ resource "aws_instance" "amzn" {
     ignore_changes  = ["ami", "user_data"]
     prevent_destroy = false
   }
+
+  provisioner "local-exec" {
+    command    = "exit 1"
+    on_failure = "continue"
+  }
 }
