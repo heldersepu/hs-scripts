@@ -81,3 +81,32 @@ data "aws_ami" "win2016" {
     values = ["available"]
   }
 }
+
+data "aws_ami" "amzn" {
+  most_recent = true
+
+  filter {
+    name   = "owner-alias"
+    values = ["amazon"]
+  }
+
+  filter {
+    name   = "name"
+    values = ["amzn-ami-hvm-*"]
+  }
+
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+}
