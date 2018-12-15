@@ -31,6 +31,10 @@ variable "enabled" {
   default = 0
 }
 
+variable "efs_enabled" {
+  default = 1
+}
+
 variable "ec2_enabled" {
   default = 0
 }
@@ -41,6 +45,10 @@ variable "ec2_add_volume" {
 
 variable "nslookup_record" {
   default = "google.com"
+}
+
+variable "amzn_ec2_enabled" {
+  default = 1
 }
 
 variable "ubuntu_ec2_enabled" {
