@@ -75,3 +75,7 @@ output "complex_map__first" {
   value = "${var.complex_map[0]}"
 }
 */
+
+output "const_env" {
+  value = "${module.constants.enviroments}"
+}
