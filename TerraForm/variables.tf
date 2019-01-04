@@ -1,3 +1,7 @@
+module "constants" {
+  source = "./constants"
+}
+
 variable "ip_ranges" {
   type = "map"
 
@@ -32,7 +36,7 @@ variable "enabled" {
 }
 
 variable "efs_enabled" {
-  default = 1
+  default = 0
 }
 
 variable "ec2_enabled" {
@@ -48,7 +52,7 @@ variable "nslookup_record" {
 }
 
 variable "amzn_ec2_enabled" {
-  default = 1
+  default = 0
 }
 
 variable "ubuntu_ec2_enabled" {
