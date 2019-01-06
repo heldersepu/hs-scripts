@@ -18,12 +18,41 @@ resource "aws_instance" "ubuntu" {
     prevent_destroy       = false
   }
 
+  provisioner "file" {
+    source      = "~/Downloads/GlobalProtect_deb-4.1.2.0-6.deb"
+    destination = "/tmp/GlobalProtect_deb-4.1.2.0-6.deb"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file("~/Downloads/AWS_keys/test.pem")}"
+      host        = "${self.public_dns}"
+    }
+  }
+
+  provisioner "file" {
+    source      = "~/VPN.sh"
+    destination = "~/VPN.sh"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file("~/Downloads/AWS_keys/test.pem")}"
+      host        = "${self.public_dns}"
+    }
+  }
+
   provisioner "remote-exec" {
     inline = [
       "ls -la > test.log",
-      "sudo apt-get update",
-      "sudo apt-get -y install gdebi-core python-minimal",
-      "cat /var/log/cloud-init-output.log",
+      "sudo apt update",
+      "sudo apt -y install awscli",
+      "sudo apt -y install gdebi-core python-minimal",
+      "sudo apt -y install net-tools unzip ansible",
+      "wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip",
+      "unzip terraform_0.11.11_linux_amd64.zip",
+      "sudo mv terraform /usr/local/bin/",
+      "sudo apt -y install /tmp/GlobalProtect_deb-4.1.2.0-6.deb"
     ]
 
     connection {
