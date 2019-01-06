@@ -56,7 +56,7 @@ variable "amzn_ec2_enabled" {
 }
 
 variable "ubuntu_ec2_enabled" {
-  default = 0
+  default = 1
 }
 
 variable "alpine_ec2_enabled" {

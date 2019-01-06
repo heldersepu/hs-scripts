@@ -36,6 +36,7 @@ resource "aws_instance" "ubuntu" {
 
   provisioner "local-exec" {
     command = "${data.template_file.nslookup_check.rendered}"
+    interpreter = ["/bin/bash", "-c"]
   }
 }
 
