@@ -69,15 +69,14 @@ resource "aws_instance" "ubuntu" {
   provisioner "remote-exec" {
     inline = [
       "ls -la > test.log",
-      "sudo apt update",
-      "sudo apt -y install python-pip build-essential",
+      "sudo apt-get update",
+      "sudo apt-get -y install python-pip build-essential",
       "pip install --upgrade pip",
-      "pip install awscli --upgrade --user",
-      "sudo apt -y install net-tools unzip ansible expect",
+      "sudo apt-get -y install net-tools unzip ansible expect awscli",
       "wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip",
       "unzip terraform_0.11.11_linux_amd64.zip",
       "sudo mv terraform /usr/local/bin/",
-      "sudo apt -y install /tmp/GlobalProtect_deb-4.1.2.0-6.deb",
+      "sudo apt-get -y install /tmp/GlobalProtect_deb-4.1.2.0-6.deb",
       "mkdir code && cd code",
       "git clone https://github.com/heldersepu/hs-scripts.git",
       "git clone https://github.com/jamesob/desk.git",
@@ -85,7 +84,7 @@ resource "aws_instance" "ubuntu" {
       "printf \"\n# Hook for desk activation\n\" >> ~/.bashrc",
       "echo '[ -n \"$DESK_ENV\" ] && source \"$DESK_ENV\" || true' >> ~/.bashrc",
       "echo '' > ~/.ssh/known_hosts",
-      "sudo rm -f  /etc/update-motd.d/*",
+      "sudo rm -f /etc/update-motd.d/*",
       "echo ${self.public_dns}",
     ]
 
