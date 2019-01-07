@@ -66,6 +66,18 @@ resource "aws_instance" "ubuntu" {
     }
   }
 
+  provisioner "file" {
+    source      = "~/.aws"
+    destination = "~"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file("~/Downloads/AWS_keys/test.pem")}"
+      host        = "${self.public_dns}"
+    }
+  }
+
   provisioner "remote-exec" {
     inline = [
       "ls -la > test.log",
