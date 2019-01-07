@@ -1,7 +1,7 @@
 resource "aws_instance" "ubuntu" {
   count                  = "${var.ubuntu_ec2_enabled}"
   ami                    = "${data.aws_ami.ubuntu.id}"
-  instance_type          = "m5d.large"
+  instance_type          = "m5d.xlarge"
   key_name               = "${aws_key_pair.sshkey.key_name}"
   vpc_security_group_ids = ["${aws_security_group.allow_all.id}"]
   availability_zone      = "${data.aws_availability_zones.available.names[0]}"
@@ -13,9 +13,21 @@ resource "aws_instance" "ubuntu" {
   }
 
   lifecycle {
-    ignore_changes        = ["ami", "instance_type", "ebs_optimized", "volume_tags", "ebs_block_device"]
+    ignore_changes        = ["ami", "ebs_optimized", "volume_tags", "ebs_block_device"]
     create_before_destroy = true
     prevent_destroy       = false
+  }
+  
+  provisioner "file" {
+    source      = "~/.bash_history"
+    destination = "~/.bash_history"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file("~/Downloads/AWS_keys/test.pem")}"
+      host        = "${self.public_dns}"
+    }
   }
 
   provisioner "file" {
