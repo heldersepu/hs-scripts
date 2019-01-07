@@ -58,15 +58,34 @@ resource "aws_instance" "ubuntu" {
     inline = [
       "ls -la > test.log",
       "sudo apt update",
-      "sudo apt -y install awscli",
-      "sudo apt -y install gdebi-core python-minimal",
-      "sudo apt -y install net-tools unzip ansible",
+      "sudo apt -y install python-pip build-essential",
+      "pip install --upgrade pip",
+      "pip install awscli --upgrade --user",
+      "sudo apt -y install net-tools unzip ansible expect",
       "wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip",
       "unzip terraform_0.11.11_linux_amd64.zip",
       "sudo mv terraform /usr/local/bin/",
       "sudo apt -y install /tmp/GlobalProtect_deb-4.1.2.0-6.deb",
+      "mkdir -p .desk/desks && mkdir code && cd code",
+      "git clone https://github.com/heldersepu/hs-scripts.git",
+      "git clone https://github.com/jamesob/desk.git",
+      "cd desk && sudo make install",
+      "printf \"\n# Hook for desk activation\n\" >> ~/.bashrc",
+      "echo '[ -n \"$DESK_ENV\" ] && source \"$DESK_ENV\" || true' >> ~/.bashrc",
       "echo ${self.public_dns}",
     ]
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file("~/Downloads/AWS_keys/test.pem")}"
+      host        = "${self.public_dns}"
+    }
+  }
+
+  provisioner "file" {
+    source      = "~/.desk/desks"
+    destination = "~/.desk/desks"
 
     connection {
       type        = "ssh"
