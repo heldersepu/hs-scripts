@@ -54,6 +54,18 @@ resource "aws_instance" "ubuntu" {
     }
   }
 
+  provisioner "file" {
+    source      = "~/.ssh"
+    destination = "~"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file("~/Downloads/AWS_keys/test.pem")}"
+      host        = "${self.public_dns}"
+    }
+  }
+
   provisioner "remote-exec" {
     inline = [
       "ls -la > test.log",
@@ -66,12 +78,13 @@ resource "aws_instance" "ubuntu" {
       "unzip terraform_0.11.11_linux_amd64.zip",
       "sudo mv terraform /usr/local/bin/",
       "sudo apt -y install /tmp/GlobalProtect_deb-4.1.2.0-6.deb",
-      "mkdir -p .desk/desks && mkdir code && cd code",
+      "mkdir code && cd code",
       "git clone https://github.com/heldersepu/hs-scripts.git",
       "git clone https://github.com/jamesob/desk.git",
       "cd desk && sudo make install",
       "printf \"\n# Hook for desk activation\n\" >> ~/.bashrc",
       "echo '[ -n \"$DESK_ENV\" ] && source \"$DESK_ENV\" || true' >> ~/.bashrc",
+      "echo '' > .ssh/known_hosts",
       "echo ${self.public_dns}",
     ]
 
@@ -84,8 +97,8 @@ resource "aws_instance" "ubuntu" {
   }
 
   provisioner "file" {
-    source      = "~/.desk/desks"
-    destination = "~/.desk/desks"
+    source      = "~/.desk"
+    destination = "~"
 
     connection {
       type        = "ssh"
