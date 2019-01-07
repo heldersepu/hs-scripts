@@ -17,7 +17,7 @@ resource "aws_instance" "ubuntu" {
     create_before_destroy = true
     prevent_destroy       = false
   }
-  
+
   provisioner "file" {
     source      = "~/.bash_history"
     destination = "~/.bash_history"
@@ -64,7 +64,8 @@ resource "aws_instance" "ubuntu" {
       "wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip",
       "unzip terraform_0.11.11_linux_amd64.zip",
       "sudo mv terraform /usr/local/bin/",
-      "sudo apt -y install /tmp/GlobalProtect_deb-4.1.2.0-6.deb"
+      "sudo apt -y install /tmp/GlobalProtect_deb-4.1.2.0-6.deb",
+      "echo ${self.public_dns}",
     ]
 
     connection {
@@ -76,7 +77,7 @@ resource "aws_instance" "ubuntu" {
   }
 
   provisioner "local-exec" {
-    command = "${data.template_file.nslookup_check.rendered}"
+    command     = "${data.template_file.nslookup_check.rendered}"
     interpreter = ["/bin/bash", "-c"]
   }
 }
