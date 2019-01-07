@@ -84,7 +84,8 @@ resource "aws_instance" "ubuntu" {
       "cd desk && sudo make install",
       "printf \"\n# Hook for desk activation\n\" >> ~/.bashrc",
       "echo '[ -n \"$DESK_ENV\" ] && source \"$DESK_ENV\" || true' >> ~/.bashrc",
-      "echo '' > .ssh/known_hosts",
+      "echo '' > ~/.ssh/known_hosts",
+      "sudo rm -f  /etc/update-motd.d/*",
       "echo ${self.public_dns}",
     ]
 
