@@ -80,15 +80,14 @@ resource "aws_instance" "ubuntu" {
 
   provisioner "remote-exec" {
     inline = [
-      "ls -la > test.log",
       "sudo apt-get update -qq",
-      "sudo apt-get -qq install python-pip build-essential",
+      "sudo apt-get -qq install python-pip build-essential > /dev/null",
       "pip install --quiet --upgrade pip",
-      "sudo apt-get -qq install net-tools unzip ansible expect awscli",
+      "sudo apt-get -qq install net-tools unzip ansible expect awscli > /dev/null",
       "wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip",
       "unzip terraform_0.11.11_linux_amd64.zip",
       "sudo mv terraform /usr/local/bin/",
-      "sudo apt-get -qq install /tmp/GlobalProtect_deb-4.1.2.0-6.deb",
+      "sudo apt-get -qq install /tmp/GlobalProtect_deb-4.1.2.0-6.deb > /dev/null",
       "mkdir code && cd code",
       "git clone --quiet https://github.com/heldersepu/hs-scripts.git",
       "git clone --quiet https://github.com/jamesob/desk.git",
