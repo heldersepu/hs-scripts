@@ -97,7 +97,14 @@ resource "aws_instance" "ubuntu" {
       "echo '[ -n \"$DESK_ENV\" ] && source \"$DESK_ENV\" || true' >> ~/.bashrc",
       "echo '' > ~/.ssh/known_hosts",
       "sudo rm -f /etc/update-motd.d/*",
+      "echo ''",
+      "aws --version",
+      "desk --version",
+      "ansible --version",
+      "terraform --version",
       "echo ${self.public_dns}",
+      "echo ''",
+
     ]
 
     connection {
