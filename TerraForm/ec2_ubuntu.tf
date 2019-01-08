@@ -97,6 +97,7 @@ resource "aws_instance" "ubuntu" {
       "echo '' > ~/.ssh/known_hosts",
       "sudo rm -f /etc/update-motd.d/*",
       "echo ''",
+      "go version",
       "aws --version",
       "desk --version",
       "make --version",
