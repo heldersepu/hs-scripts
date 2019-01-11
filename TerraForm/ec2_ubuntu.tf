@@ -13,7 +13,7 @@ resource "aws_instance" "ubuntu" {
   }
 
   lifecycle {
-    ignore_changes        = ["ami", "ebs_optimized", "volume_tags", "ebs_block_device"]
+    ignore_changes        = ["ebs_optimized", "volume_tags", "ebs_block_device"]
     create_before_destroy = true
     prevent_destroy       = false
   }
