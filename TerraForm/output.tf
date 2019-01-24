@@ -1,4 +1,3 @@
-/*
 output "aws_availability_zones_names" {
   value = "${data.aws_availability_zones.available.names}"
 }
@@ -78,5 +77,3 @@ output "complex_map__first" {
 output "const_env" {
   value = "${module.constants.enviroments}"
 }
-*/
-
