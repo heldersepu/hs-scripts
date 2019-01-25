@@ -1,3 +1,4 @@
+/*
 output "aws_availability_zones_names" {
   value = "${data.aws_availability_zones.available.names}"
 }
@@ -73,7 +74,7 @@ output "complex_map__length" {
 output "complex_map__first" {
   value = "${var.complex_map[0]}"
 }
-
+*/
 output "const_env" {
   value = "${module.constants.enviroments}"
 }
