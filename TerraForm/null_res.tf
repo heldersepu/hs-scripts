@@ -23,3 +23,11 @@ resource "null_resource" "tion" {
     command = "echo destroy ${var.vpc_ids[count.index]}"
   }
 }
+
+resource "null_resource" "sh_test" {
+  provisioner "local-exec" {
+    when    = "create"
+    command = "if [ '${join(",", var.vpc_ids)}' != '' ]; then echo 'GOOD TO GO'; else echo 'NO VPC FOUND'; fi"
+    interpreter = ["/bin/sh", "-c"]
+  }
+}
