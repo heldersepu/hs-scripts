@@ -25,6 +25,7 @@ resource "aws_default_network_acl" "default" {
   default_network_acl_id = "${aws_vpc.myvpc.default_network_acl_id}"
 
   lifecycle {
+    #this prevent constant changes on every deployment
     ignore_changes = ["subnet_ids"]
   }
 
