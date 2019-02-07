@@ -115,3 +115,7 @@ variable "complex_map" {
     },
   ]
 }
+
+locals {
+  joinlist = "{{#is_alert}}Foo:${join(" ", var.some_ips)}{{/is_alert}} {{#is_warning}}Bar:${join(" ", var.some_ips)}{{/is_warning}}"
+}

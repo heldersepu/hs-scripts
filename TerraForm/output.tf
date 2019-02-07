@@ -78,3 +78,7 @@ output "complex_map__first" {
 output "const_env" {
   value = "${module.constants.enviroments}"
 }
+
+output "joinlist" {
+  value = "${local.joinlist}"
+}
