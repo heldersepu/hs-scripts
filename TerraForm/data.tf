@@ -38,7 +38,7 @@ data "aws_ami" "alpine" {
 
   filter {
     name   = "name"
-    values = ["Alpine*Hardened*"]
+    values = ["Alpine*"]
   }
 
   filter {
