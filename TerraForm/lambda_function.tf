@@ -19,7 +19,7 @@ EOF
 }
 
 locals {
-    concurrent_exec = -1
+  concurrent_exec = -1
 }
 
 resource "aws_lambda_function" "test_lambda" {
@@ -29,8 +29,12 @@ resource "aws_lambda_function" "test_lambda" {
   handler          = "exports.test"
   source_code_hash = "${base64sha256(file("lambda_function_payload.zip"))}"
   runtime          = "nodejs8.10"
-  
+
   reserved_concurrent_executions = "${local.concurrent_exec}"
+
+  lifecycle {
+    ignore_changes = ["reserved_concurrent_executions"]
+  }
 
   environment {
     variables = {
