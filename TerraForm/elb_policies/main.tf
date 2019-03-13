@@ -43,6 +43,7 @@ resource "aws_load_balancer_listener_policy" "vault_server_listener_policies" {
 
   policy_names = [
     "${aws_load_balancer_policy.policy_tls_1_1.policy_name}",
+    "${aws_lb_cookie_stickiness_policy.cookie_stickiness_policy.name}",
   ]
 }
 
