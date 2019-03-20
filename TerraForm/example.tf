@@ -9,6 +9,12 @@ module "bucket11" {
   ip_ranges = "${var.ip_ranges}"
 }
 
+resource "null_resource" "reference_test" {
+  triggers {
+    one = "${module.bucket11.enabled}"
+  }
+}
+
 resource "aws_ebs_volume" "data" {
   count             = "1"
   availability_zone = "us-east-1a"
