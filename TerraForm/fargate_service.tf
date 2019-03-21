@@ -1,6 +1,7 @@
 # https://hub.docker.com/r/andyshinn/dnsmasq/~/dockerfile/
 
 resource "aws_ecs_task_definition" "test" {
+  count                    = 0
   family                   = "testscheduler"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
@@ -25,10 +26,12 @@ DEFINITION
 }
 
 resource "aws_ecs_cluster" "test" {
-  name = "aws_ecs_cluster"
+  count = 0
+  name  = "aws_ecs_cluster"
 }
 
 resource "aws_ecs_service" "test" {
+  count           = 0
   name            = "aws_ecs_service"
   cluster         = "${aws_ecs_cluster.test.id}"
   task_definition = "${aws_ecs_task_definition.test.arn}"
