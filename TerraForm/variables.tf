@@ -44,7 +44,7 @@ variable "ec2_enabled" {
 }
 
 variable "ec2_add_volume" {
-  default = 4
+  default = 0
 }
 
 variable "nslookup_record" {

@@ -1,4 +1,5 @@
 resource "aws_customer_gateway" "gate" {
+  count      = "${var.vpn_enabled}"
   bgp_asn    = 65533
   ip_address = "172.83.124.10"
   type       = "ipsec.1"

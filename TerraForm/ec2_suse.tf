@@ -31,7 +31,7 @@ resource "aws_instance" "suse12" {
   }
 
   lifecycle {
-    ignore_changes  = ["ami", "instance_type", "ebs_optimized", "volume_tags", "ebs_block_device"]
+    ignore_changes  = ["ami", "instance_type", "ebs_optimized", "volume_tags"]
     prevent_destroy = false
   }
 
