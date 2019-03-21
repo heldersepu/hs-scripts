@@ -40,7 +40,7 @@ variable "efs_enabled" {
 }
 
 variable "ec2_enabled" {
-  default = 0
+  default = 1
 }
 
 variable "ec2_add_volume" {

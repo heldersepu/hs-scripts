@@ -11,7 +11,7 @@ resource "aws_instance" "suse12" {
     device_name           = "/dev/sdg"
     volume_type           = "gp2"
     volume_size           = "27"
-    delete_on_termination = true
+    delete_on_termination = false
   }
 
   ephemeral_block_device {
