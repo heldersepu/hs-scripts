@@ -40,10 +40,10 @@ resource "pagerduty_service" "example" {
   escalation_policy       = "${pagerduty_escalation_policy.foo.id}"
 }
 
-resource "pagerduty_extension" "slack"{
-  name = "My Web App Extension"  
-  extension_schema = "${data.pagerduty_extension_schema.webhook.id}"
-  extension_objects    = ["${pagerduty_service.example.id}"]
+resource "pagerduty_extension" "slack" {
+  name              = "My Web App Extension"
+  extension_schema  = "${data.pagerduty_extension_schema.webhook.id}"
+  extension_objects = ["${pagerduty_service.example.id}"]
 
   config = <<EOF
 {
@@ -56,5 +56,4 @@ resource "pagerduty_extension" "slack"{
     "access_token": "XXX"
 }
 EOF
-
 }
