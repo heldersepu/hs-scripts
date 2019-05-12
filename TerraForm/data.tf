@@ -110,3 +110,18 @@ data "aws_ami" "amzn" {
     values = ["hvm"]
   }
 }
+
+data "aws_ami" "wordpress" {
+  most_recent = true
+  owners      = ["979382823631"]
+
+  filter {
+    name   = "name"
+    values = ["*bitnami-wordpresspro-5.2*"]
+  }
+
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]
+  }
+}
