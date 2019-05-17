@@ -1,0 +1,26 @@
+<canvas id="canvas" height=175 width=500 style="border:1px solid #000;">
+</canvas>
+
+<script>
+    var canvas = document.getElementById("canvas");
+    ctx = canvas.getContext("2d");
+
+    function drawText(text, font, x, y, width, height) {
+    ctx.beginPath();
+    ctx.rect(x, y, width, height);
+    ctx.stroke();
+    var mt
+    for (i=4;i<=180;i++) {
+        ctx.font = i + "px " + font;
+        mt = ctx.measureText(text)
+        if (mt.width > width) break
+    }
+    ctx.fillText(text, x, y+height);
+    }
+
+    drawText("HS", "arial", 10, 10, 20, 20)
+    drawText("HS", "arial", 60, 20, 40, 80)
+    drawText("HS", "arial", 120, 30, 80, 30)
+    drawText("HS", "arial", 220, 40, 80, 80)
+    drawText("HS", "arial", 320, 10, 140, 140)
+</script>
