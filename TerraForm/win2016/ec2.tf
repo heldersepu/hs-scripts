@@ -3,9 +3,12 @@ provider "aws" {
 }
 
 data "aws_ami" "win2016" {
+  most_recent = true
+  owners      = ["amazon"]
+
   filter {
-    name   = "image-id"
-    values = ["ami-0327667c"]
+    name   = "name"
+    values = ["Windows_Server-2016-English-Full-Base*"]
   }
 }
 
@@ -45,4 +48,8 @@ resource "aws_instance" "win2016" {
       insecure = true
     }
   }
+}
+
+output "Administrator_Password" {
+  value = "${rsadecrypt(aws_instance.win2016.password_data, file("~/Downloads/AWS_keys/test.pem"))}"
 }
