@@ -5,13 +5,17 @@ provider "sumologic" {
 }
 
 resource "sumologic_collector" "example_collector" {
-  name     = "Hosted Collector"
+  name     = "Test Collector"
   category = "my/source/category"
 }
 
 resource "sumologic_role" "example_role" {
   name        = "TestRole"
   description = "Testing resource sumologic_role"
+
+  lifecycle {
+    ignore_changes = ["users"]
+  }
 }
 
 resource "sumologic_user" "example_user" {
