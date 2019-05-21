@@ -5,12 +5,12 @@ provider "sumologic" {
 }
 
 resource "sumologic_collector" "example_collector" {
-  name     = "Test Collector"
-  category = "my/source/category"
+  name     = "Test Collector123"
+  category = "my/source/category2"
 }
 
 resource "sumologic_role" "example_role" {
-  name        = "TestRole"
+  name        = "TestRole123"
   description = "Testing resource sumologic_role"
 
   lifecycle {
@@ -18,9 +18,17 @@ resource "sumologic_role" "example_role" {
   }
 }
 
-resource "sumologic_user" "example_user" {
+resource "sumologic_user" "example_user1" {
   first_name = "Jon"
   last_name  = "Doe"
-  email      = "jd@gmail.com"
+  email      = "jon.doe@gmail.com"
+  active     = false
+  role_ids   = ["${sumologic_role.example_role.id}"]
+}
+
+resource "sumologic_user" "example_user2" {
+  first_name = "Jane"
+  last_name  = "Smith"
+  email      = "jane.smith@gmail.com"
   role_ids   = ["${sumologic_role.example_role.id}"]
 }
