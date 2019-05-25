@@ -1,0 +1,251 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "V1",
+		"title": "JobsManagement",
+		"description": "Lorem ipsum dolor sit amet"
+	},
+	"host": "879www.my-api.us-east-1.amazonaws.com",
+	"schemes": [
+		"https"
+	],
+	"paths": {
+		"/dev/jobsManagement": {
+			"get": {
+				"tags": [
+					"JobsManagement"
+				],
+				"description": "## TESTING ",
+				"operationId": "JobsManagement_Get",
+				"consumes": [],
+				"produces": [
+					"application/json",
+					"text/json",
+					"text/html"
+				],
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "## MARKDOWN DoubleHash \n`MARKDOWN code` ",
+						"schema": {
+							"$ref": "#/definitions/MyData"
+						}
+					}
+				}
+			},
+			"put": {
+				"tags": [
+					"JobsManagement"
+				],
+				"operationId": "JobsManagement_Put",
+				"consumes": [
+					"application/json",
+					"text/json",
+					"text/html"
+				],
+				"produces": [
+					"application/json",
+					"text/json",
+					"text/html"
+				],
+				"parameters": [
+					{
+						"name": "Coordinates",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"items": {
+								"$ref": "#/definitions/Coordinate"
+							},
+							"xml": {
+								"name": "Coordinate",
+								"wrapped": true
+							},
+							"type": "array"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			},
+			"post": {
+				"tags": [
+					"JobsManagement"
+				],
+				"description": "foo | bar",
+				"operationId": "JobsManagement_Post",
+				"consumes": [
+					"application/json",
+					"text/json",
+					"text/html"
+				],
+				"produces": [
+					"application/json",
+					"text/json",
+					"text/html"
+				],
+				"parameters": [
+					{
+						"name": "t",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"items": {
+								"$ref": "#/definitions/TestModel"
+							},
+							"xml": {
+								"name": "TestModel",
+								"wrapped": true
+							},
+							"type": "array"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": [
+					"JobsManagement"
+				],
+				"description": "delete stuff",
+				"operationId": "JobsManagement_Delete",
+				"consumes": [
+					"application/json",
+					"text/json",
+					"text/html"
+				],
+				"produces": [
+					"application/json",
+					"text/json",
+					"text/html"
+				],
+				"parameters": [
+					{
+						"name": "x",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"type": "object"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"TestModel": {
+			"properties": {
+				"id": {
+					"example": 123,
+					"type": "integer",
+					"format": "int32"
+				},
+				"guid": {
+					"example": "00000000-0000-0000-0000-000000000000",
+					"type": "string",
+					"format": "uuid"
+				},
+				"did": {
+					"example": 9858.216,
+					"type": "number",
+					"format": "double"
+				},
+				"keys": {
+					"items": {
+						"type": "string"
+					},
+					"example": [
+						"abc",
+						"def",
+						"ghi"
+					],
+					"type": "array"
+				}
+			},
+			"xml": {
+				"name": "Test"
+			},
+			"type": "object"
+		},
+		"MyData": {
+			"description": "My super duper data",
+			"properties": {
+				"id": {
+					"description": "The unique identifier",
+					"example": 123,
+					"type": "integer",
+					"format": "int32"
+				},
+				"name": {
+					"displayName": "Role Name",
+					"description": "Everyone needs a name",
+					"type": "string"
+				},
+				"details": {
+					"description": "Details",
+					"type": "string"
+				}
+			},
+			"xml": {
+				"name": "MyData"
+			},
+			"type": "object"
+		},
+		"Coordinate": {
+			"properties": {
+				"Elev": {
+					"description": "**Elevation**: is the height above or below a fixed reference point.",
+					"example": "2.6",
+					"type": "number",
+					"format": "float"
+				},
+				"Lat": {
+					"description": "**Latitude**: a geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
+					"example": "25.85",
+					"type": "number",
+					"format": "float",
+					"maximum": 90,
+					"minimum": -90
+				},
+				"Lon": {
+					"description": "**Longitude**: a geographic coordinate that specifies the east-west position of a point on the Earth's surface.",
+					"example": "-80.27",
+					"type": "number",
+					"format": "float",
+					"maximum": 180,
+					"minimum": -180
+				}
+			},
+			"xml": {
+				"name": "Coordinate"
+			},
+			"type": "object"
+		}
+	},
+	"tags": [
+		{
+			"name": "JobsManagement"
+		}
+	]
+}
