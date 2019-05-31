@@ -1,5 +1,5 @@
 resource "aws_kms_key" "data_bucket_kms" {
-  count       = 0 
+  count       = 0
   description = "This key is used to encrypt bucket data related bucket objects"
 }
 

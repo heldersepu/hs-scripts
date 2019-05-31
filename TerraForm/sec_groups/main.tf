@@ -1,6 +1,6 @@
 variable "vpc_ids" {
   default = ["vpc-f8182000"]
-  type = "list"
+  type    = "list"
 }
 
 data "aws_security_groups" "sgs" {

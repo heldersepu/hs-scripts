@@ -1,5 +1,5 @@
 variable "test" {
-  type    = "string"
+  type = "string"
 }
 
 locals {

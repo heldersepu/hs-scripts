@@ -46,4 +46,3 @@ resource "aws_load_balancer_listener_policy" "vault_server_listener_policies" {
     "${aws_lb_cookie_stickiness_policy.cookie_stickiness_policy.name}",
   ]
 }
-

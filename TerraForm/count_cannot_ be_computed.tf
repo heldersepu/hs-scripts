@@ -6,5 +6,5 @@ resource "aws_ebs_volume" "evol" {
 
 module "test" {
   source = "aws_keys"
-  test = "${aws_ebs_volume.evol.arn}"
+  test   = "${aws_ebs_volume.evol.arn}"
 }
