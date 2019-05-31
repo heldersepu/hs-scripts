@@ -10,8 +10,6 @@ resource "aws_key_pair" "test_sshkey" {
   public_key = "${file("~/Downloads/AWS_keys/test.pem.pub")}"
 }
 
-
 output "var_len" {
   value = "${length(var.test["de"])}"
 }
-

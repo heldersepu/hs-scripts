@@ -28,7 +28,7 @@ resource "aws_subnet" "test_app1" {
 }
 
 resource "aws_lb_cookie_stickiness_policy" "cookie_stickiness_policy" {
-  count = 0
+  count                    = 0
   name                     = "cookieStickinessPolicy"
   load_balancer            = "${aws_elb.elb.id}"
   lb_port                  = "443"
