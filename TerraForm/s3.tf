@@ -1,3 +1,7 @@
+locals {
+  s3_expiration = 50
+}
+
 resource "aws_s3_bucket" "sample_bucket12629" {
   count  = "${var.buckets}"
   bucket = "my-tf-test-bucket12629"
@@ -8,16 +12,21 @@ resource "aws_s3_bucket" "sample_bucket12629" {
   }
 
   lifecycle_rule {
-    id      = "ColdStorage"
+    id      = "BucketExpiration"
     enabled = true
-
-    transition {
-      days          = 2
-      storage_class = "GLACIER"
-    }
 
     expiration {
       days = 10
+    }
+  }
+
+  lifecycle_rule {
+    id      = "ColdStorage"
+    enabled = "${local.s3_expiration > 100 ? true: false}"
+
+    transition {
+      days          = 100
+      storage_class = "GLACIER"
     }
   }
 
