@@ -16,7 +16,7 @@ resource "aws_s3_bucket" "sample_bucket12629" {
     enabled = true
 
     expiration {
-      days = 10
+      days = "${local.s3_expiration}"
     }
   }
 
