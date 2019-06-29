@@ -1,0 +1,4987 @@
+---
+swagger: "2.0"
+info:
+  description: "# Getting Started\nWelcome to the Sumo Logic API reference. You can\
+    \ use these APIs to interact with the Sumo Logic platform. For information on\
+    \ the collector and search APIs see our [API home page](https://help.sumologic.com/APIs).\n\
+    ## API Endpoints\nSumo Logic has several deployments in different geographic locations.\
+    \ You'll need to use the Sumo Logic API endpoint corresponding to your geographic\
+    \ location. See the table below for the different API endpoints by deployment.\
+    \  For details determining your account's deployment see [API endpoints](https://help.sumologic.com/?cid=3011).\n\
+    <table>\n  <tr>\n    <td> <strong>Deployment</strong> </td>\n    <td> <strong>Endpoint</strong>\
+    \ </td>\n  </tr>\n<tr>\n    <td> AU </td>\n    <td> https://api.au.sumologic.com/api/\
+    \ </td>\n  </tr>\n  <tr>\n    <td> CA </td>\n    <td> https://api.ca.sumologic.com/api/\
+    \ </td>\n  </tr>\n<tr>\n    <td> DE </td>\n    <td> https://api.de.sumologic.com/api/\
+    \ </td>\n  </tr>\n  <tr>\n    <td> EU </td>\n    <td> https://api.eu.sumologic.com/api/\
+    \ </td>\n  </tr>\n  <tr>\n    <td> JP </td>\n    <td> https://api.jp.sumologic.com/api/\
+    \ </td>\n  </tr>\n  <tr>\n    <td> US1 </td>\n    <td> https://api.sumologic.com/api/\
+    \ </td>\n  </tr>\n  <tr>\n    <td> US2 </td>\n    <td> https://api.us2.sumologic.com/api/\
+    \ </td>\n  </tr>\n</table>\n## Authentication\nSumo Logic supports the following\
+    \ options for API authentication:\n- Access ID and Access Key\n- Base64 encoded\
+    \ Access ID and Access Key\n\nSee [Access Keys](https://help.sumologic.com/Manage/Security/Access-Keys)\
+    \ to generate an Access Key. Make sure to copy the key you create, because it\
+    \ is displayed only once.\nWhen you have an Access ID and Access Key you can execute\
+    \ requests such as the following:\n  ```bash\n  curl -u \"<accessId>:<accessKey>\"\
+    \ -X GET https://api.YOUR_DEPLOYMENT.sumologic.com/api/v1/users/{id}\n  ```\n\n\
+    Where `YOUR_DEPLOYMENT` is either `au`, `ca`, `de`, `eu`, `jp`, `us1`, or `us2`.\
+    \ See [API endpoints](#section/API-Endpoints) for details.\n\nIf you prefer to\
+    \ use basic access authentication, you can do a Base64 encoding of your `<accessId>:<accessKey>`\
+    \ to authenticate your HTTPS request. The following is an example request, replace\
+    \ the placeholder `<encoded>` with your encoded Access ID and Access Key string:\n\
+    \  ```bash\n  curl -H \"Authorization: Basic <encoded>\" -X GET https://api.YOUR_DEPLOYMENT.sumologic.com/api/v1/users/{id}\n\
+    \  ```\n\n\nRefer to [API Authentication](https://help.sumologic.com/?cid=3012)\
+    \ for a Base64 example.\n\n## Status Codes\nGeneric status codes that apply to\
+    \ all our APIs. See the [HTTP status code registry](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml)\
+    \ for reference. <table>\n  <tr>\n    <td> <strong>HTTP Status Code</strong> </td>\n\
+    \    <td> <strong>Error Code</strong> </td>\n    <td> <strong>Description</strong>\
+    \ </td>\n  </tr>\n  <tr>\n    <td> 301 </td>\n    <td> moved </td>\n    <td> The\
+    \ requested resource SHOULD be accessed through returned URI in Location Header.</td>\n\
+    \  </tr>\n  <tr>\n    <td> 401 </td>\n    <td> unauthorized </td>\n    <td> Credential\
+    \ could not be verified. </td>\n  </tr>\n  <tr>\n    <td> 403 </td>\n    <td>\
+    \ forbidden </td>\n    <td> This operation is not allowed for your account type\
+    \ or the user doesn't have the role capability to perform this action. </td>\n\
+    \  </tr>\n  <tr>\n    <td> 404 </td>\n    <td> notfound </td>\n    <td> Requested\
+    \ resource could not be found. </td>\n  </tr>\n  <tr>\n    <td> 405 </td>\n  \
+    \  <td> method.unsupported </td>\n    <td> Unsupported method for URL. </td>\n\
+    \  </tr>\n  <tr>\n    <td> 415 </td>\n    <td> contenttype.invalid </td>\n   \
+    \ <td> Invalid content type. </td>\n  </tr>\n  <tr>\n    <td> 429 </td>\n    <td>\
+    \ rate.limit.exceeded </td>\n    <td> The API request rate is higher than 4 request\
+    \ per second or inflight API requests are higher than 10 request per second. </td>\n\
+    \  </tr>\n  <tr>\n    <td> 500 </td>\n    <td> internal.error </td>\n    <td>\
+    \ Internal server error. </td>\n  </tr>\n  <tr>\n    <td> 503 </td>\n    <td>\
+    \ service.unavailable </td>\n    <td> Service is currently unavailable. </td>\n\
+    \  </tr>\n</table>\n## Filtering\nSome API endpoints support filtering results\
+    \ on a specified set of fields. Each endpoint that supports filtering will list\
+    \ the fields that can be filtered. Multiple fields can be combined by using an\
+    \ ampersand `&` character.\n\nFor example, to get 20 users whose `firstName` is\
+    \ `John` and `lastName` is `Doe`:\n  ```bash\n  api.sumologic.com/v1/users?limit=20&firstName=John&lastName=Doe\n\
+    \  ```\n\n## Sorting\nSome API endpoints support sorting fields by using the `sortBy`\
+    \ query parameter. The default sort order is ascending. Prefix the field with\
+    \ a minus sign `-` to sort in descending order.\n\nFor example, to get 20 users\
+    \ sorted by their `email` in descending order:\n  ```bash\n  api.sumologic.com/v1/users?limit=20&sort=-email\n\
+    \  ```\n\n## Rate Limiting\n* A rate limit of four API requests per second (240\
+    \ requests per minute) applies to all API calls from a user.\n* A rate limit of\
+    \ 10 concurrent requests to any API endpoint applies to an access key.\n\nIf a\
+    \ rate is exceeded, a rate limit exceeded 429 status code is returned.\n\n## Generating\
+    \ Clients\nYou can generate clients from the YAML file to access the API.\n###\
+    \ Using Swagger Editor\n1. Get the YAML file from [here](/docs/sumologic-api.yaml).\n\
+    2. Paste the content of the YAML file in [Swagger Editor](https://editor.swagger.io/)\n\
+    3. Click on \"Generate Client\" to generate a client in your preferred language.\n\
+    \n### Using Swagger Codegen\n1. Download Swagger Codegen from [here](https://github.com/swagger-api/swagger-codegen).\n\
+    2. Build Swagger Codegen. See [README](https://github.com/swagger-api/swagger-codegen#building)\
+    \ for details.\n3. Download the [YAML file](/docs/sumologic-api.yaml) and save\
+    \ it locally. Let's say the file is saved as `sumologic-api.yaml` inside `sumo/spec/`\
+    \ directory.\n4. Use the following command to generate `python` client side code\
+    \ inside the `sumo/client/python` directory.\n  ```bash\n    java -jar swagger-codegen/modules/swagger-codegen-cli/target/swagger-codegen-cli.jar\
+    \ generate \\\n      -i sumo/spec/sumologic-api.yaml \\\n      -l python \\\n\
+    \      -o sumo/client/python\n  ```\n"
+  version: "1.0.0"
+  title: "Sumo Logic API"
+  x-logo:
+    url: "./sumologic_logo.png"
+basePath: "/api"
+tags:
+- name: "connectionManagement"
+  description: "Connection management API.\n\nSet up connections to send alerts to\
+    \ other tools. For more information see [Connections and Integrations](https://help.sumologic.com/?cid=1044).\n\
+    \n_This API is in private beta and is not available until given access. To participate\
+    \ in the beta program contact your Sumo Logic account representative._\n"
+  x-displayName: "Connections (Beta)"
+- name: "contentManagement"
+  description: "Content management API.\n\nYou can export, import, delete and copy\
+    \ content in your organization’s Library. For more information see [Library](https://help.sumologic.com/?cid=5173).\
+    \ You can perform the request as a Content Administrator by using the `isAdminMode`\
+    \ parameter. For more information see [Admin Mode](https://help.sumologic.com/Manage/Content_Sharing/Admin_Mode).\n\
+    <br/> <br/>\n### Example\nThe [Content Import API](#operation/beginAsyncImport)\
+    \ can be used to create or update a Search, Scheduled Search, or Dashboard. Here\
+    \ is an example creating a Scheduled Search:\n1. Get the identifier of your `Personal`\
+    \ folder.\n  ```bash\n  curl -X GET -u {ACCESS_ID}:{ACCESS_KEY} https://api.sumologic.com/api/v2/content/folders/personal\n\
+    \  ```\n\n  Find the identifier of your `Personal` folder in the response.\n \
+    \ ```json\n  {\n      ...\n      \"id\": \"0000000006A2E86F\", <----\n      \"\
+    name\": \"Personal\",\n      \"itemType\": \"Folder\",\n      ...\n  }\n  ```\n\
+    \n  You can use [getFolder](#operation/getFolder), [getAdminRecommededFolder](#operation/getAdminRecommendedFolderAsync),\n\
+    \  or [getGlobalFolder](#operation/getGlobalFolderAsync) endpoints to traverse\
+    \ the content tree and find the identifier of any\n  folder you want to manage.\n\
+    \n2. Use the [Content Import API](#operation/beginAsyncImport) to create a new\
+    \ Scheduled Search inside your\n  `Personal` folder.\n  ```bash\n  curl -X POST\
+    \ -u {ACCESS_ID}:{ACCESS_KEY} -H \"Content-Type: application/json\" -d @search.json\
+    \ https://api.sumologic.com/api/v2/content/folders/0000000006A2E86F/import\n \
+    \ ```\n\n  The data file `search.json` in the above command has the following\
+    \ `SavedSearchWithScheduleSyncDefinition` object.\n  ```json\n  // file: search.json\n\
+    \  {\n      \"type\": \"SavedSearchWithScheduleSyncDefinition\",\n      \"name\"\
+    : \"demo-scheduled-search\",\n      \"description\": \"Runs every hour with timerange\
+    \ of 15m and sends email notifications\",\n      \"search\": {\n          \"queryText\"\
+    : \"\\\"error\\\" and \\\"warn\\\"\",\n          \"defaultTimeRange\": \"-15m\"\
+    ,\n          \"byReceiptTime\": false,\n          \"viewName\": \"\",\n      \
+    \    \"viewStartTime\": null,\n          \"queryParameters\": []\n      },\n \
+    \     \"searchSchedule\": {\n          \"displayableTimeRange\": \"-15m\",\n \
+    \         \"parseableTimeRange\": {\n              \"from\": {\n             \
+    \     \"relativeTime\": \"-15m\",\n                  \"type\": \"RelativeTimeRangeBoundary\"\
+    \n              },\n              \"to\": null,\n              \"type\": \"BeginBoundedTimeRange\"\
+    \n          },\n          \"timeZone\": \"America/Los_Angeles\",\n          \"\
+    threshold\": null,\n          \"notification\": {\n              \"taskType\"\
+    : \"EmailSearchNotificationSyncDefinition\",\n              \"toList\": [\n  \
+    \                \"ops@acme.org\"\n              ],\n              \"subjectTemplate\"\
+    : \"Search Results: {{SearchName}}\",\n              \"includeQuery\": true,\n\
+    \              \"includeResultSet\": true,\n              \"includeHistogram\"\
+    : true,\n              \"includeCsvAttachment\": false\n          },\n       \
+    \   \"muteErrorEmails\": false,\n          \"scheduleType\": \"1Hour\",\n    \
+    \      \"parameters\": []\n      }\n  }\n  ```\n\n  The response of above request\
+    \ will have the job identifier that you can use to track the status of the import\
+    \ job.\n  ```json\n  {\n      \"id\": \"74DC17FA765C7443\"\n  }\n  ```\n\n3. Use\
+    \ the job identifier from the import request to get the [status](#operation/getAsyncImportStatus)\
+    \ of the\n  import job.\n  ```bash\n  curl -X GET -u {ACCESS_ID}:{ACCESS_KEY}\
+    \ https://api.sumologic.com/api/v2/content/folders/0000000006A2E86F/import/74DC17FA765C7443/status\n\
+    \  ```\n\n  If you are importing a large item, you might have to wait for the\
+    \ import job to finish. The following is an\n  example response from a completed\
+    \ job.\n  ```json\n  {\n      \"status\": \"Success\",\n      \"statusMessage\"\
+    : null,\n      \"error\": null\n  }\n  ```\n"
+  x-displayName: "Content"
+- name: "contentPermissions"
+  description: "Content permissions API.\n\nYou can share your folders, searches,\
+    \ and dashboards with specific users or roles. For more information see [Share\
+    \ Content](https://help.sumologic.com/?cid=8675309). You can perform the request\
+    \ as a Content Administrator by using the `isAdminMode` parameter. For more information\
+    \ see [Admin Mode](https://help.sumologic.com/Manage/Content_Sharing/Admin_Mode).\n"
+  x-displayName: "Permissions"
+- name: "extractionRuleManagement"
+  description: "Field extraction rule management API.\n\nField extraction rules allow\
+    \ you to parse fields from your log messages at the time the messages are ingested\
+    \ eliminating the need to parse fields in your query. For more information see\
+    \ [Manage Field Extraction](https://help.sumologic.com/?cid=5313).\n\n_This API\
+    \ is in private beta and is not available until given access. To participate in\
+    \ the beta program contact your Sumo Logic account representative._\n"
+  x-displayName: "Field Extraction Rules (Beta)"
+- name: "folderManagement"
+  description: "Folder management API.\n\nYou can add folders and subfolders to the\
+    \ Library in order to organize your content for easy access or to share content.\
+    \ For more information see [Add Folders to the Library](https://help.sumologic.com/?cid=5020).\
+    \ You can perform the request as a Content Administrator by using the `isAdminMode`\
+    \ parameter. For more information see [Admin Mode](https://help.sumologic.com/Manage/Content_Sharing/Admin_Mode).\n"
+  x-displayName: "Folders"
+- name: "ingestBudgetManagementV1"
+  description: "Ingest Budget management API.\n\nIngest Budgets allow you to control\
+    \ the capacity of daily ingestion volume sent to Sumo Logic from Collectors. For\
+    \ more information see [Ingest Budgets](https://help.sumologic.com/?cid=5235).\n"
+  x-displayName: "Ingest Budgets"
+- name: "metricsAlertMonitorManagement"
+  description: "Metrics Alert Monitor management API.\n\nAlert monitors allow you\
+    \ to monitor a time series and alert when the metric has crossed a static threshold\
+    \ by sending an email or webhook notification. For more information see [Metrics\
+    \ Monitors](https://help.sumologic.com/?cid=8002).\n\n_This API is in private\
+    \ beta and is not available until given access. To participate in the beta program\
+    \ contact your Sumo Logic account representative._\n"
+  x-displayName: "Metrics Alert Monitors (Beta)"
+- name: "partitionManagement"
+  description: "Partition management API.\n\nCreating a partition allows you to improve\
+    \ search performance by searching over a smaller number of messages. For more\
+    \ information see [Manage Partitions](https://help.sumologic.com/?cid=5231).\n\
+    \n_This API is in private beta and is not available until given access. To participate\
+    \ in the beta program contact your Sumo Logic account representative._\n"
+  x-displayName: "Partitions (Beta)"
+- name: "roleManagement"
+  description: "Role management API.\n\nRoles determine the functions that users are\
+    \ able to perform in Sumo Logic. To manage roles, you must have an administrator\
+    \ role or your role must have been assigned the manage users and roles capability.\
+    \ For more information see [Manage Roles](https://help.sumologic.com/?cid=5234).\n"
+  x-displayName: "Roles"
+- name: "scheduledViewManagement"
+  description: "Scheduled View management API.\n\nScheduled Views speed the search\
+    \ process for small and historical subsets of your data by functioning as a pre-aggregated\
+    \ index. For more information see [Manage Scheduled Views](https://help.sumologic.com/?cid=5128).\n\
+    \n_This API is in private beta and is not available until given access. To participate\
+    \ in the beta program contact your Sumo Logic account representative._\n"
+  x-displayName: "Scheduled Views (Beta)"
+- name: "userManagement"
+  description: "User management API.\n\nTo manage users, you must have the administrator\
+    \ role or your role must have been assigned the manage users and roles capability.\
+    \ For more information see [Manage Users](https://help.sumologic.com/?cid=1006).\n"
+  x-displayName: "Users"
+schemes:
+- "https"
+security:
+- basicAuth: []
+paths:
+  /v1/connections:
+    get:
+      tags:
+      - "connectionManagement"
+      summary: "Get a list of connections."
+      description: "Get a list of all connections in the organization. The response\
+        \ is paginated with a default limit of 100 connections per page.\n"
+      operationId: "listConnections"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "limit"
+        in: "query"
+        description: "Limit the number of connections returned in the response. The\
+          \ number of connections returned may be less than the `limit`.\n"
+        required: false
+        type: "integer"
+        default: 100
+        maximum: 1000
+        minimum: 1
+        format: "int32"
+      - name: "token"
+        in: "query"
+        description: "Continuation token to get the next page of results. A page object\
+          \ with the next continuation token is returned in the response body. Subsequent\
+          \ GET requests should specify the continuation token to get the next page\
+          \ of results. `token` is set to null when no more pages are left.\n"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "A paginated list of connections in the organization."
+          schema:
+            $ref: "#/definitions/ListConnectionsResponse"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      tags:
+      - "connectionManagement"
+      summary: "Create a new connection."
+      description: "Create a new connection in the organization."
+      operationId: "createConnection"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "ConnectionDefinition"
+        description: "Information about the new connection."
+        required: true
+        schema:
+          $ref: "#/definitions/ConnectionDefinition"
+      responses:
+        200:
+          description: "The connection has been created."
+          schema:
+            $ref: "#/definitions/Connection"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/connections/test:
+    post:
+      tags:
+      - "connectionManagement"
+      summary: "Test a new connection url."
+      description: "Test a new connection url is valid and can connect."
+      operationId: "testConnection"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "ConnectionDefinition"
+        description: "Information about the new connection."
+        required: true
+        schema:
+          $ref: "#/definitions/ConnectionDefinition"
+      responses:
+        200:
+          description: "The connection url has been tested."
+          schema:
+            $ref: "#/definitions/TestConnectionResponse"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/connections/{id}:
+    get:
+      tags:
+      - "connectionManagement"
+      summary: "Get a connection."
+      description: "Get a connection with the given identifier."
+      operationId: "getConnection"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of connection to return."
+        required: true
+        type: "string"
+      - name: "type"
+        in: "query"
+        description: "Type of connection to return. Valid values are `WebhookConnection`,\
+          \ `ServiceNowConnection`."
+        required: true
+        type: "string"
+        default: "WebhookConnection"
+      responses:
+        200:
+          description: "Connection object that was requested."
+          schema:
+            $ref: "#/definitions/Connection"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      tags:
+      - "connectionManagement"
+      summary: "Update a connection."
+      description: "Update an existing connection."
+      operationId: "updateConnection"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the connection to update."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "connectionDefinition"
+        description: "Information to update about the connection."
+        required: true
+        schema:
+          $ref: "#/definitions/ConnectionDefinition"
+      responses:
+        200:
+          description: "The connection was successfully modified."
+          schema:
+            $ref: "#/definitions/Connection"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete:
+      tags:
+      - "connectionManagement"
+      summary: "Delete a connection."
+      description: "Delete a connection with the given identifier."
+      operationId: "deleteConnection"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the connection to delete."
+        required: true
+        type: "string"
+      - name: "type"
+        in: "query"
+        description: "Type of connection to delete. Valid values are `WebhookConnection`,\
+          \ `ServiceNowConnection`."
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Connection was deleted successfully."
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/content/{id}/export:
+    post:
+      tags:
+      - "contentManagement"
+      summary: "Start a content export job."
+      description: "Schedule an asynchronous export of content with the given identifier.\
+        \ If the content item is a folder, everything under the folder is exported\
+        \ recursively with folder as the root. The results from this export are incompatible\
+        \ with the Library import feature in the Sumo user interface.\n"
+      operationId: "beginAsyncExport"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The identifier of the content item to export. Identifiers from\
+          \ the Library in the Sumo user interface are provided in decimal format\
+          \ which is incompatible with this API. The identifier needs to be in hexadecimal\
+          \ format.\n"
+        required: true
+        type: "string"
+      - name: "isAdminMode"
+        in: "header"
+        description: "Set this to \"true\" if you want to perform the request as a\
+          \ Content Administrator."
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Export job has been scheduled."
+          schema:
+            $ref: "#/definitions/BeginAsyncJobResponse"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/content/{contentId}/export/{jobId}/status:
+    get:
+      tags:
+      - "contentManagement"
+      summary: "Content export job status."
+      description: "Get status of asynchronous content export request for the given\
+        \ job identifier. On success, use [getExportResult](#operation/getAsyncExportResult)\
+        \ endpoint to get result of export job.\n"
+      operationId: "getAsyncExportStatus"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "contentId"
+        in: "path"
+        description: "The identifier of the exported content item."
+        required: true
+        type: "string"
+      - name: "jobId"
+        in: "path"
+        description: "The identifier of the asynchronous export job."
+        required: true
+        type: "string"
+      - name: "isAdminMode"
+        in: "header"
+        description: "Set this to \"true\" if you want to perform the request as a\
+          \ Content Administrator."
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "The status of the export job."
+          schema:
+            $ref: "#/definitions/AsyncJobStatus"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/content/{contentId}/export/{jobId}/result:
+    get:
+      tags:
+      - "contentManagement"
+      summary: "Content export job result."
+      description: "Get results from content export job for the given job identifier.\
+        \ The results from this export are incompatible with the Library import feature\
+        \ in the Sumo user interface.\n"
+      operationId: "getAsyncExportResult"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "contentId"
+        in: "path"
+        description: "The identifier of the exported content item."
+        required: true
+        type: "string"
+      - name: "jobId"
+        in: "path"
+        description: "The identifier of the asynchronous job."
+        required: true
+        type: "string"
+      - name: "isAdminMode"
+        in: "header"
+        description: "Set this to \"true\" if you want to perform the request as a\
+          \ Content Administrator."
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "The result of export job."
+          schema:
+            $ref: "#/definitions/ContentSyncDefinition"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/content/folders/{folderId}/import:
+    post:
+      tags:
+      - "contentManagement"
+      summary: "Start a content import job."
+      description: "Schedule an asynchronous import of content inside an existing\
+        \ folder with the given identifier. Import requests can be used to create\
+        \ or update content within a folder. Content items need to have a unique name\
+        \ within their folder. If there is already a content item with the same name\
+        \ in the folder, you can set the `overwrite` parameter to `true` to overwrite\
+        \ existing content items. By default, the `overwrite` parameter is set to\
+        \ `false`, where the import will fail if a content item with the same name\
+        \ already exist.\n"
+      operationId: "beginAsyncImport"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "folderId"
+        in: "path"
+        description: "The identifier of the folder to import into. Identifiers from\
+          \ the Library in the Sumo user interface are provided in decimal format\
+          \ which is incompatible with this API. The identifier needs to be in hexadecimal\
+          \ format.\n"
+        required: true
+        type: "string"
+      - name: "isAdminMode"
+        in: "header"
+        description: "Set this to \"true\" if you want to perform the request as a\
+          \ Content Administrator."
+        required: false
+        type: "string"
+      - in: "body"
+        name: "desiredContent"
+        description: "The content to import."
+        required: true
+        schema:
+          $ref: "#/definitions/ContentSyncDefinition"
+      - name: "overwrite"
+        in: "query"
+        description: "Set this to \"true\" to overwrite a content item if the name\
+          \ already exists."
+        required: false
+        type: "boolean"
+        default: false
+      responses:
+        200:
+          description: "Import job has been scheduled."
+          schema:
+            $ref: "#/definitions/BeginAsyncJobResponse"
+        default:
+          description: "The operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/content/folders/{folderId}/import/{jobId}/status:
+    get:
+      tags:
+      - "contentManagement"
+      summary: "Content import job status."
+      description: "Get the status of a content import job for the given job identifier."
+      operationId: "getAsyncImportStatus"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "folderId"
+        in: "path"
+        description: "The identifier of the folder to import into."
+        required: true
+        type: "string"
+      - name: "jobId"
+        in: "path"
+        description: "The identifier of the import request."
+        required: true
+        type: "string"
+      - name: "isAdminMode"
+        in: "header"
+        description: "Set this to \"true\" if you want to perform the request as a\
+          \ Content Administrator."
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "The status of the import job."
+          schema:
+            $ref: "#/definitions/AsyncJobStatus"
+        default:
+          description: "The operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/content/folders/{folderId}/synchronize:
+    post:
+      tags:
+      - "contentManagement"
+      summary: "Start a content synchronization job."
+      description: "_This API is deprecated. Use [Content Import API](#operation/beginAsyncImport)\
+        \ instead._\n\nEnsures that there's a copy of the content in question under\
+        \ the provided destination identifier. The content to synchronize must come\
+        \ from an asynchronous content export request.\n"
+      operationId: "beginSynchronization"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "folderId"
+        in: "path"
+        description: "The identifier of the folder to synchronize."
+        required: true
+        type: "string"
+      - name: "isAdminMode"
+        in: "header"
+        description: "Set this to \"true\" if you want to perform the request as a\
+          \ Content Administrator."
+        required: false
+        type: "string"
+      - in: "body"
+        name: "desiredContent"
+        required: true
+        schema:
+          $ref: "#/definitions/ContentSyncDefinition"
+      responses:
+        200:
+          description: "Synchronize job has been scheduled."
+          schema:
+            $ref: "#/definitions/BeginAsyncJobResponse"
+        default:
+          description: "The operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      deprecated: true
+  /v2/content/folders/{folderId}/synchronize/{jobId}/status:
+    get:
+      tags:
+      - "contentManagement"
+      summary: "Content synchronization job status."
+      description: "_This API is deprecated. Use [Content Import API](#operation/getAsyncImportStatus)\
+        \ instead._\n\nGet the status of a content synchronization job for the given\
+        \ job identifier.\n"
+      operationId: "synchronizationStatus"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "folderId"
+        in: "path"
+        description: "The identifier of the folder which was synchronized."
+        required: true
+        type: "string"
+      - name: "jobId"
+        in: "path"
+        description: "The identifier of the synchronization request."
+        required: true
+        type: "string"
+      - name: "isAdminMode"
+        in: "header"
+        description: "Set this to \"true\" if you want to perform the request as a\
+          \ Content Administrator."
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "The status of the synchronization job."
+          schema:
+            $ref: "#/definitions/AsyncJobStatus"
+        default:
+          description: "The operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      deprecated: true
+  /v2/content/{id}/delete:
+    delete:
+      tags:
+      - "contentManagement"
+      summary: "Start a content deletion job."
+      description: "Start asynchronous deletion of content with the given identifier.\n"
+      operationId: "beginAsyncDelete"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the content to delete. Identifiers from the Library\
+          \ in the Sumo user interface are provided in decimal format which is incompatible\
+          \ with this API. The identifier needs to be in hexadecimal format.\n"
+        required: true
+        type: "string"
+      - name: "isAdminMode"
+        in: "header"
+        description: "Set this to \"true\" if you want to perform the request as a\
+          \ Content Administrator."
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Deletion job has been scheduled."
+          schema:
+            $ref: "#/definitions/BeginAsyncJobResponse"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/content/{id}/delete/{jobId}/status:
+    get:
+      tags:
+      - "contentManagement"
+      summary: "Content deletion job status."
+      description: "Get status of asynchronous content deletion request for the given\
+        \ job identifier.\n"
+      operationId: "getAsyncDeleteStatus"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the content to delete."
+        required: true
+        type: "string"
+      - name: "jobId"
+        in: "path"
+        description: "The identifier of the asynchronous job."
+        required: true
+        type: "string"
+      - name: "isAdminMode"
+        in: "header"
+        description: "Set this to \"true\" if you want to perform the request as a\
+          \ Content Administrator."
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "The status of the delete job."
+          schema:
+            $ref: "#/definitions/AsyncJobStatus"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/content/{id}/copy:
+    post:
+      tags:
+      - "contentManagement"
+      summary: "Start a content copy job."
+      description: "Start asynchronous copy of content with the given identifier to\
+        \ the destination folder. If the content item is a folder, everything under\
+        \ the folder is copied recursively.\n"
+      operationId: "beginAsyncCopy"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The identifier of the content item to copy. Identifiers from\
+          \ the Library in the Sumo user interface are provided in decimal format\
+          \ which is incompatible with this API. The identifier needs to be in hexadecimal\
+          \ format.\n"
+        required: true
+        type: "string"
+      - name: "destinationFolder"
+        in: "query"
+        description: "The identifier of the destination folder."
+        required: true
+        type: "string"
+      - name: "isAdminMode"
+        in: "header"
+        description: "Set this to \"true\" if you want to perform the request as a\
+          \ Content Administrator."
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Copy job has been scheduled."
+          schema:
+            $ref: "#/definitions/BeginAsyncJobResponse"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/content/{id}/copy/{jobId}/status:
+    get:
+      tags:
+      - "contentManagement"
+      summary: "Content copy job status."
+      description: "Returns the status of the specified copy request."
+      operationId: "asyncCopyStatus"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The identifier of the content which was copied."
+        required: true
+        type: "string"
+      - name: "jobId"
+        in: "path"
+        description: "The identifier of the asynchronous copy request job."
+        required: true
+        type: "string"
+      - name: "isAdminMode"
+        in: "header"
+        description: "Set this to \"true\" if you want to perform the request as a\
+          \ Content Administrator."
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "The status of the copy job."
+          schema:
+            $ref: "#/definitions/AsyncJobStatus"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/content/{id}/permissions:
+    get:
+      tags:
+      - "contentPermissions"
+      summary: "Get permissions of a content item"
+      description: "Returns content permissions of a content item with the given identifier."
+      operationId: "getContentPermissions"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The identifier of the content item."
+        required: true
+        type: "string"
+      - name: "explicitOnly"
+        in: "query"
+        description: "There are two permission types: explicit and implicit. Permissions\
+          \ specifically assigned to the content item are explicit. Permissions derived\
+          \ from a parent content item, like a folder are implicit. To return only\
+          \ explicit permissions set this to true.\n"
+        required: false
+        type: "boolean"
+        default: false
+      - name: "isAdminMode"
+        in: "header"
+        description: "Set this to \"true\" if you want to perform the request as a\
+          \ Content Administrator."
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "A list of permissions for the requested content item."
+          schema:
+            $ref: "#/definitions/ContentPermissionResult"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/content/{id}/permissions/add:
+    put:
+      tags:
+      - "contentPermissions"
+      summary: "Add permissions to a content item."
+      description: "Add permissions to a content item with the given identifier."
+      operationId: "addContentPermissions"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The identifier of the content item."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "contentPermissionUpdateRequest"
+        description: "New permissions to add to the content item with the given identifier."
+        required: true
+        schema:
+          $ref: "#/definitions/ContentPermissionUpdateRequest"
+      - name: "isAdminMode"
+        in: "header"
+        description: "Set this to \"true\" if you want to perform the request as a\
+          \ Content Administrator."
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Updated permission object for the requested content item."
+          schema:
+            $ref: "#/definitions/ContentPermissionResult"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/content/{id}/permissions/remove:
+    put:
+      tags:
+      - "contentPermissions"
+      summary: "Remove permissions from a content item."
+      description: "Remove permissions from a content item with the given identifier."
+      operationId: "removeContentPermissions"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The identifier of the content item."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "contentPermissionUpdateRequest"
+        description: "Permissions to remove from a content item with the given identifier."
+        required: true
+        schema:
+          $ref: "#/definitions/ContentPermissionUpdateRequest"
+      - name: "isAdminMode"
+        in: "header"
+        description: "Set this to \"true\" if you want to perform the request as a\
+          \ Content Administrator."
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Updated permissions for the requested content item."
+          schema:
+            $ref: "#/definitions/ContentPermissionResult"
+        default:
+          description: "Operation failed with an error. Check that your request is\
+            \ valid."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/extractionRules:
+    get:
+      tags:
+      - "extractionRuleManagement"
+      summary: "Get a list of field extraction rules."
+      description: "Get a list of all field extraction rules. The response is paginated\
+        \ with a default limit of 100 field extraction rules per page.\n"
+      operationId: "listExtractionRules"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "limit"
+        in: "query"
+        description: "Limit the number of field extraction rules returned in the response.\
+          \ The number of field extraction rules returned may be less than the `limit`.\n"
+        required: false
+        type: "integer"
+        default: 100
+        maximum: 1000
+        minimum: 1
+        format: "int32"
+      - name: "token"
+        in: "query"
+        description: "Continuation token to get the next page of results. A page object\
+          \ with the next continuation token is returned in the response body. Subsequent\
+          \ GET requests should specify the continuation token to get the next page\
+          \ of results.\n"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "A paginated list of field extraction rules."
+          schema:
+            $ref: "#/definitions/ListExtractionRulesResponse"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      tags:
+      - "extractionRuleManagement"
+      summary: "Create a new field extraction rule."
+      description: "Create a new field extraction rule."
+      operationId: "createExtractionRule"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "extractionRuleDefinition"
+        description: "Information about the new field extraction rule."
+        required: true
+        schema:
+          $ref: "#/definitions/ExtractionRuleDefinition"
+      responses:
+        200:
+          description: "The field extraction rule has been created."
+          schema:
+            $ref: "#/definitions/ExtractionRule"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/extractionRules/{id}:
+    get:
+      tags:
+      - "extractionRuleManagement"
+      summary: "Get a field extraction rule."
+      description: "Get a field extraction rule with the given identifier."
+      operationId: "getExtractionRule"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of field extraction rule to return."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Extraction rule object that was requested."
+          schema:
+            $ref: "#/definitions/ExtractionRule"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      tags:
+      - "extractionRuleManagement"
+      summary: "Update a field extraction rule."
+      description: "Update an existing field extraction rule. All properties specified\
+        \ in the request are replaced. Missing properties are set to their default\
+        \ values.\n"
+      operationId: "updateExtractionRule"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the field extraction rule to update."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "extractionRuleDefinition"
+        description: "Information to update about the field extraction rule."
+        required: true
+        schema:
+          $ref: "#/definitions/ExtractionRuleDefinition"
+      responses:
+        200:
+          description: "The field extraction rule was successfully modified."
+          schema:
+            $ref: "#/definitions/ExtractionRule"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete:
+      tags:
+      - "extractionRuleManagement"
+      summary: "Delete a field extraction rule."
+      description: "Delete a field extraction rule with the given identifier."
+      operationId: "deleteExtractionRule"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the field extraction rule to delete."
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Extraction rule was deleted successfully."
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/content/folders:
+    post:
+      tags:
+      - "folderManagement"
+      summary: "Create a new folder."
+      description: "Creates a new folder under the given parent folder."
+      operationId: "createFolder"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "folderDefinition"
+        description: "Information about the new folder."
+        required: true
+        schema:
+          $ref: "#/definitions/FolderDefinition"
+      - name: "isAdminMode"
+        in: "header"
+        description: "Set this to \"true\" if you want to perform the request as a\
+          \ Content Administrator."
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "The folder has been created."
+          schema:
+            $ref: "#/definitions/Folder"
+        default:
+          description: "The operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/content/folders/{id}:
+    get:
+      tags:
+      - "folderManagement"
+      summary: "Get a folder."
+      description: "Get a folder with the given identifier."
+      operationId: "getFolder"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the folder to fetch."
+        required: true
+        type: "string"
+      - name: "isAdminMode"
+        in: "header"
+        description: "Set this to \"true\" if you want to perform the request as a\
+          \ Content Administrator."
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Folder that was requested."
+          schema:
+            $ref: "#/definitions/Folder"
+        default:
+          description: "The operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      tags:
+      - "folderManagement"
+      summary: "Update a folder."
+      description: "Update an existing folder with the given identifier."
+      operationId: "updateFolder"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the folder to update."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "updateFolderRequest"
+        description: "Information to update about the folder."
+        required: true
+        schema:
+          $ref: "#/definitions/UpdateFolderRequest"
+      - name: "isAdminMode"
+        in: "header"
+        description: "Set this to \"true\" if you want to perform the request as a\
+          \ Content Administrator."
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "The folder was successfully updated."
+          schema:
+            $ref: "#/definitions/Folder"
+        default:
+          description: "The operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/content/folders/personal:
+    get:
+      tags:
+      - "folderManagement"
+      summary: "Get personal folder."
+      description: "Get the personal folder of the current user.\n"
+      operationId: "getPersonalFolder"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "The personal folder of the current user.\n"
+          schema:
+            $ref: "#/definitions/Folder"
+        default:
+          description: "The operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/content/folders/global:
+    get:
+      tags:
+      - "folderManagement"
+      summary: "Get global folder."
+      description: "Schedule an asynchronous job to get global folder. Global folder\
+        \ contains all content items that a user has permissions to view in the organization.\n"
+      operationId: "getGlobalFolderAsync"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "An asynchronous job to get a list of all content items been\
+            \ scheduled."
+          schema:
+            $ref: "#/definitions/BeginAsyncJobResponse"
+        default:
+          description: "The operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/content/folders/global/{jobId}/status:
+    get:
+      tags:
+      - "folderManagement"
+      summary: "Global folder job status."
+      description: "Get the status of an asynchronous global folder job for the given\
+        \ job identifier.\n"
+      operationId: "getGlobalFolderAsyncStatus"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "jobId"
+        in: "path"
+        description: "The identifier of the asynchronous global folder job."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Asynchronous global folder job status."
+          schema:
+            $ref: "#/definitions/AsyncJobStatus"
+        default:
+          description: "The operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/content/folders/global/{jobId}/result:
+    get:
+      tags:
+      - "folderManagement"
+      summary: "Global folder job result."
+      description: "Get results from global folder job for the given job identifier.\n"
+      operationId: "getGlobalFolderAsyncResult"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "jobId"
+        in: "path"
+        description: "The identifier of the asynchronous global folder job."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "List of all content items with view permission."
+          schema:
+            $ref: "#/definitions/ContentList"
+        default:
+          description: "The operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/content/folders/adminRecommended:
+    get:
+      tags:
+      - "folderManagement"
+      summary: "Get Admin Recommended folder."
+      description: "Schedule an asynchronous job to get the top-level Admin Recommended\
+        \ content items.\n"
+      operationId: "getAdminRecommendedFolderAsync"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "An asynchronous job to get the Admin Recommended folder has\
+            \ been scheduled."
+          schema:
+            $ref: "#/definitions/BeginAsyncJobResponse"
+        default:
+          description: "The operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/content/folders/adminRecommended/{jobId}/status:
+    get:
+      tags:
+      - "folderManagement"
+      summary: "Admin Recommended folder job status."
+      description: "Get the status of an asynchronous Admin Recommended folder job\
+        \ for the given job identifier.\n"
+      operationId: "getAdminRecommendedFolderAsyncStatus"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "jobId"
+        in: "path"
+        description: "The identifier of the asynchronous Admin Recommended folder\
+          \ job."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Asynchronous Admin Recommended folder job status."
+          schema:
+            $ref: "#/definitions/AsyncJobStatus"
+        default:
+          description: "The operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/content/folders/adminRecommended/{jobId}/result:
+    get:
+      tags:
+      - "folderManagement"
+      summary: "Admin Recommended folder job result."
+      description: "Get results from Admin Recommended job for the given job identifier.\n"
+      operationId: "getAdminRecommendedFolderAsyncResult"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "jobId"
+        in: "path"
+        description: "The identifier of the asynchronous Admin Recommended folder\
+          \ job."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The content from the Admin Recommended folder."
+          schema:
+            $ref: "#/definitions/ContentList"
+        default:
+          description: "The operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/ingestBudgets:
+    get:
+      tags:
+      - "ingestBudgetManagementV1"
+      summary: "Get a list of ingest budgets."
+      description: "Get a list of all ingest budgets. The response is paginated with\
+        \ a default limit of 100 budgets per page.\n"
+      operationId: "listIngestBudgets"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "limit"
+        in: "query"
+        description: "Limit the number of budgets returned in the response. The number\
+          \ of budgets returned may be less than the `limit`.\n"
+        required: false
+        type: "integer"
+        default: 100
+        maximum: 1000
+        minimum: 1
+        format: "int32"
+      - name: "token"
+        in: "query"
+        description: "Continuation token to get the next page of results. A page object\
+          \ with the next continuation token is returned in the response body. Subsequent\
+          \ GET requests should specify the continuation token to get the next page\
+          \ of results.\n"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "A paginated list of budgets."
+          schema:
+            $ref: "#/definitions/ListIngestBudgetsResponse_2"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      tags:
+      - "ingestBudgetManagementV1"
+      summary: "Create a new ingest budget."
+      description: "Create a new ingest budget."
+      operationId: "createIngestBudget"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "ingestBudgetDefinition"
+        description: "Information about the new ingest budget."
+        required: true
+        schema:
+          $ref: "#/definitions/IngestBudgetDefinition_2"
+      responses:
+        200:
+          description: "The ingest budget has been created."
+          schema:
+            $ref: "#/definitions/IngestBudget_2"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/ingestBudgets/{id}:
+    get:
+      tags:
+      - "ingestBudgetManagementV1"
+      summary: "Get an ingest budget."
+      description: "Get an ingest budget by the given identifier."
+      operationId: "getIngestBudget"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of ingest budget to return."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Ingest budget object that was requested."
+          schema:
+            $ref: "#/definitions/IngestBudget_2"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      tags:
+      - "ingestBudgetManagementV1"
+      summary: "Update an ingest budget."
+      description: "Update an existing ingest budget. All properties specified in\
+        \ the request are required.\n"
+      operationId: "updateIngestBudget"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the ingest budget to update."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ingestBudgetDefinition"
+        description: "Information to update about the ingest budget."
+        required: true
+        schema:
+          $ref: "#/definitions/IngestBudgetDefinition_2"
+      responses:
+        200:
+          description: "The ingest budget was successfully modified."
+          schema:
+            $ref: "#/definitions/IngestBudget_2"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete:
+      tags:
+      - "ingestBudgetManagementV1"
+      summary: "Delete an ingest budget."
+      description: "Delete an ingest budget with the given identifier."
+      operationId: "deleteIngestBudget"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the ingest budget to delete."
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "The ingest budget was deleted successfully."
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/ingestBudgets/{id}/usage/reset:
+    post:
+      tags:
+      - "ingestBudgetManagementV1"
+      summary: "Reset usage."
+      description: "Reset ingest budget's current usage to 0 before the scheduled\
+        \ reset time.\n"
+      operationId: "resetUsage"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the ingest budget to reset usage."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Ingest budget's usage was reset successfully."
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/ingestBudgets/{id}/collectors:
+    get:
+      tags:
+      - "ingestBudgetManagementV1"
+      summary: "Get a list of Collectors."
+      description: "Get a list of Collectors assigned to an ingest budget. The response\
+        \ is paginated with a default limit of 100 Collectors per page.\n"
+      operationId: "getAssignedCollectors"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of ingest budget to which Collectors are assigned."
+        required: true
+        type: "string"
+      - name: "limit"
+        in: "query"
+        description: "Limit the number of Collectors returned in the response. The\
+          \ number of Collectors returned may be less than the `limit`.\n"
+        required: false
+        type: "integer"
+        default: 100
+        maximum: 1000
+        minimum: 1
+        format: "int32"
+      - name: "token"
+        in: "query"
+        description: "Continuation token to get the next page of results. A page object\
+          \ with the next continuation token is returned in the response body. Subsequent\
+          \ GET requests should specify the continuation token to get the next page\
+          \ of results.\n"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "A paginated list of Collectors."
+          schema:
+            $ref: "#/definitions/ListCollectorIdentitiesResponse_2"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/ingestBudgets/{id}/collectors/{collectorId}:
+    put:
+      tags:
+      - "ingestBudgetManagementV1"
+      summary: "Assign a Collector to a budget."
+      description: "Assign a Collector to a budget."
+      operationId: "assignCollectorToBudget"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the ingest budget to assign to the Collector."
+        required: true
+        type: "string"
+      - name: "collectorId"
+        in: "path"
+        description: "Identifier of the Collector to assign."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Collector was successfully assigned to the ingest budget."
+          schema:
+            $ref: "#/definitions/IngestBudget_2"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete:
+      tags:
+      - "ingestBudgetManagementV1"
+      summary: "Remove Collector from a budget."
+      description: "Remove Collector from a budget."
+      operationId: "removeCollectorFromBudget"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the ingest budget to unassign from the Collector."
+        required: true
+        type: "string"
+      - name: "collectorId"
+        in: "path"
+        description: "Identifier of the Collector to unassign."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Collector was successfully unassigned from the ingest budget."
+          schema:
+            $ref: "#/definitions/IngestBudget_2"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/metrics/alerts/monitors:
+    get:
+      tags:
+      - "metricsAlertMonitorManagement"
+      summary: "Get a list of metrics monitors."
+      description: "Get a list of all metrics monitors in the organization. The response\
+        \ is paginated with a default limit of 100 monitors per page.\n"
+      operationId: "getMonitors"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "limit"
+        in: "query"
+        description: "Limit the number of monitors returned in the response."
+        required: false
+        type: "integer"
+        default: 100
+        maximum: 1000
+        minimum: 1
+        format: "int32"
+      - name: "token"
+        in: "query"
+        description: "Continuation token to get the next page of results. A page object\
+          \ with the next continuation token is returned in the response body. Subsequent\
+          \ GET requests should specify the continuation token to get the next page\
+          \ of results. `token` is set to null when no more pages are left.\n"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "List of metrics monitors."
+          schema:
+            $ref: "#/definitions/MetricsMonitorsResponse"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      tags:
+      - "metricsAlertMonitorManagement"
+      summary: "Create a new metrics monitor."
+      description: "Create a new metrics monitor.\n"
+      operationId: "createMonitor"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "monitor"
+        description: "Data to create a new metrics monitor."
+        required: true
+        schema:
+          $ref: "#/definitions/MetricsMonitorDefinition"
+      responses:
+        200:
+          description: "The metrics monitor has been created."
+          schema:
+            $ref: "#/definitions/MetricsMonitorInstance"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/metrics/alerts/monitors/{id}:
+    get:
+      tags:
+      - "metricsAlertMonitorManagement"
+      summary: "Get a metrics monitor."
+      description: "Get a metrics monitor with the given identifier.\n"
+      operationId: "getMonitor"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the monitor to return."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Metrics monitor object that was requested."
+          schema:
+            $ref: "#/definitions/MetricsMonitorInstance"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      tags:
+      - "metricsAlertMonitorManagement"
+      summary: "Update a metrics monitor."
+      description: "Update an existing metrics monitor.\n"
+      operationId: "updateMonitor"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the monitor to update."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "monitor"
+        description: "Information to update the existing metrics monitor."
+        required: true
+        schema:
+          $ref: "#/definitions/MetricsMonitorDefinition"
+      responses:
+        200:
+          description: "The metrics monitor was updated."
+          schema:
+            $ref: "#/definitions/MetricsMonitorInstance"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete:
+      tags:
+      - "metricsAlertMonitorManagement"
+      summary: "Delete a metrics monitor."
+      description: "Delete an existing metrics monitor.\n"
+      operationId: "deleteMonitor"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the monitor to delete."
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Metrics monitor was deleted."
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v2/metrics/alerts/monitors/{id}/muteStatus:
+    put:
+      tags:
+      - "metricsAlertMonitorManagement"
+      summary: "Mute or unmute a metrics monitor."
+      description: "Mute or unmute a metrics monitor.\n"
+      operationId: "setMuteStatus"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the monitor to be muted or unmuted."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "muteStatus"
+        description: "Setting for mute status."
+        required: true
+        schema:
+          $ref: "#/definitions/MetricsMonitorMuteStatus"
+      responses:
+        200:
+          description: "Metrics monitor mute status was changed."
+          schema:
+            $ref: "#/definitions/MetricsMonitorMuteStatus"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/partitions:
+    get:
+      tags:
+      - "partitionManagement"
+      summary: "Get a list of partitions."
+      description: "Get a list of all partitions in the organization. The response\
+        \ is paginated with a default limit of 100 partitions per page.\n"
+      operationId: "listPartitions"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "limit"
+        in: "query"
+        description: "Limit the number of partitions returned in the response. The\
+          \ number of partitions returned may be less than the `limit`.\n"
+        required: false
+        type: "integer"
+        default: 100
+        maximum: 1000
+        minimum: 1
+        format: "int32"
+      - name: "token"
+        in: "query"
+        description: "Continuation token to get the next page of results. A page object\
+          \ with the next continuation token is returned in the response body. Subsequent\
+          \ GET requests should specify the continuation token to get the next page\
+          \ of results. `token` is set to null when no more pages are left.\n"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "A paginated list of partitions in the organization."
+          schema:
+            $ref: "#/definitions/ListPartitionsResponse"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      tags:
+      - "partitionManagement"
+      summary: "Create a new partition."
+      description: "Create a new partition."
+      operationId: "createPartition"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "createPartitionDefinition"
+        description: "Information about the new partition."
+        required: true
+        schema:
+          $ref: "#/definitions/CreatePartitionDefinition"
+      responses:
+        200:
+          description: "The partition has been created."
+          schema:
+            $ref: "#/definitions/Partition"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/partitions/{id}:
+    get:
+      tags:
+      - "partitionManagement"
+      summary: "Get a partition."
+      description: "Get a partition with the given identifier from the organization."
+      operationId: "getPartition"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of partition to return."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Partition object that was requested."
+          schema:
+            $ref: "#/definitions/Partition"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      tags:
+      - "partitionManagement"
+      summary: "Update a partition."
+      description: "Update an existing partition in the organization.\n"
+      operationId: "updatePartition"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the partition to update."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "updatePartitionDefinition"
+        description: "Information to update about the partition."
+        required: true
+        schema:
+          $ref: "#/definitions/UpdatePartitionDefinition"
+      responses:
+        200:
+          description: "The partition was successfully modified."
+          schema:
+            $ref: "#/definitions/Partition"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/partitions/{id}/decommission:
+    post:
+      tags:
+      - "partitionManagement"
+      summary: "Decommission a partition."
+      description: "Decommission a partition with the given identifier from the organization.\n"
+      operationId: "decommissionPartition"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the partition to decommission."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The partition was decommissioned successfully."
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/scheduledViews:
+    get:
+      tags:
+      - "scheduledViewManagement"
+      summary: "Get a list of scheduled views."
+      description: "Get a list of all scheduled views in the organization. The response\
+        \ is paginated with a default limit of 100 scheduled views per page.\n"
+      operationId: "listScheduledViews"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "limit"
+        in: "query"
+        description: "Limit the number of scheduled views returned in the response.\
+          \ The number of scheduled views returned may be less than the `limit`.\n"
+        required: false
+        type: "integer"
+        default: 100
+        maximum: 1000
+        minimum: 1
+        format: "int32"
+      - name: "token"
+        in: "query"
+        description: "Continuation token to get the next page of results. A page object\
+          \ with the next continuation token is returned in the response body. Subsequent\
+          \ GET requests should specify the continuation token to get the next page\
+          \ of results. `token` is set to null when no more pages are left.\n"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "A paginated list of scheduled views in the organization."
+          schema:
+            $ref: "#/definitions/ListScheduledViewsResponse"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      tags:
+      - "scheduledViewManagement"
+      summary: "Create a new scheduled view."
+      description: "Creates a new scheduled view in the organization."
+      operationId: "createScheduledView"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "createScheduledViewDefinition"
+        description: "Information about the new scheduled view."
+        required: true
+        schema:
+          $ref: "#/definitions/CreateScheduledViewDefinition"
+      responses:
+        200:
+          description: "The scheduled view has been created."
+          schema:
+            $ref: "#/definitions/ScheduledView"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/scheduledViews/{id}:
+    get:
+      tags:
+      - "scheduledViewManagement"
+      summary: "Get a scheduled view."
+      description: "Get a scheduled view with the given identifier."
+      operationId: "getScheduledView"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the scheduled view to fetch."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Scheduled view object that was requested."
+          schema:
+            $ref: "#/definitions/ScheduledView"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      tags:
+      - "scheduledViewManagement"
+      summary: "Update a scheduled view."
+      description: "Update an existing scheduled view."
+      operationId: "updateScheduledView"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the scheduled view to update."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "updateScheduledViewDefinition"
+        description: "Information to update about the scheduled view."
+        required: true
+        schema:
+          $ref: "#/definitions/UpdateScheduledViewDefinition"
+      responses:
+        200:
+          description: "The scheduled view was successfully modified."
+          schema:
+            $ref: "#/definitions/ScheduledView"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/scheduledViews/{id}/disable:
+    delete:
+      tags:
+      - "scheduledViewManagement"
+      summary: "Disable a scheduled view."
+      description: "Disable a scheduled view with the given identifier."
+      operationId: "disableScheduledView"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the scheduled view to disable."
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "The scheduled view was disabled successfully."
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/scheduledViews/{id}/pause:
+    post:
+      tags:
+      - "scheduledViewManagement"
+      summary: "Pause a scheduled view."
+      description: "Pause a scheduled view with the given identifier."
+      operationId: "pauseScheduledView"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the scheduled view to pause."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The scheduled view was paused successfully."
+          schema:
+            $ref: "#/definitions/ScheduledView"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/scheduledViews/{id}/start:
+    post:
+      tags:
+      - "scheduledViewManagement"
+      summary: "Start a scheduled view."
+      description: "Start a scheduled view with the given identifier."
+      operationId: "startScheduledView"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the scheduled view to start."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The scheduled view was started successfully."
+          schema:
+            $ref: "#/definitions/ScheduledView"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/roles:
+    get:
+      tags:
+      - "roleManagement"
+      summary: "Get a list of roles."
+      description: "Get a list of all the roles in the organization. The response\
+        \ is paginated with a default limit of 100 roles per page.\n"
+      operationId: "listRoles"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "limit"
+        in: "query"
+        description: "Limit the number of roles returned in the response. The number\
+          \ of roles returned may be less than the `limit`.\n"
+        required: false
+        type: "integer"
+        default: 100
+        maximum: 1000
+        minimum: 1
+        format: "int32"
+      - name: "token"
+        in: "query"
+        description: "Continuation token to get the next page of results. A page object\
+          \ with the next continuation token is returned in the response body. Subsequent\
+          \ GET requests should specify the continuation token to get the next page\
+          \ of results. `token` is set to null when no more pages are left.\n"
+        required: false
+        type: "string"
+      - name: "sortBy"
+        in: "query"
+        description: "Sort the list of roles by the `name` field.\n"
+        required: false
+        type: "string"
+      - name: "name"
+        in: "query"
+        description: "Only return roles matching the given name."
+        required: false
+        type: "string"
+        minLength: 1
+      responses:
+        200:
+          description: "A paginated list of roles in the organization."
+          schema:
+            $ref: "#/definitions/ListRoleModelsResponse"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      tags:
+      - "roleManagement"
+      summary: "Create a new role."
+      description: "Create a new role in the organization."
+      operationId: "createRole"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "createRoleDefinition"
+        description: "Information about the new role."
+        required: true
+        schema:
+          $ref: "#/definitions/CreateRoleDefinition"
+      responses:
+        200:
+          description: "The role has been created."
+          schema:
+            $ref: "#/definitions/RoleModel"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/roles/{id}:
+    get:
+      tags:
+      - "roleManagement"
+      summary: "Get a role."
+      description: "Get a role with the given identifier in the organization."
+      operationId: "getRole"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the role to fetch."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Role object that was requested."
+          schema:
+            $ref: "#/definitions/RoleModel"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      tags:
+      - "roleManagement"
+      summary: "Update a role."
+      description: "Update an existing role in the organization.\n"
+      operationId: "updateRole"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the role to update."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "updateRoleDefinition"
+        description: "Information to update about the role."
+        required: true
+        schema:
+          $ref: "#/definitions/UpdateRoleDefinition"
+      responses:
+        200:
+          description: "The user was successfully modified."
+          schema:
+            $ref: "#/definitions/RoleModel"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete:
+      tags:
+      - "roleManagement"
+      summary: "Delete a role."
+      description: "Delete a role with the given identifier from the organization."
+      operationId: "deleteRole"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the role to delete."
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Role was deleted successfully."
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/roles/{roleId}/users/{userId}:
+    put:
+      tags:
+      - "roleManagement"
+      summary: "Assign a role to a user."
+      description: "Assign a role to a user in the organization.\n"
+      operationId: "assignRoleToUser"
+      parameters:
+      - name: "roleId"
+        in: "path"
+        description: "Identifier of the role to assign."
+        required: true
+        type: "string"
+      - name: "userId"
+        in: "path"
+        description: "Identifier of the user to assign the role to."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Role was successfully assigned to the user."
+          schema:
+            $ref: "#/definitions/RoleModel"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete:
+      tags:
+      - "roleManagement"
+      summary: "Remove role from a user."
+      description: "Remove a role from a user in the organization.\n"
+      operationId: "removeRoleFromUser"
+      parameters:
+      - name: "roleId"
+        in: "path"
+        description: "Identifier of the role to delete."
+        required: true
+        type: "string"
+      - name: "userId"
+        in: "path"
+        description: "Identifier of the user to remove the role from."
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Role was successfully removed from the user."
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/users:
+    get:
+      tags:
+      - "userManagement"
+      summary: "Get a list of users."
+      description: "Get a list of all users in the organization. The response is paginated\
+        \ with a default limit of 100 users per page.\n"
+      operationId: "listUsers"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "limit"
+        in: "query"
+        description: "Limit the number of users returned in the response. The number\
+          \ of users returned may be less than the `limit`.\n"
+        required: false
+        type: "integer"
+        default: 100
+        maximum: 1000
+        minimum: 1
+        format: "int32"
+      - name: "token"
+        in: "query"
+        description: "Continuation token to get the next page of results. A page object\
+          \ with the next continuation token is returned in the response body. Subsequent\
+          \ GET requests should specify the continuation token to get the next page\
+          \ of results. `token` is set to null when no more pages are left.\n"
+        required: false
+        type: "string"
+      - name: "sortBy"
+        in: "query"
+        description: "Sort the list of users by the `firstName`, `lastName`, or `email`\
+          \ field.\n"
+        required: false
+        type: "string"
+      - name: "email"
+        in: "query"
+        description: "Find user with the given email address."
+        required: false
+        type: "string"
+        minLength: 1
+      responses:
+        200:
+          description: "A paginated list of users in the organization."
+          schema:
+            $ref: "#/definitions/ListUserModelsResponse"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      tags:
+      - "userManagement"
+      summary: "Create a new user."
+      description: "Create a new user in the organization."
+      operationId: "createUser"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "createUserDefinition"
+        description: "Information about the new user."
+        required: true
+        schema:
+          $ref: "#/definitions/CreateUserDefinition"
+      responses:
+        200:
+          description: "The user has been created."
+          schema:
+            $ref: "#/definitions/UserModel"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/users/{id}:
+    get:
+      tags:
+      - "userManagement"
+      summary: "Get a user."
+      description: "Get a user with the given identifier from the organization."
+      operationId: "getUser"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of user to return."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "User object that was requested."
+          schema:
+            $ref: "#/definitions/UserModel"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      tags:
+      - "userManagement"
+      summary: "Update a user."
+      description: "Update an existing user in the organization.\n"
+      operationId: "updateUser"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the user to update."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "updateUserDefinition"
+        description: "Information to update about the user."
+        required: true
+        schema:
+          $ref: "#/definitions/UpdateUserDefinition"
+      responses:
+        200:
+          description: "The user was successfully modified."
+          schema:
+            $ref: "#/definitions/UserModel"
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete:
+      tags:
+      - "userManagement"
+      summary: "Delete a user."
+      description: "Delete a user with the given identifier from the organization\
+        \ and transfer their content to the user with the identifier specified in\
+        \ \"transferTo\". If \"transferTo\" is not specified the contents are deleted.\n"
+      operationId: "deleteUser"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the user to delete."
+        required: true
+        type: "string"
+      - name: "transferTo"
+        in: "query"
+        description: "Identifier of the user to receive the transfer of content from\
+          \ the deleted user."
+        required: false
+        type: "string"
+      responses:
+        204:
+          description: "User was deleted successfully."
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/users/{id}/email/requestChange:
+    post:
+      tags:
+      - "userManagement"
+      summary: "Change email address."
+      description: "An email with an activation link is sent to the user’s new email\
+        \ address. The user must click the link in the email within seven days to\
+        \ complete the email address change, or the link will expire.\n"
+      operationId: "requestChangeEmail"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the user to change email address."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "changeEmailRequest"
+        description: "New email address of the user."
+        required: true
+        schema:
+          $ref: "#/definitions/ChangeEmailRequest"
+      responses:
+        200:
+          description: "Email change request was submitted successfully."
+        default:
+          description: "Operation failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /v1/users/{id}/password/reset:
+    post:
+      tags:
+      - "userManagement"
+      summary: "Reset password."
+      description: "Reset a user's password."
+      operationId: "resetPassword"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifier of the user to reset password."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "User's password was reset successfully."
+        default:
+          description: "Opration failed with an error."
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+securityDefinitions:
+  basicAuth:
+    type: "basic"
+definitions:
+  AlertSearchNotificationSyncDefinition:
+    allOf:
+    - $ref: "#/definitions/ScheduleNotificationSyncDefinition"
+    - type: "object"
+      required:
+      - "sourceId"
+      properties:
+        sourceId:
+          type: "string"
+          description: "A String value to uniquely identify a Collector's Source."
+  BeginBoundedTimeRange:
+    allOf:
+    - $ref: "#/definitions/ResolvableTimeRange"
+    - type: "object"
+      required:
+      - "from"
+      properties:
+        from:
+          description: "Starting boundary of the time range."
+          $ref: "#/definitions/TimeRangeBoundary"
+        to:
+          description: "Ending boundary of the time range. If not set, the time range\
+            \ will end at the current moment."
+          $ref: "#/definitions/TimeRangeBoundary"
+  CompleteLiteralTimeRange:
+    allOf:
+    - $ref: "#/definitions/ResolvableTimeRange"
+    - type: "object"
+      required:
+      - "rangeName"
+      properties:
+        rangeName:
+          type: "string"
+          example: "previous_month"
+          description: "Name of the complete time range. Possible values are: - `yesterday`,\
+            \ - `previous_week`, - `previous_month`.\n"
+  EmailSearchNotificationSyncDefinition:
+    allOf:
+    - $ref: "#/definitions/ScheduleNotificationSyncDefinition"
+    - type: "object"
+      required:
+      - "toList"
+      properties:
+        toList:
+          type: "array"
+          description: "A list of email recipients.\n"
+          items:
+            type: "string"
+        subjectTemplate:
+          type: "string"
+          description: "If the notification is scheduled with a threshold, the default\
+            \ subject template will be \"Search Alert: $AlertCondition results found\
+            \ for $SearchName\". For email notifications without a threshold, the\
+            \ default subject template is \"Search Results: $SearchName\".\n"
+        includeQuery:
+          type: "boolean"
+          description: "A boolean value to indicate if the search query should be\
+            \ included in the notification email.\n"
+          default: true
+        includeResultSet:
+          type: "boolean"
+          description: "A boolean value to indicate if the search result set should\
+            \ be included in the notification email.\n"
+          default: true
+        includeHistogram:
+          type: "boolean"
+          description: "A boolean value to indicate if the search result histogram\
+            \ should be included in the notification email.\n"
+          default: true
+        includeCsvAttachment:
+          type: "boolean"
+          description: "A boolean value to indicate if the search results should be\
+            \ included in the notification email as a CSV attachment.\n"
+          default: false
+  EpochTimeRangeBoundary:
+    allOf:
+    - $ref: "#/definitions/TimeRangeBoundary"
+    - type: "object"
+      required:
+      - "epochMillis"
+      properties:
+        epochMillis:
+          type: "integer"
+          format: "int64"
+          example: 1538392220000
+          description: "Starting point in time as a number of milliseconds since the\
+            \ epoch."
+  FolderSyncDefinition:
+    allOf:
+    - $ref: "#/definitions/ContentSyncDefinition"
+    - type: "object"
+      required:
+      - "children"
+      properties:
+        description:
+          type: "string"
+          description: "An optional description for the folder."
+        children:
+          type: "array"
+          description: "The items in the folder, a list of Dashboard and/or Folder\
+            \ items."
+          items:
+            $ref: "#/definitions/ContentSyncDefinition"
+  Header:
+    type: "object"
+    required:
+    - "name"
+    - "value"
+    properties:
+      name:
+        type: "string"
+        description: "Name of the header field."
+      value:
+        type: "string"
+        description: "Value of the header field."
+  Iso8601TimeRangeBoundary:
+    allOf:
+    - $ref: "#/definitions/TimeRangeBoundary"
+    - type: "object"
+      required:
+      - "iso8601Time"
+      properties:
+        iso8601Time:
+          type: "string"
+          format: "date-time"
+          example: "2018-10-01T10:10:20.520+0000"
+          description: "Starting point in time as a string in ISO 8601 format."
+  QueryParameterSyncDefinition:
+    type: "object"
+    required:
+    - "autoComplete"
+    - "dataType"
+    - "description"
+    - "label"
+    - "name"
+    - "value"
+    properties:
+      name:
+        type: "string"
+        description: "The name of the parameter."
+      label:
+        type: "string"
+        description: "The label of the parameter."
+      description:
+        type: "string"
+        description: "A description of the parameter."
+      dataType:
+        type: "string"
+        description: "The data type of the parameter. Supported values are:\n  1.\
+          \ `NUMBER`\n  2. `STRING`\n  3. `QUERY_FRAGMENT`\n  4. `SEARCH_KEYWORD`\n"
+      value:
+        type: "string"
+        description: "A value for the parameter. Should be compatible with the type\
+          \ set in dataType field."
+      autoComplete:
+        description: "The object that contains all relevant information to support\
+          \ autocomplete for template variables."
+        $ref: "#/definitions/ParameterAutoCompleteSyncDefinition"
+  DashboardSyncDefinition:
+    allOf:
+    - $ref: "#/definitions/ContentSyncDefinition"
+    - type: "object"
+      required:
+      - "description"
+      - "detailLevel"
+      - "filters"
+      - "panels"
+      - "properties"
+      properties:
+        description:
+          type: "string"
+          description: "A description of the dashboard."
+        detailLevel:
+          type: "integer"
+          description: "Supported values are:\n  - `1` for small\n  - `2` for medium\n\
+            \  - `3` for large\n"
+        properties:
+          type: "string"
+          description: "Visual settings for the panel.\n"
+        panels:
+          type: "array"
+          description: "The panels of the dashboard. _Dashboard links are not supported._"
+          items:
+            $ref: "#/definitions/ReportPanelSyncDefinition"
+        filters:
+          type: "array"
+          description: "The filters for the dashboard. Filters allow you to control\
+            \ the amount of information displayed in your dashboards.\n"
+          items:
+            $ref: "#/definitions/ReportFilterSyncDefinition"
+  LiteralTimeRangeBoundary:
+    allOf:
+    - $ref: "#/definitions/TimeRangeBoundary"
+    - type: "object"
+      required:
+      - "rangeName"
+      properties:
+        rangeName:
+          type: "string"
+          example: "week"
+          description: "Name of the time range. Possible values are:\n  - `now`,\n\
+            \  - `second`,\n  - `minute`,\n  - `hour`,\n  - `day`,\n  - `today`,\n\
+            \  - `week`,\n  - `month`,\n  - `year`\n"
+  MetricsMonitorDataInRangeRule:
+    allOf:
+    - $ref: "#/definitions/MetricsMonitorRule"
+    - type: "object"
+      required:
+      - "alertType"
+      - "limit"
+      - "thresholdType"
+      - "timeThreshold"
+      properties:
+        alertType:
+          type: "string"
+          description: "Type of an alert. Accepted values are: `Critical` and `Warning`.\n"
+        thresholdType:
+          type: "string"
+          description: "One of: `Above`, `Below`.\n"
+        limit:
+          type: "number"
+          format: "double"
+          description: "Limit threshold for the monitor, data points above/below this\
+            \ threshold will be treated as outliers."
+        timeThreshold:
+          description: "Time period threshold for when alert should be triggered."
+          $ref: "#/definitions/MetricsMonitorRuleTimeThreshold"
+  MetricsMonitorMissingDataRule:
+    allOf:
+    - $ref: "#/definitions/MetricsMonitorRule"
+    - type: "object"
+      required:
+      - "affectedTimeSeries"
+      - "duration"
+      properties:
+        affectedTimeSeries:
+          type: "string"
+        duration:
+          type: "integer"
+          format: "int64"
+          description: "Time window in milliseconds."
+  MetricsMonitorRule:
+    type: "object"
+    required:
+    - "type"
+    discriminator: "type"
+    properties:
+      type:
+        type: "string"
+        description: "Type of the rule. Accepted values are: `MetricsMonitorDataInRangeRule`\
+          \ for critical and warning alerts and `MetricsMonitorMissingDataRule` for\
+          \ missing data alerts.\n"
+      emailNotifications:
+        type: "array"
+        description: "Email notifications details."
+        items:
+          $ref: "#/definitions/MetricsMonitorRuleEmailNotification"
+      webhookNotifications:
+        type: "array"
+        description: "Webhook notifications details."
+        items:
+          $ref: "#/definitions/MetricsMonitorRuleWebhookNotification"
+  MetricsMonitorRuleTimeThreshold:
+    type: "object"
+    required:
+    - "duration"
+    - "percentage"
+    properties:
+      duration:
+        type: "integer"
+        format: "int64"
+        description: "Monitor timeframe in milliseconds."
+      percentage:
+        type: "integer"
+        description: "The minimum percentage of values that must fit in time series\
+          \ before an alert is triggered. If a single value is enough to trigger alert,\
+          \ set this field to 0.\n"
+  MewboardSyncDefinition:
+    allOf:
+    - $ref: "#/definitions/ContentSyncDefinition"
+    - type: "object"
+      required:
+      - "description"
+      - "rootPanel"
+      - "title"
+      - "topologyLabelMap"
+      properties:
+        description:
+          type: "string"
+          description: "A description of the dashboard."
+        title:
+          type: "string"
+          description: "The title of the dashboard."
+        rootPanel:
+          description: "The root level panel of the dashboard."
+          $ref: "#/definitions/ContainerPanel"
+        theme:
+          type: "string"
+          example: ""
+          description: "Theme for the dashboard, can be light or dark."
+        topologyLabelMap:
+          description: "Map of topology labels associated with the dashboard."
+          $ref: "#/definitions/TopologyLabelMap"
+        refreshInterval:
+          type: "number"
+          format: "int32"
+          description: "Interval of time (in seconds) to automatically refresh the\
+            \ dashboard. A value of 0 means we never automatically refresh the dashboard.\n"
+  ContainerPanel:
+    allOf:
+    - $ref: "#/definitions/Panel"
+    - type: "object"
+      required:
+      - "layout"
+      - "panels"
+      properties:
+        layout:
+          description: "Layout of the panel."
+          $ref: "#/definitions/Layout"
+        panels:
+          type: "array"
+          description: "Children panels that the container panel contains."
+          items:
+            $ref: "#/definitions/Panel"
+        variables:
+          type: "array"
+          description: "Variables that could be applied to the panel's children."
+          items:
+            $ref: "#/definitions/Variable"
+        coloringRules:
+          type: "array"
+          description: "Coloring rules to color the panel/data with."
+          items:
+            $ref: "#/definitions/ColoringRule"
+  Layout:
+    type: "object"
+    required:
+    - "layoutStructures"
+    - "layoutType"
+    discriminator: "layoutType"
+    properties:
+      layoutType:
+        type: "string"
+        description: "Type of the layout definition."
+      layoutStructures:
+        type: "array"
+        description: "Layout structures for the panel's childen."
+        items:
+          $ref: "#/definitions/LayoutStructure"
+  Panel:
+    type: "object"
+    required:
+    - "key"
+    - "panelType"
+    discriminator: "panelType"
+    properties:
+      id:
+        type: "string"
+        description: "Unique identifier for the panel."
+      key:
+        type: "string"
+        description: "Key for the panel."
+      title:
+        type: "string"
+        description: "Title of the panel."
+      visualSettings:
+        type: "string"
+        description: "Visual settings of the panel."
+      keepVisualSettingsConsistentWithParent:
+        type: "boolean"
+        description: "Keeps the visual settings (e.g., series colors) consistent with\
+          \ the parent panel's settings."
+        default: true
+      panelType:
+        type: "string"
+        example: "ContainerPanel"
+        description: "Type of the panel."
+  RepeatingPanel:
+    allOf:
+    - $ref: "#/definitions/ContainerPanel"
+    - type: "object"
+      required:
+      - "basePanel"
+      - "maxPanelsInRow"
+      - "minWidth"
+      - "repeatedVariables"
+      properties:
+        basePanel:
+          description: "Base panel format that will be repeated on."
+          $ref: "#/definitions/SumoSearchPanel"
+        repeatedVariables:
+          type: "array"
+          description: "The variable names of variables that will be repeated on."
+          items:
+            type: "string"
+        minWidth:
+          type: "number"
+          format: "int32"
+          description: "The minimum size of the width of a repeated panel."
+          minimum: 1
+          maximum: 24
+        maxPanelsInRow:
+          type: "number"
+          format: "int32"
+          description: "The maximum number of panels in a row in the repeating panel."
+          minimum: 1
+          maximum: 24
+  SumoSearchPanel:
+    allOf:
+    - $ref: "#/definitions/Panel"
+    - type: "object"
+      required:
+      - "queries"
+      - "timerange"
+      properties:
+        queries:
+          type: "array"
+          description: "Metrics queries of the panel."
+          items:
+            $ref: "#/definitions/Query"
+          maxItems: 6
+        description:
+          type: "string"
+          description: "Description of the panel."
+        timerange:
+          type: "string"
+          description: "Timerange of the panel"
+        coloringRules:
+          type: "array"
+          description: "Coloring rules to color the panel/data with."
+          items:
+            $ref: "#/definitions/ColoringRule"
+        linkedDashboardAccessKeys:
+          type: "array"
+          description: "List of linked dashboard access keys."
+          items:
+            type: "string"
+  Query:
+    type: "object"
+    required:
+    - "queryKey"
+    - "queryString"
+    - "queryType"
+    properties:
+      queryString:
+        type: "string"
+        description: "The metrics or logs query."
+      queryType:
+        type: "string"
+        description: "The type of the query (metrics/logs)."
+      queryKey:
+        type: "string"
+        description: "The key for metrics/logs queries."
+      metricsQueryMode:
+        type: "string"
+        description: "The mode of the metrics query that the user was editing. Can\
+          \ be `Basic` or `Advanced`. Will ONLY be specified for metrics queries.\n"
+      metricsQueryData:
+        description: "The data for a basic metrics query. Will ONLY be specified for\
+          \ metrics queries."
+        $ref: "#/definitions/MetricsQueryData"
+  TextPanel:
+    allOf:
+    - $ref: "#/definitions/Panel"
+    - type: "object"
+      properties:
+        text:
+          type: "string"
+          description: "Text to be displayed in the panel."
+  Variable:
+    type: "object"
+    required:
+    - "allowMultiSelect"
+    - "hideFromUI"
+    - "includeAllOption"
+    - "name"
+    - "sourceDefinition"
+    properties:
+      id:
+        type: "string"
+        description: "Unique identifier for the variable."
+      name:
+        type: "string"
+        example: "_sourceHost"
+        description: "Name of the variable. The variable name is case-insensitive.\
+          \ Only numbers, spaces, and underscores are\nallowed in the variable name.\n"
+        maxLength: 256
+      displayName:
+        type: "string"
+        example: "Source Host"
+        description: "Display name of the variable shown in the UI. If this field\
+          \ is empty, the name field will be used.\nThe display name is case-insensitive.\
+          \ Only numbers, spaces, and underscores are allowed in the variable name.\n"
+        maxLength: 256
+      defaultValue:
+        type: "string"
+        example: "default_value"
+        description: "Default value of the variable."
+      sourceDefinition:
+        $ref: "#/definitions/VariableSourceDefinition"
+      allowMultiSelect:
+        type: "boolean"
+        description: "Allow multiple selections in the values dropdown."
+      includeAllOption:
+        type: "boolean"
+        description: "Include an \"All\" option at the top of the variable's values\
+          \ dropdown."
+      hideFromUI:
+        type: "boolean"
+        description: "Hide the variable in the dashboard UI."
+  VariableSourceDefinition:
+    type: "object"
+    required:
+    - "variableSourceType"
+    discriminator: "variableSourceType"
+    properties:
+      variableSourceType:
+        type: "string"
+        example: "MetricsQueryVariableSourceDefinition"
+        description: "Source type of the variable values."
+  MetricsQueryVariableSourceDefinition:
+    allOf:
+    - $ref: "#/definitions/VariableSourceDefinition"
+    - type: "object"
+      required:
+      - "dimension"
+      - "query"
+      properties:
+        query:
+          type: "string"
+          example: "_contentType=HostMetrics metric=CPU_LoadAvg_5min | avg by metric"
+          description: "Metrics query to get dimension values."
+          maxLength: 65536
+        dimension:
+          type: "string"
+          example: "metric"
+          description: "Dimension name to extract variable out of."
+  MagellanMetadataVariableSourceDefinition:
+    allOf:
+    - $ref: "#/definitions/VariableSourceDefinition"
+    - type: "object"
+      required:
+      - "filter"
+      - "key"
+      properties:
+        filter:
+          type: "string"
+          example: "_sourceHost=prod-* metric=CPU_Idle"
+          description: "Filter to search the catalog."
+          maxLength: 65536
+        key:
+          type: "string"
+          example: "_sourceCategory"
+          description: "Return the values for this given key."
+  CsvVariableSourceDefinition:
+    allOf:
+    - $ref: "#/definitions/VariableSourceDefinition"
+    - type: "object"
+      required:
+      - "values"
+      properties:
+        values:
+          type: "string"
+          example: "host1, host2"
+          description: "Comma separated values for the variable."
+          maxLength: 65536
+  ColoringRule:
+    type: "object"
+    required:
+    - "multipleSeriesAggregateFunction"
+    - "scope"
+    - "singleSeriesAggregateFunction"
+    properties:
+      scope:
+        type: "string"
+        description: "Regex string to match queries to apply coloring to."
+      singleSeriesAggregateFunction:
+        type: "string"
+        description: "Function to aggregate one series into one single value."
+      multipleSeriesAggregateFunction:
+        type: "string"
+        description: "Function to aggregate the aggregate values of multiple time\
+          \ series into one single value."
+      colorThresholds:
+        type: "array"
+        description: "Thresholds and colors to color with."
+        items:
+          $ref: "#/definitions/ColoringThreshold"
+  Grid:
+    allOf:
+    - $ref: "#/definitions/Layout"
+    - type: "object"
+  LayoutStructure:
+    type: "object"
+    required:
+    - "key"
+    - "structure"
+    properties:
+      key:
+        type: "string"
+        description: "The id of the panel that this structure applies to."
+      structure:
+        type: "string"
+        description: "The structure of a panel."
+  ColoringThreshold:
+    type: "object"
+    required:
+    - "color"
+    properties:
+      color:
+        type: "string"
+        description: "Color for the threshold."
+      min:
+        type: "number"
+        format: "double"
+        description: "Absolute inclusive threshold to color by."
+      max:
+        type: "number"
+        format: "double"
+        description: "Absolute exclusive threshold to color by."
+  NotificationThresholdSyncDefinition:
+    type: "object"
+    required:
+    - "count"
+    - "operator"
+    - "thresholdType"
+    properties:
+      thresholdType:
+        type: "string"
+        description: "Threshold type. Possible values are:\n 1. `message`\n 2. `group`\n"
+      operator:
+        type: "string"
+        description: "Criterion to be applied when comparing actual result count with\
+          \ expected count. Possible values are:\n 1. `eq`\n 2. `gt`\n 3. `ge`\n 4.\
+          \ `lt`\n 5. `le`\n"
+      count:
+        type: "integer"
+        description: "Expected result count."
+  RelativeTimeRangeBoundary:
+    allOf:
+    - $ref: "#/definitions/TimeRangeBoundary"
+    - type: "object"
+      required:
+      - "relativeTime"
+      properties:
+        relativeTime:
+          type: "string"
+          example: "-2w5d3h"
+          description: "Relative time as a string consisting of following elements:\n\
+            \  - `-` (optional) - minus sign indicates time in the past,\n  - `<number>`\
+            \ - number of time units,\n  - `<time_unit>` - time unit; possible values\
+            \ are: `w` (week), `d` (day), `h` (hour), `m` (minute), `s` (second).\n\
+            \nMultiple pairs of `<number><time_unit>` may be provided, and they may\
+            \ be in any order. For example, `-2w5d3h` points to the moment in time\
+            \ 2 weeks, 5 days and 3 hours ago.\n"
+  ReportFilterSyncDefinition:
+    type: "object"
+    required:
+    - "fieldName"
+    - "filterType"
+    - "label"
+    - "panelIds"
+    - "properties"
+    properties:
+      fieldName:
+        type: "string"
+        description: "The name af the field being filtered on, as listed in PanelField."
+      label:
+        type: "string"
+        description: "The name of the field being filtered on, as displayed to the\
+          \ user."
+      defaultValue:
+        type: "string"
+        description: "The default value of the parameter."
+      filterType:
+        type: "string"
+        description: "Type of filter. Can only be `numeric` or `textbox`."
+      properties:
+        type: "string"
+        description: "Visual settings for the panel.\n"
+      panelIds:
+        type: "array"
+        description: "A list of panel identifiers that the filter applies to."
+        items:
+          type: "string"
+  ReportPanelSyncDefinition:
+    type: "object"
+    required:
+    - "detailLevel"
+    - "height"
+    - "id"
+    - "metricsQueries"
+    - "name"
+    - "properties"
+    - "queryParameters"
+    - "queryString"
+    - "timeRange"
+    - "viewerType"
+    - "width"
+    - "x"
+    - "y"
+    properties:
+      name:
+        type: "string"
+        description: "The title of the panel."
+      viewerType:
+        type: "string"
+        description: "Type of [area chart](https://help.sumologic.com/Dashboards-and-Alerts/Dashboards/Chart-Panel-Types).\
+          \ Supported values are:\n  1. `table` for Table\n  2. `bar` for Bar Chart\n\
+          \  3. `column` for Column Chart\n  4. `line` for Line Chart\n  5. `area`\
+          \ for Area Chart\n  6. `pie` for Pie Chart\n  7. `svv` for Single Value\
+          \ Viewer\n  8. `title` for Title Panel\n  9. `text` for Text Panel\n\nValues\
+          \ 1-7 are used for Data Panels.\n"
+      detailLevel:
+        type: "integer"
+        description: "Supported values are:\n  - `1` for small\n  - `2` for medium\n\
+          \  - `3` for large\n"
+      queryString:
+        type: "string"
+        description: "The query to run, for panels associated to log searches."
+      metricsQueries:
+        type: "array"
+        description: "The query or queries to run, for panels associated to metrics\
+          \ searches."
+        items:
+          $ref: "#/definitions/MetricsQuerySyncDefinition"
+      timeRange:
+        description: "The time range for the query to run."
+        $ref: "#/definitions/ResolvableTimeRange"
+      x:
+        type: "integer"
+        description: "The horizontal position of the panel. A sumo screen is divided\
+          \ into 24 columns. The value for x can be any integer from 0 to 24.\n"
+      y:
+        type: "integer"
+        description: "The vertical position of the panel. A sumo screen is divided\
+          \ into 24 rows. The value for y can be any integer from 0 to 24.\n"
+      width:
+        type: "integer"
+        description: "The width of the panel."
+      height:
+        type: "integer"
+        description: "The height of the panel."
+      properties:
+        type: "string"
+        description: "Visual settings for the panel.\n"
+      id:
+        type: "string"
+        description: "A string identifier that you can use to refer to the panel in\
+          \ filters.panelIds."
+      desiredQuantizationInSecs:
+        type: "integer"
+        description: "The quantization interval aligns your time series data to common\
+          \ intervals on the time axis (for example every one minute) to optimize\
+          \ the visualization and performance.\n"
+      queryParameters:
+        type: "array"
+        description: "The parameters for parameterized searches."
+        items:
+          $ref: "#/definitions/QueryParameterSyncDefinition"
+  ResolvableTimeRange:
+    type: "object"
+    required:
+    - "type"
+    discriminator: "type"
+    properties:
+      type:
+        type: "string"
+        description: "Type of the time range. Value must be either `CompleteLiteralTimeRange`\
+          \ or `BeginBoundedTimeRange`.\n"
+  SavedSearchWithScheduleSyncDefinition:
+    allOf:
+    - $ref: "#/definitions/ContentSyncDefinition"
+    - type: "object"
+      required:
+      - "description"
+      - "search"
+      properties:
+        search:
+          description: "A saved search."
+          $ref: "#/definitions/SavedSearchSyncDefinition"
+        searchSchedule:
+          description: "Schedule details for a saved search."
+          $ref: "#/definitions/SearchScheduleSyncDefinition"
+        description:
+          type: "string"
+          description: "Description of the saved search."
+  SavedSearchSyncDefinition:
+    type: "object"
+    required:
+    - "byReceiptTime"
+    - "defaultTimeRange"
+    - "queryParameters"
+    - "queryText"
+    properties:
+      queryText:
+        type: "string"
+        description: "The text of a Sumo Logic query."
+      defaultTimeRange:
+        type: "string"
+        description: "Default time range for the search. Possible types of time ranges\
+          \ are:\n  - relative time range: e.g. \"-1d -12h\" represents a time range\
+          \ from one day ago to 12 hours ago.\n  - absolute time range: e.g. \"01-04-2017\
+          \ 20:32:00 to 01-04-2017 20:35:00\" represents a time range\n    from April\
+          \ 1st, 2017 at 8:32 PM until April 1st, 2017 at 8:35 PM.\n"
+      byReceiptTime:
+        type: "boolean"
+        description: "Set it to true to run the search using receipt time. By default,\
+          \ searches do not run by receipt time.\n"
+        default: false
+      viewName:
+        type: "string"
+        description: "The name of the Scheduled View that has indexed the data you\
+          \ want to search.\n"
+      viewStartTime:
+        type: "string"
+        format: "date-time"
+        description: "Start timestamp of the Scheduled View in UTC format.\n"
+      queryParameters:
+        type: "array"
+        description: "An array of search query parameter objects."
+        items:
+          $ref: "#/definitions/QueryParameterSyncDefinition"
+  SaveToViewNotificationSyncDefinition:
+    allOf:
+    - $ref: "#/definitions/ScheduleNotificationSyncDefinition"
+    - type: "object"
+      required:
+      - "viewName"
+      properties:
+        viewName:
+          type: "string"
+          description: "Name of the View to save the notification to.\n"
+  ScheduleNotificationSyncDefinition:
+    type: "object"
+    required:
+    - "taskType"
+    discriminator: "taskType"
+    properties:
+      taskType:
+        type: "string"
+        description: "Delivery channel for notifications.\n"
+  ScheduleSearchParameterSyncDefinition:
+    type: "object"
+    required:
+    - "name"
+    - "value"
+    properties:
+      name:
+        type: "string"
+        description: "Name of scheduled search parameter.\n"
+      value:
+        type: "string"
+        description: "Value of scheduled search parameter.\n"
+  SearchScheduleSyncDefinition:
+    type: "object"
+    required:
+    - "notification"
+    - "parameters"
+    - "parseableTimeRange"
+    - "scheduleType"
+    - "timeZone"
+    properties:
+      cronExpression:
+        type: "string"
+        description: "Cron-like expression specifying the search's schedule. Field\
+          \ scheduleType must be set to \"Custom\", otherwise, scheduleType takes\
+          \ precedence over cronExpression.\n"
+      displayableTimeRange:
+        type: "string"
+        example: "-2h"
+        description: "A human-friendly text describing the query time range. For e.g.\
+          \ \"-2h\", \"last three days\", \"team default time\"\n"
+      parseableTimeRange:
+        description: "The time range for the search query.\n"
+        $ref: "#/definitions/ResolvableTimeRange"
+      timeZone:
+        type: "string"
+        description: "Time zone identifier for time specification. Either an abbreviation\
+          \ such as \"PST\", a full name such as \"America/Los_Angeles\", or a custom\
+          \ ID such as \"GMT-8:00\". Note that the support of abbreviations is for\
+          \ JDK 1.1.x compatibility only and full names should be used.\n"
+      threshold:
+        description: "A defined threshold to trigger a notification.\n"
+        $ref: "#/definitions/NotificationThresholdSyncDefinition"
+      notification:
+        description: "Description of how the notification should be sent out."
+        $ref: "#/definitions/ScheduleNotificationSyncDefinition"
+      scheduleType:
+        type: "string"
+        description: "Run schedule of the scheduled search. Set to \"Custom\" to specify\
+          \ the schedule with a CRON expression. Possible schedule types are:\n  -\
+          \ `RealTime`\n  - `15Minutes`\n  - `1Hour`\n  - `2Hours`\n  - `4Hours`\n\
+          \  - `6Hours`\n  - `8Hours`\n  - `12Hours`\n  - `1Day`\n  - `1Week`\n  -\
+          \ `Custom`\n"
+      muteErrorEmails:
+        type: "boolean"
+        description: "If enabled, emails are not sent out in case of errors with the\
+          \ search.\n"
+      parameters:
+        type: "array"
+        description: "A list of scheduled search parameters."
+        items:
+          $ref: "#/definitions/ScheduleSearchParameterSyncDefinition"
+  ServiceNowConnection:
+    allOf:
+    - $ref: "#/definitions/Connection"
+    - type: "object"
+      required:
+      - "url"
+      - "username"
+      properties:
+        url:
+          type: "string"
+          description: "URL for the ServiceNow connection."
+        username:
+          type: "string"
+          description: "User name for the ServiceNow connection."
+  ServiceNowDefinition:
+    allOf:
+    - $ref: "#/definitions/ConnectionDefinition"
+    - type: "object"
+      required:
+      - "password"
+      - "url"
+      - "username"
+      properties:
+        url:
+          type: "string"
+          description: "URL for the ServiceNow connection."
+        username:
+          type: "string"
+          description: "User name for the ServiceNow connection."
+        password:
+          type: "string"
+          description: "User password for the ServiceNow connection."
+  ServiceNowSearchNotificationSyncDefinition:
+    allOf:
+    - $ref: "#/definitions/ScheduleNotificationSyncDefinition"
+    - type: "object"
+      required:
+      - "externalId"
+      properties:
+        externalId:
+          type: "string"
+          description: "ServiceNow identifier.\n"
+        fields:
+          description: "ServiceNow notification fields."
+          $ref: "#/definitions/ServiceNowFieldsSyncDefinition"
+  ServiceNowFieldsSyncDefinition:
+    type: "object"
+    properties:
+      eventType:
+        type: "string"
+        description: "The category that the event source uses to identify the event."
+      severity:
+        type: "integer"
+        description: "An integer value representing the severity of the alert. Supported\
+          \ values are:\n  - `0` for Clear\n  - `1` for Critical\n  - `2` for Major\n\
+          \  - `3` for Minor\n  - `4` for Warning\n"
+      resource:
+        type: "string"
+        description: "The component on the node to which the event applies."
+      node:
+        type: "string"
+        description: "The physical or virtual device on which the event occurred."
+  TimeRangeBoundary:
+    type: "object"
+    required:
+    - "type"
+    discriminator: "type"
+    properties:
+      type:
+        type: "string"
+        description: "Type of the time range boundary. Value must be from list: -\
+          \ `RelativeTimeRangeBoundary`, - `EpochTimeRangeBoundary`, - `Iso8601TimeRangeBoundary`,\
+          \ - `LiteralTimeRangeBoundary`.\n"
+  WebhookSearchNotificationSyncDefinition:
+    allOf:
+    - $ref: "#/definitions/ScheduleNotificationSyncDefinition"
+    - type: "object"
+      required:
+      - "webhookId"
+      properties:
+        webhookId:
+          type: "string"
+          description: "Identifier of the webhook connection."
+        payload:
+          type: "string"
+          description: "A JSON object in the format required by the target WebHook\
+            \ URL. For details on variables that can be used as parameters within\
+            \ your JSON object, please refer to Sumo Logic Doc Hub.\n"
+  WebhookConnection:
+    allOf:
+    - $ref: "#/definitions/Connection"
+    - type: "object"
+      required:
+      - "customHeaders"
+      - "defaultPayload"
+      - "headers"
+      - "url"
+      - "webhookType"
+      properties:
+        url:
+          type: "string"
+          description: "URL for the webhook connection."
+        headers:
+          type: "array"
+          description: "List of access authorization headers."
+          items:
+            $ref: "#/definitions/Header"
+        customHeaders:
+          type: "array"
+          description: "List of custom webhook headers."
+          items:
+            $ref: "#/definitions/Header"
+        defaultPayload:
+          type: "string"
+          description: "Default payload of the webhook."
+        webhookType:
+          type: "string"
+          description: "Type of webhook. Valid values are `AWSLambda`, `Azure`, `Datadog`,\
+            \ `HipChat`, `PagerDuty`, `Slack`, `Webhook`, and `NewRelic`."
+  WebhookDefinition:
+    allOf:
+    - $ref: "#/definitions/ConnectionDefinition"
+    - type: "object"
+      required:
+      - "defaultPayload"
+      - "url"
+      properties:
+        url:
+          type: "string"
+          description: "URL for the webhook connection."
+        headers:
+          type: "array"
+          description: "List of access authorization headers."
+          items:
+            $ref: "#/definitions/Header"
+          maxItems: 7995
+        customHeaders:
+          type: "array"
+          description: "List of custom webhook headers."
+          items:
+            $ref: "#/definitions/Header"
+          maxItems: 5
+        defaultPayload:
+          type: "string"
+          description: "Default payload of the webhook."
+          minLength: 1
+        webhookType:
+          type: "string"
+          description: "Type of webhook. Valid values are `AWSLambda`, `Azure`, `Datadog`,\
+            \ `HipChat`, `PagerDuty`, `Slack`, `Webhook`, and `NewRelic`."
+          default: "Webhook"
+  ListConnectionsResponse:
+    type: "object"
+    required:
+    - "data"
+    properties:
+      data:
+        type: "array"
+        description: "List of connections."
+        items:
+          $ref: "#/definitions/Connection"
+      next:
+        type: "string"
+        description: "Next continuation token."
+  Connection:
+    allOf:
+    - $ref: "#/definitions/Metadata"
+    - type: "object"
+      required:
+      - "description"
+      - "id"
+      - "name"
+      - "type"
+      discriminator: "type"
+      properties:
+        type:
+          type: "string"
+          description: "Type of connection. Valid values are `WebhookConnection`,\
+            \ `ServiceNowConnection`."
+        id:
+          type: "string"
+          description: "Unique identifier for the connection."
+        name:
+          type: "string"
+          description: "Name of the connection."
+        description:
+          type: "string"
+          description: "Description of the connection."
+  Metadata:
+    type: "object"
+    required:
+    - "createdAt"
+    - "createdBy"
+    - "modifiedAt"
+    - "modifiedBy"
+    properties:
+      createdAt:
+        type: "string"
+        format: "dateTime"
+        description: "Creation timestamp in UTC in [RFC3339](https://tools.ietf.org/html/rfc3339)\
+          \ format.\n"
+      createdBy:
+        type: "string"
+        description: "Identifier of the user who created the resource."
+      modifiedAt:
+        type: "string"
+        format: "dateTime"
+        description: "Last modification timestamp in UTC."
+      modifiedBy:
+        type: "string"
+        description: "Identifier of the user who last modified the resource."
+  ErrorResponse:
+    type: "object"
+    required:
+    - "errors"
+    - "id"
+    properties:
+      id:
+        type: "string"
+        example: "IUUQI-DGH5I-TJ045"
+        description: "An identifier for the error; this is unique to the specific\
+          \ API request."
+      errors:
+        type: "array"
+        example:
+        - code: "auth:password_too_short"
+          message: "Your password was too short."
+        - code: "auth:password_character_classes"
+          message: "Your password did not contain any non-alphanumeric characters"
+        description: "A list of one or more causes of the error."
+        items:
+          $ref: "#/definitions/ErrorDescription"
+  ErrorDescription:
+    type: "object"
+    required:
+    - "code"
+    - "message"
+    properties:
+      code:
+        type: "string"
+        example: "auth:password_too_short"
+        description: "An error code describing the type of error."
+      message:
+        type: "string"
+        example: "Your password was too short."
+        description: "A short English-language description of the error."
+      detail:
+        type: "string"
+        example: "Your password was 5 characters long, the minimum length is 12 characters.\
+          \  See http://example.com/password for more information."
+        description: "An optional fuller English-language description of the error."
+      meta:
+        type: "object"
+        example:
+          minLength: 12
+          actualLength: 5
+        description: "An optional list of metadata about the error."
+        properties: {}
+  ConnectionDefinition:
+    type: "object"
+    required:
+    - "name"
+    - "type"
+    discriminator: "type"
+    properties:
+      type:
+        type: "string"
+        description: "Type of connection. Valid values are `WebhookDefinition`, `ServiceNowDefinition`."
+      name:
+        type: "string"
+        description: "Name of connection. Name should be a valid alphanumeric value."
+        minLength: 1
+        maxLength: 127
+        pattern: "^([a-zA-Z0-9 +%\\-@.,_()]+)$"
+      description:
+        type: "string"
+        description: "Description of the connection."
+        maxLength: 1024
+        default: ""
+  TestConnectionResponse:
+    type: "object"
+    required:
+    - "responseContent"
+    - "statusCode"
+    properties:
+      statusCode:
+        type: "integer"
+        description: "Status code of the response of the connection test."
+      responseContent:
+        type: "string"
+        description: "Content of the response of the connection test."
+  BeginAsyncJobResponse:
+    type: "object"
+    required:
+    - "id"
+    properties:
+      id:
+        type: "string"
+        description: "Identifier to get the status of an asynchronous job."
+  AsyncJobStatus:
+    type: "object"
+    required:
+    - "status"
+    properties:
+      status:
+        type: "string"
+        description: "Whether or not the request is in progress (`InProgress`), has\
+          \ completed successfully (`Success`), or has completed with an error (`Failed`).\n"
+      statusMessage:
+        type: "string"
+        description: "Additional status message generated if the status is not `Failed`.\n"
+      error:
+        description: "More information about the failure, if the status is `Failed`."
+        $ref: "#/definitions/ErrorDescription"
+  ContentSyncDefinition:
+    type: "object"
+    required:
+    - "name"
+    - "type"
+    discriminator: "type"
+    properties:
+      type:
+        type: "string"
+        description: "The item type. Dashboard links are not supported."
+      name:
+        type: "string"
+        description: "The name of the item."
+  ContentPermissionResult:
+    type: "object"
+    required:
+    - "explicitPermissions"
+    properties:
+      explicitPermissions:
+        type: "array"
+        description: "Explicitly assigned content permissions."
+        items:
+          $ref: "#/definitions/ContentPermissionAssignment"
+      implicitPermissions:
+        type: "array"
+        description: "Implicitly inherited content permissions."
+        items:
+          $ref: "#/definitions/ContentPermissionAssignment"
+  ContentPermissionAssignment:
+    type: "object"
+    required:
+    - "contentId"
+    - "permissionName"
+    - "sourceId"
+    - "sourceType"
+    properties:
+      permissionName:
+        type: "string"
+        description: "Content permission name. Valid values are: `View`, `GrantView`,\
+          \ `Edit`, `GrantEdit`, `Manage`, and `GrantManage`.\n"
+      sourceType:
+        type: "string"
+        example: "role"
+        description: "Type of source for the permission. Valid values are: `user`,\
+          \ `role`, and `organization`.\n"
+      sourceId:
+        type: "string"
+        description: "An identifier that belongs to the source type chosen above.\
+          \ For e.g. if the sourceType is set to \"user\", sourceId should be identifier\
+          \ of a user (same goes for `role` and `organization` sourceType)\n"
+      contentId:
+        type: "string"
+        description: "Unique identifier for the content item."
+  ContentPermissionUpdateRequest:
+    type: "object"
+    required:
+    - "contentPermissionAssignments"
+    - "notificationMessage"
+    - "notifyRecipients"
+    properties:
+      contentPermissionAssignments:
+        type: "array"
+        description: "Content permissions to be updated."
+        items:
+          $ref: "#/definitions/ContentPermissionAssignment"
+      notifyRecipients:
+        type: "boolean"
+        description: "Set it to true to notify the users who were given permissions."
+      notificationMessage:
+        type: "string"
+        description: "Notification message to the users who were given permissions."
+  ListExtractionRulesResponse:
+    type: "object"
+    required:
+    - "data"
+    properties:
+      data:
+        type: "array"
+        description: "List of field extraction rules."
+        items:
+          $ref: "#/definitions/ExtractionRule"
+      next:
+        type: "string"
+        description: "Next continuation token."
+  ExtractionRule:
+    allOf:
+    - $ref: "#/definitions/ExtractionRuleDefinition"
+    - $ref: "#/definitions/Metadata"
+    - required:
+      - "id"
+      properties:
+        id:
+          type: "string"
+          description: "Unique identifier for the field extraction rule."
+        fieldNames:
+          type: "array"
+          description: "List of extracted fields from \"parseExpression\"."
+          items:
+            type: "string"
+  ExtractionRuleDefinition:
+    type: "object"
+    required:
+    - "enabled"
+    - "name"
+    - "parseExpression"
+    - "scope"
+    properties:
+      name:
+        type: "string"
+        example: "ExtractionRule123"
+        description: "Name of the field extraction rule. Use a name that makes it\
+          \ easy to identify the rule."
+        minLength: 1
+        maxLength: 256
+      scope:
+        type: "string"
+        example: "_sourceHost=127.0.0.1"
+        description: "Scope of the field extraction rule. This could be a sourceCategory,\
+          \ sourceHost, or any other metadata that describes the data you want to\
+          \ extract from. Think of the Scope as the first portion of an ad hoc search,\
+          \ before the first pipe ( | ). You'll use the Scope to run a search against\
+          \ the rule.\n"
+        minLength: 0
+        maxLength: 2048
+      parseExpression:
+        type: "string"
+        example: "parse \"message count = *,\" as msg_count"
+        description: "Describes the fields to be parsed.\n"
+        maxLength: 16384
+      enabled:
+        type: "boolean"
+        description: "Is the field extraction rule enabled."
+        default: true
+  ListDynamicRulesResponse:
+    type: "object"
+    required:
+    - "data"
+    properties:
+      data:
+        type: "array"
+        description: "List of dynamic parsing rules."
+        items:
+          $ref: "#/definitions/DynamicRule"
+      next:
+        type: "string"
+        description: "Next continuation token."
+  DynamicRule:
+    allOf:
+    - $ref: "#/definitions/DynamicRuleDefinition"
+    - $ref: "#/definitions/Metadata"
+    - required:
+      - "id"
+      properties:
+        id:
+          type: "string"
+          description: "Unique identifier for the dynamic parsing rule."
+  DynamicRuleDefinition:
+    type: "object"
+    required:
+    - "enabled"
+    - "name"
+    - "scope"
+    properties:
+      name:
+        type: "string"
+        example: "DynamicParsingRule123"
+        description: "Name of the dynamic parsing rule. Use a name that makes it easy\
+          \ to identify the rule."
+        minLength: 1
+        maxLength: 256
+      scope:
+        type: "string"
+        example: "_sourceHost=127.0.0.1"
+        description: "Scope of the dynamic parsing rule. This could be a sourceCategory,\
+          \ sourceHost, or any other metadata that describes the data you want to\
+          \ extract from. Think of the Scope as the first portion of an ad hoc search,\
+          \ before the first pipe ( | ). You'll use the Scope to run a search against\
+          \ the rule.\n"
+        minLength: 0
+        maxLength: 2048
+      enabled:
+        type: "boolean"
+        description: "Is the dynamic parsing rule enabled."
+        default: true
+  FolderDefinition:
+    type: "object"
+    required:
+    - "name"
+    - "parentId"
+    properties:
+      name:
+        type: "string"
+        example: "SampleFolder"
+        description: "The name of the folder."
+        minLength: 1
+        maxLength: 128
+      description:
+        type: "string"
+        example: "This is a sample folder."
+        description: "The description of the folder."
+        minLength: 0
+        maxLength: 255
+      parentId:
+        type: "string"
+        description: "The identifier of the parent folder."
+  Folder:
+    allOf:
+    - $ref: "#/definitions/Content"
+    - type: "object"
+      properties:
+        description:
+          type: "string"
+          example: "This is a sample folder."
+          description: "The description of the folder."
+          minLength: 0
+          maxLength: 255
+        children:
+          type: "array"
+          description: "A list of the content items."
+          items:
+            $ref: "#/definitions/Content"
+  Content:
+    allOf:
+    - $ref: "#/definitions/MetadataModel"
+    - required:
+      - "id"
+      - "itemType"
+      - "name"
+      - "parentId"
+      - "permissions"
+      properties:
+        id:
+          type: "string"
+          description: "Identifier of the content item."
+        name:
+          type: "string"
+          description: "The name of the content item."
+        itemType:
+          type: "string"
+          description: "Type of the content item. Supported values are:\n  1. Folder\n\
+            \  2. Search\n  3. Dashboard\n"
+        parentId:
+          type: "string"
+          description: "Identifier of the parent content item."
+        permissions:
+          type: "array"
+          description: "List of permissions the user has on the content item."
+          items:
+            type: "string"
+  MetadataModel:
+    type: "object"
+    required:
+    - "createdAt"
+    - "createdBy"
+    - "modifiedAt"
+    - "modifiedBy"
+    properties:
+      createdAt:
+        type: "string"
+        format: "date-time"
+        description: "Creation timestamp in UTC in [RFC3339](https://tools.ietf.org/html/rfc3339)\
+          \ format.\n"
+      createdBy:
+        type: "string"
+        description: "Identifier of the user who created the resource."
+      modifiedAt:
+        type: "string"
+        format: "date-time"
+        description: "Last modification timestamp in UTC."
+      modifiedBy:
+        type: "string"
+        description: "Identifier of the user who last modified the resource."
+  UpdateFolderRequest:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        type: "string"
+        example: "SampleFolder"
+        description: "The name of the folder."
+        minLength: 1
+        maxLength: 128
+      description:
+        type: "string"
+        example: "This is a sample folder."
+        description: "The description of the folder."
+        minLength: 0
+        maxLength: 255
+  ContentList:
+    type: "object"
+    required:
+    - "data"
+    properties:
+      data:
+        type: "array"
+        description: "A list of the content items."
+        items:
+          $ref: "#/definitions/Content"
+  ListIngestBudgetsResponse:
+    type: "object"
+    required:
+    - "data"
+    properties:
+      data:
+        type: "array"
+        description: "List of ingest budgets."
+        items:
+          $ref: "#/definitions/IngestBudget"
+      next:
+        type: "string"
+        description: "Next continuation token."
+  IngestBudget:
+    allOf:
+    - $ref: "#/definitions/IngestBudgetDefinition"
+    - $ref: "#/definitions/MetadataWithUserInfo"
+    - required:
+      - "id"
+      properties:
+        id:
+          type: "string"
+          description: "Unique identifier for the ingest budget."
+        usageBytes:
+          type: "integer"
+          format: "int64"
+          example: 900
+          description: "Current usage since the last reset, in bytes."
+        usageStatus:
+          type: "string"
+          example: "Approaching"
+          description: "Status of the current usage. Can be `Normal`, `Approaching`,\
+            \ `Exceeded`, or `Unknown` (unable to retrieve usage).\n"
+        numberOfCollectors:
+          type: "integer"
+          format: "int64"
+          example: 10
+          description: "Number of collectors assigned to the ingest budget."
+  IngestBudgetDefinition:
+    type: "object"
+    required:
+    - "action"
+    - "capacityBytes"
+    - "fieldValue"
+    - "name"
+    - "resetTime"
+    - "timezone"
+    properties:
+      name:
+        type: "string"
+        example: "Developer Budget"
+        description: "Display name of the ingest budget."
+        minLength: 1
+        maxLength: 128
+      fieldValue:
+        type: "string"
+        example: "dev_30_gb"
+        description: "Custom field value that is used to assign Collectors to the\
+          \ ingest budget."
+        minLength: 1
+        maxLength: 1024
+      capacityBytes:
+        type: "integer"
+        format: "int64"
+        example: 1000
+        description: "Capacity of the ingest budget, in bytes. It takes a few minutes\
+          \ for Collectors to stop collecting when capacity is reached. We recommend\
+          \ setting a soft limit that is lower than your needed hard limit."
+        minimum: 0
+      timezone:
+        type: "string"
+        example: "America/Los_Angeles"
+        description: "Time zone of the reset time for the ingest budget. Follow the\
+          \ format in the [IANA Time Zone Database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).\n"
+      resetTime:
+        type: "string"
+        example: "23:30"
+        description: "Reset time of the ingest budget in HH:MM format."
+        minLength: 5
+        maxLength: 5
+      description:
+        type: "string"
+        description: "Description of the ingest budget."
+        minLength: 0
+        maxLength: 1024
+      action:
+        type: "string"
+        example: "stopCollecting"
+        description: "Action to take when ingest budget's capacity is reached. All\
+          \ actions are audited. Supported values are:\n  * `stopCollecting`\n  *\
+          \ `keepCollecting`\n"
+  MetadataWithUserInfo:
+    type: "object"
+    required:
+    - "createdAt"
+    - "createdByUser"
+    - "modifiedAt"
+    - "modifiedByUser"
+    properties:
+      createdAt:
+        type: "string"
+        format: "date-time"
+        description: "Creation timestamp in UTC in [RFC3339](https://tools.ietf.org/html/rfc3339)\
+          \ format.\n"
+      createdByUser:
+        description: "Information about the user who created the resource."
+        $ref: "#/definitions/UserInfo"
+      modifiedAt:
+        type: "string"
+        format: "date-time"
+        description: "Last modification timestamp in UTC in [RFC3339](https://tools.ietf.org/html/rfc3339)\
+          \ format."
+      modifiedByUser:
+        description: "Information about the user who last modified the resource."
+        $ref: "#/definitions/UserInfo"
+  UserInfo:
+    type: "object"
+    required:
+    - "email"
+    - "firstName"
+    - "id"
+    - "lastName"
+    properties:
+      id:
+        type: "string"
+        description: "User's identifier."
+      email:
+        type: "string"
+        description: "User's email."
+      firstName:
+        type: "string"
+        description: "User's first name."
+      lastName:
+        type: "string"
+        description: "User's last name."
+  ListCollectorIdentitiesResponse:
+    type: "object"
+    required:
+    - "data"
+    properties:
+      data:
+        type: "array"
+        description: "List of Collector identities."
+        items:
+          $ref: "#/definitions/CollectorIdentity"
+      next:
+        type: "string"
+        description: "Next continuation token."
+  CollectorIdentity:
+    type: "object"
+    required:
+    - "id"
+    - "name"
+    properties:
+      id:
+        type: "string"
+        description: "Unique identifier for the Collector."
+      name:
+        type: "string"
+        description: "The name of the Collector."
+  ListIngestBudgetsResponse_2:
+    type: "object"
+    required:
+    - "data"
+    properties:
+      data:
+        type: "array"
+        description: "List of ingest budgets."
+        items:
+          $ref: "#/definitions/IngestBudget_2"
+      next:
+        type: "string"
+        description: "Next continuation token."
+  IngestBudget_2:
+    allOf:
+    - $ref: "#/definitions/IngestBudgetDefinition"
+    - $ref: "#/definitions/MetadataWithUserInfo"
+    - required:
+      - "id"
+      properties:
+        id:
+          type: "string"
+          description: "Unique identifier for the ingest budget."
+        usageBytes:
+          type: "integer"
+          format: "int64"
+          example: 900
+          description: "Current usage since the last reset, in bytes."
+        usageStatus:
+          type: "string"
+          example: "Approaching"
+          description: "Status of the current usage. Can be `Normal`, `Approaching`,\
+            \ `Exceeded`, or `Unknown` (unable to retrieve usage).\n"
+        numberOfCollectors:
+          type: "integer"
+          format: "int64"
+          example: 10
+          description: "Number of collectors assigned to the ingest budget."
+  IngestBudgetDefinition_2:
+    type: "object"
+    required:
+    - "action"
+    - "capacityBytes"
+    - "fieldValue"
+    - "name"
+    - "resetTime"
+    - "timezone"
+    properties:
+      name:
+        type: "string"
+        example: "Developer Budget"
+        description: "Display name of the ingest budget."
+        minLength: 1
+        maxLength: 128
+      fieldValue:
+        type: "string"
+        example: "dev_30_gb"
+        description: "Custom field value that is used to assign Collectors to the\
+          \ ingest budget."
+        minLength: 1
+        maxLength: 1024
+      capacityBytes:
+        type: "integer"
+        format: "int64"
+        example: 1000
+        description: "Capacity of the ingest budget, in bytes. It takes a few minutes\
+          \ for Collectors to stop collecting when capacity is reached. We recommend\
+          \ setting a soft limit that is lower than your needed hard limit."
+        minimum: 0
+      timezone:
+        type: "string"
+        example: "America/Los_Angeles"
+        description: "Time zone of the reset time for the ingest budget. Follow the\
+          \ format in the [IANA Time Zone Database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).\n"
+      resetTime:
+        type: "string"
+        example: "23:30"
+        description: "Reset time of the ingest budget in HH:MM format."
+        minLength: 5
+        maxLength: 5
+      description:
+        type: "string"
+        description: "Description of the ingest budget."
+        minLength: 0
+        maxLength: 1024
+      action:
+        type: "string"
+        example: "stopCollecting"
+        description: "Action to take when ingest budget's capacity is reached. All\
+          \ actions are audited. Supported values are:\n  * `stopCollecting`\n  *\
+          \ `keepCollecting`\n"
+  ListCollectorIdentitiesResponse_2:
+    type: "object"
+    required:
+    - "data"
+    properties:
+      data:
+        type: "array"
+        description: "List of Collector identities."
+        items:
+          $ref: "#/definitions/CollectorIdentity_2"
+      next:
+        type: "string"
+        description: "Next continuation token."
+  CollectorIdentity_2:
+    type: "object"
+    required:
+    - "id"
+    - "name"
+    properties:
+      id:
+        type: "string"
+        description: "Unique identifier for the Collector."
+      name:
+        type: "string"
+        description: "The name of the Collector."
+  MetricsMonitorsResponse:
+    type: "object"
+    required:
+    - "data"
+    properties:
+      data:
+        type: "array"
+        description: "List of metrics monitors."
+        items:
+          $ref: "#/definitions/MetricsMonitorInstance"
+      next:
+        type: "string"
+        description: "Next continuation token."
+  MetricsMonitorInstance:
+    allOf:
+    - required:
+      - "id"
+      - "monitorDefinition"
+      properties:
+        monitorDefinition:
+          description: "The metric monitor object."
+          $ref: "#/definitions/MetricsMonitorDefinition"
+        id:
+          type: "string"
+          description: "Identifier of the metrics monitor."
+        orgId:
+          type: "string"
+          description: "Identifier of the organization."
+        status:
+          type: "string"
+          description: "Status of the monitor."
+        statusLastUpdatedAt:
+          type: "string"
+          format: "date-time"
+          description: "Date and time the status was last modified in ISO 8601 format."
+    - $ref: "#/definitions/MetadataWithUserInfo"
+  MetricsMonitorDefinition:
+    type: "object"
+    required:
+    - "alertQueries"
+    - "isDisabled"
+    - "monitorRules"
+    - "muteStatus"
+    - "name"
+    - "queriesTimeRange"
+    - "timeZone"
+    properties:
+      name:
+        type: "string"
+        description: "Name of the metrics monitor."
+      description:
+        type: "string"
+        description: "Monitor description."
+      isDisabled:
+        type: "boolean"
+        description: "Is the monitor enabled."
+      alertQueries:
+        type: "array"
+        description: "Monitor's queries."
+        items:
+          $ref: "#/definitions/MetricsAlertQuery"
+      queriesTimeRange:
+        description: "Time range for the monitor's queries."
+        $ref: "#/definitions/ResolvableTimeRange"
+      timeZone:
+        type: "string"
+        description: "Time zone."
+      monitorRules:
+        type: "array"
+        description: "Monitor rules."
+        items:
+          $ref: "#/definitions/MetricsMonitorRule"
+      muteStatus:
+        description: "Status of mute setting."
+        $ref: "#/definitions/MetricsMonitorMuteStatus"
+      chartSettings:
+        type: "string"
+        description: "Chart settings."
+  MetricsAlertQuery:
+    type: "object"
+    required:
+    - "isAlertRow"
+    - "query"
+    - "rowId"
+    properties:
+      rowId:
+        type: "string"
+        description: "Row identifier."
+      query:
+        type: "string"
+        description: "A monitor query."
+      isAlertRow:
+        type: "boolean"
+        description: "Is the monitor alerting on this row's query."
+  MetricsMonitorRuleEmailNotification:
+    type: "object"
+    required:
+    - "recipients"
+    properties:
+      recipients:
+        type: "array"
+        description: "List of notification recipients' email addresses."
+        items:
+          type: "string"
+  MetricsMonitorRuleWebhookNotification:
+    type: "object"
+    required:
+    - "webhookId"
+    properties:
+      webhookId:
+        type: "string"
+        description: "Identifier of the webhook."
+      payload:
+        type: "string"
+        description: "Webhook's payload."
+  MetricsMonitorMuteStatus:
+    type: "object"
+    required:
+    - "isMuted"
+    properties:
+      isMuted:
+        type: "boolean"
+        description: "Is the monitor muted."
+      duration:
+        type: "integer"
+        format: "int64"
+        description: "Duration to mute the monitor in milliseconds."
+      mutedAt:
+        type: "string"
+        format: "date-time"
+        description: "Date and time the monitor was muted in ISO 8601 format."
+  ListPartitionsResponse:
+    type: "object"
+    required:
+    - "data"
+    properties:
+      data:
+        type: "array"
+        description: "List of partitions."
+        items:
+          $ref: "#/definitions/Partition"
+      next:
+        type: "string"
+        description: "Next continuation token."
+  Partition:
+    allOf:
+    - $ref: "#/definitions/CreatePartitionDefinition"
+    - required:
+      - "createdAt"
+      - "createdBy"
+      - "id"
+      - "modifiedAt"
+      properties:
+        id:
+          type: "string"
+          description: "Unique identifier for the partition."
+        isActive:
+          type: "boolean"
+          description: "This has the value `true` if the partition is active and `false`\
+            \ if it has been decommissioned.\n"
+        createdAt:
+          type: "string"
+          format: "dateTime"
+          description: "Creation timestamp in UTC in [RFC3339](https://tools.ietf.org/html/rfc3339)\
+            \ format.\n"
+        createdBy:
+          type: "string"
+          description: "Identifier of the user who created the resource."
+        modifiedAt:
+          type: "string"
+          format: "dateTime"
+          description: "Last modification timestamp in UTC."
+  CreatePartitionDefinition:
+    type: "object"
+    required:
+    - "name"
+    - "routingExpression"
+    properties:
+      name:
+        type: "string"
+        example: "apache"
+        description: "The name of the partition."
+        maxLength: 255
+      routingExpression:
+        type: "string"
+        example: "_sourcecategory=*/Apache"
+        description: "The query that defines the data to be included in the partition."
+        minLength: 1
+        maxLength: 16384
+      dataForwardingId:
+        type: "string"
+        description: "An optional ID of a data forwarding configuration to be used\
+          \ by the partition."
+      analyticsTier:
+        type: "string"
+        example: "enhanced"
+        description: "The Cloud Flex analytics tier for your data; only relevant if\
+          \ your account has basic analytics enabled. Possible values are:\n  1. `enhanced`\n\
+          \  2. `basic`\n  3. `cold`\n"
+        default: "enhanced"
+      retentionPeriod:
+        type: "integer"
+        example: 365
+        description: "The number of days to retain data in the partition, or -1 to\
+          \ use the default value for your account.  Only relevant if your account\
+          \ has variable retention enabled.\n"
+      isCompliant:
+        type: "boolean"
+        example: false
+        description: "Whether the partition is compliant or not. Mark a partition\
+          \ as compliant if it contains data used for compliance or audit purpose.\
+          \ Retention for a compliant partition can only be increased and cannot be\
+          \ reduced after the partition is created.\n"
+        default: false
+  UpdatePartitionDefinition:
+    type: "object"
+    properties:
+      dataForwardingId:
+        type: "string"
+        description: "An optional ID of a data forwarding destination to be used by\
+          \ the partition."
+      retentionPeriod:
+        type: "integer"
+        example: 365
+        description: "The number of days to retain data in the partition, or -1 to\
+          \ use the default value for your account. Only relevant if your account\
+          \ has variable retention enabled.\n"
+      reduceRetentionPeriodImmediately:
+        type: "boolean"
+        description: "This is required if the newly specified `retentionPeriod` is\
+          \ less than the existing retention period.  In such a situation, a value\
+          \ of `true` says that data between the existing retention period and the\
+          \ new retention period should be deleted immediately; if `false`, such data\
+          \ will be deleted after seven days. This property is optional and ignored\
+          \ if the specified `retentionPeriod` is greater than or equal to the current\
+          \ retention period.\n"
+        default: false
+  ListScheduledViewsResponse:
+    type: "object"
+    required:
+    - "data"
+    properties:
+      data:
+        type: "array"
+        description: "List of scheduled views."
+        items:
+          $ref: "#/definitions/ScheduledView"
+      next:
+        type: "string"
+        description: "Next continuation token."
+  ScheduledView:
+    allOf:
+    - $ref: "#/definitions/CreateScheduledViewDefinition"
+    - required:
+      - "id"
+      properties:
+        id:
+          type: "string"
+          description: "Identifier for the scheduled view."
+        createdAt:
+          type: "string"
+          format: "dateTime"
+          description: "Creation timestamp in UTC."
+        createdByOptimizeIt:
+          type: "boolean"
+          description: "If the scheduled view is created by OptimizeIt."
+        error:
+          type: "string"
+          description: "Errors related to the scheduled view."
+        status:
+          type: "string"
+          description: "Status of the scheduled view."
+        totalBytes:
+          type: "integer"
+          format: "int64"
+          description: "Total storage consumed by the scheduled view."
+        totalMessageCount:
+          type: "integer"
+          format: "int64"
+          description: "Total number of messages for the scheduled view."
+        createdBy:
+          type: "string"
+          description: "Identifier of the user who created the scheduled view."
+  CreateScheduledViewDefinition:
+    type: "object"
+    required:
+    - "indexName"
+    - "query"
+    - "startTime"
+    properties:
+      query:
+        type: "string"
+        example: "_sourcecategory=*/Apache"
+        description: "The query that defines the data to be included in the scheduled\
+          \ view."
+        minLength: 1
+        maxLength: 16384
+      indexName:
+        type: "string"
+        example: "TestScheduledView"
+        description: "Name of the index for the scheduled view."
+        minLength: 0
+        maxLength: 255
+      startTime:
+        type: "string"
+        format: "dateTime"
+        description: "Start timestamp in UTC in [RFC3339](https://tools.ietf.org/html/rfc3339)\
+          \ format."
+      retentionPeriod:
+        type: "integer"
+        format: "int32"
+        example: 365
+        description: "The number of days to retain data in the scheduled view, or\
+          \ -1 to use the default value for your account.  Only relevant if your account\
+          \ has multi-retention. enabled.\n"
+        default: -1
+      dataForwardingId:
+        type: "string"
+        description: "An optional ID of a data forwarding configuration to be used\
+          \ by the scheduled view."
+  UpdateScheduledViewDefinition:
+    type: "object"
+    properties:
+      dataForwardingId:
+        type: "string"
+        description: "An optional ID of a data forwarding configuration to be used\
+          \ by the scheduled view."
+      retentionPeriod:
+        type: "integer"
+        format: "int32"
+        example: 365
+        description: "The number of days to retain data in the scheduled view, or\
+          \ -1 to use the default value for your account.  Only relevant if your account\
+          \ has multi-retention. enabled.\n"
+        default: -1
+      reduceRetentionPeriodImmediately:
+        type: "boolean"
+        description: "This is required if the newly specified `retentionPeriod` is\
+          \ less than the existing retention period.  In such a situation, a value\
+          \ of `true` says that data between the existing retention period and the\
+          \ new retention period should be deleted immediately; if `false`, such data\
+          \ will be deleted after seven days. This property is optional and ignored\
+          \ if the specified `retentionPeriod` is greater than or equal to the current\
+          \ retention period.\n"
+        default: false
+  ListRoleModelsResponse:
+    type: "object"
+    required:
+    - "data"
+    properties:
+      data:
+        type: "array"
+        description: "List of roles."
+        items:
+          $ref: "#/definitions/RoleModel"
+      next:
+        type: "string"
+        description: "Next continuation token."
+  RoleModel:
+    allOf:
+    - $ref: "#/definitions/CreateRoleDefinition"
+    - $ref: "#/definitions/MetadataModel"
+    - required:
+      - "id"
+      properties:
+        id:
+          type: "string"
+          description: "Unique identifier for the role."
+        systemDefined:
+          type: "boolean"
+          description: "Role is system or user defined."
+  CreateRoleDefinition:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        type: "string"
+        example: "Admin"
+        description: "Name of the role."
+        minLength: 1
+        maxLength: 128
+      description:
+        type: "string"
+        example: "Manage users and content."
+        description: "Description of the role."
+        minLength: 0
+        maxLength: 255
+      filterPredicate:
+        type: "string"
+        example: "!_sourceCategory=billing"
+        description: "A search filter to restrict access to specific logs. The filter\
+          \ is silently added to the beginning of each query a user runs. For example,\
+          \ using '!_sourceCategory=billing' as a filter predicate will prevent users\
+          \ assigned to the role from viewing logs from the source category named\
+          \ 'billing'.\n"
+      users:
+        type: "array"
+        description: "List of user identifiers to assign the role to."
+        items:
+          type: "string"
+      capabilities:
+        type: "array"
+        description: "List of [capabilities](https://help.sumologic.com/Manage/Users-and-Roles/Manage-Roles/Role-Capabilities)\
+          \ associated with this role. Valid values are\n  ### Connections\n  - manageConnections\n\
+          \  ### Collectors\n  - manageCollectors\n  - viewCollectors\n  ### Dashboards\n\
+          \  - shareDashboardWhitelist\n  - shareDashboardWorld\n  ### Data Management\n\
+          \  - manageContent\n  - manageDataVolumeFeed\n  - manageFieldExtractionRules\n\
+          \  - manageIndexes\n  - manageS3DataForwarding\n  ### Metrics\n  - manageMonitors\n\
+          \  - metricsExtraction\n  ### Security\n  - ipWhitelisting\n  - manageAccessKeys\n\
+          \  - manageAuditDataFeed\n  - managePasswordPolicy\n  - manageSaml\n  -\
+          \ manageSupportAccountAccess\n  - manageUsersAndRoles\n  - shareDashboardOutsideOrg\n"
+        items:
+          type: "string"
+  UpdateRoleDefinition:
+    type: "object"
+    required:
+    - "capabilities"
+    - "description"
+    - "filterPredicate"
+    - "name"
+    - "users"
+    properties:
+      name:
+        type: "string"
+        example: "Admin"
+        description: "Name of the role."
+        minLength: 1
+        maxLength: 128
+      description:
+        type: "string"
+        example: "Manage users and content."
+        description: "Description of the role."
+        minLength: 0
+        maxLength: 255
+      filterPredicate:
+        type: "string"
+        example: "!_sourceCategory=billing"
+        description: "A search filter to restrict access to specific logs. The filter\
+          \ is silently added to the beginning of each query a user runs. For example,\
+          \ using '!_sourceCategory=billing' as a filter predicate will prevent users\
+          \ assigned to the role from viewing logs from the source category named\
+          \ 'billing'.\n"
+      users:
+        type: "array"
+        description: "List of user identifiers to assign the role to."
+        items:
+          type: "string"
+      capabilities:
+        type: "array"
+        description: "List of [capabilities](https://help.sumologic.com/Manage/Users-and-Roles/Manage-Roles/Role-Capabilities)\
+          \ associated with this role. Valid values are\n  ### Connections\n  - manageConnections\n\
+          \  ### Collectors\n  - manageCollectors\n  - viewCollectors\n  ### Dashboards\n\
+          \  - shareDashboardWhitelist\n  - shareDashboardWorld\n  ### Data Management\n\
+          \  - manageContent\n  - manageDataVolumeFeed\n  - manageFieldExtractionRules\n\
+          \  - manageIndexes\n  - manageS3DataForwarding\n  ### Metrics\n  - manageMonitors\n\
+          \  - metricsExtraction\n  ### Security\n  - ipWhitelisting\n  - manageAccessKeys\n\
+          \  - manageAuditDataFeed\n  - managePasswordPolicy\n  - manageSaml\n  -\
+          \ manageSupportAccountAccess\n  - manageUsersAndRoles\n  - shareDashboardOutsideOrg\n"
+        items:
+          type: "string"
+  ListUserModelsResponse:
+    type: "object"
+    required:
+    - "data"
+    properties:
+      data:
+        type: "array"
+        description: "List of users."
+        items:
+          $ref: "#/definitions/UserModel"
+      next:
+        type: "string"
+        description: "Next continuation token."
+  UserModel:
+    allOf:
+    - $ref: "#/definitions/CreateUserDefinition"
+    - $ref: "#/definitions/MetadataModel"
+    - required:
+      - "id"
+      properties:
+        id:
+          type: "string"
+          description: "Unique identifier for the user."
+        isActive:
+          type: "boolean"
+          description: "True if the user is active."
+        isLocked:
+          type: "boolean"
+          description: "This has the value `true` if the user's account has been locked.\
+            \ If a user tries to log into their account several times and fails, his\
+            \ or her account will be locked for security reasons.\n"
+        isMfaEnabled:
+          type: "boolean"
+          description: "True if multi factor authentication is enabled for the user."
+        lastLoginTimestamp:
+          type: "string"
+          format: "date-time"
+          description: "Timestamp of the last login for the user in UTC. Will be null\
+            \ if the user has never logged in."
+  CreateUserDefinition:
+    type: "object"
+    required:
+    - "email"
+    - "firstName"
+    - "lastName"
+    - "roleIds"
+    properties:
+      firstName:
+        type: "string"
+        example: "John"
+        description: "First name of the user."
+        minLength: 1
+        maxLength: 128
+      lastName:
+        type: "string"
+        example: "Doe"
+        description: "Last name of the user."
+        minLength: 0
+        maxLength: 128
+      email:
+        type: "string"
+        format: "email"
+        example: "johndoe@acme.com"
+        description: "Email address of the user."
+        maxLength: 255
+      roleIds:
+        type: "array"
+        description: "List of roleIds associated with the user."
+        items:
+          type: "string"
+  UpdateUserDefinition:
+    type: "object"
+    required:
+    - "firstName"
+    - "isActive"
+    - "lastName"
+    - "roleIds"
+    properties:
+      firstName:
+        type: "string"
+        example: "John"
+        description: "First name of the user."
+        minLength: 1
+        maxLength: 128
+      lastName:
+        type: "string"
+        example: "Doe"
+        description: "Last name of the user."
+        minLength: 0
+        maxLength: 128
+      isActive:
+        type: "boolean"
+        description: "This has the value `true` if the user is active and `false`\
+          \ if they have been deactivated."
+      roleIds:
+        type: "array"
+        description: "List of role identifiers associated with the user."
+        items:
+          type: "string"
+  ChangeEmailRequest:
+    type: "object"
+    required:
+    - "email"
+    properties:
+      email:
+        type: "string"
+        format: "email"
+        example: "johndoe@acme.com"
+        description: "New email address of the user."
+        maxLength: 255
+  ParameterAutoCompleteSyncDefinition:
+    type: "object"
+    required:
+    - "autoCompleteType"
+    properties:
+      autoCompleteType:
+        type: "string"
+        description: "The autocomplete parameter type. Supported values are:\n  1.\
+          \ `SKIP_AUTOCOMPLETE`\n  2. `CSV_AUTOCOMPLETE`\n  3. `AUTOCOMPLETE_KEY`\n\
+          \  4. `VALUE_ONLY_AUTOCOMPLETE`\n  5. `VALUE_ONLY_LOOKUP_AUTOCOMPLETE`\n\
+          \  6. `LABEL_VALUE_LOOKUP_AUTOCOMPLETE`\n"
+      autoCompleteValues:
+        type: "array"
+        description: "The array of values of the corresponding autocomplete parameter."
+        items:
+          $ref: "#/definitions/AutoCompleteValueSyncDefinition"
+      lookupFileName:
+        type: "string"
+        description: "The lookup file to use as a source for autocomplete values."
+      lookupLabelColumn:
+        type: "string"
+        description: "The column from the lookup file to use for autocomplete labels."
+      lookupValueColumn:
+        type: "string"
+        description: "The column from the lookup file to fill the actual value when\
+          \ a particular label is selected."
+  AutoCompleteValueSyncDefinition:
+    type: "object"
+    required:
+    - "label"
+    - "value"
+    properties:
+      label:
+        type: "string"
+        description: "The label of the autocomplete value."
+      value:
+        type: "string"
+        description: "The value of the autocomplete value."
+  MetricsQuerySyncDefinition:
+    type: "object"
+    required:
+    - "query"
+    - "rowId"
+    properties:
+      query:
+        type: "string"
+        description: "The text of a metrics query."
+      rowId:
+        type: "string"
+        description: "A label referring to the query; used if other metrics queries\
+          \ reference this one."
+  TopologyLabelMap:
+    type: "object"
+    description: "Map of the topology labels. Each label has a key and a list of values.\
+      \ If a value is `*`, it means the label will match content for all values of\
+      \ its key.\n"
+    additionalProperties:
+      $ref: "#/definitions/TopologyLabelValuesList"
+  TopologyLabelValuesList:
+    type: "array"
+    description: "List of values corresponding to a key of a label."
+    items:
+      type: "string"
+      description: "Value of the label."
+  MetricsQueryData:
+    type: "object"
+    required:
+    - "filters"
+    - "groupBy"
+    - "metric"
+    properties:
+      metric:
+        type: "string"
+        description: "The metric of the query."
+      aggregationType:
+        type: "string"
+        description: "The type of aggregation. Can be `Count`, `Minimum`, `Maximum`,\
+          \ `Sum` or `Average`."
+      groupBy:
+        type: "string"
+        description: "The field to group the results by."
+      filters:
+        type: "array"
+        description: "A list of filters for the metrics query."
+        items:
+          $ref: "#/definitions/MetricsFilter"
+    description: "The data format describing a basic metrics query."
+    example:
+      metric: "CPU_user"
+      aggregationType: "count"
+      groupBy: "_sourceHost"
+      filters:
+      - key: "_sourceCategory"
+        value: "cqmerger"
+      - key: "_sourceHost"
+        value: "nite-cqmerger-1"
+  MetricsFilter:
+    type: "object"
+    properties:
+      key:
+        type: "string"
+        description: "The key of the metrics filter."
+      value:
+        type: "string"
+        description: "The value of the metrics filter."
+    description: "The filter for metrics query."
+    example:
+      key: "_sourceCategory"
+      value: "cqmerger"
+x-tagGroups:
+- name: "Library Management"
+  tags:
+  - "contentManagement"
+  - "contentPermissions"
+  - "folderManagement"
+- name: "Users and Roles Management"
+  tags:
+  - "roleManagement"
+  - "userManagement"
+- name: "Settings Management"
+  tags:
+  - "connectionManagement"
+  - "extractionRuleManagement"
+  - "partitionManagement"
+  - "scheduledViewManagement"
+- name: "Ingest Budgets Management"
+  tags:
+  - "ingestBudgetManagementV1"
+- name: "Metrics"
+  tags:
+  - "metricsAlertMonitorManagement"
