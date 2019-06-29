@@ -80,6 +80,7 @@ info:
   x-logo:
     url: "./sumologic_logo.png"
 basePath: "/api"
+host: "api.us2.sumologic.com"
 tags:
 - name: "connectionManagement"
   description: "Connection management API.\n\nSet up connections to send alerts to\
