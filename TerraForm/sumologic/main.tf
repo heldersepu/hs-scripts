@@ -32,3 +32,11 @@ resource "sumologic_user" "example_user2" {
   email      = "jane.smith@gmail.com"
   role_ids   = ["${sumologic_role.example_role.id}"]
 }
+
+output "example_user1_id" {
+  value = "${sumologic_user.example_user1.id}"
+}
+
+output "example_user1_name" {
+  value = "${sumologic_user.example_user1.first_name} ${sumologic_user.example_user1.last_name}"
+}
