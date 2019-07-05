@@ -8,3 +8,7 @@ resource "aws_s3_bucket" "sample_bucket1111" {
     Environment = "Dev"
   }
 }
+
+output "bucket_name" {
+  value = "${aws_s3_bucket.sample_bucket1111.*.id}"
+}
