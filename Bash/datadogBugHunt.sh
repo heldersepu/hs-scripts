@@ -6,6 +6,6 @@ make build
 mv ~/.go/bin/terraform-provider-datadog ~/.terraform.d/plugins/linux_amd64/terraform-provider-datadog
 
 cd ~/code/hs-scripts/TerraForm/datadog/
-terraform init 
-terraform apply -auto-approve
-terraform destroy -auto-approve
+terraform init >/dev/null 2>&1
+export TF_LOG=TRACE; terraform apply -auto-approve
+export TF_LOG=;terraform destroy -auto-approve >/dev/null 2>&1
