@@ -16,7 +16,7 @@ function successFunc(resp) {
         var marker = new google.maps.Marker({position: loc, map: map});
         var infowindow = new google.maps.InfoWindow({
             content: x.description + "<br>" + 
-            "<a href='https://camera.deckchair.com/webcam/" + x.tag + "'>https://camera.deckchair.com/webcam/" + x.tag + "</a>"
+            "<a target='blank' href='https://camera.deckchair.com/" + x.tag + "'>https://camera.deckchair.com/" + x.tag + "</a>"
         });
         marker.addListener('click', function() {
             infowindow.open(map, marker);
