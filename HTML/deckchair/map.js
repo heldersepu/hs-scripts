@@ -9,7 +9,7 @@ $.ajax({
 function successFunc(resp) {
     var map = new google.maps.Map(
         document.getElementById('map'),
-        {zoom: 5, center: {lat: 26.98, lng: -80.78}});
+        {zoom: 6, center: {lat: 26.98, lng: -80.78}});
     resp.data.forEach(x => {
         coord = x.location.loc.coordinates
         loc = {lat: coord[0], lng: coord[1]};
