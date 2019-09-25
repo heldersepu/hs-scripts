@@ -5,6 +5,7 @@ for role in $roles; do
     desc=$(echo $role | base64 --decode | jq -r ".description")
     system=$(echo $role | base64 --decode | jq -r ".systemDefined")
     filter=$(echo $role | base64 --decode | jq ".filterPredicate")
+    capabilities=$(echo $role | base64 --decode | jq ".capabilities")
 
 
     resource=$(echo $name | tr '[:upper:]' '[:lower:]')
@@ -20,7 +21,7 @@ for role in $roles; do
     echo ""
     echo "  filter_predicate = $filter"
     if [ $system = "false" ]; then
-        echo "  capabilities     = []"
+        echo "  capabilities     = $capabilities"
     fi
     echo ""
     echo "  lifecycle {"
