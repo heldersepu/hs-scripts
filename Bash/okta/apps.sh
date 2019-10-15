@@ -7,6 +7,8 @@ for app in $apps; do
         id=$(echo $app | base64 --decode | jq ".id")
         name=$(echo $app | base64 --decode | jq ".name")
         label=$(echo $app | base64 --decode | jq ".label")
+        nameTpl=$(echo $app | base64 --decode | jq ".credentials.userNameTemplate.template")
+        nameTplType=$(echo $app | base64 --decode | jq ".credentials.userNameTemplate.type")        
 
         resource="${name}_${label}"
         resource=$(echo $resource | tr '[:upper:]' '[:lower:]')
@@ -23,8 +25,12 @@ for app in $apps; do
         resource="${resource/__/_}"
 
 
-        echo "# ----  terraform import okta_user.$resource $id"
-        echo "resource \"okta_user\" \"$resource\" {"
+        echo "# ----  terraform import okta_app_saml.$resource $id"
+        echo "resource \"okta_app_saml\" \"$resource\" {"
+        echo "  preconfigured_app        = $name"
+        echo "  label                    = $label"
+        echo "  user_name_template       = $nameTpl"
+        echo "  user_name_template_type  = $nameTplType"
         echo "}"
         echo ""
     fi
