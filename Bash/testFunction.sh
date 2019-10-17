@@ -16,8 +16,10 @@ function testEcho1() {
 }
 
 array=("one" "two" "three")
-testEcho1 ${array[@]}
+return1=$(testEcho1 ${array[@]})
 
 
 array=("uno" "dos" "tres")
-testEcho1 ${array[@]}
+return2=$(testEcho1 ${array[@]})
+
+echo "$return1  -  $return2"
