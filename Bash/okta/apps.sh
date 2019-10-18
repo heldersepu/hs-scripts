@@ -1,4 +1,4 @@
-url="https://myapp.oktapreview.com/api"
+source common.sh
 
 apps=$(curl -s -X GET "$url/v1/apps?limit=200"  -H "Authorization: SSWS $okta_token" | jq -r ".[] | @base64")
 for app in $apps; do
@@ -8,21 +8,8 @@ for app in $apps; do
         name=$(echo $app | base64 --decode | jq ".name")
         label=$(echo $app | base64 --decode | jq ".label")
         nameTpl=$(echo $app | base64 --decode | jq ".credentials.userNameTemplate.template")
-        nameTplType=$(echo $app | base64 --decode | jq ".credentials.userNameTemplate.type")        
-
-        resource="${name}_${label}"
-        resource=$(echo $resource | tr '[:upper:]' '[:lower:]')
-        resource=$(echo $resource | tr -d '"')
-        resource="${resource//  /_}"
-        resource="${resource// /_}"
-        resource="${resource/:/_}"
-        resource="${resource/./_}"
-        resource="${resource/@/_}"
-        resource="${resource/(/_}"
-        resource="${resource/)/_}"
-        resource="${resource/_-_/_}"
-        resource="${resource/\"_\"/_}"
-        resource="${resource/__/_}"
+        nameTplType=$(echo $app | base64 --decode | jq ".credentials.userNameTemplate.type")
+        resource=$(clean "${name}_${label}")        
 
 
         echo "# ----  terraform import okta_app_saml.$resource $id"
