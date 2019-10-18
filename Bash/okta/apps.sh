@@ -11,10 +11,10 @@ for app in $apps; do
         nameTplType=$(echo $app | base64 --decode | jq ".credentials.userNameTemplate.type")
         resource=$(clean "${name}_${label}")
 
-        usersLink=$(echo $app | base64 --decode | jq "._links.users.href")
-        users=$(curl -s -X GET "$usersLink?limit=200"  -H "Authorization: SSWS $okta_token" | jq -r ".[].credentials.userName")
-        groupsLink=$(echo $app | base64 --decode | jq "._links.groups.href")
-        groups=$(curl -s -X GET "$groupsLink?limit=200"  -H "Authorization: SSWS $okta_token" | jq -r ".[].credentials.userName")
+        usersLink=$(echo $app | base64 --decode | jq "._links.users.href" | tr -d '"')
+        users=$(curl -s -X GET $usersLink  -H "Authorization: SSWS $okta_token" | jq ".[].credentials.userName")
+        groupsLink=$(echo $app | base64 --decode | jq "._links.groups.href" | tr -d '"')
+        groups=$(curl -s -X GET $groupsLink  -H "Authorization: SSWS $okta_token" | jq ".[].id")
 
         echo "# ----  terraform import okta_app_saml.$resource $id"
         echo "resource \"okta_app_saml\" \"$resource\" {"
@@ -22,9 +22,22 @@ for app in $apps; do
         echo "  label                    = $label"
         echo "  user_name_template       = $nameTpl"
         echo "  user_name_template_type  = $nameTplType"
-        for app in $apps; do
+        
+        for user in $users; do
+            echo "  users {"
+            echo "    id = data.okta_user.users[$user].id"
+            echo "  }"
+        done
 
-        done    
+        if [ -n "$groups" ]; then
+            echo "  groups = ["
+            for group in $groups; do
+                group=$(echo $group | tr -d '"')
+                groupName=$(curl -s -X GET "$url/v1/groups/$group"  -H "Authorization: SSWS $okta_token" | jq ".profile.name")
+                echo "    data.okta_group.groups[$groupName].id,"
+            done
+            echo "  ]"
+        fi
         echo "}"
         echo ""
     fi
