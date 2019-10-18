@@ -9,8 +9,12 @@ for app in $apps; do
         label=$(echo $app | base64 --decode | jq ".label")
         nameTpl=$(echo $app | base64 --decode | jq ".credentials.userNameTemplate.template")
         nameTplType=$(echo $app | base64 --decode | jq ".credentials.userNameTemplate.type")
-        resource=$(clean "${name}_${label}")        
+        resource=$(clean "${name}_${label}")
 
+        usersLink=$(echo $app | base64 --decode | jq "._links.users.href")
+        users=$(curl -s -X GET "$usersLink?limit=200"  -H "Authorization: SSWS $okta_token" | jq -r ".[].credentials.userName")
+        groupsLink=$(echo $app | base64 --decode | jq "._links.groups.href")
+        groups=$(curl -s -X GET "$groupsLink?limit=200"  -H "Authorization: SSWS $okta_token" | jq -r ".[].credentials.userName")
 
         echo "# ----  terraform import okta_app_saml.$resource $id"
         echo "resource \"okta_app_saml\" \"$resource\" {"
@@ -18,8 +22,10 @@ for app in $apps; do
         echo "  label                    = $label"
         echo "  user_name_template       = $nameTpl"
         echo "  user_name_template_type  = $nameTplType"
+        for app in $apps; do
+
+        done    
         echo "}"
         echo ""
     fi
 done
-
