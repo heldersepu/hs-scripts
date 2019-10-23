@@ -36,7 +36,7 @@ for app in $apps; do
         fi
 
         usersLink=$(echo $app | base64 --decode | jq "._links.users.href" | tr -d '"')
-        users=$(curl -s -X GET $usersLink  -H "Authorization: SSWS $okta_token" | jq ".[].credentials.userName")
+        users=$(curl -s -X GET $usersLink  -H "Authorization: SSWS $okta_token" | jq ".[] | select(.scope == \"USER\") | .credentials.userName")
         groupsLink=$(echo $app | base64 --decode | jq "._links.groups.href" | tr -d '"')
         groups=$(curl -s -X GET $groupsLink  -H "Authorization: SSWS $okta_token" | jq ".[].id")
 
