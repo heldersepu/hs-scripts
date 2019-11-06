@@ -31,7 +31,20 @@ for ptype in "${poltypes[@]}"; do
                 echo "  groups_included = [ data.okta_group.groups[$groupName].id ]"
 
                 if [ $ptype = "MFA_ENROLL" ]; then
-                    echo "  ## manually add settings here ##"
+                    echo ""
+                    settings=$(echo $pol | base64 --decode | jq ".settings.factors")
+                    for sett in $(echo $settings | jq 'keys' | jq ".[]"); do
+                        setting=$(echo $sett | tr -d '"')
+                        echo "  $setting  = {"
+                        enroll=$(echo $pol | base64 --decode | jq ".settings.factors.$setting.enroll.self")
+                        echo "    enroll = $enroll"
+                        consent=$(echo $pol | base64 --decode | jq ".settings.factors.$setting.consent.type")
+                        if [ $consent != "\"NONE\"" ]; then
+                            echo "    consent_type = $consent"
+                        fi
+                        echo "  }"
+                        echo ""
+                    done
                 fi
 
                 echo "}"
