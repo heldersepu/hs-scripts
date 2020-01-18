@@ -2,6 +2,10 @@ variable "list" {
   default = ["a", "b", "c"]
 }
 
+variable "list_num" {
+  default = ["1", "2", "3"]
+}
+
 variable "list2" {
   default = [{ "key" : "1" }, { "key" : "2" }]
 }
@@ -16,4 +20,8 @@ resource "null_resource" "test" {
     when        = "create"
     command     = "echo ${each.key} = ${each.value[0]}, ${each.value[1].key};"
   }
+}
+
+output "mymap" {
+  value = zipmap(var.list, var.list_num)
 }
