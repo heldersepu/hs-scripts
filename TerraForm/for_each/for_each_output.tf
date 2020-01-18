@@ -8,8 +8,11 @@ resource "null_resource" "data" {
   provisioner "local-exec" {
     when        = "create"
     command     = "echo ${each.value};"
-    interpreter = ["/bin/sh", "-c"]
   }
+}
+
+output "data" {
+  value = null_resource.data
 }
 
 output "myout" {

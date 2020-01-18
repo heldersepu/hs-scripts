@@ -15,6 +15,5 @@ resource "null_resource" "test" {
   provisioner "local-exec" {
     when        = "create"
     command     = "echo ${each.key} = ${each.value[0]}, ${each.value[1].key};"
-    interpreter = ["/bin/sh", "-c"]
   }
 }
