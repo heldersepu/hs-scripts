@@ -11,6 +11,15 @@ variable "image_id" {
   }
 }
 
+variable "instance_type" {
+  type = string
+
+  validation {
+    condition     = can(regex("t2.micro|m1.small|m1.large", var.instance_type))
+    error_message = "Invalid instance type allowed_values = ['t2.micro', 'm1.small', 'm1.large']."
+  }
+}
+
 variable "data" {
   default = ["bla", "foo"]
 }
