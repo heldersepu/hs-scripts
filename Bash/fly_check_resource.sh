@@ -1,11 +1,17 @@
 #!/bin/bash
 
 TEAM=MyTeam
-PIPE=foo
 
-data_arr=($(fly -t $TEAM resources -p $PIPE  --json | jq .[].name))
-for data in "${data_arr[@]}"
+pipe_arr=($(fly -t $TEAM pipelines --json | jq .[].name))
+for pipe in "${pipe_arr[@]}"
 do
-    echo $data
-    fly -t $TEAM check-resource --resource=$PIPE/${data//\"/}
+    echo ""
+    echo $pipe
+    pipeline=${pipe//\"/}
+    data_arr=($(fly -t $TEAM resources -p $pipeline  --json | jq .[].name))
+    for data in "${data_arr[@]}"
+    do
+        echo "--$data"
+        fly -t $TEAM check-resource --resource=$pipeline/${data//\"/}
+    done
 done
