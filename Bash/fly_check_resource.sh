@@ -2,14 +2,10 @@
 
 TEAM=MyTeam
 PIPE=foo
-MATCH=bar
 
-data_arr=($(fly -t $TEAM get-pipeline -p $PIPE | grep "name: $MATCH"))
+data_arr=($(fly -t $TEAM resources -p $PIPE  --json | jq .[].name))
 for data in "${data_arr[@]}"
 do
-    if [[ $data = *"$MATCH"* ]]; then
-        echo $data
-        fly -t $TEAM check-resource --resource=$PIPE/$data
-        sleep 5
-    fi
+    echo $data
+    fly -t $TEAM check-resource --resource=$PIPE/${data//\"/}
 done
