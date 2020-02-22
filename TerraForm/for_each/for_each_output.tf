@@ -21,15 +21,24 @@ variable "instance_type" {
 }
 
 variable "data" {
-  default = ["bla", "foo"]
+  default = {
+    1 = {
+      name = "bla"
+      type = 1
+    }
+    2 = {
+      name = "foo"
+      type = 2
+    }
+  }
 }
 
 resource "null_resource" "data" {
-  for_each = toset(var.data)
+  for_each = var.data
 
   provisioner "local-exec" {
-    when    = "create"
-    command = "echo ${each.value};"
+    when    = create
+    command = "echo ${each.value.name};"
   }
 }
 
