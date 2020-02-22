@@ -11,7 +11,13 @@ locals {
       ram         = 3.75
     }
   }
+
+  gke_cost = {
+    false = 0.000791667
+    true  = 0.000166667
+  }
 }
+
 
 output "mymap" {
   value = local.gke_node_pool
@@ -32,4 +38,8 @@ output "substr1" {
 
 output "substr2" {
   value = substr("n1-standard-1-p", 0, length("n1-standard-1-p") - 2)
+}
+
+output "gcost" {
+  value = local.gke_cost[local.gke_node_pool["n1-standard-1-p"].preemptible] * 10000
 }
