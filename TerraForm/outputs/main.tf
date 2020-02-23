@@ -4,6 +4,7 @@ locals {
       preemptible = true
       cpu         = 1
       ram         = 3.75
+      version     = 0.1
     }
     n1-standard-1-n = {
       preemptible = false
@@ -42,4 +43,11 @@ output "substr2" {
 
 output "gcost" {
   value = local.gke_cost[local.gke_node_pool["n1-standard-1-p"].preemptible] * 10000
+}
+
+output "versions" {
+  value = [
+    for k, v in local.gke_node_pool : 
+      lookup(local.gke_node_pool[k], "version", 0)
+  ]
 }
