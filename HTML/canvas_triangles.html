@@ -1,0 +1,38 @@
+<canvas id="c"></canvas>
+
+<script>
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    canvas.width = canvas.height = 800;
+    ctx.translate(400, 400);
+    delta = 0
+
+    function drawTriangle(size, angle, color) {
+        ctx.beginPath();
+        size = size * 8
+        for (j = 0; j < 3; j++) {
+            a = angle * Math.PI / 180
+            x = size * Math.sin(a)
+            y = size * Math.cos(a)
+            ctx.lineTo(x, y);
+            angle += 120
+        }
+        ctx.stroke();
+        ctx.fillStyle = color;
+        ctx.fill();
+    }
+
+    function drawTriangles() {
+        for (i = 120; i > 0; i--) {
+            color = (i % 2 == 0 ? "cyan" : "blue")
+            drawTriangle(i, i * 2 - delta * Math.sin(i / 50), color)
+        }
+    }
+
+    function draw() {
+        delta += 0.2
+        drawTriangles();
+    }
+
+    setInterval(draw, 1000 / 24);
+</script>
