@@ -1,3 +1,8 @@
+provider "bitbucket" {
+  username = ""
+  password = ""
+}
+
 locals {
   owner = ""
 }
