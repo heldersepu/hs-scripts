@@ -1,0 +1,68 @@
+<canvas id="c"></canvas>
+
+<script>
+    class Star {
+        constructor(ctx, x, y, angle) {
+            this.ctx = ctx;
+            this.x = x;
+            this.y = y;
+            this.angle = angle
+        }
+
+        drawStar(max, min, points) {
+            this.ctx.beginPath();
+            for (var j = 0; j < points + 2; j++) {
+                var a = this.angle * Math.PI / 180
+                var sz = (j % 2 == 0) ? max : min
+                var xd = sz * Math.sin(a)
+                var yd = sz * Math.cos(a)
+                this.ctx.lineTo(this.x + xd, this.y + yd);
+                this.angle += 360 / points
+            }
+            this.ctx.stroke();
+        }
+
+        delta = 1
+        min = 20
+        max = 48
+        points = 10
+        transf = 0
+        incPoints = false
+        draw() {
+            this.min += this.delta
+            this.max -= this.delta
+            this.drawStar(this.max, this.min, this.points)
+            if (this.min > 48 || this.max > 48) {
+                this.delta *= -1
+                this.transf++
+                this.incPoints = (this.transf % 2 == 0)
+            }
+            if (this.incPoints && this.max == this.min) {
+                this.points += 2 * this.delta
+                this.incPoints = false
+            }
+        }
+    }
+
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    canvas.width = canvas.height = 400;
+    ctx.lineWidth = 3;
+
+    stars = []
+    for (i = 1; i < 4; i++) {
+        for (k = 1; k < 4; k++) {
+            stars.push(
+                new Star(ctx, 105 * k, 105 * i, i * k * 10)
+            );
+        }
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, 400, 400);
+        stars.forEach(s => s.draw())
+    }
+
+    setInterval(draw, 1000 / 24);
+
+</script>
