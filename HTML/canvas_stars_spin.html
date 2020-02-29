@@ -1,0 +1,45 @@
+<canvas id="c"></canvas>
+
+<script>
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    canvas.width = canvas.height = 800;
+    ctx.translate(400, 400);
+    delta = 0
+
+    function drawStar(size, angle, color) {
+        ctx.beginPath();
+        size = size * 8
+        points = []
+        numPoints = 11
+        for (j = 0; j < numPoints; j++) {
+            a = angle * Math.PI / 180
+            points.push({
+                x: size * Math.sin(a),
+                y: size * Math.cos(a)
+            })
+            angle += 360 / numPoints
+        }
+        for (j = 0; j < numPoints; j++) {
+            k = (j * 2 + 1) % numPoints
+            ctx.lineTo(points[k].x, points[k].y);
+        }
+
+        ctx.fillStyle = color;
+        ctx.fill();
+    }
+
+    function drawStars() {
+        for (i = 120; i > 0; i--) {
+            color = (i % 2 == 0 ? "black" : "white")
+            drawStar(i, i - delta, color)
+        }
+    }
+
+    function draw() {
+        delta += 0.2
+        drawStars();
+    }
+
+    setInterval(draw, 1000 / 24);
+</script>
