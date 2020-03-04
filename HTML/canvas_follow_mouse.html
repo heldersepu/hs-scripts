@@ -20,10 +20,12 @@
             this.ctx.lineTo(this.coord[1].x, this.coord[1].y);
             this.ctx.stroke();
 
+            var px = Math.max(Math.min(pos.x, this.coord[1].x), this.coord[0].x)
+            var py = Math.max(Math.min(pos.y, this.coord[1].y), this.coord[0].y)
             var d = []
             for (var i = 0; i < 2; i++) {
-                var dx = (pos.x - this.coord[i].x)
-                var dy = (pos.y - this.coord[i].y)
+                var dx = (px - this.coord[i].x)
+                var dy = (py - this.coord[i].y)
                 d.push(Math.sqrt(dx * dx + dy * dy))
             }
 
@@ -52,9 +54,9 @@
     const canvas = document.getElementById('c');
     const ctx = canvas.getContext('2d');
     shapes = []
-    shapes.push(new Shape(ctx, [{ x: 10, y: 10 }, { x: 580, y: 250 }], "red"))
-    shapes.push(new Shape(ctx, [{ x: 10, y: 10 }, { x: 50, y: 280 }], "blue"))
-    shapes.push(new Shape(ctx, [{ x: 10, y: 10 }, { x: 580, y: 50 }], "green"))
+    shapes.push(new Shape(ctx, [{ x: 50, y: 50 }, { x: 580, y: 250 }], "red"))
+    shapes.push(new Shape(ctx, [{ x: 90, y: 90 }, { x: 50, y: 280 }], "blue"))
+    shapes.push(new Shape(ctx, [{ x: 10, y: 10 }, { x: 500, y: 50 }], "green"))
 
     shapes.forEach(s => s.draw(s.coord[1]));
     canvas.addEventListener('mousemove', function (evt) {
