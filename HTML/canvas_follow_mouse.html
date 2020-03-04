@@ -1,0 +1,66 @@
+<canvas id="c" width=600 height=300></canvas>
+
+<script>
+    class Shape {
+        constructor(ctx, coord, color) {
+            this.ctx = ctx;
+            this.coord = coord;
+            this.v = {
+                x: coord[1].x - coord[0].x,
+                y: coord[1].y - coord[0].y
+            }
+            this.angle = Math.atan2(this.v.y, this.v.x)
+            this.length = Math.sqrt(this.v.x * this.v.x + this.v.y * this.v.y)
+            this.color = color;
+        }
+
+        draw(pos) {
+            this.ctx.beginPath();
+            this.ctx.moveTo(this.coord[0].x, this.coord[0].y);
+            this.ctx.lineTo(this.coord[1].x, this.coord[1].y);
+            this.ctx.stroke();
+
+            var d = []
+            for (var i = 0; i < 2; i++) {
+                var dx = (pos.x - this.coord[i].x)
+                var dy = (pos.y - this.coord[i].y)
+                d.push(Math.sqrt(dx * dx + dy * dy))
+            }
+
+            var s = (d[0] + d[1] + this.length) / 2
+            var A = Math.sqrt(s * (s - d[0]) * (s - d[1]) * (s - this.length))
+            var h = 2 * A / this.length
+            var l = Math.sqrt(d[0] * d[0] - h * h)
+
+            var x = this.coord[0].x + l * Math.cos(this.angle)
+            var y = this.coord[0].x + l * Math.sin(this.angle)
+
+            this.ctx.beginPath();
+            this.ctx.fillStyle = this.color;
+            this.ctx.arc(x, y, 10, 0, 2 * Math.PI);
+            this.ctx.fill();
+        }
+    }
+
+    function getMousePos(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+            x: evt.clientX - rect.left,
+            y: evt.clientY - rect.top
+        };
+    }
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    shapes = []
+    shapes.push(new Shape(ctx, [{ x: 10, y: 10 }, { x: 580, y: 250 }], "red"))
+    shapes.push(new Shape(ctx, [{ x: 10, y: 10 }, { x: 50, y: 280 }], "blue"))
+    shapes.push(new Shape(ctx, [{ x: 10, y: 10 }, { x: 580, y: 50 }], "green"))
+
+    shapes.forEach(s => s.draw(s.coord[1]));
+    canvas.addEventListener('mousemove', function (evt) {
+        var mousePos = getMousePos(canvas, evt);
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        shapes.forEach(s => s.draw(mousePos));
+
+    }, false);
+</script>
