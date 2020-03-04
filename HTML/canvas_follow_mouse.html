@@ -1,4 +1,4 @@
-<canvas id="c" width=600 height=300></canvas>
+<canvas id="c" width=800 height=600 style="border:2px solid #a7a4a4;"></canvas>
 
 <script>
     class Shape {
@@ -18,7 +18,10 @@
             this.ctx.beginPath();
             this.ctx.moveTo(this.coord[0].x, this.coord[0].y);
             this.ctx.lineTo(this.coord[1].x, this.coord[1].y);
+            this.ctx.strokeStyle = "black";
+            this.ctx.setLineDash([]);
             this.ctx.stroke();
+            this.ctx.closePath();
 
             var px = Math.max(Math.min(pos.x, this.coord[1].x), this.coord[0].x)
             var py = Math.max(Math.min(pos.y, this.coord[1].y), this.coord[0].y)
@@ -41,6 +44,15 @@
             this.ctx.fillStyle = this.color;
             this.ctx.arc(x, y, 10, 0, 2 * Math.PI);
             this.ctx.fill();
+            this.ctx.closePath();
+
+            this.ctx.beginPath();
+            this.ctx.moveTo(x, y);
+            this.ctx.lineTo(pos.x, pos.y);
+            this.ctx.setLineDash([2, 10]);
+            this.ctx.strokeStyle = this.color;
+            this.ctx.stroke();
+            this.ctx.closePath();
         }
     }
 
