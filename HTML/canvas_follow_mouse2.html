@@ -1,0 +1,85 @@
+<canvas id="c" width=800 height=600 style="border:2px solid #a7a4a4;"></canvas>
+
+<script>
+    class Shape {
+        constructor(ctx, coord, color) {
+            this.ctx = ctx;
+            this.coord = coord;
+            this.v = {
+                x: coord[1].x - coord[0].x,
+                y: coord[1].y - coord[0].y
+            }
+            this.angle = Math.atan2(this.v.y, this.v.x)
+            this.length = Math.sqrt(this.v.x * this.v.x + this.v.y * this.v.y)
+            this.color = color;
+        }
+
+        drawLine(coord, color, dash) {
+            this.ctx.beginPath();
+            this.ctx.moveTo(coord[0].x, coord[0].y);
+            this.ctx.lineTo(coord[1].x, coord[1].y);
+            this.ctx.strokeStyle = color;
+            this.ctx.setLineDash(dash);
+            this.ctx.stroke();
+            this.ctx.closePath();
+        }
+
+        add(p1, p2) {
+            return { x: p1.x + p2.x, y: p1.y + p2.y }
+        }
+
+        get(p, angle, lenght) {
+            return {
+                x: p.x + lenght * Math.cos(angle),
+                y: p.y + lenght * Math.sin(angle)
+            }
+        }
+
+        draw(pos) {
+            this.drawLine(this.coord, "black", []);
+
+            var px = Math.max(Math.min(pos.x, this.coord[1].x), this.coord[0].x)
+            var py = Math.max(Math.min(pos.y, this.coord[1].y), this.coord[0].y)
+
+            var x = this.coord[0].x
+            var y = this.coord[0].y
+
+            this.ctx.beginPath();
+            this.ctx.fillStyle = this.color;
+            this.ctx.arc(x, y, 10, 0, 2 * Math.PI);
+            this.ctx.fill();
+            this.ctx.closePath();
+
+            this.drawLine([pos, this.add(pos, this.v)], this.color, [4, 2]);
+
+            this.coord.forEach(p =>
+                this.drawLine([
+                    this.get(p, this.angle - Math.PI / 2, 1200),
+                    this.get(p, this.angle + Math.PI / 2, 1200)],
+                    this.color, [1, 2])
+            );
+        }
+    }
+
+    function getMousePos(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+            x: evt.clientX - rect.left,
+            y: evt.clientY - rect.top
+        };
+    }
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    shapes = []
+    shapes.push(new Shape(ctx, [{ x: 150, y: 150 }, { x: 580, y: 350 }], "red"))
+    shapes.push(new Shape(ctx, [{ x: 90, y: 90 }, { x: 50, y: 280 }], "blue"))
+    shapes.push(new Shape(ctx, [{ x: 30, y: 50 }, { x: 500, y: 50 }], "green"))
+
+    shapes.forEach(s => s.draw(s.coord[1]));
+    canvas.addEventListener('mousemove', function (evt) {
+        var mousePos = getMousePos(canvas, evt);
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        shapes.forEach(s => s.draw(mousePos));
+
+    }, false);
+</script>
