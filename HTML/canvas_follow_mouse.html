@@ -14,14 +14,18 @@
             this.color = color;
         }
 
-        draw(pos) {
+        drawLine(coord, color, dash) {
             this.ctx.beginPath();
-            this.ctx.moveTo(this.coord[0].x, this.coord[0].y);
-            this.ctx.lineTo(this.coord[1].x, this.coord[1].y);
-            this.ctx.strokeStyle = "black";
-            this.ctx.setLineDash([]);
+            this.ctx.moveTo(coord[0].x, coord[0].y);
+            this.ctx.lineTo(coord[1].x, coord[1].y);
+            this.ctx.strokeStyle = color;
+            this.ctx.setLineDash(dash);
             this.ctx.stroke();
             this.ctx.closePath();
+        }
+
+        draw(pos) {
+            this.drawLine(this.coord, "black", []);
 
             var px = Math.max(Math.min(pos.x, this.coord[1].x), this.coord[0].x)
             var py = Math.max(Math.min(pos.y, this.coord[1].y), this.coord[0].y)
@@ -46,13 +50,7 @@
             this.ctx.fill();
             this.ctx.closePath();
 
-            this.ctx.beginPath();
-            this.ctx.moveTo(x, y);
-            this.ctx.lineTo(pos.x, pos.y);
-            this.ctx.setLineDash([2, 10]);
-            this.ctx.strokeStyle = this.color;
-            this.ctx.stroke();
-            this.ctx.closePath();
+            this.drawLine([{ x, y }, pos], this.color, [2, 10]);
         }
     }
 
