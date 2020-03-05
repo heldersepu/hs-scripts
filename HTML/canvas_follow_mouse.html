@@ -27,8 +27,8 @@
         draw(pos) {
             this.drawLine(this.coord, "black", []);
 
-            var px = Math.max(Math.min(pos.x, this.coord[1].x), this.coord[0].x)
-            var py = Math.max(Math.min(pos.y, this.coord[1].y), this.coord[0].y)
+            var px = Math.max(pos.x, this.coord[0].x)
+            var py = Math.max(pos.y, this.coord[0].y)
             var d = []
             for (var i = 0; i < 2; i++) {
                 var dx = (px - this.coord[i].x)
@@ -43,6 +43,8 @@
 
             var x = this.coord[0].x + l * Math.cos(this.angle)
             var y = this.coord[0].x + l * Math.sin(this.angle)
+            x = Math.min(x, this.coord[1].x)
+            y = Math.min(y, this.coord[1].y)
 
             this.ctx.beginPath();
             this.ctx.fillStyle = this.color;
@@ -50,7 +52,7 @@
             this.ctx.fill();
             this.ctx.closePath();
 
-            this.drawLine([{ x, y }, pos], this.color, [2, 10]);
+            this.drawLine([{ x, y, }, pos], this.color, [1, 4]);
         }
     }
 
@@ -65,10 +67,10 @@
     const ctx = canvas.getContext('2d');
     shapes = []
     shapes.push(new Shape(ctx, [{ x: 50, y: 50 }, { x: 580, y: 250 }], "red"))
-    shapes.push(new Shape(ctx, [{ x: 90, y: 90 }, { x: 50, y: 280 }], "blue"))
-    shapes.push(new Shape(ctx, [{ x: 10, y: 10 }, { x: 500, y: 50 }], "green"))
+    shapes.push(new Shape(ctx, [{ x: 90, y: 90 }, { x: 150, y: 280 }], "blue"))
+    shapes.push(new Shape(ctx, [{ x: 10, y: 10 }, { x: 500, y: 100 }], "green"))
 
-    shapes.forEach(s => s.draw(s.coord[1]));
+    shapes.forEach(s => s.draw(s.coord[0]));
     canvas.addEventListener('mousemove', function (evt) {
         var mousePos = getMousePos(canvas, evt);
         ctx.clearRect(0, 0, canvas.width, canvas.height)
