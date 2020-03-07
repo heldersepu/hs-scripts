@@ -1,0 +1,43 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+<canvas id="chart"></canvas>
+<style>
+  canvas {
+    max-width: 90%;
+  }
+</style>
+
+<script>
+
+  data = { a: [10], b: [10] }
+  for (let year = 1; year < 5; year++) {
+    prev = data.a[year - 1]
+    data.a.push(prev * Math.pow(Math.E, 2.0))
+    data.b.push(prev * Math.pow(Math.E, 3.1))
+  }
+
+  var ctx = document.getElementById("chart").getContext('2d');
+  var chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [0, 1, 2, 3, 4, 5],
+      datasets: [
+        {
+          label: 'Data A',
+          data: data.a,
+          backgroundColor: 'rgba(250, 100, 130, 1)',
+        },
+        {
+          label: 'Data B',
+          data: data.b,
+          backgroundColor: 'rgba(0, 100, 130, 1)',
+        }
+      ]
+    },
+    options: {
+      scales: {
+        xAxes: [{ display: false, barPercentage: 1.30, }, { display: true, }],
+        yAxes: [{ ticks: { beginAtZero: true } }]
+      }
+    }
+  });
+</script>
