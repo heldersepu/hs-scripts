@@ -1,0 +1,48 @@
+<canvas id="canvas"></canvas>
+
+<script>
+
+  data = [
+    { x: 0, y: 30 },
+    { x: 80, y: 90 },
+    { x: 50, y: 20 },
+    { x: 150, y: 70 },
+    { x: 260, y: 80 },
+    { x: 279, y: 130 },
+    { x: 200, y: 129 },
+    { x: 130, y: 100 },
+    { x: 100, y: 130 }
+  ]
+
+  var canvas = document.getElementById("canvas");
+  var ctx = canvas.getContext("2d");
+
+  prev = null
+  angle = null
+  data.forEach((p) => {
+    if (prev) {
+      var a = Math.atan2(p.y - prev.y, p.x - prev.x);
+      if (angle) {
+        drawArc("green", prev, 16, angle, a, true);
+        drawArc("red", prev, 20, angle, a, false);
+      }
+      angle = a
+    }
+    prev = p
+  });
+
+  ctx.beginPath();
+  data.forEach((p) => ctx.lineTo(p.x, p.y));
+  ctx.stroke();
+
+  function drawArc(color, center, radius, sAngle, eAngle, cclockwise) {
+    ctx.beginPath();
+    ctx.fillStyle = color
+    ctx.arc(center.x, center.y, radius, sAngle + Math.PI, eAngle, cclockwise);
+    ctx.lineTo(center.x, center.y);
+    ctx.fill();
+    ctx.closePath();
+  }
+
+
+</script>
