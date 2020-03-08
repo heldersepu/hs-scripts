@@ -12,6 +12,7 @@ do
     for data in "${data_arr[@]}"
     do
         echo "--$data"
-        fly -t $TEAM check-resource --resource=$pipeline/${data//\"/}
+        fly -t $TEAM check-resource --resource=$pipeline/${data//\"/} --async &
+        sleep 10
     done
 done
