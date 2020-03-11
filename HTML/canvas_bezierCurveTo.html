@@ -1,0 +1,51 @@
+<canvas id="myCanvas" width="600" height="150"></canvas>
+<script>
+    var canvas = document.getElementById('myCanvas');
+    var context = canvas.getContext('2d');
+
+    function drawCurve(x, y, curves) {
+        context.beginPath();
+        context.moveTo(x, y);
+        for (i = 0; i < curves.length; i++) {
+            c = curves[i]
+            context.bezierCurveTo(c[0], c[1], c[2], c[3], c[4], c[5]);
+            context.moveTo(c[4], c[5]);
+            context.stroke();
+        }
+
+    }
+
+    context.strokeStyle = 'blue';
+    drawCurve(0, 150, [
+        [100, 0, 200, 100, 300, 50],
+        [400, 0, 500, 100, 600, 20]
+    ]);
+
+    context.strokeStyle = 'red';
+    drawCurve(0, 0, [
+        [100, 0, 180, 90, 280, 50],
+        [400, 0, 400, 80, 600, 120]
+    ]);
+
+    data = []
+
+    numPoints = 6
+    size = 35
+    angle = 0
+    for (j = 0; j < numPoints; j++) {
+        a = angle * Math.PI / 180
+        points = []
+
+        points.push(80 + Math.round(size / 2 * Math.sin(a)))
+        points.push(80 + Math.round(size / 2 * Math.cos(a)))
+        points.push(80 + Math.round(size * Math.sin(a)))
+        points.push(80 + Math.round(size * Math.cos(a)))
+        points.push(80 + Math.round(size * 2 * Math.sin(a)))
+        points.push(80 + Math.round(size * 2 * Math.cos(a)))
+
+        angle += 360 / numPoints
+        data.push(points)
+    }
+    context.strokeStyle = 'black';
+    drawCurve(80, 80, data);
+</script>
