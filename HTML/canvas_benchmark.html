@@ -59,7 +59,7 @@
     drawLine_tranrot({ x: 220, y: 140 }, { x: 220, y: 10 }, 10)
   }
   t1 = performance.now();
-  console.log("drawLine_tranrot = " + (t1 - t0))
+  document.write("<br> drawLine_tranrot = " + (t1 - t0))
 
   t0 = performance.now();
   for (j = 0; j < repetitions; j++) {
@@ -75,7 +75,7 @@
     drawLine_trig({ x: 220, y: 140 }, { x: 220, y: 10 }, 10)
   }
   t1 = performance.now();
-  console.log("drawLine_trig = " + (t1 - t0))
+  document.write("<br> drawLine_trig = " + (t1 - t0))
 
 
 </script>
