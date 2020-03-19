@@ -1,23 +1,41 @@
 <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
 <script>
-    colors = ["red", "blue", "green", "cyan", "white", "black", "yellow"]
+    colors = ["red", "blue", "green", "cyan", "white", "lime", "yellow"]
 
     function setup() {
         spheres = []
         forRange(x => forRange(y => forRange(z => {
-            color = "red"
-            spheres.push({ x, y, z, color })
+            color = "gray"
+            delta = random()
+            speed = random(20) - 10
+            spheres.push({ x, y, z, color, delta, speed })
         })))
 
         createCanvas(windowWidth, windowHeight, WEBGL);
+
         frameRate(500);
         document.oncontextmenu = () => false;
-        setInterval(changeColor, 500)
+        setInterval(changeColor, 800)
+        setInterval(changePos, 10)
     }
 
     function changeColor() {
         spheres.forEach(obj => {
-            obj.color = colors[int(random(colors.length))]
+            if (obj.x < 200 && obj.y < 200 && obj.z < 200 &&
+                obj.x > -200 && obj.y > -200 && obj.z > -200) {
+                obj.color = colors[int(random(colors.length))]
+            }
+        })
+    }
+
+    function changePos() {
+        spheres.forEach(obj => {
+            if (obj.x < 200 && obj.y < 200 && obj.z < 200 &&
+                obj.x > -200 && obj.y > -200 && obj.z > -200) {
+                obj.x += Math.sin(obj.delta) * obj.speed
+                obj.y += Math.cos(obj.delta) * obj.speed
+                obj.delta += 0.2
+            }
         })
     }
 
@@ -35,11 +53,10 @@
         rotateX(millis() / 8000);
 
         spheres.forEach(obj => {
-            noStroke()
             push();
             translate(obj.x, obj.y, obj.z);
             fill(obj.color)
-            sphere(18)
+            sphere(18, 8, 8)
             pop();
         })
     }
