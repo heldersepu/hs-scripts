@@ -1,5 +1,12 @@
+<style>
+    body {
+        margin: 0px;
+    }
+</style>
 <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
 <script>
+    rotation = 0
+    rotate = true
     colors = ["red", "blue", "green", "cyan", "white", "lime", "yellow"]
 
     function setup() {
@@ -17,6 +24,11 @@
         document.oncontextmenu = () => false;
         setInterval(changeColor, 800)
         setInterval(changePos, 10)
+
+        document.addEventListener("keydown", function (event) {
+            if (event.which == 32)
+                rotate = !rotate
+        })
     }
 
     function changeColor() {
@@ -34,6 +46,7 @@
                 obj.x > -200 && obj.y > -200 && obj.z > -200) {
                 obj.x += Math.sin(obj.delta) * obj.speed
                 obj.y += Math.cos(obj.delta) * obj.speed
+                obj.z += Math.cos(obj.delta) * obj.speed
                 obj.delta += 0.2
             }
         })
@@ -49,8 +62,12 @@
     function draw() {
         background(155);
         translate(0, 0, -500);
-        rotateY(millis() / 2000);
-        rotateX(millis() / 8000);
+        if (rotate) {
+            rotation++
+        }
+
+        rotateY(rotation / 200);
+        rotateX(rotation / 800);
 
         spheres.forEach(obj => {
             push();
