@@ -1,0 +1,61 @@
+<canvas id="canvas" width=500></canvas>
+
+<script>
+    var pixelated = null
+    var image = new Image();
+    image.src = "http://i.stack.imgur.com/UFBxY.png";
+    image.onload = imageLoaded;
+
+    var size = 120;
+    var delta = 0.5;
+
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    function drawImage(img, x, y, size, filter) {
+        ctx.beginPath()
+        ctx.filter = filter
+        ctx.drawImage(img, x, y, size, size);
+        ctx.closePath()
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (size > canvas.height || size < 120) {
+            delta *= -1
+        }
+        size += delta;
+
+        drawImage(image, 0, 0, size, 'blur(1px)');
+        drawImage(image, 140, 0, size, 'none');
+        drawImage(pixelated, 280, 0, size, 'none');
+    }
+
+    function imageLoaded() {
+        var c = document.createElement('canvas');
+        c.width = image.width;
+        c.height = image.height;
+        c.style.cssText =
+            'image-rendering: optimizeSpeed;' + // FireFox < 6.0
+            'image-rendering: -moz-crisp-edges;' + // FireFox
+            'image-rendering: -o-crisp-edges;' +  // Opera
+            'image-rendering: -webkit-crisp-edges;' + // Chrome
+            'image-rendering: crisp-edges;' + // Chrome
+            'image-rendering: -webkit-optimize-contrast;' + // Safari
+            'image-rendering: pixelated; ' + // Future browsers
+            '-ms-interpolation-mode: nearest-neighbor;';
+        var ct = c.getContext('2d');
+        ct.webkitImageSmoothingEnabled = false;
+        ct.mozImageSmoothingEnabled = false;
+        ct.msImageSmoothingEnabled = false;
+        ct.imageSmoothingEnabled = false;
+        var w = c.width / 5;
+        var h = c.height / 5;
+        ct.drawImage(image, 0, 0, w, h);
+        ct.drawImage(c, 0, 0, w, h, 0, 0, c.width, c.height);
+        ct.clearRect(0, 0, w, h);
+        pixelated = c
+
+        setInterval(draw, 20);
+    }
+</script>
