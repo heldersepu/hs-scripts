@@ -1,0 +1,46 @@
+<script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
+<script>
+    colors = ["red", "blue", "green", "cyan", "white", "black", "yellow"]
+
+    function setup() {
+        spheres = []
+        forRange(x => forRange(y => forRange(z => {
+            color = "red"
+            spheres.push({ x, y, z, color })
+        })))
+
+        createCanvas(windowWidth, windowHeight, WEBGL);
+        frameRate(500);
+        document.oncontextmenu = () => false;
+        setInterval(changeColor, 500)
+    }
+
+    function changeColor() {
+        spheres.forEach(obj => {
+            obj.color = colors[int(random(colors.length))]
+        })
+    }
+
+    function forRange(fn) {
+        const cubeSpacing = 120
+        for (let i = -250; i <= 250; i += cubeSpacing) {
+            fn(i);
+        }
+    }
+
+    function draw() {
+        background(155);
+        translate(0, 0, -500);
+        rotateY(millis() / 2000);
+        rotateX(millis() / 8000);
+
+        spheres.forEach(obj => {
+            noStroke()
+            push();
+            translate(obj.x, obj.y, obj.z);
+            fill(obj.color)
+            sphere(18)
+            pop();
+        })
+    }
+</script>
