@@ -1,0 +1,81 @@
+<canvas id="canvas" height="300" width="600"></canvas>
+
+<script>
+  canvas = document.getElementById("canvas");
+  ctx = canvas.getContext("2d");
+
+  function drawLine_trig(p1, p2, asize) {
+    ctx.beginPath()
+    ctx.moveTo(p1.x, p1.y);
+    ctx.lineTo(p2.x, p2.y);
+
+    if (asize > 0) {
+      lineAngle = Math.atan2(p1.y - p2.y, p1.x - p2.x);
+      delta = Math.PI / 6
+      for (i = 0; i < 2; i++) {
+        ctx.moveTo(p2.x, p2.y);
+        x = p2.x + asize * Math.cos(lineAngle + delta)
+        y = p2.y + asize * Math.sin(lineAngle + delta)
+        ctx.lineTo(x, y);
+        delta *= -1
+      }
+    }
+    ctx.stroke();
+  }
+
+  function drawLine_tranrot(p1, p2, asize) {
+    ctx.beginPath()
+    ctx.moveTo(p1.x, p1.y);
+    ctx.lineTo(p2.x, p2.y);
+
+    if (asize > 0) {
+      lineAngle = Math.atan2(p1.y - p2.y, p1.x - p2.x);
+      delta = Math.PI / 6
+      ctx.translate(p2.x, p2.y);
+      for (i = 0; i < 2; i++) {
+        ctx.moveTo(0, 0);
+        ctx.rotate(lineAngle + delta);
+        ctx.lineTo(asize, 0);
+        ctx.rotate(-lineAngle - delta);
+        delta *= -1
+      }
+      ctx.translate(-p2.x, -p2.y);
+    }
+    ctx.stroke();
+  }
+
+  repetitions = 100000
+  t0 = performance.now();
+  for (j = 0; j < repetitions; j++) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    drawLine_tranrot({ x: 10, y: 10 }, { x: 100, y: 20 }, 20)
+    drawLine_tranrot({ x: 20, y: 15 }, { x: 140, y: 120 }, 20)
+    drawLine_tranrot({ x: 140, y: 20 }, { x: 80, y: 50 }, 20)
+
+    drawLine_tranrot({ x: 150, y: 20 }, { x: 150, y: 90 }, 20)
+    drawLine_tranrot({ x: 180, y: 90 }, { x: 180, y: 20 }, 20)
+
+    drawLine_tranrot({ x: 200, y: 10 }, { x: 200, y: 140 }, 10)
+    drawLine_tranrot({ x: 220, y: 140 }, { x: 220, y: 10 }, 10)
+  }
+  t1 = performance.now();
+  document.write("<br> drawLine_tranrot = " + (t1 - t0))
+
+  t0 = performance.now();
+  for (j = 0; j < repetitions; j++) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    drawLine_trig({ x: 10, y: 10 }, { x: 100, y: 20 }, 20)
+    drawLine_trig({ x: 20, y: 15 }, { x: 140, y: 120 }, 20)
+    drawLine_trig({ x: 140, y: 20 }, { x: 80, y: 50 }, 20)
+
+    drawLine_trig({ x: 150, y: 20 }, { x: 150, y: 90 }, 20)
+    drawLine_trig({ x: 180, y: 90 }, { x: 180, y: 20 }, 20)
+
+    drawLine_trig({ x: 200, y: 10 }, { x: 200, y: 140 }, 10)
+    drawLine_trig({ x: 220, y: 140 }, { x: 220, y: 10 }, 10)
+  }
+  t1 = performance.now();
+  document.write("<br> drawLine_trig = " + (t1 - t0))
+
+
+</script>
