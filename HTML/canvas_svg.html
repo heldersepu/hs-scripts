@@ -1,0 +1,39 @@
+<canvas id=canvas width=250 height=250></canvas>
+
+<script>
+    function svgimage() {
+        var image = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="220" height="200" version="1.1">
+                <defs>
+                    <radialGradient id="grey_blue" cx="50%" cy="50%" r="50%" fx="20%" fy="40%">
+                        <stop offset="0%" style="stop-color:gray;stop-opacity:0"/>
+                        <stop offset="100%" style="stop-color:blue;stop-opacity:1"/>
+                    </radialGradient>
+                </defs>
+                <ellipse cx="110" cy="100" rx="110" ry="100" style="fill:url(#grey_blue)"/>
+            </svg>`;
+        return encodeURIComponent(image);
+    }
+
+    function drawImage() {
+        ctx.clearRect(0, 0, canvas.width * 2, canvas.height)
+        dx = Math.sin(i) * 30
+        dy = Math.cos(i) * 20
+        ctx.drawImage(img, 50, 0, 200 + dx, 100 + dy);
+        i += 0.01
+    }
+
+    function startDrawing() {
+        ctx.rotate(20 * Math.PI / 180)
+        setInterval(drawImage, 20);
+    }
+
+
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+    var i = 0
+
+    var img = new Image();
+    img.onload = startDrawing
+    img.src = 'data:image/svg+xml;charset=utf-8,' + svgimage();
+</script>
