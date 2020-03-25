@@ -51,11 +51,10 @@
         ct.imageSmoothingEnabled = false;
         var w = c.width / 5;
         var h = c.height / 5;
+        ct.globalCompositeOperation = 'copy';
         ct.drawImage(image, 0, 0, w, h);
         ct.drawImage(c, 0, 0, w, h, 0, 0, c.width, c.height);
-        ct.clearRect(0, 0, w, h);
         pixelated = c
-
         setInterval(draw, 20);
     }
 </script>
