@@ -1,0 +1,64 @@
+<canvas id="c"></canvas>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+  function progress(ctx, cx, cy, fraction) {
+    ctx.lineWidth = 30;
+    ctx.lineCap = "round";
+    ctx.beginPath();
+    p = Math.PI * 2 * fraction
+    ctx.arc(cx, cy, 160, 0, p);
+    ctx.stroke();
+  }
+
+  const canvas = document.getElementById("c");
+  canvas.width = canvas.height = 400;
+  const ctx = canvas.getContext("2d");
+  ctx.strokeStyle = "red";
+  ctx.font = "90px Arial";
+
+  i = 3
+  delta = 1
+  text = null
+  function draw() {
+    ctx.clearRect(0, 0, 400, 400)
+    progress(ctx, 200, 200, i / 200)
+    ctx.fillText(text, 180, 220);
+    i += delta
+    if (i > 196 || i < 2) {
+      delta *= -1
+      text = nuText
+    }
+  }
+
+  function getRandomNumber() {
+    $.ajax({
+      type: "GET",
+      url: "http://swagger-net-test.azurewebsites.net/api/Random/GetRandomNumber?max=7",
+      success: successFunc,
+      error: errorFunc
+    });
+  }
+
+  nuText = null
+  interval = null
+  function successFunc(data) {
+    nuText = data
+    if (!text)
+      text = data;
+    if (!interval) {
+      interval = setInterval(draw, 60);
+      setInterval(getRandomNumber, 2000);
+      t = Math.round(new Date().getTime() / 100) % 100
+      i = Math.max(Math.min(t * 2, 190), 5)
+    }
+  }
+
+  function errorFunc(err) {
+    if (err.responseText === "")
+      alert("Sorry the communication failed.");
+    else
+      alert(err.responseText);
+  }
+
+  getRandomNumber()  
+</script>
