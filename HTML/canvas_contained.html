@@ -1,0 +1,92 @@
+<canvas id="c" width=500 height=400 style="border:2px solid #a7a4a4;"></canvas>
+
+<script>
+    class Shape {
+        constructor(ctx, x, y, width, height, angle, color) {
+            this.ctx = ctx;
+            this.color = color;
+            this.angle = angle;
+            this.width = width;
+            this.height = height;
+            this.coords = this.getCoords(x, y, width, height, angle)
+        }
+
+        getCoords(x, y, width, height, angle) {
+            var coords = [{ x, y }];
+            x += width * Math.cos(angle)
+            y += width * Math.sin(angle)
+            coords.push({ x: (x + coords[0].x) / 2, y: (y + coords[0].y) / 2 })
+            coords.push({ x, y })
+
+            angle += Math.PI / 2
+            x += height * Math.cos(angle)
+            y += height * Math.sin(angle)
+            coords.push({ x: (x + coords[2].x) / 2, y: (y + coords[2].y) / 2 })
+            coords.push({ x, y })
+
+            angle += Math.PI / 2
+            x += width * Math.cos(angle)
+            y += width * Math.sin(angle)
+            coords.push({ x: (x + coords[4].x) / 2, y: (y + coords[4].y) / 2 })
+            coords.push({ x, y })
+            coords.push({ x: (coords[6].x + coords[0].x) / 2, y: (coords[6].y + coords[0].y) / 2 })
+            return coords
+        }
+
+        drawShape() {
+            this.ctx.beginPath();
+            this.ctx.moveTo(this.coords[0].x, this.coords[0].y);
+            this.coords.forEach(c => this.ctx.lineTo(c.x, c.y));
+            this.ctx.lineTo(this.coords[0].x, this.coords[0].y);
+            this.ctx.fillStyle = this.color;
+            this.ctx.fill();
+            this.ctx.closePath();
+        }
+
+        inside(p, vs) {
+            var inside = false;
+            for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+                var xi = vs[i].x, yi = vs[i].y;
+                var xj = vs[j].x, yj = vs[j].y;
+                var intersect = ((yi > p.y) != (yj > p.y)) && (p.x < (xj - xi) * (p.y - yi) / (yj - yi) + xi);
+                if (intersect) inside = !inside;
+            }
+            return inside;
+        };
+
+        draw(pos, bound) {
+            if (pos) {
+                var newCoords = this.getCoords(pos.x, pos.y, this.width, this.height, this.angle)
+                var inBounds = true
+                newCoords.forEach(c => { if (this.inside(c, bound.coords)) inBounds = false })
+                bound.coords.forEach(c => { if (!this.inside(c, newCoords)) inBounds = false })
+                if (inBounds) this.coords = newCoords
+            }
+            this.drawShape();
+        }
+    }
+
+    function getMousePos(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+            x: evt.clientX - rect.left,
+            y: evt.clientY - rect.top
+        };
+    }
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    ctx.globalAlpha = 0.8
+
+    parent = new Shape(ctx, 150, 120, 150, 100, 0.1, "red")
+    child = new Shape(ctx, 130, 60, 250, 200, 0.1, "blue")
+
+    canvas.addEventListener('mousemove', function (evt) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        var mousePos = getMousePos(canvas, evt);
+        parent.draw();
+        child.draw(mousePos, parent);
+    }, false);
+
+    parent.draw();
+    child.draw();
+</script>
