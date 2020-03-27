@@ -15,21 +15,17 @@
             var coords = [{ x, y }];
             x += width * Math.cos(angle)
             y += width * Math.sin(angle)
-            coords.push({ x: (x + coords[0].x) / 2, y: (y + coords[0].y) / 2 })
             coords.push({ x, y })
 
             angle += Math.PI / 2
             x += height * Math.cos(angle)
             y += height * Math.sin(angle)
-            coords.push({ x: (x + coords[2].x) / 2, y: (y + coords[2].y) / 2 })
             coords.push({ x, y })
 
             angle += Math.PI / 2
             x += width * Math.cos(angle)
             y += width * Math.sin(angle)
-            coords.push({ x: (x + coords[4].x) / 2, y: (y + coords[4].y) / 2 })
             coords.push({ x, y })
-            coords.push({ x: (coords[6].x + coords[0].x) / 2, y: (coords[6].y + coords[0].y) / 2 })
             return coords
         }
 
