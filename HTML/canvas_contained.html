@@ -79,10 +79,10 @@
     canvas.addEventListener('mousemove', function (evt) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         var mousePos = getMousePos(canvas, evt);
-        parent.draw();
         child.draw(mousePos, parent);
+        parent.draw();
     }, false);
 
-    parent.draw();
     child.draw();
+    parent.draw();
 </script>
