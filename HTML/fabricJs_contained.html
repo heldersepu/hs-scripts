@@ -1,0 +1,96 @@
+<canvas id="canvas" width="500" height="350"></canvas>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.2/fabric.min.js"></script>
+<script>
+
+    var canvas = new fabric.Canvas("canvas");
+    canvas.stateful = true;
+
+    function getCoords(rect) {
+        var x = rect.left;
+        var y = rect.top;
+        var angle = (rect.angle * Math.PI) / 180;
+
+        var coords = [{ x, y }];
+        x += rect.width * Math.cos(angle);
+        y += rect.width * Math.sin(angle);
+        coords.push({ x, y });
+
+        angle += Math.PI / 2;
+        x += rect.height * Math.cos(angle);
+        y += rect.height * Math.sin(angle);
+        coords.push({ x, y });
+
+        angle += Math.PI / 2;
+        x += rect.width * Math.cos(angle);
+        y += rect.width * Math.sin(angle);
+        coords.push({ x, y });
+        return coords;
+    }
+
+    function inside(p, vs) {
+        var inside = false;
+        for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+            var xi = vs[i].x,
+                yi = vs[i].y;
+            var xj = vs[j].x,
+                yj = vs[j].y;
+            var intersect =
+                yi > p.y !== yj > p.y && p.x < ((xj - xi) * (p.y - yi)) / (yj - yi) + xi;
+            if (intersect) inside = !inside;
+        }
+        return inside;
+    }
+
+    var parent = new fabric.Rect({
+        width: 150,
+        height: 100,
+        left: 200,
+        top: 50,
+        angle: 25,
+        selectable: false,
+        fill: "red"
+    });
+    var pCoords = getCoords(parent);
+
+    var child = new fabric.Rect({
+        width: 250,
+        height: 175,
+        left: 180,
+        top: 10,
+        angle: 25,
+        hasControls: false,
+        fill: "rgba(0,0,255,0.9)"
+    });
+
+    canvas.add(parent);
+    canvas.add(child);
+
+    canvas.on("object:moving", function (e) {
+        var cCoords = getCoords(e.target);
+        var inBounds = true;
+        cCoords.forEach(c => {
+            if (inside(c, pCoords)) inBounds = false;
+        });
+        pCoords.forEach(c => {
+            if (!inside(c, cCoords)) inBounds = false;
+        });
+        if (inBounds) {
+            e.target.setCoords();
+            e.target.saveState();
+        } else {
+            e.target.animate(
+                {
+                    left: e.target._stateProperties.left,
+                    top: e.target._stateProperties.top
+                },
+                {
+                    duration: 500,
+                    onChange: canvas.renderAll.bind(canvas),
+                    easing: fabric.util.ease["easeInBounce"]
+                }
+            );
+        }
+    });
+
+</script>
