@@ -1,4 +1,4 @@
-<canvas id=canvas width=250 height=250></canvas>
+<canvas id=canvas width=800 height=800></canvas>
 
 <script>
     function svgimage() {
@@ -16,18 +16,24 @@
     }
 
     function drawImage() {
-        ctx.clearRect(0, 0, canvas.width * 2, canvas.height)
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        i += 0.05
         dx = Math.sin(i) * 30
         dy = Math.cos(i) * 20
-        ctx.drawImage(img, 50, 0, 200 + dx, 100 + dy);
-        i += 0.01
+
+        max = 12
+        for (j = 0; j < max; j++) {
+            ctx.drawImage(img, 450, 10, 200 + dx, 100 + dy);
+            ctx.drawImage(img, 150, 10, 100 + dx, 50 + dy);
+            ctx.rotate(8 * Math.PI / 180)
+        }
+        ctx.rotate(-max * (8 * Math.PI / 180))
     }
 
     function startDrawing() {
-        ctx.rotate(20 * Math.PI / 180)
+
         setInterval(drawImage, 20);
     }
-
 
     var canvas = document.querySelector('canvas');
     var ctx = canvas.getContext('2d');
