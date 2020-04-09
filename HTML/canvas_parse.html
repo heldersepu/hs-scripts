@@ -5,6 +5,8 @@
 </style>
 
 <canvas id="canvas" width=300 height=300></canvas>
+<canvas id="filter" width=300 height=300></canvas>
+<canvas id="border" width=300 height=300></canvas>
 <canvas id="output" width=300 height=300></canvas>
 
 <script>
@@ -13,11 +15,11 @@
   image.src = "./images/2A3g2.jpg";
   image.onload = imageLoaded;
 
-  var canvas = document.getElementById("canvas");
-  var ctx = canvas.getContext("2d");
-
-  var output = document.getElementById("output");
-  var outctx = output.getContext("2d");
+  var ctx = []
+  ['canvas', 'filter', 'border', 'output'].forEach(e => {
+    var canvas = document.getElementById(e);
+    ctx.push(canvas.getContext("2d"));
+  });
 
   function FilterInvert(p) {
     // Filter out any black white noise + Invert 
@@ -35,10 +37,113 @@
     return p
   }
 
+  function GetBorders(p) {
+    var border = [];
+
+    for (x = 0; x < p.width; x++) {
+      for (y = 0; y < p.height; y++) {
+        offset = (p.width * y + x) * 4;
+        r = p.data[offset];
+        g = p.data[offset + 1];
+        b = p.data[offset + 2];
+        a = p.data[offset + 3];
+
+        topOffset = (p.width * (y - 1) + x) * 4;
+        rTop = p.data[topOffset];
+
+        topRightOffset = (p.width * (y - 1) + (x + 1)) * 4;
+        rTopRight = p.data[topRightOffset];
+
+        rightOffset = (p.width * y + (x + 1)) * 4;
+        rRight = p.data[rightOffset];
+
+        bottomRightOffset = (p.width * (y + 1) + (x + 1)) * 4;
+        rBottomRight = p.data[bottomRightOffset];
+
+        bottomOffset = (p.width * (y + 1) + x) * 4;
+        rBottom = p.data[bottomOffset];
+
+        bottomLeftOffset = (p.width * (y + 1) + (x - 1)) * 4;
+        rBottomLeft = p.data[bottomLeftOffset];
+
+        leftOffset = (p.width * y + (x - 1)) * 4;
+        rLeft = p.data[leftOffset];
+
+        topLeftOffset = (p.width * (y - 1) + (x - 1)) * 4;
+        rTopLeft = p.data[topLeftOffset];
+
+        // Check around current white pixel if black one is near
+        if (r == 255 && rTop == 0 ||
+          r == 255 && rTopRight == 0 ||
+          r == 255 && rRight == 0 ||
+          r == 255 && rBottomRight == 0 ||
+          r == 255 && rBottom == 0 ||
+          r == 255 && rBottomLeft == 0 ||
+          r == 255 && rLeft == 0 ||
+          r == 255 && rTopLeft == 0) {
+
+          border.push([x, y]);
+        }
+      }
+    }
+
+    //Order border array
+    var borderscounter = 0;
+    var borders = [[]];
+
+    var coordFound = undefined;
+
+    borders[borderscounter].push(border[0]);
+    border.shift();
+
+
+    while (border.length > 0) {
+
+      coordFound = false;
+
+      for (a = 0; a < border.length; a++) {
+
+        lastBlobElement = borders[borderscounter].length - 1;
+
+        if (pixelIsTouching(border[a], borders[borderscounter][lastBlobElement])) {
+
+          coordFound = true;
+          borders[borderscounter].push(border[a]);
+          border.splice(a, 1);
+
+        }
+      }
+
+      if (coordFound == false && border.length > 0) {
+        borderscounter++;
+        borders[borderscounter] = [];
+        borders[borderscounter].push(border[0]);
+        border.shift();
+      }
+    }
+
+    return borders;
+  }
+
   function imageLoaded() {
-    ctx.drawImage(image, 0, 0, 300, 300);
-    var pixeldata = ctx.getImageData(0, 0, 300, 300);
-    var data = FilterInvert(pixeldata)
-    outctx.putImageData(data, 0, 0);
+    ctx[0].drawImage(image, 0, 0, 300, 300);
+    var pixdata = ctx[0].getImageData(0, 0, 300, 300);
+    var fildata = FilterInvert(pixdata)
+    ctx[1].putImageData(fildata, 0, 0);
+
+    var bordata = GetBorders(fildata);
+    ctx[2].lineWidth = 1;
+    ctx[2].strokeStyle = 'red';
+    for (b = 0; b < borders.length; b++) {
+      for (var a = 0; a < borders[b].length; a++) {
+        // + 0.5 to get rid of blurry lines
+        if (a == 0) {
+          ctx[2].moveTo(borders[b][a][0] + 0.5, borders[b][a][1]);
+        } else {
+          ctx[2].lineTo(borders[b][a][0] + 0.5, borders[b][a][1]);
+        }
+      }
+    }
+    ctx[2].stroke();
   }
 </script>
