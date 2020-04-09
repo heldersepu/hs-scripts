@@ -10,6 +10,9 @@
 <canvas id="output" width=300 height=300></canvas>
 
 <script>
+  var ctx = [];
+  var element = 0;
+  var bordata = null;
   var image = new Image();
   image.crossOrigin = "Anonymous";
   if (window.location.hash) {
@@ -18,12 +21,6 @@
     image.src = "./images/2A3g2.jpg";
   }
   image.onload = imageLoaded;
-
-  var ctx = [];
-  ['canvas', 'filter', 'border', 'output'].forEach(e => {
-    var canvas = document.getElementById(e);
-    ctx.push(canvas.getContext("2d"));
-  });
 
   function FilterInvert(p) {
     // Filter out any black white noise + Invert 
@@ -135,11 +132,17 @@
     return borders;
   }
 
-  var element = 0;
-  var bordata = null;
+
   function imageLoaded() {
-    ctx[0].drawImage(image, 0, 0, 300, 300);
-    var pixdata = ctx[0].getImageData(0, 0, 300, 300);
+    ['canvas', 'filter', 'border', 'output'].forEach(e => {
+      var canvas = document.getElementById(e);
+      canvas.width = image.width
+      canvas.height = image.height
+      ctx.push(canvas.getContext("2d"));
+    });
+
+    ctx[0].drawImage(image, 0, 0, image.width, image.height);
+    var pixdata = ctx[0].getImageData(0, 0, image.width, image.height);
     var fildata = FilterInvert(pixdata)
     ctx[1].putImageData(fildata, 0, 0);
 
@@ -163,7 +166,7 @@
   function draw() {
     ctx[3].beginPath()
     ctx[3].lineWidth = 2;
-    ctx[3].clearRect(0, 0, 300, 300);
+    ctx[3].clearRect(0, 0, image.width, image.height);
     for (var a = 0; a < bordata[element].length; a++) {
       if (a == 0) {
         ctx[3].moveTo(bordata[element][a][0] + 0.5, bordata[element][a][1]);
