@@ -15,7 +15,7 @@
   image.src = "./images/2A3g2.jpg";
   image.onload = imageLoaded;
 
-  var ctx = []
+  var ctx = [];
   ['canvas', 'filter', 'border', 'output'].forEach(e => {
     var canvas = document.getElementById(e);
     ctx.push(canvas.getContext("2d"));
@@ -90,27 +90,19 @@
     //Order border array
     var borderscounter = 0;
     var borders = [[]];
-
     var coordFound = undefined;
 
     borders[borderscounter].push(border[0]);
     border.shift();
 
-
     while (border.length > 0) {
-
       coordFound = false;
-
       for (a = 0; a < border.length; a++) {
-
         lastBlobElement = borders[borderscounter].length - 1;
-
         if (pixelIsTouching(border[a], borders[borderscounter][lastBlobElement])) {
-
           coordFound = true;
           borders[borderscounter].push(border[a]);
           border.splice(a, 1);
-
         }
       }
 
@@ -134,13 +126,13 @@
     var bordata = GetBorders(fildata);
     ctx[2].lineWidth = 1;
     ctx[2].strokeStyle = 'red';
-    for (b = 0; b < borders.length; b++) {
-      for (var a = 0; a < borders[b].length; a++) {
+    for (b = 0; b < bordata.length; b++) {
+      for (var a = 0; a < bordata[b].length; a++) {
         // + 0.5 to get rid of blurry lines
         if (a == 0) {
-          ctx[2].moveTo(borders[b][a][0] + 0.5, borders[b][a][1]);
+          ctx[2].moveTo(bordata[b][a][0] + 0.5, bordata[b][a][1]);
         } else {
-          ctx[2].lineTo(borders[b][a][0] + 0.5, borders[b][a][1]);
+          ctx[2].lineTo(bordata[b][a][0] + 0.5, bordata[b][a][1]);
         }
       }
     }
