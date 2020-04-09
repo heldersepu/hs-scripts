@@ -157,6 +157,7 @@
   }
 
   function draw() {
+    ctx[3].beginPath()
     ctx[3].clearRect(0, 0, 300, 300);
     for (var a = 0; a < bordata[element].length; a++) {
       if (a == 0) {
@@ -167,7 +168,7 @@
     }
     ctx[3].stroke();
     element++;
-    if (element > bordata.length)
+    if (element >= bordata.length)
       element = 0;
   }
 </script>
