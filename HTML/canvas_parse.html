@@ -37,6 +37,20 @@
     return p
   }
 
+  function pixelIsTouching(coord1, coord2) {
+    if (coord1[0] == coord2[0] &&
+      (coord1[1] == coord2[1] + 1 ||
+        coord1[1] == coord2[1] - 1)) {
+      return true;
+    } else if (coord1[1] == coord2[1] &&
+      (coord1[0] == coord2[0] + 1 ||
+        coord1[0] == coord2[0] - 1)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   function GetBorders(p) {
     var border = [];
 
