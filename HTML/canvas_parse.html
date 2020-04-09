@@ -131,13 +131,15 @@
     return borders;
   }
 
+  var element = 0;
+  var bordata = null;
   function imageLoaded() {
     ctx[0].drawImage(image, 0, 0, 300, 300);
     var pixdata = ctx[0].getImageData(0, 0, 300, 300);
     var fildata = FilterInvert(pixdata)
     ctx[1].putImageData(fildata, 0, 0);
 
-    var bordata = GetBorders(fildata);
+    bordata = GetBorders(fildata);
     ctx[2].lineWidth = 1;
     ctx[2].strokeStyle = 'red';
     for (b = 0; b < bordata.length; b++) {
@@ -151,5 +153,21 @@
       }
     }
     ctx[2].stroke();
+    setInterval(draw, 500);
+  }
+
+  function draw() {
+    ctx[3].clearRect(0, 0, 300, 300);
+    for (var a = 0; a < bordata[element].length; a++) {
+      if (a == 0) {
+        ctx[3].moveTo(bordata[element][a][0] + 0.5, bordata[element][a][1]);
+      } else {
+        ctx[3].lineTo(bordata[element][a][0] + 0.5, bordata[element][a][1]);
+      }
+    }
+    ctx[3].stroke();
+    element++;
+    if (element > bordata.length)
+      element = 0;
   }
 </script>
