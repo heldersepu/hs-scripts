@@ -28,8 +28,10 @@
     i += delta
     if (i > 196 || i < 2) {
       delta *= -1
-      text = data.num
-      if (i < 2) delta = 1
+      if (i < 2) {
+        delta = 1
+        text = data.num
+      }
       i = Math.min(Math.max(i, 2), 196)
     }
   }
