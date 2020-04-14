@@ -1,0 +1,46 @@
+<script src="https://unpkg.com/tippy.js@2.0.8/dist/tippy.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.14.1/cytoscape.min.js"></script>
+
+<style>
+  .container {
+    display: grid;
+    border: 2px blue solid;
+    height: 400px;
+    width: 400px;
+  }
+
+  #cyto {
+    grid-row: 2/ span 1;
+    grid-column: 1/ span 6;
+  }
+</style>
+
+<div class="container">
+  <div id="cyto">
+  </div>
+</div>
+
+<script>
+  tippy("#cyto");
+
+  cy = cytoscape({
+    container: document.getElementById("cyto"),
+
+    style: cytoscape
+      .stylesheet()
+      .selector("node")
+      .css({ content: "data(id)" }),
+
+    elements: [
+      { data: { id: "WORDS" } },
+      { data: { id: "REALITY" } }
+    ]
+  });
+
+  cy.on('drag', 'node', function (evt) {
+    var node = evt.target;
+    var point = node.point();
+    console.log(node.id() + " " + point.x + " " + point.y);
+  });
+</script>
