@@ -1,34 +1,38 @@
-<style>body{margin:0}</style>
-<canvas id="can1" />
+<style>
+    body {
+        margin: 0
+    }
+</style>
+<canvas id="can1"></canvas>
 
 <script>
-function getDocumentWidth() {
-    return Math.min(document.documentElement.clientWidth, window.innerWidth || 0);
-};
+    function getDocumentWidth() {
+        return Math.min(document.documentElement.clientWidth, window.innerWidth || 0);
+    };
 
-function getDocumentHeight() {
-    return Math.min(document.documentElement.clientHeight, window.innerHeight || 0)
-};
+    function getDocumentHeight() {
+        return Math.min(document.documentElement.clientHeight, window.innerHeight || 0)
+    };
 
-var canvas = document.getElementById('can1');
-var context = canvas.getContext('2d');
+    var canvas = document.getElementById('can1');
+    var context = canvas.getContext('2d');
 
-window.addEventListener('resize', resizeCanvas, false);
-function resizeCanvas() {
-    canvas.width = getDocumentWidth();
-    canvas.height = getDocumentHeight();
-    drawDots();
-}
+    window.addEventListener('resize', resizeCanvas, false);
+    function resizeCanvas() {
+        canvas.width = getDocumentWidth();
+        canvas.height = getDocumentHeight();
+        drawDots();
+    }
 
-function drawDots() {
-    var r = 1;
+    function drawDots() {
+        var r = 1;
 
-    for (var x = 20; x < canvas.width; x += 20) {
-        for (var y = 20; y < canvas.height; y += 20) {
-            context.fillRect(x - r / 2, y - r / 2, r, r);
+        for (var x = 20; x < canvas.width; x += 20) {
+            for (var y = 20; y < canvas.height; y += 20) {
+                context.fillRect(x - r / 2, y - r / 2, r, r);
+            }
         }
     }
-}
 
-resizeCanvas();
+    resizeCanvas();
 </script>
