@@ -1,0 +1,23 @@
+<canvas id="c" width=500 height=100></canvas>
+
+<script>
+  var ctx = document.querySelector("canvas").getContext("2d")
+  ctx.font = "50px Arial";
+  var i = 3
+  var delta = 1
+
+  function loop() {
+    ctx.clearRect(0, 0, 500, 100)
+    ctx.setLineDash([]);
+    ctx.strokeText("HELLO", 10, 50);
+    ctx.beginPath()
+    ctx.setLineDash([i, 80]);
+    ctx.strokeText("WORLD", 200, 50);
+    ctx.closePath()
+    i += delta
+    if (i > 300 || i < 2)
+      delta *= -1
+  }
+
+  setInterval(loop, 50)
+</script>
