@@ -1,21 +1,80 @@
-<canvas id="c" width=500 height=100></canvas>
+<canvas id="c" width=900 height=600></canvas>
 
 <script>
-  var ctx = document.querySelector("canvas").getContext("2d")
-  ctx.font = "50px Arial";
-  var i = 3
-  var delta = 1
+  var ctx = document.getElementById("c").getContext("2d")
+  ctx.font = "150px Arial";
+  ctx.lineWidth = 2;
+  var i = delta = 3
+  const world = "WORLDふ"
+  const wlen = letterLen(world, ctx.font)
+  const minlen = Math.min(...wlen)
+
+
+  function letterLen(text, font) {
+    const oc = document.createElement('canvas');
+    oc.width = oc.height = 200;
+    const octx = oc.getContext("2d");
+    octx.globalCompositeOperation = 'copy';
+    octx.imageSmoothingEnabled = false;
+    octx.font = font;
+
+    function pixels(char) {
+      octx.strokeText(char, 20, oc.height - 20);
+      const id = octx.getImageData(0, 0, oc.width, oc.height)
+      return id.data.reduce((a, c) => c ? a + 1 : a, 0)
+    }
+
+    function length(char) {
+      octx.setLineDash([]);
+      const full = pixels(char)
+      if (full == 0) return 0
+      let max = full
+      let min = 0
+      do {
+        let iter = Math.round((min + max) / 2)
+        octx.setLineDash([iter, 800]);
+        if (pixels(char) > full - 10)
+          max = iter
+        else
+          min = iter
+      } while (min + 1 < max)
+      return max
+    }
+
+    const strArray = text.split('');
+    return strArray.map(s => length(s));
+  }
+
+  function animText1(text) {
+    ctx.beginPath()
+    ctx.strokeStyle = "red";
+    ctx.setLineDash([i, 400]);
+    ctx.strokeText(text, 150, 290);
+    ctx.closePath()
+  }
+
+  function animText2(text) {
+    ctx.strokeStyle = "blue";
+    const letters = text.split('');
+    let ix = 10
+    for (j = 0; j < letters.length; j++) {
+      ctx.beginPath()
+      ctx.setLineDash([i * wlen[j] / minlen, 400]);
+      ctx.strokeText(letters[j], ix, 450 + j * 20);
+      ctx.closePath()
+      ix += ctx.measureText(letters[j]).width
+    }
+  }
 
   function loop() {
-    ctx.clearRect(0, 0, 500, 100)
+    ctx.clearRect(0, 0, 900, 600)
+    ctx.strokeStyle = "black";
     ctx.setLineDash([]);
-    ctx.strokeText("HELLO", 10, 50);
-    ctx.beginPath()
-    ctx.setLineDash([i, 80]);
-    ctx.strokeText("WORLD", 200, 50);
-    ctx.closePath()
+    ctx.strokeText("HELLO", 10, 120);
+    animText1(world)
+    animText2(world)
     i += delta
-    if (i > 300 || i < 2)
+    if (i > 450 || i < 2)
       delta *= -1
   }
 
