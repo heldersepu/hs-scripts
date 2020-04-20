@@ -1,16 +1,16 @@
 <canvas id="c" width=800 height=240></canvas>
 
 <script>
-  var canvas = document.getElementById("c")
-  var ctx = canvas.getContext("2d")
+  var canvas = document.getElementById("c");
+  var ctx = canvas.getContext("2d");
   ctx.lineWidth = 0.5;
-  var i = delta = 3
-  var hash = "MAGIC"
+  var i = delta = 3;
+  var hash = "MAGIC";
   if (window.location.hash)
     hash = window.location.hash.substring(1);
 
   function draw(text, font, x, y, l, color) {
-    ctx.beginPath()
+    ctx.beginPath();
     ctx.font = font;
     ctx.textAlign = "center";
     ctx.strokeStyle = color;
@@ -19,17 +19,18 @@
   }
 
   function loop() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    draw("I KNOW SOMETHING ABOUT", "40px Arial", 0, 40, 2, "#BEBEBE")
-    draw("I KNOW SOMETHING ABOUT", "40px Arial", 0, 40, 10 + delta / 12, "black")
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let rand = (Math.random() < 0.95) ? 0 : delta / 12
+    draw("I KNOW SOMETHING ABOUT", "40px Arial", 0, 40, 1.5, "#BEBEBE");
+    draw("I KNOW SOMETHING ABOUT", "40px Arial", 0, 40, 10 + rand, "black");
 
-    draw(hash, "110px Arial", 0, 130, i, "red")
-    draw(hash, "110px Arial", 2, 132, i / 2, "blue")
+    draw(hash, "110px Arial", 0, 130, i, "red");
+    draw(hash, "110px Arial", 2, 132, i / 2, "blue");
 
-    i += delta
+    i += delta;
     if (i > 40 || i < 2)
-      delta *= -1
+      delta *= -1;
   }
 
-  setInterval(loop, 50)
+  setInterval(loop, 50);
 </script>
