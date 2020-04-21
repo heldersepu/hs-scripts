@@ -1,0 +1,70 @@
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.19/fabric.js"></script>
+
+<button class="alignment" data-action="left">Align Left</button>
+<button class="alignment" data-action="right">Align Right</button>
+<button class="alignment" data-action="top">Align Top</button>
+<button class="alignment" data-action="bottom">Align Bottom</button>
+<canvas id="a" width="400" height="200"></canvas>
+
+<script>
+    function move(obj, prop, value) {
+        obj.saveState();
+        obj.animate(prop, value, {
+            duration: 1000,
+            onChange: canvas.renderAll.bind(canvas),
+            onComplete: canvas.renderAll.bind(canvas),
+            easing: fabric.util.ease["easeOutQuad"],
+            abort: function () {
+                obj.setCoords();
+                for (const prop in obj.aCoords) {
+                    point = obj.aCoords[prop]
+                    if (point.x <= 0 || point.x >= canvas.width ||
+                        point.y <= 0 || point.y >= canvas.height) {
+                        obj.left = obj._stateProperties.left;
+                        obj.top = obj._stateProperties.top;
+                        return true
+                    }
+                }
+                obj.saveState();
+            }
+        });
+    }
+
+    function process_align(val, obj) {
+        switch (val) {
+            case 'left':
+                move(obj, 'left', 1);
+                break;
+            case 'right':
+                move(obj, 'left', canvas.width - 1);
+                break;
+            case 'top':
+                move(obj, 'top', 1);
+                break;
+            case 'bottom':
+                move(obj, 'top', canvas.height - 1);
+                break;
+        }
+    }
+
+    var canvas = new fabric.Canvas('a');
+    canvas.stateful = true;
+    canvas.add(new fabric.Rect({ left: 50, top: 50, height: 50, width: 50, fill: 'red' }));
+    canvas.add(new fabric.Rect({ angle: 76, left: 180, top: 50, height: 50, width: 50, fill: 'green' }));
+    canvas.add(new fabric.Rect({ left: 90, top: 130, height: 50, width: 50, fill: 'blue' }));
+    canvas.renderAll();
+
+    $('.alignment').click(function () {
+        var cur_value = $(this).attr('data-action');
+        var activeObj = canvas.getActiveObject() || canvas.getActiveGroup();
+        if (cur_value != '' && activeObj) {
+            process_align(cur_value, activeObj);
+            activeObj.setCoords();
+            canvas.renderAll();
+        } else {
+            alert('Please select a item');
+            return false;
+        }
+    });
+</script>
