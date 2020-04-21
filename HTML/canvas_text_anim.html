@@ -24,21 +24,19 @@
       return id.data.reduce((a, c) => c ? a + 1 : a, 0)
     }
 
+    function find(char, full, min, max) {
+      if (min >= max) return max
+      let iter = Math.floor((min + max) / 2)
+      octx.setLineDash([iter, 800]);
+      if (pixels(char) > full - 10)
+        return find(char, full, min, iter)
+      return find(char, full, iter + 1, max)
+    }
+
     function length(char) {
       octx.setLineDash([]);
       const full = pixels(char)
-      if (full == 0) return 0
-      let max = full
-      let min = 0
-      do {
-        let iter = Math.round((min + max) / 2)
-        octx.setLineDash([iter, 800]);
-        if (pixels(char) > full - 10)
-          max = iter
-        else
-          min = iter
-      } while (min + 1 < max)
-      return max
+      return find(char, full, 0, full);
     }
 
     const strArray = text.split('');
