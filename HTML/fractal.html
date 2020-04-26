@@ -1,0 +1,47 @@
+<canvas id="c" width=800 height=800></canvas>
+
+<script>
+  function drawFractal() {
+    for (let x = 0; x < canvas.width; x++) {
+      for (let y = 0; y < canvas.height; y++) {
+        const belongsToSet = checkIfBelongsToMandelbrotSet(x / state.magnificationFactor - state.panX, y / state.magnificationFactor - state.panY);
+        if (belongsToSet === 0) {
+          ctx.clearRect(x, y, 1, 1);
+        } else {
+          ctx.fillStyle = `hsl(80, 100%, ${belongsToSet}%)`;
+          // Draw a colorful pixel
+          ctx.fillRect(x, y, 1, 1);
+        }
+      }
+    }
+  }
+
+  function checkIfBelongsToMandelbrotSet(x, y) {
+    let realComponentOfResult = x;
+    let imaginaryComponentOfResult = y;
+    // Set max number of iterations
+    for (let i = 0; i < state.maxIterations; i++) {
+      const tempRealComponent = realComponentOfResult * realComponentOfResult - imaginaryComponentOfResult * imaginaryComponentOfResult + x;
+      const tempImaginaryComponent = state.imaginaryConstant * realComponentOfResult * imaginaryComponentOfResult + y;
+      realComponentOfResult = tempRealComponent;
+      imaginaryComponentOfResult = tempImaginaryComponent;
+      // Return a number as a percentage
+      if (realComponentOfResult * imaginaryComponentOfResult > 5) {
+        return (i / state.maxIterations * 100);
+      }
+    }
+    // Return zero if in set
+    return 0;
+  }
+
+  const canvas = document.getElementById('c');
+  const ctx = canvas.getContext('2d');
+  const state = {
+    magnificationFactor: 1,
+    imaginaryConstant: 1,
+    maxIterations: 4,
+    panX: 400,
+    panY: 400
+  }
+  drawFractal()
+</script>
