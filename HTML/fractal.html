@@ -2,12 +2,11 @@
 
 <script>
   function drawFractal() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (let x = 0; x < canvas.width; x++) {
       for (let y = 0; y < canvas.height; y++) {
         const belongsToSet = checkIfBelongsToMandelbrotSet(x / state.magnificationFactor - state.panX, y / state.magnificationFactor - state.panY);
-        if (belongsToSet === 0) {
-          ctx.clearRect(x, y, 1, 1);
-        } else {
+        if (belongsToSet !== 0) {
           ctx.fillStyle = `hsl(80, 100%, ${belongsToSet}%)`;
           // Draw a colorful pixel
           ctx.fillRect(x, y, 1, 1);
@@ -36,12 +35,18 @@
 
   const canvas = document.getElementById('c');
   const ctx = canvas.getContext('2d');
-  const state = {
-    magnificationFactor: 16,
+  let state = {
+    magnificationFactor: 5000,
     imaginaryConstant: 1,
-    maxIterations: 18,
-    panX: 25,
-    panY: 25
+    maxIterations: 32,
+    panX: 1,
+    panY: 1
   }
-  drawFractal()
+
+  function draw() {
+    state.magnificationFactor += 100
+    drawFractal()
+  }
+
+  setInterval(draw, 500);  
 </script>
