@@ -1,0 +1,59 @@
+<canvas id="canvas"></canvas>
+
+<script>
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext("2d");
+  ctx.globalAlpha = 0.6
+
+  const poligons = [
+    [[89, 9], [13, 9], [13, 76], [98, 36], [89, 9]],
+    [[5, 50], [5, 90], [99, 90], [99, 50], [5, 50]]
+  ]
+
+  function draw(poly, color) {
+    ctx.beginPath();
+    poly.map(val => ctx.lineTo(val[0], val[1]));
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.stroke();
+  }
+
+  function inside(p, vs) {
+    var inside = false;
+    for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+      var xi = vs[i][0], yi = vs[i][1];
+      var xj = vs[j][0], yj = vs[j][1];
+      var intersect = ((yi > p[1]) != (yj > p[1])) && (p[0] < (xj - xi) * (p[1] - yi) / (yj - yi) + xi);
+      if (intersect) inside = !inside;
+    }
+    return inside;
+  };
+
+  function check_overlap(p) {
+    for (x = 0; x < p.width; x++) {
+      for (y = 0; y < p.height; y++) {
+        let overlap = 0
+        for (pol = 0; pol < poligons.length; pol++) {
+          if (inside([x, y], poligons[pol]))
+            overlap++
+        }
+        if (overlap >= 2) {
+          offset = (p.width * y + x) * 4;
+          p.data[offset] = 0;
+          p.data[offset + 1] = 0;
+          p.data[offset + 2] = 0;
+
+        }
+      }
+    }
+    return p
+  }
+
+  draw(poligons[0], 'blue')
+  draw(poligons[1], 'red')
+
+  data = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  data = check_overlap(data);
+  ctx.putImageData(data, 0, 0);
+
+</script>
