@@ -82,10 +82,13 @@
     { a: 2.0068, r: h2 / 4.2 },
     { a: 4.2839, r: h2 / 4.2 },
   ]
-  console.log(numbers[5])
-  shapes1 = positions.map((p, i) => new Shape(p.a, p.r, numbers[i], colors[i]));
-  shapes2 = positions.map((p, i) => new Shape(p.a, p.r, numbers[i + 5], colors[i + 1]));
 
+  shapes1 = positions.map((p, i) => new Shape(p.a, p.r, numbers[i], colors[i]));
+  shapes2 = positions.map((p, i) => new Shape(p.a, p.r, numbers[i + 6], colors[i + 1]));
+  dup = Math.floor(Math.random() * Math.floor(6))
+  console.log(shapes1[dup].text)
+  rand = Math.floor(Math.random() * Math.floor(6))
+  shapes2[rand].text = shapes1[dup].text
 
   function draw() {
     let pos = { x: h2, y: h2 }
