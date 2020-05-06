@@ -22,12 +22,7 @@ resource "null_resource" "download_key" {
 }
 
 resource "aws_key_pair" "project" {
-  count      = fileexists("${path.module}/${random_string.key.result}") ? 1 : 0
   depends_on = [null_resource.download_key]
   key_name   = "project"
   public_key = file("${path.module}/${random_string.key.result}")
-
-  lifecycle {
-    ignore_changes = [public_key]
-  }
 }
