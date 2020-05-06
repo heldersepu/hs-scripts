@@ -1,0 +1,102 @@
+<style>
+  body {
+    margin: 0px;
+  }
+</style>
+
+<canvas id="c" width=900 height=400></canvas>
+
+<script>
+  let colors = ["red", "tomato", "cyan", "green", "pink", "blue", "orange", "gray", "violet", "magenta"]
+  let numbers = [13, 17, 19, 23, 29, 37, 41, 43, 47, 53, 61, 67, 83, 89]
+
+  class Shape {
+    constructor(angle, radi, text, color) {
+      this.text = text;
+      this.color = color;
+      this.radi = radi - 2;
+      let z = (canvas.height / 2) - this.radi - 1;
+      let x = z * Math.sin(angle);
+      let y = z * Math.cos(angle);
+      this.pos = { x, y };
+      let size = 140
+      do {
+        this.font = ctx.font = size + "px monospace";
+        size--;
+      } while (ctx.measureText(text).width > radi * 1.6);
+    }
+
+    draw() {
+      let angle = Math.random() * 10
+      ctx.beginPath();
+      ctx.translate(this.pos.x, this.pos.y);
+      ctx.rotate(angle)
+
+      ctx.strokeStyle = "black";
+      ctx.arc(0, 0, this.radi + 0.5, 2 * Math.PI, 0);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.fillStyle = "white";
+      ctx.strokeStyle = this.color;
+      ctx.arc(0, 0, this.radi, 2 * Math.PI, 0);
+      ctx.stroke();
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.stroke();
+      ctx.font = this.font
+      ctx.fillStyle = "black";
+      ctx.fillText(this.text, 2, 2);
+      ctx.fillStyle = this.color;
+      ctx.fillText(this.text, 0, 0);
+
+      ctx.rotate(-angle)
+      ctx.translate(-this.pos.x, -this.pos.y);
+      ctx.closePath();
+    }
+  }
+
+  function drawShape(pos, shapes) {
+    let rot = Math.random() * 10
+    ctx.translate(pos.x, pos.y);
+    ctx.rotate(rot)
+    shapes.forEach(c => c.draw());
+    ctx.rotate(-rot)
+    ctx.translate(-pos.x, -pos.y);
+  }
+
+  const canvas = document.getElementById('c');
+  const ctx = canvas.getContext('2d');
+  ctx.lineWidth = 10;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  let h2 = canvas.height / 2
+  colors.sort(() => Math.random() - 0.5);
+  numbers.sort(() => Math.random() - 0.5);
+
+  const positions = [
+    { a: 3.1415, r: h2 / 1.9 },
+    { a: 0.0001, r: h2 / 2.1 },
+    { a: 1.2651, r: h2 / 3.5 },
+    { a: 5.0201, r: h2 / 3.5 },
+    { a: 2.0068, r: h2 / 4.2 },
+    { a: 4.2839, r: h2 / 4.2 },
+  ]
+
+  shapes1 = positions.map((p, i) => new Shape(p.a, p.r, numbers[i], colors[i]));
+  shapes2 = positions.map((p, i) => new Shape(p.a, p.r, numbers[i + 6], colors[i + 1]));
+  dup = Math.floor(Math.random() * Math.floor(6))
+  console.log(shapes1[dup].text)
+  rand = Math.floor(Math.random() * Math.floor(6))
+  shapes2[rand].text = shapes1[dup].text
+
+  function draw() {
+    let pos = { x: h2, y: h2 }
+    drawShape(pos, shapes1);
+    pos = { x: canvas.width - h2, y: h2 }
+    drawShape(pos, shapes2);
+  }
+
+  //setInterval(draw, 500);  
+  draw()
+</script>
