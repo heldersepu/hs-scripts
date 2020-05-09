@@ -1,0 +1,35 @@
+<canvas id="canvas" width=400></canvas>
+
+<script>
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    function draw() {
+        ctx.beginPath();
+        x = Math.random() * canvas.width
+        y = Math.random() * canvas.height
+        ctx.arc(x, y, 10, 0, 2 * Math.PI)
+        ctx.stroke();
+    }
+
+    function takeSnap() {
+        src = canvas.toDataURL("image/png");
+        for (i = 0; i < 5; i++) {
+            ctx.fillRect(50 * i, 20 * i, 50, 10);
+        }
+    }
+
+    function undo() {
+        clearInterval(inter)
+        let img = new Image();
+        img.onload = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            ctx.drawImage(img, 0, 0);
+        };
+        img.src = src;
+    }
+
+    inter = setInterval(draw, 100);
+    setTimeout(takeSnap, 2000);
+    setTimeout(undo, 4000);
+</script>
