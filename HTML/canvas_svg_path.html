@@ -1,0 +1,72 @@
+<canvas id=canvas width=300 height=200></canvas>
+
+<script>
+    var image = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" version="1.1">
+            <path d="
+                M 588, 173,
+                L588,176,  L585,216,  L585,216,  L584,223,
+                L580,274,  L565,273,  L565,273,  L549,271,
+                L539,270,  L535,269,  L513,267,  L503,266,
+                L486,264,  L477,262,  L468,261,  L464,260,
+                L455,259,  L449,258,  L451,249,  L452,244,
+                L453,233,  L456,218,  L456,215,  L460,192,
+                L460,191,  L462,180,  L463,174,  L463,171,
+                L464,167,  L464,161,  L465,158,  L470,159,
+                L471,159,  L477,160,  L477,160,  L480,161,
+                L482,161,  L487,161,  L499,163,  L500,163,
+                L514,165,  L534,168,  L535,168,  L544,169,
+                L555,170,  L557,170,  L565,171,  L581,173,
+                Z" fill="transparent" stroke-width="1" stroke="black">
+            </path>
+        </svg>`;
+
+    function inside(p, vs) {
+        var inside = false;
+        for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+            var xi = vs[i][0], yi = vs[i][1];
+            var xj = vs[j][0], yj = vs[j][1];
+            var intersect = ((yi > p[1]) != (yj > p[1])) && (p[0] < (xj - xi) * (p[1] - yi) / (yj - yi) + xi);
+            if (intersect) inside = !inside;
+        }
+        return inside;
+    }
+
+    function draw() {
+        ctx.translate(-400, -100)
+        ctx.drawImage(img, 0, 0);
+
+        const matches = image.matchAll(/L(...),(...),/g)
+        const poly = Array.from(matches, m => [Number(m[1]), Number(m[2])])
+
+        let xs = poly.map(p => p[0]);
+        let ys = poly.map(p => p[1]);
+        let [xmin, xmax] = [Math.min(...xs), Math.max(...xs)];
+        let [ymin, ymax] = [Math.min(...ys), Math.max(...ys)];
+
+        ctx.globalAlpha = 0.5
+        const pointWidth = 3
+        for (let x = xmin; x <= xmax; x += pointWidth) {
+            for (let y = ymin; y <= ymax; y += pointWidth) {
+                if (inside([x, y], poly)) {
+                    ctx.beginPath();
+                    r = Math.random()
+                    ctx.fillStyle = r < 0.5 ? "blue" : "red"
+                    f = 1.06 + r / 100
+                    radius = Math.abs(Math.sin(x / f)) + Math.abs(Math.cos(y / f)) + 0.5
+                    ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                    ctx.fill();
+                }
+            }
+        }
+
+    }
+
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+    ctx.fillStyle = "red"
+
+    var img = new Image();
+    img.onload = draw
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(image);
+</script>
