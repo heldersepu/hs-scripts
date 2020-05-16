@@ -1,5 +1,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
 
+
 <div class="text-center">
   <canvas id="chart"></canvas>
 </div>
@@ -20,10 +21,20 @@
           position: 'top',
           offset: true,
           ticks: {
+            display: true,
             callback: function (value, index, values) {
               return value % 2000 == 0 ? "" : value;
-            }
+            },
+            major: {
+              enabled: true,
+            },
+            fontStyle: function (context) {
+              return context.tick.major ? 'bold' : undefined;
+            },
           },
+          afterBuildTicks: function (scale) {
+            scale.ticks[1].major = true;
+          }
         }],
       }
     }
