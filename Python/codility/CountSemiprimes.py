@@ -1,12 +1,17 @@
 def semiprimes(N):
     # get primes
-    primes = [2] + list(range(3, N//2+1, 2))
-    i = 1
-    while i < len(primes):
-        for j in range(primes[i]*2, N//2+1, primes[i]):
-            if j in primes:
-                primes.remove(j)
+    sieve = [True] * (N+1)
+    sieve[0] = sieve[1] = False
+    i = 2
+    while (i*i <= N):
+        if sieve[i] == True:
+            for j in range(i*i, N+1, i):
+                sieve[j] = False
         i += 1
+    primes = []
+    for num, is_prime in enumerate(sieve):
+        if is_prime:
+            primes.append(num)
 
     # get semiprimes
     semiprime = {4, 6, 9}
