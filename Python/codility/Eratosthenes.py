@@ -1,12 +1,12 @@
 import timeit
 
 
-def solution(N):
+def solutionA(N):
     primes = set(range(3, N, 2))
     primes.add(2)
     i = 3
     while i < len(primes):
-        for j in range(i**2, N, i):
+        for j in range(i*i, N, i):
             if j in primes:
                 primes.remove(j)
         i += 2
@@ -30,11 +30,11 @@ def solutionB(N):
     return primes
 
 
-print(solution(100))
+print(solutionA(100))
 print(solutionB(100))
 
 starttime = timeit.default_timer()
-solution(10000000)
+solutionA(10000000)
 print(timeit.default_timer() - starttime)
 
 starttime = timeit.default_timer()
