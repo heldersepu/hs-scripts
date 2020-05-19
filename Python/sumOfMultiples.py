@@ -1,6 +1,3 @@
-import math
-
-
 def solutionL(N):
     s = 0
     for i in range(N+1):
