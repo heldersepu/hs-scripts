@@ -133,7 +133,10 @@
             "200": {
               "description": "Success",
               "schema": {
-                "$ref": "#/definitions/MonthEnum"
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/MonthEnum"
+                }
               }
             }
           }
