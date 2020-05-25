@@ -1,0 +1,411 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "My Service",
+      "version": "v1"
+    },
+    "paths": {
+      "/api/Authors": {
+        "post": {
+          "tags": [
+            "Authors"
+          ],
+          "operationId": "CreateAuthor",
+          "consumes": [
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "schema": {
+                "$ref": "#/definitions/AuthorForCreationDto"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "Authors"
+          ],
+          "operationId": "CreateAuthorWithDateOfDeath",
+          "consumes": [
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "schema": {
+                "$ref": "#/definitions/AuthorForCreationWithDateOfDeathDto"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      },
+      "/api/DefaultFromQuery": {
+        "get": {
+          "tags": [
+            "DefaultFromQuery"
+          ],
+          "produces": [
+            "text/plain",
+            "application/json",
+            "text/json"
+          ],
+          "parameters": [
+            {
+              "in": "query",
+              "name": "Zip",
+              "type": "string",
+              "default": "90210"
+            },
+            {
+              "in": "query",
+              "name": "StreetAddress",
+              "type": "string",
+              "default": "5361 Doverton Dr"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#/definitions/MyClass"
+              }
+            }
+          }
+        }
+      },
+      "/api/Error": {
+        "get": {
+          "tags": [
+            "Error"
+          ],
+          "summary": "Testing xml comments",
+          "produces": [
+            "text/plain",
+            "application/json",
+            "text/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Error"
+          ],
+          "produces": [
+            "text/plain",
+            "application/json",
+            "text/json"
+          ],
+          "parameters": [
+            {
+              "in": "query",
+              "name": "id",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#/definitions/MonthEnum"
+              }
+            }
+          }
+        }
+      },
+      "/api/InherTest": {
+        "get": {
+          "tags": [
+            "InherTest"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "query",
+              "name": "repository",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "/api/InherTest/{id}": {
+        "get": {
+          "tags": [
+            "InherTest"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "type": "integer",
+              "format": "int32"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      },
+      "/api/TestEmail/TestEmail/{templateName}": {
+        "get": {
+          "tags": [
+            "TestEmail"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "templateName",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      },
+      "/api/Values": {
+        "get": {
+          "tags": [
+            "Values"
+          ],
+          "produces": [
+            "text/plain",
+            "application/json",
+            "text/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Values"
+          ],
+          "consumes": [
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      },
+      "/api/Values/{id}": {
+        "get": {
+          "tags": [
+            "Values"
+          ],
+          "produces": [
+            "text/plain",
+            "application/json",
+            "text/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "type": "integer",
+              "format": "int32"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "Values"
+          ],
+          "consumes": [
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "Values"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "type": "integer",
+              "format": "int32"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "AuthorForCreationDto": {
+        "type": "object",
+        "properties": {
+          "FirstName": {
+            "type": "string"
+          },
+          "LastName": {
+            "type": "string"
+          },
+          "DateOfBirth": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "Genre": {
+            "type": "string"
+          }
+        }
+      },
+      "AuthorForCreationWithDateOfDeathDto": {
+        "type": "object",
+        "properties": {
+          "FirstName": {
+            "type": "string"
+          },
+          "LastName": {
+            "type": "string"
+          },
+          "DateOfBirth": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "DateOfDeath": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "Genre": {
+            "type": "string"
+          }
+        }
+      },
+      "MyClass": {
+        "type": "object",
+        "properties": {
+          "Zip": {
+            "default": "90210",
+            "type": "string"
+          },
+          "StreetAddress": {
+            "default": "5361 Doverton Dr",
+            "type": "string"
+          }
+        }
+      },
+      "MonthEnum": {
+        "format": "int32",
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "type": "integer"
+      }
+    }
+  }
+  
