@@ -1,0 +1,49 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+
+<body style="margin: 0px">
+    <canvas id="chart" width="800" height="400"></canvas>
+</body>
+
+
+<script>
+    var chart = document.getElementById('chart').getContext('2d');
+
+    var chartOptions = {
+        responsive: true,
+        legend: { labels: { fontSize: 15 } },
+        scales: {
+            yAxes: [{ ticks: { reverse: false, fontSize: 15 } }],
+            xAxes: [{ ticks: { fontSize: 15 } }],
+        }
+    }
+
+    async function defaultChart() {
+        const response = await fetch('https://offleaseonly.azurewebsites.net/api/Stats/Additions');
+        data = await response.json();
+        var dateList = [];
+        var additions = [];
+        const six = moment().subtract(6, 'months')
+        for (var key in data) {
+            const date = moment(key)
+            if (data[key] < 1000 && date > six && date.day() != 6 && date.day() != 0) {
+                dateList.unshift(key);
+                additions.unshift(data[key]);
+            }
+        }
+
+        var options = {
+            type: 'line',
+            data: {
+                labels: dateList,
+                datasets: [{
+                    label: 'Additions',
+                    data: additions,
+                }]
+            },
+            options: chartOptions
+        }
+        new Chart(chart, options);
+    }
+    window.onload = defaultChart;
+</script>
