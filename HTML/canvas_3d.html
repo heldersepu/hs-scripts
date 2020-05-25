@@ -1,0 +1,257 @@
+<canvas id="viewport" width="600" height="400"></canvas>
+
+<script>
+  var viewport = document.getElementById("viewport");
+  var context = viewport.getContext("2d");
+
+
+  //Camera variables:
+  var currentCamera = {
+    x: 400,
+    y: -800,
+    z: -600,
+    rotationX: 1,
+    rotationY: 0.5,
+    rotationZ: 1,
+    depth: 500,
+    width: viewport.width,
+    height: viewport.height,
+    offsetX: viewport.width / 2,
+    offsetY: viewport.height / 2
+  }
+
+  //Contains all objects stored in the gameSpace:
+  var cubeCount = 0;
+
+  var gameSpace = {
+    vertices: [
+      { x: 0, y: 0, z: 0, parent: "" },
+      { x: 0, y: 0, z: 0, parent: "" },
+      { x: 0, y: 0, z: 0, parent: "" },
+      { x: 0, y: 0, z: 0, parent: "" },
+      { x: 0, y: 0, z: 0, parent: "" },
+      { x: 0, y: 0, z: 0, parent: "" },
+      { x: 0, y: 0, z: 0, parent: "" },
+      { x: 0, y: 0, z: 0, parent: "" },
+    ],
+    edges: [],
+    triangles: [
+      { point1: 0, point2: 0, point3: 0, color: "", parent: "" },
+      { point1: 0, point2: 0, point3: 0, color: "", parent: "" },
+      { point1: 0, point2: 0, point3: 0, color: "", parent: "" },
+      { point1: 0, point2: 0, point3: 0, color: "", parent: "" },
+      { point1: 0, point2: 0, point3: 0, color: "", parent: "" },
+      { point1: 0, point2: 0, point3: 0, color: "", parent: "" },
+      { point1: 0, point2: 0, point3: 0, color: "", parent: "" },
+      { point1: 0, point2: 0, point3: 0, color: "", parent: "" },
+      { point1: 0, point2: 0, point3: 0, color: "", parent: "" },
+      { point1: 0, point2: 0, point3: 0, color: "", parent: "" },
+      { point1: 0, point2: 0, point3: 0, color: "", parent: "" },
+      { point1: 0, point2: 0, point3: 0, color: "", parent: "" }
+    ]
+  };
+
+  function getEdges() {
+    for (var count = cubeCount * 12; count < gameSpace.edges.length; count++) {
+      var edge = gameSpace.edges[count];
+
+      edge.startPoint = gameSpace.vertices[edge.startPoint];
+      edge.endPoint = gameSpace.vertices[edge.endPoint];
+    }
+  }
+
+  function getTriangles() {
+    for (var count = cubeCount * 12; count < gameSpace.triangles.length; count++) {
+      var triangle = gameSpace.triangles[count];
+
+      triangle.point1 = gameSpace.vertices[triangle.point1];
+      triangle.point2 = gameSpace.vertices[triangle.point2];
+      triangle.point3 = gameSpace.vertices[triangle.point3];
+    }
+  }
+
+  var toRenderTriangles;
+  var depth;
+  var xValues;
+  var fromCam;
+  function renderLoop() {
+
+    toRenderTriangles = [];
+
+    for (var count = 0; count < gameSpace.vertices.length; count++) {
+      var vertex = gameSpace.vertices[count];
+
+      var distanceX = vertex.x - currentCamera.x;
+      var distanceY = vertex.y - currentCamera.y;
+      var distanceZ = vertex.z - currentCamera.z;
+
+      var rotationYX = Math.cos(currentCamera.rotationY) * distanceX + Math.sin(currentCamera.rotationY) * distanceZ;
+      var rotationYY = distanceY;
+      var rotationYZ = Math.cos(currentCamera.rotationY) * distanceZ - Math.sin(currentCamera.rotationY) * distanceX;
+
+      var rotationXX = rotationYX;
+      var rotationXY = Math.cos(currentCamera.rotationX) * rotationYY - Math.sin(currentCamera.rotationX) * rotationYZ;
+      var rotationXZ = Math.cos(currentCamera.rotationX) * rotationYZ + Math.sin(currentCamera.rotationX) * rotationYY;
+
+      var rotationZX = Math.cos(currentCamera.rotationZ) * rotationXX + Math.sin(currentCamera.rotationZ) * rotationXY;
+      var rotationZY = Math.cos(currentCamera.rotationZ) * rotationXY - Math.sin(currentCamera.rotationZ) * rotationXX;
+      var rotationZZ = rotationXZ;
+
+      var scale = currentCamera.depth / rotationZZ;
+      var renderScale = scale * 10;
+
+      var positionX = scale * rotationZX + currentCamera.offsetX;
+      var positionY = scale * rotationZY + currentCamera.offsetY;
+      var positionZ = scale;
+
+      vertex.positionX = positionX;
+      vertex.positionY = positionY;
+      vertex.positionZ = positionZ;
+    }
+
+
+    for (var count = 0; count < gameSpace.triangles.length; count++) {
+      var triangle = gameSpace.triangles[count];
+
+      if (triangle.point1.positionZ > 0 && triangle.point2.positionZ > 0 && triangle.point3.positionZ > 0) {
+        var vector1 = {
+          x: triangle.point1.x - triangle.point2.x,
+          y: triangle.point1.y - triangle.point2.y,
+          z: triangle.point1.z - triangle.point2.z
+        };
+        var vector2 = {
+          x: triangle.point3.x - triangle.point2.x,
+          y: triangle.point3.y - triangle.point2.y,
+          z: triangle.point3.z - triangle.point2.z
+        };
+
+        var crossProduct = {
+          x: vector1.y * vector2.z - vector1.z * vector2.y,
+          y: vector1.z * vector2.x - vector1.x * vector2.z,
+          z: vector1.x * vector2.y - vector1.y * vector2.x
+        };
+
+        var cameraVector = {
+          x: (currentCamera.x) - (triangle.point1.x + triangle.point2.x + triangle.point3.x) / 3,
+          y: (currentCamera.y) - (triangle.point1.y + triangle.point2.y + triangle.point3.y) / 3,
+          z: (currentCamera.z) - (triangle.point1.z + triangle.point2.z + triangle.point3.z) / 3
+        };
+
+        var dotProduct = crossProduct.x * cameraVector.x + crossProduct.y * cameraVector.y + crossProduct.z * cameraVector.z;
+        var length2 = Math.sqrt(crossProduct.x * crossProduct.x + crossProduct.y * crossProduct.y + crossProduct.z * crossProduct.z);
+
+        dotProduct = dotProduct / length2;
+
+        if (dotProduct > 0) {
+          toRenderTriangles.push({
+            positionX1: triangle.point1.positionX,
+            positionY1: triangle.point1.positionY,
+
+            positionX2: triangle.point2.positionX,
+            positionY2: triangle.point2.positionY,
+
+            positionX3: triangle.point3.positionX,
+            positionY3: triangle.point3.positionY,
+
+            positionZ: (triangle.point1.positionZ + triangle.point2.positionZ + triangle.point3.positionZ) / 3,
+
+            depth: triangle.depth,
+
+            color: triangle.color,
+            shading: 0
+          });
+        }
+      }
+    }
+
+    for (count = 0; count < toRenderTriangles.length; count++) {
+      context.beginPath();
+
+      context.moveTo(toRenderTriangles[count].positionX1, toRenderTriangles[count].positionY1);
+      context.lineTo(toRenderTriangles[count].positionX2, toRenderTriangles[count].positionY2);
+      context.lineTo(toRenderTriangles[count].positionX3, toRenderTriangles[count].positionY3);
+      context.lineTo(toRenderTriangles[count].positionX1, toRenderTriangles[count].positionY1);
+
+      context.fillStyle = toRenderTriangles[count].color;
+      context.stroke();
+      context.fill();
+
+      context.closePath();
+    }
+  }
+
+  function createCube(x, y, z, width, height, depth, thisColor) {
+    cubeCount = cubeCount + 1;
+
+    var newCubeId = "cube" + cubeCount;
+
+    //Create vertices:
+    gameSpace.vertices.push(
+      { x: width + x, y: height + y, z: depth + z, parent: newCubeId },
+      { x: -width + x, y: height + y, z: depth + z, parent: newCubeId },
+      { x: -width + x, y: -height + y, z: depth + z, parent: newCubeId },
+      { x: width + x, y: -height + y, z: depth + z, parent: newCubeId },
+      { x: width + x, y: height + y, z: -depth + z, parent: newCubeId },
+      { x: -width + x, y: height + y, z: -depth + z, parent: newCubeId },
+      { x: -width + x, y: -height + y, z: -depth + z, parent: newCubeId },
+      { x: width + x, y: -height + y, z: -depth + z, parent: newCubeId }
+    );
+
+    //Create edges:
+    var currentGameSpaceEdgesCount;
+    var currentGameSpaceTrianglesCount;
+
+    if (cubeCount == 0 || cubeCount == 1) {
+      currentGameSpaceEdgesCount = gameSpace.vertices.length / (cubeCount * 2);
+      currentGameSpaceTrianglesCount = gameSpace.vertices.length / (cubeCount * 2);
+    } else {
+      currentGameSpaceEdgesCount = 8 * cubeCount;
+      currentGameSpaceTrianglesCount = 8 * cubeCount;
+    }
+    gameSpace.edges.push(
+      { startPoint: currentGameSpaceEdgesCount + 0, endPoint: currentGameSpaceEdgesCount + 1 },
+      { startPoint: currentGameSpaceEdgesCount + 1, endPoint: currentGameSpaceEdgesCount + 2 },
+      { startPoint: currentGameSpaceEdgesCount + 2, endPoint: currentGameSpaceEdgesCount + 3 },
+      { startPoint: currentGameSpaceEdgesCount + 3, endPoint: currentGameSpaceEdgesCount + 0 },
+
+      { startPoint: currentGameSpaceEdgesCount + 4, endPoint: currentGameSpaceEdgesCount + 5 },
+      { startPoint: currentGameSpaceEdgesCount + 5, endPoint: currentGameSpaceEdgesCount + 6 },
+      { startPoint: currentGameSpaceEdgesCount + 6, endPoint: currentGameSpaceEdgesCount + 7 },
+      { startPoint: currentGameSpaceEdgesCount + 7, endPoint: currentGameSpaceEdgesCount + 4 },
+
+      { startPoint: currentGameSpaceEdgesCount + 0, endPoint: currentGameSpaceEdgesCount + 4 },
+      { startPoint: currentGameSpaceEdgesCount + 1, endPoint: currentGameSpaceEdgesCount + 5 },
+      { startPoint: currentGameSpaceEdgesCount + 2, endPoint: currentGameSpaceEdgesCount + 6 },
+      { startPoint: currentGameSpaceEdgesCount + 3, endPoint: currentGameSpaceEdgesCount + 7 }
+    );
+    getEdges();
+
+    gameSpace.triangles.push(
+      { point1: currentGameSpaceEdgesCount + 2, point2: currentGameSpaceEdgesCount + 1, point3: currentGameSpaceEdgesCount + 0, color: thisColor, parent: newCubeId },
+      { point1: currentGameSpaceEdgesCount + 0, point2: currentGameSpaceEdgesCount + 3, point3: currentGameSpaceEdgesCount + 2, color: thisColor, parent: newCubeId },
+
+      { point1: currentGameSpaceEdgesCount + 4, point2: currentGameSpaceEdgesCount + 5, point3: currentGameSpaceEdgesCount + 6, color: thisColor, parent: newCubeId },
+      { point1: currentGameSpaceEdgesCount + 6, point2: currentGameSpaceEdgesCount + 7, point3: currentGameSpaceEdgesCount + 4, color: thisColor, parent: newCubeId },
+
+      { point1: currentGameSpaceEdgesCount + 6, point2: currentGameSpaceEdgesCount + 1, point3: currentGameSpaceEdgesCount + 2, color: thisColor, parent: newCubeId },
+      { point1: currentGameSpaceEdgesCount + 6, point2: currentGameSpaceEdgesCount + 5, point3: currentGameSpaceEdgesCount + 1, color: thisColor, parent: newCubeId },
+
+      { point1: currentGameSpaceEdgesCount + 4, point2: currentGameSpaceEdgesCount + 3, point3: currentGameSpaceEdgesCount + 0, color: thisColor, parent: newCubeId },
+      { point1: currentGameSpaceEdgesCount + 4, point2: currentGameSpaceEdgesCount + 7, point3: currentGameSpaceEdgesCount + 3, color: thisColor, parent: newCubeId },
+
+      { point1: currentGameSpaceEdgesCount + 3, point2: currentGameSpaceEdgesCount + 7, point3: currentGameSpaceEdgesCount + 6, color: thisColor, parent: newCubeId },
+      { point1: currentGameSpaceEdgesCount + 6, point2: currentGameSpaceEdgesCount + 2, point3: currentGameSpaceEdgesCount + 3, color: thisColor, parent: newCubeId },
+
+      { point1: currentGameSpaceEdgesCount + 1, point2: currentGameSpaceEdgesCount + 5, point3: currentGameSpaceEdgesCount + 4, color: thisColor, parent: newCubeId },
+      { point1: currentGameSpaceEdgesCount + 4, point2: currentGameSpaceEdgesCount + 0, point3: currentGameSpaceEdgesCount + 1, color: thisColor, parent: newCubeId }
+    );
+    getTriangles();
+  }
+
+  createCube(0, -100, 0, 100, 100, 100, "gray");
+  createCube(200, -25, 50, 100, 100, 100, "blue");
+  createCube(50, 50, -200, 100, 100, 100, "green");
+
+
+  renderLoop();
+</script>
