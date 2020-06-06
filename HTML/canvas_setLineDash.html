@@ -1,0 +1,31 @@
+<canvas id="c" width=800 height=400></canvas>
+
+<script>
+  var ctx = document.getElementById("c").getContext("2d");
+  ctx.font = "150px Arial";
+  var i = delta = 4;
+
+  function pixels() {
+    const id = ctx.getImageData(0, 0, 800, 400);
+    return id.data.reduce((a, c) => c ? a + 1 : a, 0);
+  }
+
+  function drawText(text, i) {
+    ctx.beginPath();
+    ctx.setLineDash([i, 1000]);
+    ctx.strokeText(text, 10, 120);
+  }
+
+  function mainLoop() {
+    ctx.clearRect(0, 0, 800, 400);
+    drawText("XORWIBD", i);
+
+    i += delta;
+    if (i > 900 || i < 2) {
+      delta *= -1;
+      console.log(pixels());
+    }
+  }
+
+  setInterval(mainLoop, 40);
+</script>
