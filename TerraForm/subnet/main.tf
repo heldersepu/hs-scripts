@@ -1,8 +1,8 @@
 locals {
   subnets = {
-    cow = "10.0.208.0/20",
-    cat = "10.0.192.0/20",
-    dog = "10.0.224.0/20"
+    100 = "10.0.208.0/20",
+    200 = "10.0.192.0/20",
+    500 = "10.0.224.0/20"
   }
 }
 
@@ -19,6 +19,23 @@ resource "aws_subnet" "subnet" {
   for_each   = local.subnets
   cidr_block = each.value
   tags       = { Name = each.key }
+}
+
+
+resource "aws_network_acl" "network_acl" {
+  vpc_id = aws_vpc.myvpc.id
+
+  dynamic "ingress" {
+    for_each = local.subnets
+    content {
+      rule_no    = ingress.key
+      protocol   = "tcp"
+      action     = "allow"
+      cidr_block = ingress.value
+      from_port  = 22
+      to_port    = 22
+    }
+  }
 }
 
 output "subnets" {
