@@ -1,4 +1,4 @@
 variable "enabled" {
-  type    = "string"
-  default = 0
+  type    = number
+  default = 1
 }
