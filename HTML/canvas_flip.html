@@ -1,0 +1,27 @@
+<canvas id=canvas width=200 height=200></canvas>
+
+<script>
+    function drawEllipse(x, y, rx, ry) {
+        for (i = 0; i <= 360; i++) {
+            a = i * Math.PI / 180
+            px = rx * Math.sin(a) + x
+            py = ry * Math.cos(a) + y
+            ctx.lineTo(px, py);
+        }
+    }
+
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+    ctx.translate(canvas.width / 2, canvas.height / 2);
+    ctx.lineWidth = 0.5;
+
+    for (j = 0; j < 6; j++) {
+        drawEllipse(0, 0, 30, 90);
+        ctx.rotate(0.3)
+    }
+    ctx.stroke();
+
+    image = ctx.getImageData(0, 0, 100, 100);
+    ctx.putImageData(image, 5, 5);
+
+</script>
