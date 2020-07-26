@@ -1,0 +1,73 @@
+<canvas id="canvas" width="400" height="180"></canvas>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.2/fabric.min.js"></script>
+<script>
+    var canvas = new fabric.Canvas("canvas");
+    canvas.stateful = true;
+
+    function inside(p, vs) {
+        var inside = false;
+        for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+            var xi = vs[i].x, yi = vs[i].y;
+            var xj = vs[j].x, yj = vs[j].y;
+            var intersect =
+                yi > p.y !== yj > p.y && p.x < ((xj - xi) * (p.y - yi)) / (yj - yi) + xi;
+            if (intersect) inside = !inside;
+        }
+        return inside;
+    }
+
+    function getCoords(rect) {
+        var coords = []
+        coords.push(rect.aCoords.tl);
+        coords.push(rect.aCoords.tr);
+        coords.push(rect.aCoords.br);
+        coords.push(rect.aCoords.bl);
+        coords.push(rect.aCoords.tl);
+        return coords;
+    }
+
+    function objectMoving(e) {
+        var cCoords = getCoords(parent);
+        var inBounds = inside({ x: e.target.left + 30, y: e.target.top + 30 }, cCoords);
+
+        if (inBounds) {
+            e.target.setCoords();
+            e.target.saveState();
+        } else {
+            e.target.left = e.target._stateProperties.left;
+            e.target.top = e.target._stateProperties.top;
+        }
+    }
+
+    var boundary = new fabric.Rect({
+        width: 310, height: 170,
+        left: 5, top: 5,
+        selectable: false,
+        strokeDashArray: [5, 2],
+        stroke: "blue",
+        fill: "transparent"
+    });
+
+    var parent = new fabric.Rect({
+        width: 250, height: 110,
+        left: 35, top: 35,
+        selectable: false,
+        strokeDashArray: [2, 5],
+        stroke: "black",
+        fill: "transparent"
+    });
+
+    var child = new fabric.Circle({
+        radius: 30,
+        fill: "rgba(255,0,0,0.8)",
+        top: 50, left: 50,
+        hasControls: false,
+    });
+
+    canvas.add(boundary);
+    canvas.add(parent);
+    canvas.add(child);
+    canvas.on("object:moving", objectMoving);
+
+</script>
