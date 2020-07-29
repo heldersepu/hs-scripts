@@ -1,0 +1,14 @@
+name: profile-aws
+title: InSpec Profile
+maintainer: The Authors
+copyright: The Authors
+copyright_email: heldersepu@gmail.com
+license: Apache-2.0
+summary: An AWS InSpec Compliance Profile
+version: 1.0.0
+
+supports:
+  platform: aws
+depends:
+  - name: inspec-aws
+    url: git@github.com:inspec/inspec-aws.git
