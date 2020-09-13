@@ -1,0 +1,20 @@
+<canvas id=canvas1 width=450 height=160></canvas>
+
+<script>
+    var s = 6, x = 25, y = 25;
+    var ctx = document.getElementById('canvas1').getContext('2d')
+    var img = new Image;
+    img.onload = draw1;
+    img.src = "https://imgur.com/download/oXfw9nD/";
+
+    function draw1() {
+        ctx.filter = 'blur(5px)'
+        for (i = 0; i < 360; i++)
+            ctx.drawImage(img, x + Math.sin(i) * s, y + Math.cos(i) * s);
+        ctx.globalCompositeOperation = "source-in";
+
+        ctx.filter = 'invert(100)'
+        ctx.globalCompositeOperation = "source-over";
+        ctx.drawImage(img, x, y);
+    }
+</script>
