@@ -99,5 +99,116 @@
         }
       }
     }
+  },
+  "definitions": {
+    "TokenRequest": {
+      "required": [
+        "password",
+        "username"
+      ],
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "TokenResponse": {
+      "type": "object",
+      "properties": {
+        "tokenResult": {
+          "type": "string"
+        }
+      }
+    },
+    "FramePackTypeEnum": {
+      "enum": [
+        "NotApplicable",
+        "PipeRack",
+        "LwBVan",
+        "VanTray",
+        "Car",
+        "CarryBag"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FramePackTypeEnum",
+        "modelAsString": false
+      }
+    },
+    "FrameRequest": {
+      "type": "object",
+      "properties": {
+        "qCodeJobId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "quantity": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "widthInMm": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "heightInMm": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "ePackingType": {
+          "$ref": "#/definitions/FramePackTypeEnum"
+        },
+        "userEmail": {
+          "type": "string"
+        }
+      }
+    },
+    "FrameCaseEnum": {
+      "enum": [
+        "Case0_NoBraces",
+        "Case1_1Vertical_0Horizontal",
+        "Case2_2Vertical_0Horizontal",
+        "Case3_NVertical_0Horizontal",
+        "Case4_0Vertical_1Horizontal",
+        "Case5_1Vertical_1Horizontal",
+        "Case6_2Vertical_1Horizontal",
+        "Case7_NVertical_1Horizontal",
+        "Case8_0Vertical_2Horizontal",
+        "Case9_1Vertical_2Horizontal",
+        "Case10_2Vertical_2Horizontal",
+        "Case11_NVertical_2Horizontal",
+        "Case12_0Vertical_NHorizontal",
+        "Case13_1Vertical_NHorizontal",
+        "Case14_2Vertical_NHorizontal",
+        "Case15_NVertical_NHorizontal"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FrameCaseEnum",
+        "modelAsString": false
+      }
+    },
+    "FrameResponse": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "caseNumber": {
+          "$ref": "#/definitions/FrameCaseEnum"
+        },
+        "memberPriceEachExGst": {
+          "format": "double",
+          "type": "number"
+        },
+        "retailPriceEachExGst": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    }
   }
 }
