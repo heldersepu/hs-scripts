@@ -1,0 +1,103 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "myapi API31",
+    "description": "ASP.NET Core Web API",
+    "version": "v1"
+  },
+  "host": "localhost:44348",
+  "basePath": "/v1",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/api/Test": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "operationId": "Test",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/RequestToken": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "operationId": "RequestToken",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/TokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TokenResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/FrameLookUp": {
+      "post": {
+        "tags": [
+          "Frame"
+        ],
+        "operationId": "FrameLookup",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "access token",
+            "required": true,
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/FrameRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FrameResponse"
+            }
+          }
+        }
+      }
+    }
+  }
+}
