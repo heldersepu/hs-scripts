@@ -11,4 +11,4 @@ supports:
   platform: aws
 depends:
   - name: inspec-aws
-    url: git@github.com:inspec/inspec-aws.git
+    url: https://github.com/inspec/inspec-aws/archive/master.tar.gz
