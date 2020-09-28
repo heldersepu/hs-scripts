@@ -1,5 +1,5 @@
 ## Example:
-#    Replace tag in all instances where names Match "Test" the "Blue" with "Red"
+#    In all instances where names Match "Test" replace the tags containing "Blue" with "Red"
 #    . awsEc2RenameTags.sh Test Blue Red
 #  
 
