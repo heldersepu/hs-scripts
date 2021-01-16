@@ -1,4 +1,4 @@
-<canvas id="canvas" width=1200 height=400></canvas>
+<canvas id="canvas" width=4000 height=200></canvas>
 
 <script>
   var canvas = document.getElementById("canvas");
@@ -14,18 +14,26 @@
 
   async function start() {
     const peaksReq = await fetch("https://raw.githubusercontent.com/bbc/peaks.js/master/demo/TOL_6min_720p_download.json");
-    const peaks = (await peaksReq.json()).data;
+    const json = await peaksReq.json()
+    const rate_per_pixel = json.sample_rate/json.samples_per_pixel
+    console.log(rate_per_pixel)
+    const peaks = json.data;
     
-    var s = 420
-    var ra = [0,0,0,0,0];
-    for (let i = s; i < s+canvas.width; i+=2) {
-      drawbar((i - s), 50, peaks[i])      
+    var ra = [[0,0,0,0,0],[0,0,0,0,0]];
+    for (let i = 0; i < canvas.width; i+=2) {
+      if ((i/2*rate_per_pixel)%10 == 0)
+        drawbar(i+0.5, 0, canvas.height)
+
+      drawbar(i, 60, peaks[i])
+      drawbar(i, 60, peaks[i+1])
 
       //rolling average
-      ra.shift();
-      ra.push(peaks[i])
-      ave = ra.reduce((a, b) => a + b, 0)/ra.length
-      drawbar((i - s), 100, ave)      
+      for (let j = 0; j < 2; j++) {
+        ra[j].shift();
+        ra[j].push(peaks[i+j])
+        ave = ra[j].reduce((a, b) => a + b, 0)/ra[j].length
+        drawbar(i, 130, ave)
+      }
     } 
   }
 
