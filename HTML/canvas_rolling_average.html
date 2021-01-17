@@ -48,11 +48,10 @@
         ctx.fillText(sec++, i+2, 10);
       }
 
-      drawbar(i, 60, rValue(min, max, peaks[i]), "red")
-      drawbar(i, 60, rValue(min, max, peaks[i+1]), "red")
-
-      //rolling average
       for (let j = 0; j < 2; j++) {
+        drawbar(i, 60, rValue(min, max, peaks[i+j]), "red")
+
+        //rolling average
         ra[j].shift();
         ra[j].push(peaks[i+j])
         ave = ra[j].reduce((a, b) => a + b, 0)/ra[j].length
