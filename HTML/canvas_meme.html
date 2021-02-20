@@ -1,0 +1,65 @@
+Head Text:<input type="text" id="htext" name="ftext" style="width: 140px;" value="Hello"><br>
+Foot Text:<input type="text" id="ftext" name="ftext" style="width: 140px;" value="World"><br>
+<canvas id="c" width=280 height=380 style="border:2px solid red;"></canvas>
+
+
+<script>
+    class Meme {
+        constructor(ctx, width, height) {
+            this.ctx = ctx;
+            this.ctx.font = '80px Arial';
+            this.ctx.fillStyle = "blue"
+            this.ctx.textAlign = "center"
+            this.width = width;
+            this.height = height;
+        }
+
+        addHeadText(text) {
+            this.htext = text;
+            this.draw();
+        }
+
+        addFootText(text) {
+            this.ftext = text;
+            this.draw();
+        }
+
+        addImage(image_src) {
+            this.image = new Image();
+            this.image.src = image_src;
+            this.image.onload = () => { this.draw() };
+        }
+
+        draw() {
+            this.ctx.beginPath();
+            this.ctx.clearRect(0,0,this.width, this.height)
+            if (this.image) {
+                this.ctx.drawImage(this.image, 0, 0, this.width, this.height);
+            }
+            if (this.htext) {
+                this.ctx.textBaseline = "top";
+                this.ctx.fillText(this.htext, this.width/2, 0);
+            }
+            if (this.ftext) {
+                this.ctx.textBaseline = "bottom";
+                this.ctx.fillText(this.ftext, this.width/2, this.height);
+            }
+            this.ctx.closePath();
+        }
+    }
+
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+
+    meme = new Meme(ctx, canvas.width, canvas.height)
+    meme.addHeadText("Hello");
+    meme.addFootText("World");
+    meme.addImage("http://i.stack.imgur.com/UFBxY.png");
+
+    document.getElementById('htext').onkeyup = (event) => {
+        meme.addHeadText(event.srcElement.value);
+    };
+    document.getElementById('ftext').onkeyup = (event) => {
+        meme.addFootText(event.srcElement.value);
+    };
+</script>
