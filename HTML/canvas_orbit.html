@@ -1,0 +1,53 @@
+<style>
+  canvas {
+    position: absolute;
+    left: 0;
+  }
+</style>
+<canvas id="c" width=800 height=800></canvas>
+<canvas id="b" width=800 height=800></canvas>
+
+<script>
+  var canvas = document.getElementById("c");
+  var ctx = canvas.getContext("2d");
+  ctx.translate(400, 400);
+
+  var bcanvas = document.getElementById("b");
+  var bctx = bcanvas.getContext("2d");
+  bctx.translate(400, 400);
+  bctx.globalAlpha = 0.2
+
+  const big = 300
+  const small = 67
+  var frame = 0
+
+
+  function draw(x, y, r) {
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, 2 * Math.PI);
+    ctx.stroke();
+
+    bctx.beginPath();
+    bctx.arc(x, y, 1, 0, 2 * Math.PI);
+    bctx.fill();
+  }
+
+  function loop() {
+    ctx.clearRect(-400, -400, 800, 800);
+
+    let angle = (frame % big)*360/big
+    let a = angle * Math.PI / 180
+    let x = big * Math.cos(a)
+    let y = big * Math.sin(a)
+    draw(x, y, 12);
+
+    angle = (frame % small)*360/small
+    a = angle * Math.PI / 180
+    x += small * Math.cos(a)
+    y += small * Math.sin(a)
+    draw(x, y, 6);
+    frame++;
+  }
+
+  setInterval(loop, 50);
+</script>
