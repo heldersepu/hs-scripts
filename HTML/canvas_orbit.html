@@ -38,7 +38,7 @@
     let angle = (frame % big)*360/big
     let a = angle * Math.PI / 180
     let x = big * Math.cos(a)
-    let y = big * Math.sin(a)
+    let y = big/1.5 * Math.sin(a)
     draw(x, y, 12);
 
     angle = (frame % small)*360/small
