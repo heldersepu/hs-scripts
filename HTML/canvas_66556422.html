@@ -1,0 +1,28 @@
+<canvas id="imgadd" width=600></canvas>
+
+<script>
+(() => {
+  //canvas setting
+  const sceneInfo = [{
+    imageSequence: [0, 5],
+    imgArray: [],
+    canvas: document.querySelector("#imgadd"),
+    context: document.querySelector("#imgadd").getContext("2d")
+  }];
+
+  //img add function
+  function addImage() {
+    let imgadd;
+    for (let i = 1; i < 7; i++) {
+      let imgadd = new Image();
+      sceneInfo[0].imgArray.push(imgadd);
+      imgadd.onload = () => {
+        sceneInfo[0].context.drawImage(sceneInfo[0].imgArray[i-1], i*40, i*10);
+        console.log(sceneInfo[0].imgArray[i-1].src)
+      };
+      imgadd.src = `http://swagger-net-test.azurewebsites.net/api/Image/?${i}`;
+    }
+  }
+  addImage();
+})();
+</script>
