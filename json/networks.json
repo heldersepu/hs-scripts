@@ -1,0 +1,34 @@
+[
+  {
+    "description": "blahnet-public-acl",
+    "metadata": {
+      "broadcast": "192.168.1.191",
+      "cidr": "192.168.1.128/26",
+      "ip": "192.168.1.128",
+      "ip_range": {
+        "start": "192.168.1.128",
+        "end": "192.168.1.191"
+      },
+      "netmask": "255.255.255.192",
+      "network": "192.168.1.128",
+      "prefix": "26",
+      "size": "64"
+    }
+  },
+  {
+    "description": "blahnet-public-acl",
+    "metadata": {
+      "broadcast": "192.168.160.127",
+      "cidr": "192.168.160.0/25",
+      "ip": "192.168.160.0",
+      "ip_range": {
+        "start": "192.168.160.0",
+        "end": "192.168.160.127"
+      },
+      "netmask": "255.255.255.128",
+      "network": "192.168.160.0",
+      "prefix": "25",
+      "size": "128"
+    }
+  }
+]
