@@ -1,0 +1,38 @@
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<body>
+  <button onclick="screenshot()">Take Screenshot</button>
+  <div id='input'>
+    <h2>This is a test</h2>
+    <h3>Hello World</h3>
+    <br>
+
+    Base64 output:
+    <input name="screenshot" type='text' id='screenshot_input' />
+    <br>
+    <br>
+  </div>
+
+  <div id="output">
+    <canvas id=c width=100 height=100 style="border:1px solid #000;"></canvas>
+  </div>
+</body>
+
+
+<script>
+  const canvas = document.getElementById('c');
+  const ctx = canvas.getContext('2d');
+
+  function screenshot() {
+    html2canvas(document.getElementById('input'), {
+      background: '#fff'
+    }).then(function(h2c) {
+      var base64URL = h2c.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+      document.getElementById('screenshot_input').value = base64URL;
+      console.log(base64URL);
+
+      canvas.width = h2c.width/2
+      canvas.height = h2c.height/2
+      ctx.drawImage(h2c, 0, 0, h2c.width/2, h2c.height/2);
+    });
+  }
+</script>
