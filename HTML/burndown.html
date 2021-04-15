@@ -1,7 +1,7 @@
 <meta name="viewport" content="width=device-width" />
 <html>
 <head>
-    <style>body {margin: 0px;}</style>    
+    <style>body {margin: 0px;}</style>
 </head>
 
 <body>
@@ -16,7 +16,7 @@
         {name:"Core"    , guid:"e3d7261a-0285-40d4-9fc7-37ca17f4098b"},
     ];
     var base = 'https://autonation.visualstudio.com/a6c05b37-4ffd-417a-a3a8-55fd634acca6/GUID/_api/_teamChart/Burndown?chartOptions={"Width":940,"Height":460,"ShowDetails":true,"Title":"NAME"}&counter=2&iterationPath=Global%5C2017%5CSprint+{{ID}}&__v=5'
-    
+
     var regex = /(\d{1,})/gmi
     var match = regex.exec(window.location.search)
     var id = match === null? 25 : match[1]
@@ -29,11 +29,3 @@
     }
 </script>
 </html>
-
-
-
-
- 
- 
- 
-

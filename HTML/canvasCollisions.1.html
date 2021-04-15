@@ -30,7 +30,7 @@ function onMove(e) {
       if (selectedItem.fillColor != "lime") {
         selectedItem.color = selectedItem.fillColor
         selectedItem.fillColor = "lime"
-      }      
+      }
     } else if (selectedItem.color) {
       selectedItem.fillColor = selectedItem.color
     }
@@ -40,7 +40,7 @@ function onMove(e) {
 }
 
 function onDown(e) {
-    cx = e.pageX; cy = e.pageY;    
+    cx = e.pageX; cy = e.pageY;
     objects.forEach(function(o) {
         if ( cx >o.x && cy >o.y && cx < (o.x +o.w) && cy < (o.y +o.h) ) {
             selectedItem =o;
@@ -48,7 +48,7 @@ function onDown(e) {
     });
 }
 
-function drawFigure() { 
+function drawFigure() {
   objects.forEach(function(o) {
     ctx.fillStyle = o.fillColor;
     ctx.fillRect(o.x,o.y,o.w,o.h);

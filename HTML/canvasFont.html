@@ -6,16 +6,16 @@
     ctx = canvas.getContext("2d");
 
     function drawText(text, font, x, y, width, height) {
-    ctx.beginPath();
-    ctx.rect(x, y, width, height);
-    ctx.stroke();
-    var mt
-    for (i=4;i<=180;i++) {
-        ctx.font = i + "px " + font;
-        mt = ctx.measureText(text)
-        if (mt.width > width) break
-    }
-    ctx.fillText(text, x, y+height);
+        ctx.beginPath();
+        ctx.rect(x, y, width, height);
+        ctx.stroke();
+        var mt
+        for (i = 4; i <= 180; i++) {
+            ctx.font = i + "px " + font;
+            mt = ctx.measureText(text)
+            if (mt.width > width) break
+        }
+        ctx.fillText(text, x, y + height);
     }
 
     drawText("HS", "arial", 10, 10, 20, 20)

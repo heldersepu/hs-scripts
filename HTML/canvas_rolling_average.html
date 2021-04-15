@@ -39,7 +39,7 @@
     const { max, min } = peaks.getMaxMin();
     canvas.width = Math.min(canvas.width, peaks.length+50)
     ctx.translate(0.5, 0.5)
-    
+
     var ra = [[0,0,0,0,0],[0,0,0,0,0]];
     var sec = 0
     for (let i = 0; i < canvas.width; i+=2) {
@@ -57,7 +57,7 @@
         ave = ra[j].reduce((a, b) => a + b, 0)/ra[j].length
         drawbar(i, 130, rValue(min, max, ave), "blue")
       }
-    } 
+    }
   }
 
   if(window.location.hash) {

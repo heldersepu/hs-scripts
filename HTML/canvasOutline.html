@@ -23,7 +23,7 @@
         ctx1.drawImage(img1, x, y);
     }
 
-    
+
     var ctx2 = document.getElementById('canvas2').getContext('2d'),
     img2 = new Image;
     img2.onload = draw2;
@@ -34,7 +34,7 @@
         ctx2.globalAlpha = 0.3
         for(var i = 0 ; i < dArr.length; i += 2)
             ctx2.drawImage(img2, x + dArr[i]*s, y + dArr[i+1]*s);
-        ctx2.globalCompositeOperation = "source-in";        
+        ctx2.globalCompositeOperation = "source-in";
         ctx2.globalAlpha = 1
         ctx2.globalCompositeOperation = "source-over";
         ctx2.drawImage(img2, x, y);
@@ -48,7 +48,7 @@
 
     function draw3() {
         ctx3.scale(1.6, 1.6)
-        ctx3.globalAlpha = 0.5        
+        ctx3.globalAlpha = 0.5
         ctx3.drawImage(img3, -50 , 0);
         ctx3.globalCompositeOperation = "source-in";
         ctx3.scale(0.6, 0.6)
