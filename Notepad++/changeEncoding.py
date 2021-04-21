@@ -2,7 +2,7 @@ import os
 def doWalk(dirSource):
     for root, dirs, files in os.walk(dirSource):
         for name in files:
-            if (name.endswith(".php")):                
+            if (name.endswith(".php")):
                 notepad.open(os.path.join(root, name))
                 notepad.menuCommand(MENUCOMMAND.EDIT_TRIMTRAILING)
                 if (notepad.getEncoding() == BUFFERENCODING.UTF8):

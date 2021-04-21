@@ -1,6 +1,6 @@
 strTable = ""
 
-def testContents(contents, lineNumber, totalLines): 
+def testContents(contents, lineNumber, totalLines):
     global strTable
     if (contents.strip() == "|-"):
         strField = ""

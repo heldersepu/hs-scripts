@@ -1,4 +1,4 @@
-def testContents(contents, lineNumber, totalLines): 
+def testContents(contents, lineNumber, totalLines):
     if (contents.find(".") < 0):
         editor.replaceLine(lineNumber, "")
 
