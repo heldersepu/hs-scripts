@@ -1,5 +1,5 @@
 
-<canvas id="canvas" width="300" height="300"></canvas>
+<canvas id="canvas" ></canvas>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/2.3.4/fabric.min.js"></script>
 <script>
@@ -15,13 +15,27 @@
     setTimeout(
         function(){
             canvas.remove(rect)
+            canvas.setWidth(3000)
             rect = new fabric.Rect({
                 top : 80, left : 80,
-                width : 60, height : 70,
+                width : 6000, height : 7000,
                 fill : 'blue'
             });
             canvas.add(rect);
         },
-        3000
+        1000
+    );
+
+    setTimeout(
+        function(){
+            canvas.setWidth(5000)
+            rect2 = new fabric.Rect({
+                top : 10, left : 10,
+                width : 200, height : 20,
+                fill : 'red'
+            });
+            canvas.add(rect2);
+        },
+        2000
     );
 </script>
