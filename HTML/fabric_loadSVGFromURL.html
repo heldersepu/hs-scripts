@@ -6,6 +6,9 @@
     var canvas = new fabric.Canvas('canvas');
     var url = "http://swagger-net-test.azurewebsites.net/api/SvgImage?"
 
+    var text = new fabric.Textbox('TEST', { width: 450, height: 10, top: 100, left: 100 });
+    this.canvas.add(text);
+
     function loadSVG(url) {
         fabric.loadSVGFromURL(url, function (objects, options) {
             if (image) canvas.remove(image);
@@ -16,14 +19,10 @@
             image.center();
             image.setCoords();
             canvas.renderAll();
+            canvas.bringToFront(text)
         });
     }
 
     loadSVG(url + "color=red")
-    setTimeout(
-        function(){
-            loadSVG(url + "color=blue")
-        },
-        3000
-    );
+    setTimeout( function () { loadSVG(url + "color=blue") }, 3000 );
 </script>
