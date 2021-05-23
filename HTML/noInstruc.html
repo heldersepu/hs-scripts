@@ -23,6 +23,13 @@
     function mouseup() {
         if (!move) history.push({ X: pos.X, Y: pos.Y })
         localStorage.timer = timer
+        if (localStorage.done) {
+            if (confirm("Start Again?")) {
+                localStorage.timer = 1;
+                localStorage.removeItem('done');
+                location.reload();
+            }
+        }
     }
 
     function drawHistory() {
