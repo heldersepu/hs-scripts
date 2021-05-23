@@ -1,0 +1,116 @@
+<style> body { margin: 0 } </style>
+<canvas id="canvas1"></canvas>
+<script>
+    const canvas = document.getElementById('canvas1');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    let satPos = { X: 100, Y: 100, a: 0 }
+    let mouseButtonDown = 1;
+    let move = false;
+    let pos = { X: canvas.width / 4, Y: canvas.height / 2 };
+    let history = [{ X: pos.X, Y: pos.Y }]
+    let timer = 1
+    if (localStorage.timer) timer = localStorage.timer
+
+    document.addEventListener('mousedown', mousedown);
+    document.addEventListener('mouseup', mouseup);
+
+    function mousedown() {
+        if (!move) mouseButtonDown = (mouseButtonDown+1) % 3
+    }
+
+    function mouseup() {
+        if (!move) history.push({ X: pos.X, Y: pos.Y })
+        localStorage.timer = timer
+    }
+
+    function drawHistory() {
+        ctx.beginPath();
+        ctx.strokeStyle = 'black';
+        ctx.setLineDash([5, 5]);
+        ctx.moveTo(history[0].X, history[0].Y)
+        for (let i = 1; i < history.length; i++) {
+            ctx.lineTo(history[i].X, history[i].Y)
+        }
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.strokeStyle = 'red';
+        ctx.setLineDash([10, 2]);
+        ctx.moveTo(history[history.length - 1].X, history[history.length - 1].Y)
+        ctx.lineTo(pos.X, pos.Y)
+        ctx.stroke();
+        ctx.closePath();
+    }
+
+    function drawGoal() {
+        ctx.beginPath();
+        ctx.fillStyle = 'gray';
+        ctx.arc(canvas.width, canvas.height / 2, 80, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.fill();
+    }
+
+    function drawTimer() {
+        ctx.beginPath();
+        ctx.font = '48px serif';
+        ctx.fillText(timer/10, 10, 50);
+        ctx.closePath();
+    }
+
+    function circle() {
+        ctx.fillStyle = 'red';
+        ctx.beginPath();
+        ctx.arc(pos.X, pos.Y, 20, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.fill();
+    }
+
+    function satellite() {
+        ctx.fillStyle = 'blue';
+        ctx.beginPath();
+        ctx.arc(satPos.X + pos.X, satPos.Y + pos.Y, 10, 0, Math.PI * 2);
+        ctx.closePath();
+        satPos.X = 35 * Math.sin(satPos.a);
+        satPos.Y = 35 * Math.cos(satPos.a);
+        ctx.fill();
+    }
+
+    function animate() {
+        if (move) {
+            pos.X += satPos.X / 10;
+            pos.Y += satPos.Y / 10;
+            if (Math.hypot(pos.X - canvas.width, pos.Y - canvas.height/2) < 80) {
+                move = false; mouseButtonDown = 10;
+                clearInterval(inter);
+                localStorage.done = true
+                location.reload();
+            } else if (pos.X < 0 || pos.Y < 0 || pos.X > canvas.width || pos.Y > canvas.height) {
+                move = false; mouseButtonDown = 1;
+                pos = { X: canvas.width / 4, Y: canvas.height / 2 };
+                history = [{ X: pos.X, Y: pos.Y }]
+            }
+        } else if (mouseButtonDown == 0) {
+            move = true;
+            setTimeout(function(){ move = false; mouseButtonDown = 1}, 1000);
+        } else if (mouseButtonDown == 1) {
+            satPos.a += 0.05;
+        }
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawGoal();
+        drawHistory();
+        satellite();
+        circle();
+        drawTimer();
+        requestAnimationFrame(animate);
+    }
+    if (localStorage.done) {
+        ctx.font = '80px serif';
+        ctx.fillText(localStorage.timer/10, 10, canvas.height/2);
+    } else {
+        animate();
+        inter = setInterval(function(){ timer++; }, 100);
+    }
+</script>
