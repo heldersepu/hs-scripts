@@ -1,0 +1,48 @@
+<button id="rec">record</button><br>
+<canvas id="canvas" width="300" height="200"></canvas>
+<br>
+
+<script>
+  var recorder, chunks = [];
+
+  rec.onclick = function () {
+    this.textContent = "stop recording";
+    var cStream = canvas.captureStream(30);
+    recorder = new MediaRecorder(cStream);
+    recorder.start();
+    recorder.ondataavailable = saveChunks;
+    recorder.onstop = exportStream;
+    this.onclick = stopRecording;
+  };
+
+  function saveChunks(e) {
+    chunks.push(e.data);
+  }
+
+  function stopRecording() {
+    recorder.stop();
+  }
+
+  function exportStream(e) {
+    var blob = new Blob(chunks);
+    var vidURL = URL.createObjectURL(blob);
+    var vid = document.createElement("video");
+    vid.controls = true;
+    vid.src = vidURL;
+    vid.onended = function () {
+      URL.revokeObjectURL(vidURL);
+    };
+    document.body.appendChild(vid, canvas);
+  }
+
+  var x = 0;
+  var ctx = canvas.getContext("2d");
+
+  var anim = function () {
+    x = (x+1) % (canvas.width);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillRect(x - 50, 20, 50, 50);
+    requestAnimationFrame(anim);
+  };
+  anim();
+</script>
