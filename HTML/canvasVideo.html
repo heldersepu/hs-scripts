@@ -1,26 +1,32 @@
-<button id="rec">record</button><br>
+<button id="recstart">record</button>
+<button id="recstop">stop</button>
+<br />
 <canvas id="canvas" width="300" height="200"></canvas>
-<br>
+<br />
 
 <script>
-  var recorder, chunks = [];
+  var chunks = [];
+  var cStream = canvas.captureStream(5);
+  var recorder = new MediaRecorder(cStream);
+  recorder.ondataavailable = saveChunks;
+  recorder.onstop = exportStream;
 
-  rec.onclick = function () {
-    this.textContent = "stop recording";
-    var cStream = canvas.captureStream(30);
-    recorder = new MediaRecorder(cStream);
-    recorder.start();
-    recorder.ondataavailable = saveChunks;
-    recorder.onstop = exportStream;
-    this.onclick = stopRecording;
+  recstart.onclick = function () {
+    if (recorder.state === "paused")
+      recorder.resume()
+    else
+      recorder.start(100)
+  };
+
+  recstop.onclick = function () {
+    if (recorder.state !== "inactive")
+      recorder.stop();
   };
 
   function saveChunks(e) {
     chunks.push(e.data);
-  }
-
-  function stopRecording() {
-    recorder.stop();
+    if (recorder.state === "recording")
+      recorder.pause();
   }
 
   function exportStream(e) {
@@ -29,9 +35,6 @@
     var vid = document.createElement("video");
     vid.controls = true;
     vid.src = vidURL;
-    vid.onended = function () {
-      URL.revokeObjectURL(vidURL);
-    };
     document.body.appendChild(vid, canvas);
   }
 
@@ -39,7 +42,7 @@
   var ctx = canvas.getContext("2d");
 
   var anim = function () {
-    x = (x+1) % (canvas.width);
+    x = (x + 1) % canvas.width;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillRect(x - 50, 20, 50, 50);
     requestAnimationFrame(anim);
