@@ -1,0 +1,38 @@
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+
+<form method="get" action="#" id="ckdemoform">
+  <input type="email" id="email-input" value="email@foo.bar" />
+  <input type="text" id="name-field" value="foo" />
+  <input type="text" id="company" value="abc" />
+  <input type="text" id="channels" value="TG" />
+</form>
+<button onclick="submitCDK(event)" type="submit">SEND</button>
+
+<script>
+  function submitCDK(e) {
+    e.preventDefault();
+    var data = {
+      email: $("#email-input").val(),
+      name: $("#name-field").val(),
+      company: $("#company").val(),
+      channels: $("#channels").val(),
+    };
+    $.ajax({
+      type: "POST",
+      url: "https://leads.idexo.io",
+      dataType: "json",
+      contentType: "application/json; charset=utf-8",
+      data: JSON.stringify(data),
+
+      success: function () {
+        alert("Form completed.");
+      },
+      error: function () {
+        alert("Form submission unsuccessful");
+      },
+    });
+  }
+</script>
