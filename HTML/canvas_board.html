@@ -1,0 +1,48 @@
+<canvas id="canvas" width=500 height=500 ></canvas>
+
+<script>
+
+  class Shape {
+    constructor(x, y, width, height) {
+        this.path = new Path2D();
+        this.path.arc(x, y, 12, 0, 2 * Math.PI);
+        this.path.lineTo(x +width/2, y);
+        this.path.lineTo(x, y +height/2);
+        this.path.lineTo(x -width/2, y);
+        this.path.lineTo(x, y -height/2)
+        this.path.lineTo(x +width/2, y);
+    }
+
+    draw(ctx, pos) {
+      ctx.beginPath();
+      let color = ctx.isPointInPath(this.path, pos.x, pos.y)? "red": "green";
+      ctx.fillStyle = color;
+      ctx.fill(this.path);
+    }
+  }
+
+  function getMousePos(canvas, evt) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+      x: evt.clientX - rect.left,
+      y: evt.clientY - rect.top
+    };
+  }
+
+  var canvas = document.getElementById("canvas");
+  var ctx = canvas.getContext("2d");
+
+  shapes = []
+  for (var i = 0; i < 6; i++) {
+    for (var j = 0; j < 6; j++) {
+      shapes.push(new Shape(50 + i*40, 40 + j*40, 40, 20))
+    }
+  }
+
+  canvas.addEventListener('mousemove', function (evt) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    var mousePos = getMousePos(canvas, evt);
+    shapes.forEach(s => {s.draw(ctx, mousePos)})
+  }, false);
+  shapes.forEach(s => {s.draw(ctx, {x:0,y:0})})
+</script>

@@ -1,0 +1,68 @@
+<canvas id="canvas" width=12000 height=200></canvas>
+
+<script>
+  var canvas = document.getElementById("canvas");
+  var ctx = canvas.getContext("2d");
+
+  Array.prototype.getMaxMin = function () {
+    let max = Number.MIN_VALUE;
+    let min = Number.MAX_VALUE;
+
+    for (let i = 0, len = this.length; i < len; i++) {
+      if (this[i] > max) max = this[i];
+      if (this[i] < min) min = this[i];
+    }
+
+    return { max, min };
+  };
+
+  function drawbar(x, y1, y2, color="black") {
+    ctx.beginPath();
+    ctx.strokeStyle = color;
+    ctx.moveTo(x, y1);
+    ctx.lineTo(x, y1+y2)
+    ctx.stroke();
+  }
+
+  function rValue(min, max, value) {
+    let val = (value * 35) / max;
+    if (value < 0) val = (value * -35) / min;
+    val = Math.round(val * 10) / 10;
+    return val;
+  };
+
+  async function start(url) {
+    const peaksReq = await fetch(url);
+    const json = await peaksReq.json()
+    const pixel_rate = json.sample_rate/json.samples_per_pixel
+    const peaks = json.data;
+    const { max, min } = peaks.getMaxMin();
+    canvas.width = Math.min(canvas.width, peaks.length+50)
+    ctx.translate(0.5, 0.5)
+
+    var ra = [[0,0,0,0,0],[0,0,0,0,0]];
+    var sec = 0
+    for (let i = 0; i < canvas.width; i+=2) {
+      if ((i/2 % pixel_rate) < 1) {
+        drawbar(i+0.5, 0, canvas.height)
+        ctx.fillText(sec++, i+2, 10);
+      }
+
+      for (let j = 0; j < 2; j++) {
+        drawbar(i, 60, rValue(min, max, peaks[i+j]), "red")
+
+        //rolling average
+        ra[j].shift();
+        ra[j].push(peaks[i+j])
+        ave = ra[j].reduce((a, b) => a + b, 0)/ra[j].length
+        drawbar(i, 130, rValue(min, max, ave), "blue")
+      }
+    }
+  }
+
+  if(window.location.hash) {
+    start(window.location.hash.substring(1))
+  } else {
+    start("https://raw.githubusercontent.com/bbc/peaks.js/master/demo/TOL_6min_720p_download.json")
+  }
+</script>

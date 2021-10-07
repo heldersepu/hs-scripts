@@ -1,0 +1,15 @@
+---
+
+- name: Populate service facts
+  service_facts:
+
+
+- name: check sentineld is running
+  fail:
+    msg: sentineld is not running!
+  failed_when: ansible_facts.services["sentineld"]["state"] != "running"
+
+- name: check cron is running
+  fail:
+    msg: cron is not running!
+  failed_when: ansible_facts.services["cron.service"]["state"] != "running"

@@ -1,0 +1,39 @@
+---
+- name: Testing EC2
+  hosts: localhost
+  gather_facts: False
+  tasks:
+    - name: launch instance
+      ec2:
+        key_name: neo4j
+        instance_type: t2.micro
+        image: ami-1c761163
+        wait: yes
+        exact_count: 2
+        count_tag: 
+          Group: foo
+        region: us-east-1
+        instance_tags:
+          Group: foo
+      register: ec2
+
+    - debug:
+        var: ec2.instance_ids
+
+    - name: Gather EC2 facts  
+      ec2_instance_facts:
+        region: us-east-1
+        filters:
+          "tag:Group": "foo"
+          "instance-type": ["t2.micro", "t2.nano"]
+      register: ec2f
+    
+    - debug:
+        var: ec2f
+
+    - name: Terminate EC2 Instance(s)
+      ec2:
+        instance_ids: '{{ item.instance_id }}'
+        state: absent
+        region: us-east-1
+      with_items: "{{ ec2f.instances }}"
