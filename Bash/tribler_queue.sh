@@ -1,12 +1,15 @@
 #!/bin/bash
+## Script to keep a queue on tribbler
 
 MAX_QUEUE=1
-H=http://localhost:8085/downloads
+H=http://localhost:52194/downloads
 IFS=$'\n'
 
 running=0
 arr_queue=()
-downloads=$(curl -s $H | jq -c .downloads[])
+key=$(cat ~/.Tribler/7.10/triblerd.conf | grep "key =")
+key="${key/"key = "/""}"
+downloads=$(curl -H "X-Api-Key: $key" -s $H | jq -c .downloads[])
 for row in $downloads; do
     echo ${row} | jq .name
     status=$(echo ${row} | jq .status)
@@ -18,14 +21,14 @@ for row in $downloads; do
     if [ "$progress" == "1" ] ; then
         # Stop all with progress completed
         if [ $status != '"DLSTATUS_STOPPED"' ] ; then
-            resp=$(curl -sX PATCH $H/$id --data "state=stop")
+            resp=$(curl -H "X-Api-Key: $key" -sX PATCH $H/$id --data "state=stop")
         fi
     else
         # Count the running and stop if we have more than max
         if [ $status != '"DLSTATUS_STOPPED"' ] ; then
             ((running++))
             if [ $running -gt $MAX_QUEUE ] ; then
-                resp=$(curl -sX PATCH $H/$id --data "state=stop")
+                resp=$(curl -H "X-Api-Key: $key" -sX PATCH $H/$id --data "state=stop")
             fi
         else
             arr_queue+=($id)
@@ -33,11 +36,11 @@ for row in $downloads; do
     fi
 done
 
-# If we have running less than max we start  
+# If we have running less than max we start
 if [ $running -lt $MAX_QUEUE ] ; then
     for queue in $arr_queue; do
-        resp=$(curl -sX PATCH $H/$queue --data "state=resume")
-        ((running++)) 
+        resp=$(curl -H "X-Api-Key: $key" -sX PATCH $H/$queue --data "state=resume")
+        ((running++))
         if [ $running -ge $MAX_QUEUE ] ; then break; fi
     done
 fi
