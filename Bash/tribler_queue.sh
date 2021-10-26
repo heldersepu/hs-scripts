@@ -29,7 +29,6 @@ for row in $downloads; do
             ((running++))
             if [ $running -gt $MAX_QUEUE ] ; then
                 resp=$(curl -H "X-Api-Key: $key" -sX PATCH $H/$id --data-raw '{"state":"stop"}')
-                echo $resp
             fi
         else
             arr_queue+=($id)
