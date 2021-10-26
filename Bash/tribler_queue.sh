@@ -21,14 +21,15 @@ for row in $downloads; do
     if [ "$progress" == "1" ] ; then
         # Stop all with progress completed
         if [ $status != '"DLSTATUS_STOPPED"' ] ; then
-            resp=$(curl -H "X-Api-Key: $key" -sX PATCH $H/$id --data "state=stop")
+            resp=$(curl -H "X-Api-Key: $key" -sX PATCH $H/$id --data-raw '{"state":"stop"}')
         fi
     else
         # Count the running and stop if we have more than max
         if [ $status != '"DLSTATUS_STOPPED"' ] ; then
             ((running++))
             if [ $running -gt $MAX_QUEUE ] ; then
-                resp=$(curl -H "X-Api-Key: $key" -sX PATCH $H/$id --data "state=stop")
+                resp=$(curl -H "X-Api-Key: $key" -sX PATCH $H/$id --data-raw '{"state":"stop"}')
+                echo $resp
             fi
         else
             arr_queue+=($id)
@@ -39,7 +40,7 @@ done
 # If we have running less than max we start
 if [ $running -lt $MAX_QUEUE ] ; then
     for queue in $arr_queue; do
-        resp=$(curl -H "X-Api-Key: $key" -sX PATCH $H/$queue --data "state=resume")
+        resp=$(curl -H "X-Api-Key: $key" -sX PATCH $H/$queue --data-raw '{"state":"resume"}')
         ((running++))
         if [ $running -ge $MAX_QUEUE ] ; then break; fi
     done
