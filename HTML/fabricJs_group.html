@@ -1,0 +1,16 @@
+<scrip type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.19/fabric.js" ></script>
+<canvas id="a" width="160" height="160"></canvas>
+
+<script>
+  objs = []
+  objs.push(new fabric.Rect({left: 50, top: 50, height: 50, width: 50, fill: "red" }))
+  objs.push(new fabric.Rect({left: 90, top: 60, height: 50,width: 50,fill: "green"}))
+  objs.push(new fabric.Rect({left: 70, top: 80, height: 50, width: 50, fill: "blue" }))
+
+  group = new fabric.Group(objs, { left: 30, top: 0, opacity: 0.8 });
+
+  canvas = new fabric.Canvas("a");
+  canvas.add(new fabric.Rect({left: 0, top: 40, height: 5, width: 160, fill: "black" }));
+  canvas.add(group);
+  canvas.renderAll();
+</script>
