@@ -1,0 +1,29 @@
+<canvas id="canvas" width="500" height="500"></canvas>
+
+<script>
+  class Shape {
+    constructor(x, y, width, height, color) {
+      this.color = color
+      this.path = new Path2D();
+      this.path.arc(x, y, height / 3, 0, 2 * Math.PI);
+      this.path.rect(x + width / 2, y - height / 2, -width, height);
+    }
+
+    draw(ctx) {
+      ctx.beginPath();
+      ctx.fillStyle = this.color;
+      ctx.fill(this.path);
+    }
+  }
+
+  var canvas = document.getElementById("canvas");
+  var ctx = canvas.getContext("2d");
+
+  shapes = [];
+  shapes.push(new Shape(30, 30, 50, 50, "blue"));
+  shapes.push(new Shape(45, 50, 40, 40, "red"));
+
+  shapes.forEach((s) => {
+    s.draw(ctx, { x: 0, y: 0 });
+  });
+</script>
