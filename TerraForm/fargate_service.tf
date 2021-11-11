@@ -7,8 +7,8 @@ resource "aws_ecs_task_definition" "test" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = 256
   memory                   = 512
-  execution_role_arn       = "${aws_iam_role.role.arn}"
-  task_role_arn            = "${aws_iam_role.role.arn}"
+  execution_role_arn       = aws_iam_role.role.arn
+  task_role_arn            = aws_iam_role.role.arn
 
   container_definitions = <<DEFINITION
 [
@@ -33,8 +33,8 @@ resource "aws_ecs_cluster" "test" {
 resource "aws_ecs_service" "test" {
   count           = 0
   name            = "aws_ecs_service"
-  cluster         = "${aws_ecs_cluster.test.id}"
-  task_definition = "${aws_ecs_task_definition.test.arn}"
+  cluster         = aws_ecs_cluster.test.id
+  task_definition = aws_ecs_task_definition.test.arn
   desired_count   = 1
   launch_type     = "FARGATE"
   depends_on      = ["aws_iam_role.role"]
@@ -64,5 +64,5 @@ data "aws_iam_policy_document" "role" {
 
 resource "aws_iam_role" "role" {
   name               = "iam_role"
-  assume_role_policy = "${data.aws_iam_policy_document.role.json}"
+  assume_role_policy = data.aws_iam_policy_document.role.json
 }

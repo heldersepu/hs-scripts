@@ -1,6 +1,6 @@
 resource "aws_load_balancer_policy" "policy_tls_1_1" {
-  count              = "${var.enabled}"
-  load_balancer_name = "${var.elb_name}"
+  count              = var.enabled
+  load_balancer_name = var.elb_name
   policy_name        = "policy-tls-1-1"
   policy_type_name   = "SSLNegotiationPolicyType"
 
@@ -15,8 +15,8 @@ resource "aws_load_balancer_policy" "policy_tls_1_1" {
 }
 
 resource "aws_load_balancer_listener_policy" "vault_server_listener_policies" {
-  count              = "${var.enabled}"
-  load_balancer_name = "${var.elb_name}"
+  count              = var.enabled
+  load_balancer_name = var.elb_name
   load_balancer_port = 443
 
   policy_names = [

@@ -47,7 +47,7 @@ output "gcost" {
 
 output "versions" {
   value = [
-    for k, v in local.gke_node_pool : 
-      lookup(local.gke_node_pool[k], "version", 0)
+    for k, v in local.gke_node_pool :
+    lookup(local.gke_node_pool[k], "version", 0)
   ]
 }

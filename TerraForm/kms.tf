@@ -6,5 +6,5 @@ resource "aws_kms_key" "data_bucket_kms" {
 resource "aws_kms_alias" "data_bucket_kms" {
   count         = 0
   name          = "alias/databucketkey"
-  target_key_id = "${aws_kms_key.data_bucket_kms.key_id}"
+  target_key_id = aws_kms_key.data_bucket_kms.key_id
 }

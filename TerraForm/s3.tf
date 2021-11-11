@@ -3,7 +3,7 @@ locals {
 }
 
 resource "aws_s3_bucket" "sample_bucket12629" {
-  count  = "${var.buckets}"
+  count  = var.buckets
   bucket = "my-tf-test-bucket12629"
   acl    = "private"
 
@@ -16,13 +16,13 @@ resource "aws_s3_bucket" "sample_bucket12629" {
     enabled = true
 
     expiration {
-      days = "${local.s3_expiration}"
+      days = local.s3_expiration
     }
   }
 
   lifecycle_rule {
     id      = "ColdStorage"
-    enabled = "${local.s3_expiration > 100 ? true: false}"
+    enabled = local.s3_expiration > 100 ? true : false
 
     transition {
       days          = 100
@@ -37,6 +37,6 @@ resource "aws_s3_bucket" "sample_bucket12629" {
 }
 
 resource "aws_glacier_vault" "glacier_vault" {
-  count = "${var.buckets}"
+  count = var.buckets
   name  = "ColdStorage"
 }

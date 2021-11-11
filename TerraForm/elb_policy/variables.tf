@@ -1,12 +1,12 @@
 variable "elb_name" {
-  type = "string"
+  type = string
 }
 
 variable "elb_arn" {
-  type    = "string"
+  type    = string
   default = ""
 }
 
 variable "enabled" {
-  type = "string"
+  type = string
 }

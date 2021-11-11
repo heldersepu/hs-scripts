@@ -1,5 +1,5 @@
 provider "aws" {
-   region  = "us-east-1"
+  region = "us-east-1"
 }
 
 data "aws_region" "current" {}
@@ -35,6 +35,6 @@ resource "aws_secretsmanager_secret_version" "token" {
 }
 
 output "test" {
-  value = data.aws_secretsmanager_secret_version.token.secret_string
+  value     = data.aws_secretsmanager_secret_version.token.secret_string
   sensitive = true
 }

@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_cloudformation_stack" "cmk_key" {
-  name      = "cmk-key-stack"
+  name          = "cmk-key-stack"
   template_body = <<EOT
   Resources:
     Key:

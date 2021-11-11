@@ -18,7 +18,7 @@ data "aws_iam_policy_document" "drole" {
 
 resource "aws_iam_role" "iam_role" {
   name               = "iam_role"
-  assume_role_policy = "${data.aws_iam_policy_document.drole.json}"
+  assume_role_policy = data.aws_iam_policy_document.drole.json
 }
 
 resource "aws_kinesis_stream" "kinesis_stream" {
@@ -39,8 +39,8 @@ resource "aws_cloudwatch_log_group" "log_group" {
 
 resource "aws_cloudwatch_log_subscription_filter" "log_subs_filter" {
   name            = "log_subs_filter"
-  role_arn        = "${aws_iam_role.iam_role.arn}"
-  log_group_name  = "${aws_cloudwatch_log_group.log_group.name}"
+  role_arn        = aws_iam_role.iam_role.arn
+  log_group_name  = aws_cloudwatch_log_group.log_group.name
   filter_pattern  = "[]"
-  destination_arn = "${aws_kinesis_stream.kinesis_stream.arn}"
+  destination_arn = aws_kinesis_stream.kinesis_stream.arn
 }

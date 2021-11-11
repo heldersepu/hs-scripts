@@ -1,11 +1,11 @@
 resource "aws_instance" "suse12" {
-  count                  = "${var.ec2_enabled}"
-  ami                    = "${data.aws_ami.suse12.id}"
+  count                  = var.ec2_enabled
+  ami                    = data.aws_ami.suse12.id
   instance_type          = "r4.4xlarge" #"m5.large"
-  key_name               = "${aws_key_pair.sshkey.key_name}"
+  key_name               = aws_key_pair.sshkey.key_name
   vpc_security_group_ids = ["${aws_security_group.allow_all.id}"]
-  availability_zone      = "${data.aws_availability_zones.available.names[0]}"
-  user_data              = "${data.template_file.user_data.rendered}"
+  availability_zone      = data.aws_availability_zones.available.names[0]
+  user_data              = data.template_file.user_data.rendered
 
   ebs_block_device {
     device_name           = "/dev/sdg"
@@ -41,8 +41,8 @@ resource "aws_instance" "suse12" {
     connection {
       type        = "ssh"
       user        = "ec2-user"
-      private_key = "${file("~/Downloads/AWS_keys/test.pem")}"
-      host        = "${self.public_dns}"
+      private_key = file("~/Downloads/AWS_keys/test.pem")
+      host        = self.public_dns
     }
   }
 }

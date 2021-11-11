@@ -11,7 +11,7 @@ resource "aws_iam_access_key" "iam_keys" {
 }
 
 data "external" "stdout" {
-  program = [ "bash", "${path.module}/encrypt.sh"]
+  program = ["bash", "${path.module}/encrypt.sh"]
 
   query = {
     id = aws_iam_access_key.iam_keys.id

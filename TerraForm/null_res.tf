@@ -7,10 +7,10 @@ variable "vpc_ids" {
 }
 
 resource "null_resource" "tion" {
-  count = "${length(compact(var.vpc_ids))}"
+  count = length(compact(var.vpc_ids))
 
   triggers {
-    vpcs = "${join(",", var.vpc_ids)}"
+    vpcs = join(",", var.vpc_ids)
   }
 
   provisioner "local-exec" {

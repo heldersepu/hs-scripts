@@ -1,5 +1,5 @@
 variable "enviroments" {
-  type = "map"
+  type = map(string)
 
   default = {
     "prod"  = "p"
@@ -11,5 +11,5 @@ variable "enviroments" {
 }
 
 output "enviroments" {
-  value = "${var.enviroments}"
+  value = var.enviroments
 }

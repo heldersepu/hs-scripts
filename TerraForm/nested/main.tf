@@ -1,5 +1,5 @@
-variable PETS {
-  type = map
+variable "PETS" {
+  type = map(any)
   default = {
     "dog" = {
       indoor  = "poodle"
@@ -14,11 +14,11 @@ variable PETS {
   }
 }
 
-variable TYPE {
+variable "TYPE" {
   type = string
 }
 
-variable BREED {
+variable "BREED" {
   type = string
 }
 

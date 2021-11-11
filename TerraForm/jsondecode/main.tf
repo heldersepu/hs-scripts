@@ -21,11 +21,11 @@ EOF
 }
 
 locals {
-    tshirtsize = jsondecode(var.prod).tshirt_size
-    cpucount   = jsondecode(var.global).tshirtsizes[local.tshirtsize].cpucount
+  tshirtsize = jsondecode(var.prod).tshirt_size
+  cpucount   = jsondecode(var.global).tshirtsizes[local.tshirtsize].cpucount
 }
 
 output "cpucount" {
-    value = local.cpucount
+  value = local.cpucount
 }
 

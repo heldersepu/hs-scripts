@@ -8,11 +8,11 @@ variable "data" {
     test = string
   }))
 
-  default = [ {name:"foo", test:"1"}, {name:"bar", test:"2"} ]
+  default = [{ name : "foo", test : "1" }, { name : "bar", test : "2" }]
 }
 
 locals {
-    data = { for x in var.data : join("_", [x.name, x.test]) => x }
+  data = { for x in var.data : join("_", [x.name, x.test]) => x }
 }
 
 data "template_file" "test" {
@@ -21,5 +21,5 @@ data "template_file" "test" {
 }
 
 output "out" {
-    value = data.template_file.test
+  value = data.template_file.test
 }

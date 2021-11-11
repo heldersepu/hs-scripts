@@ -11,19 +11,19 @@ resource "aws_elb" "elb" {
     instance_protocol  = "https"
     lb_port            = 443
     lb_protocol        = "https"
-    ssl_certificate_id = "${aws_iam_server_certificate.dummy.arn}"
+    ssl_certificate_id = aws_iam_server_certificate.dummy.arn
   }
 }
 
 resource "aws_lb_cookie_stickiness_policy" "cookie_stickiness_policy" {
   name                     = "cookieStickinessPolicy"
-  load_balancer            = "${aws_elb.elb.id}"
+  load_balancer            = aws_elb.elb.id
   lb_port                  = "443"
   cookie_expiration_period = "600"
 }
 
 resource "aws_load_balancer_policy" "policy_tls_1_1" {
-  load_balancer_name = "${aws_elb.elb.name}"
+  load_balancer_name = aws_elb.elb.name
   policy_name        = "policy-tls-1-1"
   policy_type_name   = "SSLNegotiationPolicyType"
 
@@ -38,7 +38,7 @@ resource "aws_load_balancer_policy" "policy_tls_1_1" {
 }
 
 resource "aws_load_balancer_listener_policy" "vault_server_listener_policies" {
-  load_balancer_name = "${aws_elb.elb.name}"
+  load_balancer_name = aws_elb.elb.name
   load_balancer_port = 443
 
   policy_names = [

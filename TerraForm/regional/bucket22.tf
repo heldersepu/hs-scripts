@@ -22,7 +22,7 @@ resource "aws_s3_bucket_object" "k8s-state" {
 
 data "template_file" "data" {
   for_each = fileset("${path.module}/data", "**/*")
-  template = "${file("${path.module}/data/${each.value}")}"
+  template = file("${path.module}/data/${each.value}")
   vars = {
     bucket_id  = aws_s3_bucket.sample_bucket2222.id
     bucket_arn = aws_s3_bucket.sample_bucket2222.arn

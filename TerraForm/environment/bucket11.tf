@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "sample_bucket1111" {
-  count  = "${var.enabled}"
+  count  = var.enabled
   bucket = "my-tf-test-bucket1111"
   acl    = "private"
 
@@ -10,5 +10,5 @@ resource "aws_s3_bucket" "sample_bucket1111" {
 }
 
 output "bucket_name" {
-  value = "${aws_s3_bucket.sample_bucket1111.*.id}"
+  value = aws_s3_bucket.sample_bucket1111.*.id
 }

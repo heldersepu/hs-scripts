@@ -14,23 +14,23 @@ resource "aws_acm_certificate" "default" {
 }
 
 resource "aws_route53_zone" "zone" {
-  count         = "${var.enabled}"
+  count         = var.enabled
   name          = "test.azurewebsites.net"
   force_destroy = true
 }
 
 resource "aws_route53_record" "cert_validation" {
   count   = 0
-  name    = "${lookup(aws_acm_certificate.default.domain_validation_options[count.index], "resource_record_name")}"
-  type    = "${lookup(aws_acm_certificate.default.domain_validation_options[count.index], "resource_record_type")}"
-  zone_id = "${aws_route53_zone.zone.id}"
+  name    = lookup(aws_acm_certificate.default.domain_validation_options[count.index], "resource_record_name")
+  type    = lookup(aws_acm_certificate.default.domain_validation_options[count.index], "resource_record_type")
+  zone_id = aws_route53_zone.zone.id
   records = ["${lookup(aws_acm_certificate.default.domain_validation_options[count.index], "resource_record_value")}"]
   ttl     = 60
 }
 
 resource "aws_acm_certificate_validation" "cert" {
   count           = 0
-  certificate_arn = "${aws_acm_certificate.default.arn}"
+  certificate_arn = aws_acm_certificate.default.arn
 
   timeouts {
     create = "20m"
@@ -38,27 +38,27 @@ resource "aws_acm_certificate_validation" "cert" {
 }
 
 resource "aws_route53_record" "elb_external_p" {
-  count   = "${var.enabled}"
-  zone_id = "${aws_route53_zone.zone.id}"
+  count   = var.enabled
+  zone_id = aws_route53_zone.zone.id
   name    = "pi-3.test.azurewebsites.net"
   type    = "A"
 
   alias {
     name                   = "p-external-802436749.us-east-1.elb.amazonaws.com"
-    zone_id                = "${aws_elb.elb.zone_id}"
+    zone_id                = aws_elb.elb.zone_id
     evaluate_target_health = false
   }
 }
 
 resource "aws_route53_record" "elb_external_s" {
-  count   = "${var.enabled}"
-  zone_id = "${aws_route53_zone.zone.id}"
+  count   = var.enabled
+  zone_id = aws_route53_zone.zone.id
   name    = "s4-3.test.azurewebsites.net"
   type    = "A"
 
   alias {
     name                   = "s-external-1555626742.us-east-1.elb.amazonaws.com"
-    zone_id                = "${aws_elb.elb.zone_id}"
+    zone_id                = aws_elb.elb.zone_id
     evaluate_target_health = false
   }
 }

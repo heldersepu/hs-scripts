@@ -1,5 +1,5 @@
 resource "aws_vpc" "myvpc" {
-  cidr_block           = "${var.cidr}"
+  cidr_block           = var.cidr
   instance_tenancy     = "default"
   enable_dns_support   = true
   enable_dns_hostnames = true
@@ -15,14 +15,14 @@ data "aws_availability_zones" "available" {
 }
 
 resource "aws_subnet" "app1" {
-  vpc_id                  = "${aws_vpc.myvpc.id}"
-  cidr_block              = "${aws_vpc.myvpc.cidr_block}"
-  availability_zone       = "${data.aws_availability_zones.available.names[0]}"
+  vpc_id                  = aws_vpc.myvpc.id
+  cidr_block              = aws_vpc.myvpc.cidr_block
+  availability_zone       = data.aws_availability_zones.available.names[0]
   map_public_ip_on_launch = true
 }
 
 resource "aws_default_network_acl" "default" {
-  default_network_acl_id = "${aws_vpc.myvpc.default_network_acl_id}"
+  default_network_acl_id = aws_vpc.myvpc.default_network_acl_id
 
   lifecycle {
     #this prevent constant changes on every deployment
@@ -35,7 +35,7 @@ resource "aws_default_network_acl" "default" {
 }
 
 resource "aws_internet_gateway" "igw" {
-  vpc_id = "${aws_vpc.myvpc.id}"
+  vpc_id = aws_vpc.myvpc.id
 
   tags {
     Name        = "my_igw"

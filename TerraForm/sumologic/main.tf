@@ -34,7 +34,7 @@ resource "sumologic_user" "example_user2" {
 }
 
 output "example_user1_id" {
-  value = "${sumologic_user.example_user1.id}"
+  value = sumologic_user.example_user1.id
 }
 
 output "example_user1_name" {

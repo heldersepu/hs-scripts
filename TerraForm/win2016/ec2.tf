@@ -14,7 +14,7 @@ data "aws_ami" "win2016" {
 
 resource "aws_key_pair" "ssh" {
   key_name   = "ssh"
-  public_key = "${file("~/Downloads/AWS_keys/test.pem.pub")}"
+  public_key = file("~/Downloads/AWS_keys/test.pem.pub")
 }
 
 resource "aws_security_group" "open" {
@@ -29,9 +29,9 @@ resource "aws_security_group" "open" {
 }
 
 resource "aws_instance" "win2016" {
-  ami                    = "${data.aws_ami.win2016.id}"
+  ami                    = data.aws_ami.win2016.id
   instance_type          = "m5.large"
-  key_name               = "${aws_key_pair.ssh.key_name}"
+  key_name               = aws_key_pair.ssh.key_name
   vpc_security_group_ids = ["${aws_security_group.open.id}"]
   get_password_data      = true
 
@@ -41,8 +41,8 @@ resource "aws_instance" "win2016" {
     connection {
       type     = "winrm"
       user     = "Administrator"
-      password = "${rsadecrypt(self.password_data, file("~/Downloads/AWS_keys/test.pem"))}"
-      host     = "${self.public_dns}"
+      password = rsadecrypt(self.password_data, file("~/Downloads/AWS_keys/test.pem"))
+      host     = self.public_dns
       timeout  = "10m"
       https    = false
       insecure = true
@@ -51,5 +51,5 @@ resource "aws_instance" "win2016" {
 }
 
 output "Administrator_Password" {
-  value = "${rsadecrypt(aws_instance.win2016.password_data, file("~/Downloads/AWS_keys/test.pem"))}"
+  value = rsadecrypt(aws_instance.win2016.password_data, file("~/Downloads/AWS_keys/test.pem"))
 }

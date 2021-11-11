@@ -6,11 +6,11 @@ locals {
     },
     200 = {
       cidr_block = "10.0.192.0/20"
-      tags       = {Name = "GOOD"}
+      tags       = { Name = "GOOD" }
     },
     500 = {
       cidr_block = "10.0.224.0/20"
-      tags       = {Name = "BAD", Type = "SLOW"}
+      tags       = { Name = "BAD", Type = "SLOW" }
     },
   }
 }
@@ -27,6 +27,6 @@ resource "aws_subnet" "subnet" {
   vpc_id     = aws_vpc.myvpc.id
   for_each   = local.subnets
   cidr_block = each.value.cidr_block
-  tags       = each.value.tags    
+  tags       = each.value.tags
 }
 

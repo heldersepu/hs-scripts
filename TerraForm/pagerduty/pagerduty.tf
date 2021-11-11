@@ -28,7 +28,7 @@ resource "pagerduty_escalation_policy" "foo" {
 
     target {
       type = "user"
-      id   = "${pagerduty_user.example.id}"
+      id   = pagerduty_user.example.id
     }
   }
 }
@@ -37,12 +37,12 @@ resource "pagerduty_service" "example" {
   name                    = "My Web App"
   auto_resolve_timeout    = 14400
   acknowledgement_timeout = 600
-  escalation_policy       = "${pagerduty_escalation_policy.foo.id}"
+  escalation_policy       = pagerduty_escalation_policy.foo.id
 }
 
 resource "pagerduty_extension" "slack" {
   name              = "My Web App Extension"
-  extension_schema  = "${data.pagerduty_extension_schema.webhook.id}"
+  extension_schema  = data.pagerduty_extension_schema.webhook.id
   extension_objects = ["${pagerduty_service.example.id}"]
 
   config = <<EOF

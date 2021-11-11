@@ -3,7 +3,7 @@ module "constants" {
 }
 
 variable "ip_ranges" {
-  type = "map"
+  type = map(string)
 
   default = {
     "de" = "10.13.112.0/21"
@@ -13,7 +13,7 @@ variable "ip_ranges" {
 }
 
 variable "some_ips" {
-  type = "list"
+  type = list(string)
 
   default = [
     "127.0.0.0/32",
@@ -76,7 +76,7 @@ variable "buckets" {
 }
 
 variable "prevent_destroy" {
-  type    = "string"
+  type    = string
   default = "false"
 }
 
@@ -85,12 +85,12 @@ variable "cidr" {
 }
 
 locals {
-  test   = "${var.cidr}"
-  sshkey = "${file("~/Downloads/AWS_keys/test.pem.pub")}"
+  test   = var.cidr
+  sshkey = file("~/Downloads/AWS_keys/test.pem.pub")
 }
 
 variable "complex_map" {
-  type = "list"
+  type = list(string)
 
   default = [
     {

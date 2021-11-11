@@ -8,7 +8,7 @@ output "test" {
 }
 
 
-variable complex {
+variable "complex" {
   type = object({
     gid = string
     access = object({

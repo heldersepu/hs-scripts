@@ -10,6 +10,6 @@ KUBECONFIG
 }
 
 resource "local_file" "test" {
-    content     = "${local.kubeconfig}"
-    filename = "${pathexpand("~/.test/hello.world")}"
+  content  = local.kubeconfig
+  filename = pathexpand("~/.test/hello.world")
 }
