@@ -1,0 +1,28 @@
+Employees:
+  - Department:
+    - Dev:
+      - name: "danielf"
+        role: developer
+        details:
+          email  : danielf@example.com
+          firstname  : daniel
+          lastname   : folsik
+      - name: "johnb"
+        role: developer
+        details:
+          email  : johnb@example.com
+          firstname  : john
+          lastname   : belk
+    - Ops:
+      - name: "benol"
+        role: devops
+        details:
+          email  : benol@example.com
+          firstname  : ben
+          lastname   : olkin
+      - name: "pauld"
+        role: devops
+        details:
+          email  : pauld@example.com
+          firstname  : paul
+          lastname   : dempler
