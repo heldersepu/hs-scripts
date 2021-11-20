@@ -1,10 +1,12 @@
-locals {
-  hour = formatdate("YYYYMMDDhh", timestamp())
+# hour=$(date +%G%m%d%H);  sudo terraform apply  -var="hour=$hour"
+
+variable "hour" {
+  type = number
 }
 
 resource "null_resource" "test" {
   triggers = {
-    hour = local.hour
+    hour = var.hour
   }
   provisioner "local-exec" {
     command = "echo 'test'"
