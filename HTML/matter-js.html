@@ -1,17 +1,22 @@
 <body>
+ForceY:
+<input type="range" id="force" min="100" max="700">
+<br><canvas id="canvas"></canvas>
+<div id="output" style="font-family: monospace;"></div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.17.1/matter.js"></script>
 <script>
   var Bodies = Matter.Bodies;
   var Body = Matter.Body;
   var Composite = Matter.Composite;
 
-  var canvas = document.createElement("canvas");
+  var canvas = document.getElementById("canvas");
   canvas.width = canvas.height = 400;
   var context = canvas.getContext("2d");
-  document.body.appendChild(canvas);
 
   var engine = Matter.Engine.create();
   var runner = Matter.Runner.create();
+  var jump = 0
   Matter.Render.run(
     Matter.Render.create({
       canvas: canvas,
@@ -27,13 +32,38 @@
   );
   Matter.Runner.run(runner, engine);
 
-  Composite.add(engine.world, Bodies.rectangle(250, 280, 500, 5, { isStatic: true }) );
-  Composite.add(engine.world, Bodies.rectangle(200, 180, 50, 25, { isStatic: true }) );
-  var a = Bodies.rectangle(50, 230, 40, 40);
+  Composite.add(engine.world, Bodies.rectangle(400, 400, 800, 200, { isStatic: true }) );
+  for (var i = 260; i >= 100; i -= 40) {
+    Composite.add(engine.world, Bodies.rectangle(200, i, 10 , 1, { isStatic: true }) );
+  }
+  var a = Bodies.rectangle(160, 270, 40, 40);
   Composite.add(engine.world, a);
 
+  Matter.Events.on(engine, 'beforeUpdate', function(event) {
+    if (a.velocity.y < -0.05) {
+        jump += a.velocity.y
+        document.getElementById("output").innerHTML += "<br> " + a.velocity.y + " " + jump
+    }
+  });
+
   canvas.addEventListener('mouseup', function (evt) {
-    Body.applyForce(a, a.position, { x: 0.01, y: -0.03 });
+    var force = document.getElementById("force").value / -10000
+    var frictionAir = 0.99
+    var gravityScale = 0.001
+    var deltaTimeSquared = Math.pow((1000 / 60), 2)
+    var gravity = a.mass * gravityScale
+    var netForce = force + gravity
+
+    var velocity = (netForce / a.mass) * deltaTimeSquared
+    var height = 0
+    do {
+        height += velocity
+        velocity = velocity * frictionAir + (gravity / a.mass) * deltaTimeSquared
+    } while (velocity < -0.05)
+    document.getElementById("output").innerHTML = "<br>estimated height " + height + "<br>"
+
+    jump = 0
+    Body.applyForce(a, a.position, { x: 0, y: force });
   }, false);
 </script>
 </body>
