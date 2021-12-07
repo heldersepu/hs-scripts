@@ -1,6 +1,16 @@
 <body>
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no"
+    />
+  </head>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.17.1/matter.js"></script>
-  <style> body { margin: 0px; } </style>
+  <style>
+    body {
+      margin: 0px;
+    }
+  </style>
   <script>
     var Bodies = Matter.Bodies;
     var Body = Matter.Body;
@@ -34,16 +44,16 @@
     Composite.add(engine.world, a);
 
     canvas.addEventListener("mouseup", () => {
-        Body.applyForce(a, a.position, { x: 0.01, y: -0.03 })
+      Body.applyForce(a, a.position, { x: 0.01, y: -0.03 });
     });
 
     setInterval(() => {
-        if (a.position.x > 400) {
-            Body.setAngle(a, 0);
-            Body.setAngularVelocity(a, 0);
-            Body.setVelocity(a, { x: 0, y: 0 });
-            Body.setPosition(a, { x: 50, y: 230 });
-        }
+      if (a.position.x > 400) {
+        Body.setAngle(a, 0);
+        Body.setAngularVelocity(a, 0);
+        Body.setVelocity(a, { x: 0, y: 0 });
+        Body.setPosition(a, { x: 50, y: 230 });
+      }
     }, 500);
   </script>
 </body>
