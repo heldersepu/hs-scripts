@@ -1,0 +1,46 @@
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.17.1/matter.js"></script>
+  <style> body { margin: 0px; } </style>
+  <script>
+    var Bodies = Matter.Bodies;
+    var Body = Matter.Body;
+    var Composite = Matter.Composite;
+
+    var canvas = document.createElement("canvas");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    var context = canvas.getContext("2d");
+    document.body.appendChild(canvas);
+
+    var engine = Matter.Engine.create();
+    var runner = Matter.Runner.create();
+    Matter.Render.run(
+      Matter.Render.create({
+        canvas: canvas,
+        engine: engine,
+        options: {
+          width: canvas.width,
+          height: canvas.height,
+          showAngleIndicator: true,
+          showVelocity: true,
+        },
+      })
+    );
+    Matter.Runner.run(runner, engine);
+
+    Composite.add( engine.world, Bodies.rectangle(250, 280, 500, 5, { isStatic: true }) );
+    Composite.add( engine.world, Bodies.rectangle(200, 180, 50, 25, { isStatic: true }) );
+    var a = Bodies.rectangle(50, 230, 40, 40);
+    Composite.add(engine.world, a);
+
+    canvas.addEventListener("mouseup", () => {
+        Body.applyForce(a, a.position, { x: 0.01, y: -0.03 })
+    });
+
+    setInterval(() => {
+        if (a.position.x > 400) {
+            Body.setPosition(a, { x: 50, y: 230 });
+        }
+    }, 500);
+  </script>
+</body>
