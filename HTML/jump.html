@@ -39,6 +39,9 @@
 
     setInterval(() => {
         if (a.position.x > 400) {
+            Body.setAngle(a, 0);
+            Body.setAngularVelocity(a, 0);
+            Body.setVelocity(a, { x: 0, y: 0 });
             Body.setPosition(a, { x: 50, y: 230 });
         }
     }, 500);
