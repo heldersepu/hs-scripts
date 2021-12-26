@@ -5,7 +5,7 @@ locals {
 resource "null_resource" "set_initial_state" {
   provisioner "local-exec" {
     interpreter = ["bash", "-c"]
-    command = "echo \"0\" > counter"
+    command     = "echo \"0\" > counter"
   }
 }
 

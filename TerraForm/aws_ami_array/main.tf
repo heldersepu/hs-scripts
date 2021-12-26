@@ -1,12 +1,12 @@
 provider "aws" { region = "us-east-2" }
 
 locals {
-    allowed_os = {
-        "amazon": {owner: "amazon",       filter: "amzn2-ami-hvm*"},
-        "suse":   {owner: "amazon",       filter: "*suse*"},
-        "RHEL":   {owner: "amazon",       filter: "*RHEL*"},
-        "ubuntu": {owner: "099720109477", filter: "*ubuntu-bionic-18.04-amd64-*"},
-    }
+  allowed_os = {
+    "amazon" : { owner : "amazon", filter : "amzn2-ami-hvm*" },
+    "suse" : { owner : "amazon", filter : "*suse*" },
+    "RHEL" : { owner : "amazon", filter : "*RHEL*" },
+    "ubuntu" : { owner : "099720109477", filter : "*ubuntu-bionic-18.04-amd64-*" },
+  }
 }
 
 variable "ami_name" {
