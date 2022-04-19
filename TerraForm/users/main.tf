@@ -26,8 +26,6 @@ resource "null_resource" "delete_virtual_mfa" {
   ]
 }
 
-
 # output "passwords" {
 #   value = aws_iam_user_login_profile.one_time_pwd
 # }
-
