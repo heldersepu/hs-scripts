@@ -12,6 +12,6 @@ resource "aws_iam_user_login_profile" "one_time_pwd" {
   password_reset_required = true
 }
 
-output "passwords" {
-  value = aws_iam_user_login_profile.one_time_pwd
-}
+# output "passwords" {
+#   value = aws_iam_user_login_profile.one_time_pwd
+# }
