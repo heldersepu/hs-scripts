@@ -1,0 +1,23 @@
+<canvas id="canvas" width="100" height="100"></canvas>
+<canvas id="output" width="100" height="100"></canvas>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/2.3.4/fabric.min.js"></script>
+<script>
+    var image = "http://i.stack.imgur.com/UFBxY.png"
+    var canvas = new fabric.Canvas("canvas")
+    var rect = new fabric.Rect({
+        top: 40, left: 20,
+        width: 80, height: 40,
+        opacity: 0.5, angle: 10
+    })
+    canvas.add(rect)
+    fabric.Image.fromURL(image, function (i) {
+        canvas.add(i.set({ left: 0, top: 0, width: 100, height: 100, selectable: false}))
+        canvas.setActiveObject(rect);
+    })
+    function modifiedHandler(evt) {
+        var obj = evt.target;
+        console.log(obj.get('left'), obj.get('top'), obj.get('width'), obj.get('height'), obj.get('angle'));
+    }
+    canvas.on('object:modified', modifiedHandler)
+</script>
