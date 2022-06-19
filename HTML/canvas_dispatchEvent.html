@@ -1,0 +1,16 @@
+<canvas id="canvas" width="200" height="200"></canvas>
+
+<script>
+    function onDown(e) {
+        ctx.lineTo(e.pageX, e.pageY)
+        ctx.stroke()
+    }
+
+    var canvas = document.querySelector("canvas")
+    var ctx = canvas.getContext("2d")
+
+    canvas.addEventListener("mousedown", onDown, false)
+    for (let i = 0; i < 20; i++) {
+        canvas.dispatchEvent(new MouseEvent("mousedown", {clientX: i*i, clientY: i*2}));
+    }
+</script>
