@@ -1,7 +1,6 @@
 #!/bin/bash
 ## Script to change the hops if download speed is 0
 
-MAX_QUEUE=1
 H=http://localhost:52194
 IFS=$'\n'
 
