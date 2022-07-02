@@ -7,14 +7,14 @@ h1 {
   margin-bottom: 15px;
 }
 div {
-	position: relative;    
+	position: relative;
 	padding: 10px
 }
 h1 {
 	text-align: center;
 }
 p {
-	border: 2px solid black;  
+	border: 2px solid black;
 	width: 90px;
 	height: 25px;
 	font-family: Helvetica;
@@ -35,7 +35,7 @@ p {
 	background-color: #C9C9C9;
 }
 .row {
-  width: 100%;  
+  width: 100%;
 }
 
 /********** Large devices only **********/

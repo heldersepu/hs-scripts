@@ -15,14 +15,14 @@ function successFunc(resp) {
         loc = {lat: coord[0], lng: coord[1]};
         var marker = new google.maps.Marker({position: loc, map: map});
         var infowindow = new google.maps.InfoWindow({
-            content: x.description + "<br>" + 
+            content: x.description + "<br>" +
             "<a target='blank' href='https://camera.deckchair.com/" + x.tag + "'>https://camera.deckchair.com/" + x.tag + "</a>"
         });
         marker.addListener('click', function() {
             infowindow.open(map, marker);
         });
     });
-    
+
 }
 
 function errorFunc(err) {

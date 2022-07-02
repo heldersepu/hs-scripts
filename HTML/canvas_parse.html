@@ -23,7 +23,7 @@
   image.onload = imageLoaded;
 
   function FilterInvert(p) {
-    // Filter out any black white noise + Invert 
+    // Filter out any black white noise + Invert
     for (var x = 0; x < p.data.length; x += 4) {
       if (p.data[x] > 127) {
         p.data[x] = 0;

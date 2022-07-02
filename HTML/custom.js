@@ -10,7 +10,7 @@ var MinimumOrderAmount = 10.0
 // StoreState: 0=Normal, 1=Always Open, 2=Closed, 3=Closed for Maint
 var StoreState = 0;
 
-// Redirect: Web page to redirect when the store is closed 
+// Redirect: Web page to redirect when the store is closed
 // Is triggered when StoreState = 2
 var Redirect="http://";
 
@@ -188,7 +188,7 @@ function processCartTotal(grandTotal)
 {
     grandTotal= grandTotal.replace('$', '');
     grandTotal= grandTotal.replace(',', '');
-    if(grandTotal >= MinimumOrderAmount) { 
+    if(grandTotal >= MinimumOrderAmount) {
         showCart();
     } else {
 		hideCart();
@@ -202,11 +202,11 @@ jQuery(document).ready(function(){
 });
 
 function doCheckCart()
-{	
+{
 	if ($('.CartLink').text().indexOf("item") > 0) {
 		displayRestaurant(getCookie("LastCateg"), "none");
 	} else {
-		displayRestaurant("All OK", "block");		
+		displayRestaurant("All OK", "block");
 		$('#CategoryBreadcrumb').each(function( index, domEle ) {
 			aTags = domEle.getElementsByTagName("a");
 			if (aTags.length > 1) {

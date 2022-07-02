@@ -18,19 +18,19 @@ function draw(event) {
   var center = {x: canvas.width/2, y: canvas.height/2}
   var lineWidth = rad/4
   var color = "red"
-  
+
 
   if (event) {
     var _x = event.clientX - center.x;
     var _y = event.clientY - center.y;
-    var distance = Math.sqrt(_x * _x + _y * _y); 
-    if (distance < (rad + lineWidth/2)) {      
+    var distance = Math.sqrt(_x * _x + _y * _y);
+    if (distance < (rad + lineWidth/2)) {
       ctx.beginPath();
       ctx.font = "30px Arial";
-      ctx.fillText(Math.round(distance), center.x +10, center.y);      
+      ctx.fillText(Math.round(distance), center.x +10, center.y);
       ctx.beginPath();
       ctx.lineWidth = 2;
-      ctx.strokeStyle = "black";  
+      ctx.strokeStyle = "black";
       ctx.setLineDash([3, 3]);
       ctx.moveTo(center.x, center.y);
       ctx.lineTo(event.clientX, event.clientY);
@@ -43,10 +43,10 @@ function draw(event) {
   ctx.setLineDash([]);
   ctx.beginPath();
   ctx.lineWidth = lineWidth;
-  ctx.strokeStyle = color;  
+  ctx.strokeStyle = color;
   ctx.arc(center.x, center.y, rad, 8, 0, true);
   ctx.stroke();
-  
+
   ctx.beginPath();
   ctx.lineWidth = 4;
   ctx.strokeStyle = "black";

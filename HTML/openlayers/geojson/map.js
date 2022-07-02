@@ -1,6 +1,6 @@
 
 var dataLayer = new ol.layer.Vector({
-    source: new ol.source.Vector({ 
+    source: new ol.source.Vector({
         features: new ol.format.GeoJSON().readFeatures(
             geojsonObject, {featureProjection: 'EPSG:3857'}
         )
