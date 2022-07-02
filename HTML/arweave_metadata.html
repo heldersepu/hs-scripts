@@ -1,0 +1,17 @@
+<input id="metadata" value="https://arweave.net/PtVbAD2itYdq6AHg5jGoXTMImMVb1UdTfP6vmixfcxY" style="width: 500px;"></br>
+<img id="image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" style="width: 500px;">
+<script>
+    var img = document.getElementById('image')
+    var input = document.getElementById('metadata')
+    var last
+    input.onkeydown = lookUp
+    function lookUp(e) {
+        if (e.keyCode == 13 && last != input.value) {
+            last = input.value
+            img.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+            fetch(input.value)
+                .then(response => response.json())
+                .then(data =>  img.src = data.image);
+        }
+    }
+</script>
