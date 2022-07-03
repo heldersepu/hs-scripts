@@ -6,7 +6,7 @@ echo ""
 
 printf " Do you want to continue (Y/n): "
 read INPT
-if [ "$INPT" = "y" ]; then 
+if [ "$INPT" = "y" ]; then
     echo ""
     # curl http://127.0.0.1:8080/solr/remaxlistings/update -H "Content-Type: text/xml" --data-binary '<delete><query>listingsourceid:15</query></delete>'
     # curl http://127.0.0.1:8080/solr/remaxlistings/update -H "Content-Type: text/xml" --data-binary '<delete><query>listingsourceid:19</query></delete>'

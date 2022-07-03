@@ -15,14 +15,14 @@ do
     count=0
     keyWord="busy"
     while [ "$keyWord" = "busy" ]
-    do        
+    do
         echo ""
         echo "\033[31m  $keyWord : $count  \033[0m";
         sleep 30
         count=`expr $count + 1`
         keyWord=$(curl 'http://127.0.0.1:8080/solr/geom/dataimport' | grep -wo 'busy')
     done
-    
+
     if [ $count -le 2 ]; then
         runImport="false"
     else

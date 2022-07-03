@@ -8,5 +8,5 @@ for key in $accessKeys; do
     echo $id  $label
     if [ "$label" = "DELETE ME" ]; then
         curl -u "$sumo_key" -X DELETE $base_url/$id
-    fi 
+    fi
 done

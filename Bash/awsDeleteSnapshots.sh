@@ -10,7 +10,7 @@ else
     for s in "${sizes[@]}"
     do
         arr=($(aws ec2 describe-snapshots --owner-ids 998877665544 --filters Name=volume-size,Values=${s} | jq -r '.Snapshots[].SnapshotId'))
-        
+
         min=0
         max=$(( ${#arr[@]} -1 ))
 

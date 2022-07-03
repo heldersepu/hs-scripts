@@ -24,7 +24,7 @@ for zone in $zones; do
             done
             echo "  ]"
         fi
-        
+
         if [ "$proxies" != "null" ]; then
             echo "  proxies  = ["
             for proxy in $(echo $proxies | jq -r ".[].value"); do

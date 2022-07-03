@@ -8,4 +8,4 @@ add_git_metadata_message() {
 
 
 jq -n "[]" | \
-add_git_metadata_message 
+add_git_metadata_message

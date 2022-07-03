@@ -37,7 +37,7 @@ if [ "$INPT" = "y" ]; then
             sed -i 's/LUCENE_40/LUCENE_41/g' /solr/cores/$SolrCore/conf/solrconfig.xml
             sed -i 's/replication</</g' /solr/cores/$SolrCore/conf/solrconfig.xml
             sed -i 's/<str name="pollInterval">00:00:60/<str name="pollInterval">00:10:00/g' /solr/cores/$SolrCore/conf/solrconfig.xml
-            
+
             # Fix: no field name specified in query and no default specified via 'df' param
             sed -i 's/<str name="df">text<\/str>//g' /solr/cores/$SolrCore/conf/solrconfig.xml
             sed -i 's/<int name="rows">10/<str name="df">text<\/str><int name="rows">10/g' /solr/cores/$SolrCore/conf/solrconfig.xml
@@ -50,10 +50,10 @@ if [ "$INPT" = "y" ]; then
             sed -i 's/10.10.20.72/10.93.106.98/g' /solr/cores/$SolrCore/conf/solrconfig.xml
             sed -i 's/10.93.106.97/10.93.106.98/g' /solr/cores/$SolrCore/conf/solrconfig.xml
             sed -i 's/10.93.106.99/10.93.106.98/g' /solr/cores/$SolrCore/conf/solrconfig.xml
-            
+
             # New names of the libraries
             sed -i 's/apache-solr-/solr-/g' /solr/cores/$SolrCore/conf/solrconfig.xml
-            
+
             # Delete the data
             curl http://127.0.0.1:8080/solr/$SolrCore/update -H "Content-Type: text/xml" --data-binary '<delete><query>*:*</query></delete>' > /dev/null 2>&1
             curl http://127.0.0.1:8080/solr/$SolrCore/update -H "Content-Type: text/xml" --data-binary '<commit />' > /dev/null 2>&1
@@ -95,12 +95,12 @@ if [ "$INPT" = "y" ]; then
         echo '#' >> /etc/sysctl.conf
         echo 'vm.swappiness=10' >> /etc/sysctl.conf
     fi
-    
+
     /etc/init.d/tomcat6 stop
     chmod 777 -R /solr
     /etc/init.d/tomcat6 start
     sleep 10
-    
+
     echo ""
     echo " Disable polling on all cores"
     for i in `seq 1 7`; do

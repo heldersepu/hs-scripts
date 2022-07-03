@@ -20,15 +20,15 @@ RED='\033[0;31m'
 GRN='\033[0;32m'
 NC='\033[0m' # No Color
 
-if [ -z ${SWAPEX_ENVIRONMENT+x} ]  ; then 
-    echo "${RED}You need to set your SWAPEX_ENVIRONMENT variables${NC}" ; 
-else 
+if [ -z ${SWAPEX_ENVIRONMENT+x} ]  ; then
+    echo "${RED}You need to set your SWAPEX_ENVIRONMENT variables${NC}" ;
+else
     TREGION={$AWS_REGION}
     for i in "${arr[@]}"
     do
         #Change the region on env variable
-        REGION=${i//arn:aws:cloudtrail:/} 
-        REGION=${REGION//:9966*/} 
+        REGION=${i//arn:aws:cloudtrail:/}
+        REGION=${REGION//:9966*/}
         AWS_REGION=${REGION}
 
         echo "${GRN} ${i} ${NC}"

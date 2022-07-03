@@ -13,7 +13,7 @@ for user in $users; do
     resource="${resource// /_}"
     resource="${resource/./_}"
     resource="${resource/@/_}"
-        
+
     for role in $(echo $roleIds | jq -r ".[]"); do
         name=$(echo $roles | jq ".[] | select(.id == \"$role\")" | jq '.name')
         name=$(echo $name | tr '[:upper:]' '[:lower:]')
