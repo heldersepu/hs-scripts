@@ -23,7 +23,7 @@
 :: MAKE BACKUP OF DLLS
 @IISRESET /stop
 @ECHO.
-@ECHO   ***** Making a backup of the files ***** 
+@ECHO   ***** Making a backup of the files *****
 @SET TIMESTAMP=%DATE:~10,4%-%DATE:~4,2%-%DATE:~7,2%-%TIME:~0,2%-%TIME:~3,2%-%TIME:~6,2%
 MD %fldDestin1%\BACKUP\%TIMESTAMP%
 
@@ -33,7 +33,7 @@ MD %fldDestin1%\BACKUP\%TIMESTAMP%
 
 :: COPY THE DLLS
 @ECHO.
-@ECHO    ***** Copying the files ***** 
+@ECHO    ***** Copying the files *****
 @FOR %%a IN (%listFiles%) DO @(
     XCOPY %fldSource%\%%a C:\SecretAgent\wwwroot\common\bin /Y /R /K
     XCOPY C:\SecretAgent\wwwroot\common\bin\%%a %fldDestin1% /Y /R /K
@@ -41,7 +41,7 @@ MD %fldDestin1%\BACKUP\%TIMESTAMP%
 
 :: GAC THE DLLS
 @ECHO.
-@ECHO    ***** GAC the files ***** 
+@ECHO    ***** GAC the files *****
 @FOR %%a IN (%listFiles%) DO @(
     H:\GAC\GACUTIL.EXE /i c:\SecretAgent\wwwRoot\Common\bin\%%a
 )

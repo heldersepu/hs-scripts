@@ -9,7 +9,7 @@
 @COLOR 0C
 @IF (%1) == () GOTO iisreset
 @ECHO.
-@ECHO %1 
+@ECHO %1
 @XCopy %1 C:\SecretAgent\WWWRoot\common\bin\   /R /Y /Q /D
 @XCopy %1 C:\SecretAgent\WWWRoot\ERACorporate\bin\   /R /Y /Q /D
 @XCopy %1 C:\SecretAgent\WWWRoot\Century21Site\bin\   /R /Y /Q /D

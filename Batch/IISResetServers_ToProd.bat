@@ -19,10 +19,10 @@
     @ECHO %%a
     ::Take server offline
     XCopy \\%%a\c$\%RootSystem%\StatusFail.aspx \\%%a\c$\%RootSystem%\Status.aspx /Y/R/I
-    
+
     @PING 127.0.0.1 -n 300 > NUL
     IISRESET %%a
-    
+
     ::Bring server online
     XCopy \\%%a\c$\%RootSystem%\StatusOriginal.aspx \\%%a\c$\%RootSystem%\Status.aspx  /Y/R/I
     @PING 127.0.0.1 -n 60 > NUL

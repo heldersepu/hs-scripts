@@ -8,7 +8,7 @@
 @ECHO    THIS SCRIPT WILL TAKE SERVERS OFFLINE
 @ECHO  DO AN IISRESET AND BRING THEM BACK ONLINE
 @ECHO.
-@ECHO    Are you sure you want to proceed? 
+@ECHO    Are you sure you want to proceed?
 @ECHO.
 @ECHO.
 @PAUSE
@@ -38,7 +38,7 @@
 )
 :: WARMUP THE SERVERS
 @FOR %%a IN (%serverNames%) DO @(
-    @PING 127.0.0.1 -N 10 > NUL    
+    @PING 127.0.0.1 -N 10 > NUL
     START IEXPLORE "http://quantro.%%a.com/"
 )
 
@@ -46,7 +46,7 @@
 @CLS
 @ECHO.
 @ECHO.
-@ECHO        IISRESET COMPLETE 
+@ECHO        IISRESET COMPLETE
 @ECHO Make sure that the site loads correctly
 @ECHO.
 @ECHO.

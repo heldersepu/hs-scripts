@@ -22,7 +22,7 @@
     @ECHO.
 
     COPY /Y /Z %fldSource1%      \\%%a\c$\%fldDestin1%
-  
+
     @PING 127.0.0.1 -n 10 > NUL
 
 )

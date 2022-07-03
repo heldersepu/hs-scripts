@@ -26,8 +26,8 @@
     @ECHO %%a
     MD "\\%%a\c$\%fldDestin%\BACKUP\%TIMESTAMP%"
     @FOR %%b IN (%listFiles%) DO @(
-        COPY /Y \\%%a\c$\%fldDestin%\%%b   "\\%%a\c$\%fldDestin%\BACKUP\%TIMESTAMP%"    
-    ) 
+        COPY /Y \\%%a\c$\%fldDestin%\%%b   "\\%%a\c$\%fldDestin%\BACKUP\%TIMESTAMP%"
+    )
 )
 
 @ECHO.
@@ -54,7 +54,7 @@
 :: @ECHO Copy completed
 :: @ECHO.
 :: @PAUSE
-:: 
+::
 :: @FOR %%a IN (%serverNames%) DO @(
 ::     @ECHO %%a
 ::     @c:\pstools\psexec \\%%a IISRESET
