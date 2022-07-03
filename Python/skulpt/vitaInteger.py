@@ -1,5 +1,5 @@
 import turtle
- 
+
 def do_I(t):
     do_T(t)
     t.right(90)
@@ -23,8 +23,8 @@ def do_T(t):
     t.forward(25)
     t.right(90)
     t.forward(78)
-    
- 
+
+
 t = turtle.Turtle()
 s = turtle.Turtle()
 t.color('Black')
@@ -54,7 +54,7 @@ s.forward(84)
 
 do_I(t)
 t.color('Red')
-t.forward(80) 
+t.forward(80)
 s.right(180)
 s.forward(84)
 

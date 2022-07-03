@@ -9,7 +9,7 @@ eventEmitter.emit('sum',5 ,3);
 
 class Car extends EventEmitter {
     constructor(make) {
-        super();        
+        super();
         this._make = make;
 
         this.on('honk', () =>{

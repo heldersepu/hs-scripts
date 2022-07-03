@@ -129,19 +129,19 @@ class Hand(LatinSuitedCard):
             x, y, rotation = LAED_POS[:]
         elif self.isDealer:
             y = 170
-        allcentered = True        
+        allcentered = True
         for j in range(len(self.cards)):
             rot = rotation
             image = card_imgs
             pos = self.cards[j][1]
             dCard = self.cards[j][0]
-            xinc = j * 25            
+            xinc = j * 25
             if self.isDealer and j == 0:
                 xinc = -20
                 if self.hideDealerCard:
                     image = card_back
                     dCard = ('C','A')
-                else: 
+                else:
                     rot = self.cards[0][1][2]
                     if rot > 9: rot -= 0.01
             card = Card(dCard, image)
@@ -159,7 +159,7 @@ class Deck(LatinSuitedCard):
         self.cards = []
         self.add_cards()
         self.spell = self.spelled()
-        
+
     def add_cards(self):
         for s in self.SUITS:
             for r in self.RANKS:
@@ -169,7 +169,7 @@ class Deck(LatinSuitedCard):
         self.cards = []
         self.add_cards()
         self.shuffle()
-        
+
     def shuffle(self):
         random.shuffle(self.cards)
 
@@ -200,7 +200,7 @@ class Deck(LatinSuitedCard):
 
 #define event handlers for buttons
 def deal():
-    global isRunningAnimation, doReduce, message, DealerPoints   
+    global isRunningAnimation, doReduce, message, DealerPoints
     if not doReduce:
         doReduce = True
     elif isRunningAnimation:
@@ -217,7 +217,7 @@ def deal():
             message = ""
 
 def hit():
-    global doReduce, isRunningAnimation, message    
+    global doReduce, isRunningAnimation, message
     if not doReduce:
         doReduce = True
     elif isRunningAnimation:
@@ -229,7 +229,7 @@ def hit():
         if not card is None:
             playerHand.add_card(card)
             if playerHand.get_value() > 21:
-                stand() 
+                stand()
 
 def stand():
     global isRunningAnimation, doReduce, message
@@ -252,7 +252,7 @@ def stand():
                 d = dealerHand.get_value()
         print p, d
         if message == "":
-            if p > 21: 
+            if p > 21:
                 bust = True
                 message = "You lose"
                 DealerPoints += 1
@@ -260,10 +260,10 @@ def stand():
                 bust = True
                 message = "You win"
                 PlayerPoints += 1
-            elif p > d: 
+            elif p > d:
                 message = "You win"
                 PlayerPoints += 1
-            else: 
+            else:
                 message = "You lose"
                 DealerPoints += 1
         print message
@@ -342,7 +342,7 @@ def draw_question(canvas):
         canvas.draw_line((x, y), (x+180, y), 50, "White")
         canvas.draw_text(question, (x-9, y+12), 38, "Black")
         canvas.draw_text(question, (x-10, y+12), 38, "Red")
-    
+
 def draw_message(canvas):
     canvas.draw_circle((250, 330), 46, 1, "Black", "Cyan")
     canvas.draw_circle((630, 330), 46, 1, "Black", "Cyan")
@@ -353,7 +353,7 @@ def draw_message(canvas):
     if bust:
         bustmsg = "Bust"
         fontsize = 30
-        x = 585        
+        x = 585
         if message == "You win":
             bustmsg = "Dealer bust"
             fontsize = 28
@@ -438,7 +438,7 @@ def draw(canvas):
     canvas.draw_line((WIDTH, 50), (WIDTH, 250), 20, "Black")
     draw_question(canvas)
     if message != "":
-        draw_message(canvas)        
+        draw_message(canvas)
 
 def game_timer_handler():
     global isRunningAnimation, message, bust
@@ -470,7 +470,7 @@ def autoplay():
         autoPlayTimer.start()
         btnAutoPlay.set_text("Stop AutoPlay")
 
-def timer_handler():    
+def timer_handler():
     if message == "":
         if playerHand.get_value() < 18:
             hit()
@@ -478,7 +478,7 @@ def timer_handler():
             stand()
     else:
         deal()
-        
+
 # initialization frame
 
 frame = simplegui.create_frame("Blackjack", WIDTH, HIGHT, 100)

@@ -143,8 +143,8 @@ class WheelbarrowExample:
 
         # This masks out everything except for the image itself
         #window.shape_combine_mask(mask, 10, 10)
-    
+
 if __name__ == "__main__":
     WheelbarrowExample()
     gtk.mainloop()
-    
+

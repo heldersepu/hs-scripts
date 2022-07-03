@@ -1,5 +1,5 @@
 """
-Merging a sorted list consisting of K elements with a sorted list consisting of L elements takes (K+L) milliseconds (ms). 
+Merging a sorted list consisting of K elements with a sorted list consisting of L elements takes (K+L) milliseconds (ms).
 The time required to merge more than two lists into one final list depends on the order in which the merges are performed.
 """
 

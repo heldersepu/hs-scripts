@@ -1,9 +1,9 @@
 """
-Strings with long blocks of repeating characters take much less space 
-if kept in a compressed representation. To obtain the compressed representation, 
-we replace each segment of equal characters in the string with the number of 
-characters in the segment followed by the character (for example, we replace segment 
-"CCCC" with "4C"). To avoid increasing the size, we leave the one-letter segments 
+Strings with long blocks of repeating characters take much less space
+if kept in a compressed representation. To obtain the compressed representation,
+we replace each segment of equal characters in the string with the number of
+characters in the segment followed by the character (for example, we replace segment
+"CCCC" with "4C"). To avoid increasing the size, we leave the one-letter segments
 unchanged (the compressed representation of "BC" is the same string − "BC").
 """
 

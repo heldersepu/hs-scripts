@@ -35,18 +35,18 @@ path = coord_to_path(tile_coord)
 
 
 print ""
-print "coord = " 
+print "coord = "
 print coord
 
 print ""
-print "map_coord = " 
+print "map_coord = "
 print map_coord
 
 print ""
-print "tile_coord = " 
+print "tile_coord = "
 print tile_coord
 
 print ""
-print "path = " 
+print "path = "
 print path
 print ""
