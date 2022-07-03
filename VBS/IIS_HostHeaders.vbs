@@ -29,7 +29,7 @@ Function AddHostHeader(siteID, ip, port, host)
 	bindings = objWebsite.ServerBindings
 	If (CheckForHost(host, bindings) = true) Then
 		WScript.Echo "host header already exists"
-	Else	
+	Else
         a = UBound(bindings)
         a = a + 1
         ReDim Preserve bindings(a)

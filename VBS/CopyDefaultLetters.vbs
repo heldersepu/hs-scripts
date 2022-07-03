@@ -7,14 +7,14 @@ fileName        = "CopyDefaultLetters"
 scriptFile      = Wscript.Path & "\" & fileName & ".vbs"
 defaultFolder   = "E:\Conversion\DefaultLetters"
 
-If (Not objFSO.FileExists(scriptFile)) Then    
-    '// Register the file     
+If (Not objFSO.FileExists(scriptFile)) Then
+    '// Register the file
     doRegist(scriptFile)
     msgBox " Right click funtion Added! "
 Else
     If WScript.Arguments.Count > 0  Then
         Select Case UCase(WScript.Arguments.Item(0))
-            Case "/DO" 
+            Case "/DO"
                 tempFile = ""
                 For I = 1 to WScript.Arguments.Count -1
                     tempFile = tempFile & " " & WScript.Arguments.Item(I)
@@ -53,7 +53,7 @@ Sub doRegist(myFile)
     Set oShLink  = objShell.CreateShortcut(Wscript.Path & "\" & fileName & ".lnk")
     oShLink.TargetPath = myFile
     oShLink.Save
-    ' Create the Regedit keys    
+    ' Create the Regedit keys
     DllReg  = "HKCR\*\shell\" & fileName & "\command\"
     RegProg = "wscript " & myFile & " /DO %1"
     objShell.RegWrite DllReg , RegProg
@@ -61,13 +61,13 @@ End Sub
 
 Sub doDelet(myFile)
     'Delete all the files
-    If objFSO.FileExists(myFile) then 
+    If objFSO.FileExists(myFile) then
         call objFSO.DeleteFile(myFile)
     End If
-    If objFSO.FileExists(Wscript.Path & "\" & fileName & ".lnk") then 
+    If objFSO.FileExists(Wscript.Path & "\" & fileName & ".lnk") then
         call objFSO.DeleteFile(Wscript.Path & "\" & fileName & ".lnk")
     End If
-    ' Delete the Regedit keys    
+    ' Delete the Regedit keys
     call objShell.RegDelete("HKCR\*\shell\" & fileName & "\command\")
     call objShell.RegDelete("HKCR\*\shell\" & fileName & "\")
 End Sub

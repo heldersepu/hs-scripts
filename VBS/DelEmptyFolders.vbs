@@ -7,7 +7,7 @@ MsgBox " DEL COMPLETE! "
 
 'Loop through all folders
 Sub procSubFolders(topFolder)
-    For Each subFldr in topFolder.SubFolders    
+    For Each subFldr in topFolder.SubFolders
         Call procSubFolders(subFldr)
         If (subFldr.Size = 0) and (subFldr.files.count = 0) then
             fso.DeleteFolder(subFldr.Path)

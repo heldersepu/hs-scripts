@@ -1,26 +1,26 @@
 '// Save the case of all the .PAS files in a directory to a file "case.ini"
-'// 
+'//
 '// CASE [/C] [/G] source
-'//   
+'//
 '//   /G	Generate the case.ini file
 '//   /C	Check the directory against the case.ini file
 '//   /R	Rename the File Based in the Original in SVN or case.ini
 '//   /REG  	Register the Rename++ Context menu <- will add a right click funtion to the windows shell
-'//   source	Specifies the directory to be inspected, 
-'//		"ALL" can be used to process all 3 states  
+'//   source	Specifies the directory to be inspected,
+'//		"ALL" can be used to process all 3 states
 '//		" FL"	C:\newqq95\allcomp
 '//   		"GA"	C:\NEWQQGA\allcomp
 '//   		"TX"	C:\Quick95\ALLCOMP
-'// Ex:  case  /c all 
+'// Ex:  case  /c all
 
 Set objShell    = CreateObject("WScript.Shell")
 Set fso  		= CreateObject("Scripting.FileSystemObject")
 scriptFile   	= Wscript.Path & "\case.vbs"
 
-If (Not fso.FileExists(scriptFile)) Then	
-'// Register the file 	
+If (Not fso.FileExists(scriptFile)) Then
+'// Register the file
 	dRegist(scriptFile)
-'// process all 3 states 
+'// process all 3 states
 	GenList ("C:\newqq95\allcomp")
 	GenList ("C:\NEWQQGA\allcomp")
 	GenList ("C:\Quick95\ALLCOMP")
@@ -28,11 +28,11 @@ Else
 	iNum = WScript.Arguments.Count
 	If iNum > 0  Then
 		Select Case UCase(WScript.Arguments.Item(0))
-			Case "/G" 
+			Case "/G"
 				GenCase (WScript.Arguments.Item(1))
-			Case "/C" 
+			Case "/C"
 				CheckCase (WScript.Arguments.Item(1))
-			Case "/R" 
+			Case "/R"
 				dRename (WScript.Arguments.Item(1))
 			Case "/REG"
 				dRegist(scriptFile)
@@ -47,7 +47,7 @@ Else
 End If
 
 Sub GenCase(Param)
-	If UCase(Param) = "ALL" then			'// process all 3 states 
+	If UCase(Param) = "ALL" then			'// process all 3 states
 		GenList ("C:\newqq95\allcomp")
 		GenList ("C:\NEWQQGA\allcomp")
 		GenList ("C:\Quick95\ALLCOMP")
@@ -108,7 +108,7 @@ Sub CheckCase (Param)
 			End Select
 		End If
 	End If
-	
+
 End Sub
 
 Sub CheckList (directory)
@@ -120,21 +120,21 @@ Sub CheckList (directory)
 			nLine = true	' var keeping track if is needed  to read Next Line in the INI file
 			For Each File In Fldr.Files							'Loop through all files in the folder
 				If (UCase(Right(File,4)) = ".PAS") then
-					Do 
+					Do
 						If inFile.AtEndOfStream then Exit For
-						If nLine then dLine = inFile.ReadLine						
+						If nLine then dLine = inFile.ReadLine
 						nLine = true
 						If fso.FileExists(dLine) then
 							deleted = false
 							If File <> dline then 						'Check files against the ini file
-								If UCase(File) = UCase(dline)  then 
+								If UCase(File) = UCase(dline)  then
 									outFile.WriteLine(File & "	" & dLine )
 								Else
 									outFile.WriteLine(File & "	" & "  <- This file was Added" )
 									nLine = false
 								End If
 							End If
-						Else 
+						Else
 							If dLine <> "" then outFile.WriteLine("  This file was deleted ->   " & "	" & dLine )
 							deleted = true
 						End If
@@ -145,8 +145,8 @@ Sub CheckList (directory)
 			outFile.Close
 			Set DIffFile = fso.GetFile(directory & "\DIff.ini")
 			initSize = DIffFile.size
-			If  ( initSize > 0 ) then 
-				objShell.Run "notepad.exe " & directory & "\DIff.ini" 
+			If  ( initSize > 0 ) then
+				objShell.Run "notepad.exe " & directory & "\DIff.ini"
 			else
 				DIffFile.Delete true   '// If the file is Size = 0 delete it!
 			end If
@@ -174,19 +174,19 @@ Sub dRename(argFile)
 			'msgbox cFile & " " & Len(dFile.name)
 			gotFixed = True
 		End If
-		
+
 		If Not gotFixed then
 		If fso.FileExists(dFile.ParentFolder & "\case.ini") Then
-			'Change to proper case based on case.ini 
+			'Change to proper case based on case.ini
 			Set inFile 	= fso.OpenTextFile(dFile.ParentFolder& "\case.ini", 1)
 			Do until inFile.AtEndOfStream
 				ThisLine = inFile.ReadLine
-				If Ucase(ThisLine) = Ucase(File) then 
+				If Ucase(ThisLine) = Ucase(File) then
 					cFile = ThisLine
 					Exit Do
-				End If 
+				End If
 			Loop
-		End If 
+		End If
 		If cFile =  "" then
 			'Change the case of the file per letter
 			For I = 1 to Len(strFile)
@@ -218,7 +218,7 @@ Sub dRegist(myFile)
 	Set oShLink  = objShell.CreateShortcut(Wscript.Path & "\case.lnk")
 	oShLink.TargetPath = Wscript.Path & "\case.vbs"
 	oShLink.Save
-' Create the Regedit keys	
+' Create the Regedit keys
 	DllReg  = "HKCR\*\shell\Rename++\command\"
 	RegProg = "wscript " & myFile & " /R ""%1"""
 	objShell.RegWrite DllReg , RegProg
@@ -226,13 +226,13 @@ End Sub
 
 Sub Delet()
 'Delete all the files
-	If fso.FileExists(Wscript.Path & "\case.vbs") then 
+	If fso.FileExists(Wscript.Path & "\case.vbs") then
 		fso.DeleteFile Wscript.Path & "\case.vbs"
 	End If
-	If fso.FileExists(Wscript.Path & "\case.lnk") then 
+	If fso.FileExists(Wscript.Path & "\case.lnk") then
 		fso.DeleteFile Wscript.Path & "\case.lnk"
 	End If
-' Delete the Regedit keys	
+' Delete the Regedit keys
 	objShell.RegDelete "HKCR\*\shell\Rename++\command\"
 	objShell.RegDelete "HKCR\*\shell\Rename++\"
 End Sub

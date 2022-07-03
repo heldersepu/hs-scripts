@@ -2,18 +2,18 @@ myFile = "C:\Scripts\presidents.txt"
 
 If myFile <> "" Then
     Wscript.Echo doTasks(myFile)
-End If     
+End If
 
 Function doTasks(dFile)
     Set fso = CreateObject("Scripting.FileSystemObject")
     Set inFile  = fso.OpenTextFile(dFile, 1)
-    
+
     totVowels = 0
     dLongest = ""
-    dInitial = "" 
+    dInitial = ""
     dMax = 0
-    
-    'Loop file 
+
+    'Loop file
     Do until inFile.AtEndOfStream
         dLine = inFile.ReadLine
         'Wscript.Echo dLine
@@ -21,7 +21,7 @@ Function doTasks(dFile)
         dLen = Len(arrNames(1))
         If (dLen > dMax) then
             dMax = dLen
-            dLongest = arrNames(1) & " " & arrNames(0) 
+            dLongest = arrNames(1) & " " & arrNames(0)
         End If
         dInitial = dInitial & Ucase(Left(arrNames(1),1) & Left(arrNames(0),1))
         For I = 1 to Len(dLine)
@@ -33,7 +33,7 @@ Function doTasks(dFile)
         Next
     Loop
     inFile.Close
-    
+
     strVowels = VbCrLf
     For I = 65 to 90
         If InStr(dInitial,Chr(I)) = 0 Then
@@ -42,5 +42,5 @@ Function doTasks(dFile)
     Next
     doTasks = "Longest first name: " & dLongest & VbCrLf & VbCrLf & _
               "Letters not used as initials: " & strVowels & VbCrLf & _
-              "Total vowels used: " & totVowels & VbCrLf 
+              "Total vowels used: " & totVowels & VbCrLf
 End Function

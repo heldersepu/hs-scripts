@@ -9,7 +9,7 @@ If iNum >= 2  Then
 	directory2 = WScript.Arguments.Item(1)
 Else
 	' -- Get the Directories via Explorer
-	set WshShell = WScript.CreateObject("WScript.Shell") 
+	set WshShell = WScript.CreateObject("WScript.Shell")
 	strDesktop = WshShell.SpecialFolders("Desktop")
 
 	Set SA = CreateObject("Shell.Application")
@@ -26,7 +26,7 @@ If directory1 <> "" and directory2 <> "" then
 	' -- Initialize the Folder Var containing the files collection
 	Set fso  = CreateObject("Scripting.FileSystemObject")
 	Set Fldr1 = fso.GetFolder(directory1)
-	Set Fldr2 = fso.GetFolder(directory2)	
+	Set Fldr2 = fso.GetFolder(directory2)
 
 	' -- Get all files in the folder1 and put them on array
 	cnt1 = 0
@@ -42,7 +42,7 @@ If directory1 <> "" and directory2 <> "" then
 	' -- Get all files in the folder2 and put them on array
 	cnt2 = 0
 	For Each File In Fldr2.Files
-		If UCase(Right(File,4)) <> ".UNK" and _ 
+		If UCase(Right(File,4)) <> ".UNK" and _
 		   UCase(Right(File,4)) <> ".LNK" Then ' Get the all the files but the ...
 			cnt2 = cnt2 + 1
 			Redim Preserve arFiles2(cnt2)
@@ -50,17 +50,17 @@ If directory1 <> "" and directory2 <> "" then
 		End If
 	next
 
-	' -- Create OutPut File 
-	Set objExcel = createobject("Excel.application")  
+	' -- Create OutPut File
+	Set objExcel = createobject("Excel.application")
 	objexcel.Visible = False
 	objexcel.Workbooks.add
 	objexcel.Cells(1, 1).Value = "Difference in folders "
 	objExcel.Cells(1, 1).Font.Bold = TRUE
 	objExcel.Cells(1, 1).Font.Size = 12
-	objexcel.Cells(2, 1).Value = directory1 
+	objexcel.Cells(2, 1).Value = directory1
 	objexcel.Cells(3, 1).Value = directory2
 
-	objexcel.Cells(5, 1).Value = "Removed" 
+	objexcel.Cells(5, 1).Value = "Removed"
 	objExcel.Columns(1).columnwidth=20
 	objexcel.Cells(5, 2).Value = "Modified"
 	objExcel.Columns(2).columnwidth=20
@@ -72,25 +72,25 @@ If directory1 <> "" and directory2 <> "" then
 	'objExcel.Cells(5, 3).BorderLineStyle(sabpLeft) = 5
 
 
-	' -- Compare Files in Folder1 with Files in Folder2 
+	' -- Compare Files in Folder1 with Files in Folder2
 	iRemov = 6
 	iModif = 6
-	For I = 1 to cnt1 
+	For I = 1 to cnt1
 		Exist  = False
 		Modif = False
 		For J = 1 to cnt2
-			' -- Compare the file names 
+			' -- Compare the file names
 			If Ucase(arFiles1(I)) = Ucase(arFiles2(J)) Then
 				Exist = True
 				Set f1 = fso.GetFile(Fldr1 & "\" & arFiles1(I))
 				Set f2 = fso.GetFile(Fldr2 & "\" & arFiles2(J))
-				' -- Compare the date 
-				If f1.DateLastModified <> f2.DateLastModified then 
+				' -- Compare the date
+				If f1.DateLastModified <> f2.DateLastModified then
 					Modif = True
 				End if
 			End if
 		Next
-		If Exist = False Then 
+		If Exist = False Then
 			objexcel.Cells(iRemov, 1).Value = arFiles1(I) '"<- Removed"
 			iRemov = iRemov + 1
 		Else
@@ -101,35 +101,35 @@ If directory1 <> "" and directory2 <> "" then
 		End If
 	Next
 
-	' -- Compare Files in Folder2 with Files in Folder1 
+	' -- Compare Files in Folder2 with Files in Folder1
 	iAdded = 6
-	For I = 1 to cnt2 
+	For I = 1 to cnt2
 		Exist  = False
 		For J = 1 to cnt1
-			' -- Compare the file names 
+			' -- Compare the file names
 			If Ucase(arFiles2(I)) = Ucase(arFiles1(J)) Then
 				Exist = True
 			End if
 		Next
-		If Exist = False Then 
+		If Exist = False Then
 			objexcel.Cells(iAdded, 3).Value = arFiles2(I) '" <- Added "
 			iAdded = iAdded + 1
 		End If
 	Next
 
 	If iAdded > iRemov then
-		If iAdded > iModif then 
+		If iAdded > iModif then
 			max = iAdded
 		else
 			max = iModif
 		End If
 	Else
-		If iRemov > iModif then 
+		If iRemov > iModif then
 			max = iRemov
 		Else
 			max = iModif
 		End If
-	End If 
+	End If
 
 	set dRange = objexcel.Range("A5:C" & max-1)
 
@@ -142,5 +142,5 @@ If directory1 <> "" and directory2 <> "" then
 		fso.DeleteFile(strDesktop & "\diff.xls")
 	End If
 	objexcel.ActiveWorkbook.SaveAs (strDesktop & "\diff.xls") ', 3,"abc"  ' FileName , Property, Password
-	objexcel.Quit     
+	objexcel.Quit
 End if

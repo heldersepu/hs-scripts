@@ -3,7 +3,7 @@ myFile = "C:\Scripts\cmdlets.txt"
 dScramble = ".CSRIIEHRRTOENSWWPOCTIHPT-T"
 If myFile <> "" Then
     Wscript.Echo doConvert(myFile)
-End If     
+End If
 
 Function doConvert(dFile)
     Set fso = CreateObject("Scripting.FileSystemObject")
@@ -21,7 +21,7 @@ Function doConvert(dFile)
                 isFound = False
             End If
         Next
-        
+
         if isFound then
             dMessage = dMessage & dLine& VbCrLf
         End IF

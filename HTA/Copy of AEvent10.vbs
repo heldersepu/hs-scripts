@@ -1,12 +1,12 @@
 Dim A(20)
 For I = 0 to 19
-	Select case (I Mod 4) 
+	Select case (I Mod 4)
 		Case 0 A(I)="Yellow ***"
 		Case 1 A(I)="Red"
 		Case 2 A(I)="Blue      ===="
 		Case 3 A(I)="Green      %%"
 	End Select
-Next 
+Next
 
 For I = 0 to 19
 	Wscript.Echo I&"	"& A(I)

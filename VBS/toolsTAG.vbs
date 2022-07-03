@@ -90,7 +90,7 @@ Sub OpenStopWatch(objShell)
     Set fso = Nothing
 End Sub
 
-Sub OpenRightNow(objShell, arrRIGHTNOW)    
+Sub OpenRightNow(objShell, arrRIGHTNOW)
     Set fso = CreateObject("Scripting.FileSystemObject")
     If fso.FileExists(arrRIGHTNOW(0)) then
         objShell.Run arrRIGHTNOW(0)

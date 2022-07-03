@@ -13,7 +13,7 @@ If WScript.Arguments.Count > 0 then
 End If
 
 'Input via Explorer
-If myFile = "" Then 
+If myFile = "" Then
 	Set ObjFSO = CreateObject("UserAccounts.CommonDialog")
 	ObjFSO.Filter = "HTML File|*.html"
 	ObjFSO.FilterIndex = 3
@@ -24,18 +24,18 @@ End If
 'Call the Convert Procedure
 If myFile <> "" Then
 	Call DoConvert(myFile)
-End If 	
+End If
 
 Sub DoConvert(dFile)
 	Set inFile  = fso.OpenTextFile(dFile, 1)
 	Set ObjFile = fso.GetFile(dFile)
 	Set outFile = fso.CreateTextFile(ObjFile.ParentFolder  & "\Small " & ObjFile.Name, True)
 	Set ObjFile = Nothing
-	
+
 	'Loop file & copy info to new file
 	Do until inFile.AtEndOfStream
 		dLine = inFile.ReadLine
-		'Replace the Deleted Color		
+		'Replace the Deleted Color
 		If InStr(dLine,"#FFAEAE") <> 0 Then
 				dLine = Replace(dLine, "#FFAEAE","#FF0000" )
 		End If

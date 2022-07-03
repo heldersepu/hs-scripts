@@ -19,15 +19,15 @@ InitFSO = ObjFSO.ShowOpen
 
 	Do Until objExcel.Cells(intRow,1).Value = ""
 		cA = objExcel.Cells(intRow, 1).Value
-		If Len(cA) > 24 Then 
+		If Len(cA) > 24 Then
 			cA = Left(cA,24)
 		End If
 		cB = objExcel.Cells(intRow, 2).Value
-		If Len(cB) > 24 Then 
+		If Len(cB) > 24 Then
 			cB = Left(cB,24)
 		End If
 		cC = objExcel.Cells(intRow, 3).Value
-		If Len(cC) > 24 Then 
+		If Len(cC) > 24 Then
 			cC = Left(cC,24)
 		End If
 	    Info = Info & intRow & String(5 - Len(intRow), " ") & " | " & _
@@ -36,7 +36,7 @@ InitFSO = ObjFSO.ShowOpen
 	    intRow = intRow + 1
 		If intRow > 1000 then Exit Do
 	Loop
-	
+
 	Info = Info & "---------------------------------------------------------------------" & VbCrLf
 	Wscript.Echo Info
 	objExcel.Quit

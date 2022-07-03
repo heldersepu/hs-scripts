@@ -9,6 +9,6 @@ Sub deleteBigFiles(strFolder)
     For Each objFile in colFiles
         If (objFile.Size > 40000000) Then
             CALL objFSO.DeleteFile(objFile)
-        End If	
+        End If
     Next
 End Sub

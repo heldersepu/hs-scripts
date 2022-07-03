@@ -9,7 +9,7 @@ If WScript.Arguments.Count > 0 then
 	End If
 End If
 'Input via Explorer
-If myTxtFile = "" Then 
+If myTxtFile = "" Then
 	Set ObjFSO = CreateObject("UserAccounts.CommonDialog")
 	ObjFSO.Filter = "GNU Diff File|*.*"
 	ObjFSO.ShowOpen
@@ -18,10 +18,10 @@ End If
 'Call the Write Procedure
 If myTxtFile <> "" Then
 	Call DoWrite(myTxtFile)
-End If 	
+End If
 
 Sub DoWrite(txtFile)
-	
+
 	'InFile is the GNU diff file (input file)
 	Set inFile  = fso.OpenTextFile(txtFile, 1)
 	'Append the rest of the info to the HTML file
@@ -37,17 +37,17 @@ Sub DoWrite(txtFile)
 	IntPlus = 0
 	IntMinus = 0
 	IntModif = 0
-	
+
 	inFile.SkipLine
 	inFile.SkipLine
 	'Loop lines  Count + and - & Write all the Comparison Details
 	Do until inFile.AtEndOfStream
 		dLine = inFile.ReadLine
 		dChar = Left(dLine,1)
-		If dChar = "@" Then 
+		If dChar = "@" Then
 			IntPosS = inStr(5,dLine," ")
 			IntPosC = inStr(5,dLine,",")
-			If IntPosC = 0 then 
+			If IntPosC = 0 then
 				IntPos = IntPosS
 			Else
 				If IntPosC > IntPosS then
@@ -56,25 +56,25 @@ Sub DoWrite(txtFile)
 					IntPos = IntPosc
 				End IF
 			End If
-				
+
 			IntLine = Mid(dLine,5,IntPos-5)
 		Else
-			If dChar = "+" Then 
+			If dChar = "+" Then
 				IntPlus = IntPlus + 1
 				outFile.WriteLine(IntLine & "	" &chr(34)& Mid(dLine,2,len(dline)) &chr(34)& "	ADD")
 			Else
-				If dChar = "-" Then 
+				If dChar = "-" Then
 					IntMinus = IntMinus + 1
 					outFile.WriteLine(IntLine & "	" &chr(34)& Mid(dLine,2,len(dline)) &chr(34)& "	DEL")
 				Else
 					outFile.WriteLine(IntLine & "	" &chr(34)& dLine &chr(34)& "	UNK")
 				End If
-			End If 
-			
+			End If
+
 			IntLine = IntLine + 1
-		End If 
+		End If
 	Loop
-	
+
 	'Write the end of the file with the Statistics
 	outFile.WriteLine("")
 	outFile.WriteLine("COMPARISON STATISTICS")
@@ -82,8 +82,8 @@ Sub DoWrite(txtFile)
     outFile.WriteLine("  Added	" & IntPlus)
     outFile.WriteLine("  Deleted	" & IntMinus)
     outFile.WriteLine("  Modified	" & IntModif)
-	outFile.WriteLine("")		
+	outFile.WriteLine("")
 	outFile.Close
 	inFile.Close
-	
+
 End Sub

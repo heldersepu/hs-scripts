@@ -1,17 +1,17 @@
-'Correction!  Multiply by 1000 both 
+'Correction!  Multiply by 1000 both
 myFile = "C:\Scripts\Pool.mdb"
 myTable = "SwimmingPool"
 'Call the Calculate Procedure
 If myFile <> "" Then
     Call doCalculate(myFile,myTable)
-End If     
+End If
 
 Sub doCalculate(dFile, dTable)
     'Create an ADO object
     Set objADO = CreateObject( "ADODB.Connection" )
     'Connection String
     strConnect = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source= " _
-                 & dFile & ";" 
+                 & dFile & ";"
     'SQL query to execute
     mySQL = "SELECT * FROM " & dTable
     'Open the Connection
@@ -37,7 +37,7 @@ Sub doCalculate(dFile, dTable)
             'Correction!  Multiply by 1000
             'Uniform depth: Length x Width x Depth
             WScript.Echo "Name: " & dCustomer & VbCrLf & _
-                "    Volume of Water: " & _ 
+                "    Volume of Water: " & _
                 dLength * dWidth * dDepth *1000 & VbCrLf
         End IF
         'Move to the Next Element on the List
@@ -45,5 +45,5 @@ Sub doCalculate(dFile, dTable)
     Loop
     'Close the Query
     objADO.Close
-    
+
 End Sub

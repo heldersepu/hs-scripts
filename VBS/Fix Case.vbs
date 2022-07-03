@@ -1,5 +1,5 @@
 'Rename ALL files to lcase
-'On Error Resume Next 
+'On Error Resume Next
 
 If WScript.Arguments.Count = 0 Then
 	Set FSO = CreateObject("Scripting.FileSystemObject")
@@ -14,7 +14,7 @@ If WScript.Arguments.Count = 0 Then
 		Set myFile = FSO.GetFile(strFile)
 		Call myFile.Move(LCase(myFile.Path))
 	Next
-Else 
+Else
 	Set objShell = CreateObject("WScript.Shell")
 	objShell.Run "notepad++ Fix Case.vbs"
 	Set objShell = Nothing

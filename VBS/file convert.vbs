@@ -4,7 +4,7 @@ Set filesys = CreateObject("Scripting.FileSystemObject")
 
 mfile = InputBox (vbcrlf & "Please enter File to convert","  File Converter")
 if filesys.FileExists(mfile) Then
-  
+
   Set db      = filesys.OpenTextFile(mfile, 1)
   Set outFile = filesys.CreateTextFile(mfile & "2.txt", True)
   Do until (db.AtEndOfStream)

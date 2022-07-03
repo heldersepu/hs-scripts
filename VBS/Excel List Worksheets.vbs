@@ -4,12 +4,12 @@ Set fso = CreateObject("Scripting.FileSystemObject")
 myFile = ""
 ' Input via Arguments
 If WScript.Arguments.Count > 0 then
-	If fso.FileExists(WScript.Arguments.Item(0)) Then 
+	If fso.FileExists(WScript.Arguments.Item(0)) Then
 		myFile = WScript.Arguments.Item(0)
 	End If
 End if
 'Input via Explorer
-If myFile = "" Then 
+If myFile = "" Then
 	Set ObjFSO = CreateObject("UserAccounts.CommonDialog")
 	ObjFSO.Filter = "Excel File|*.xls"
 	ObjFSO.FilterIndex = 3
@@ -17,7 +17,7 @@ If myFile = "" Then
 	myFile = ObjFSO.FileName
 End If
 
-IF myFile <> "" then 
+IF myFile <> "" then
 	' open the excel document as read-only
 	On Error Resume Next
 	Set objExcel = CreateObject("Excel.Application")
@@ -40,15 +40,15 @@ IF myFile <> "" then
 		Next
 		objExcel.Workbooks(1).Close
 		objExcel.Quit
-		
+
 		Answ = MsgBox("Out put to a file",VbYesNo,"VbQuestion")
-		If Answ = VbYes then 
+		If Answ = VbYes then
 			Set outFile = fso.CreateTextFile(myFile & ".txt", True)
-			outFile.WriteLine("We have " & intWorksheets & " worksheets" & _ 
+			outFile.WriteLine("We have " & intWorksheets & " worksheets" & _
 						VbCrLf & myFile & VbCrLf & AllSheets)
 			outFile.Close
 		Else
-			WScript.Echo "We have " & intWorksheets & " worksheets" & _ 
+			WScript.Echo "We have " & intWorksheets & " worksheets" & _
 						VbCrLf & myFile & VbCrLf & AllSheets
 		End If
 	End If

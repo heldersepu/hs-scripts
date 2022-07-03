@@ -12,14 +12,14 @@ myFilesArray = Array("H:\newqq95\allcomp\HIG.dll", "H:\Newqq95C\allcomp\HIG.dll"
  "H:\TestVer\QuickQuoteForWindows\Florida\MDB_beta\RES\CompDll\HIG.dll", _
  "H:\TestVer\QuickQuoteForWindows\Georgia\CompDll\HIG.dll", "H:\TestVer\QuickQuoteForWindows\Texas\CompDll\HIG.dll", _
  "H:\TestVer\QuickQuoteForWindows\Texas\CompDll\HIGI.dll")
- 
+
 dResp = MsgBox("Whould you like to Delete all HIG.DLL files?", VbYesNo, "Delete Hartford GA & TX.")
-If dResp = vbYes then 
-    Set fso  = CreateObject("Scripting.FileSystemObject")      
+If dResp = vbYes then
+    Set fso  = CreateObject("Scripting.FileSystemObject")
     'Delete all HIG*.DLL files in TX and GA folders
     For Each dFile In myFilesArray
         dFile = UCase(dFile)
-        If (InStr(dFile,"FLORIDA") = 0) and (InStr(dFile,"NEWQQ95") = 0) then 
+        If (InStr(dFile,"FLORIDA") = 0) and (InStr(dFile,"NEWQQ95") = 0) then
             If fso.FileExists(dFile) then
                 fso.DeleteFile(dFile)
             End If

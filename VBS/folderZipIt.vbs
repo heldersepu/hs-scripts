@@ -63,7 +63,7 @@ Sub doRegist(myFile)
     'Get the SendTo folder
     Set objFolder = objShell.Namespace(&H9&).self
     If objFSO.FolderExists(objFolder.path) Then
-        'Create Shortcut 
+        'Create Shortcut
         Set wsShell    = CreateObject("WScript.Shell")
         Set oShLink  = wsShell.CreateShortcut(objFolder.path & "\ZipIt (add letters and create zip).lnk")
         oShLink.TargetPath = myFile

@@ -12,7 +12,7 @@ Set objWbemLocator = CreateObject("WbemScripting.SWbemLocator")
 Set objWMIService  = objwbemLocator.ConnectServer(strComputer, strNamespace, strUser, strPassword)
 
 objWMIService.Security_.authenticationLevel = WbemAuthenticationLevelPktPrivacy
- 
+
 Set colItems = objWMIService.ExecQuery("Select * From Win32_OperatingSystem")
 For Each objItem in colItems
   Wscript.Echo "Operating system: " & objItem.Caption

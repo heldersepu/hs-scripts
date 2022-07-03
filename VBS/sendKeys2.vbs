@@ -4,7 +4,7 @@ oShell.Run "notepad"
 'Create 1 sec delay
 wscript.sleep 1000
 
-'send some keystrokes 
+'send some keystrokes
 oShell.SendKeys "TERR"
 oShell.SendKeys "{ENTER}"
 oShell.SendKeys " - A.B, C;DE"

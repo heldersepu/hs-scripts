@@ -1,4 +1,4 @@
-'Ask  for a phone number 
+'Ask  for a phone number
 dPhone = inputBox("Please enter 7 digit Phone Number")
 
 If (Len(dPhone) = 7) and isNumeric(dPhone) then
@@ -12,14 +12,14 @@ If (Len(dPhone) = 7) and isNumeric(dPhone) then
     If Len(dLine) = 7 then
       If dPhone = ConvertToNum(dLine) then
         Wscript.Echo dLine
-        wordFound = true        
-      end if 
-    end if 
+        wordFound = true
+      end if
+    end if
   Loop
-  
-  if not wordFound then 
-    Wscript.Echo "No word found in the list" 
-  end if 
+
+  if not wordFound then
+    Wscript.Echo "No word found in the list"
+  end if
   inFile.Close
 Else
   Wscript.Echo "Wrong phone Number"
@@ -47,8 +47,8 @@ Function ConvertToNum(strWord)
           temp = temp & "8"
         Case "W", "X", "Y"
           temp = temp & "9"
-        
+
       End Select
-    next 
+    next
     ConvertToNum = Temp
 End Function

@@ -13,7 +13,7 @@ If WScript.Arguments.Count > 0 then
 End If
 
 'Input via Explorer
-If myFile = "" Then 
+If myFile = "" Then
 	Set ObjFSO = CreateObject("UserAccounts.CommonDialog")
 	ObjFSO.Filter = "File|*.*"
 	ObjFSO.FilterIndex = 3
@@ -25,14 +25,14 @@ End If
 If myFile <> "" Then
 	'Call DoConvert(myFile)
 	Call FixLines(myFile)
-End If 	
+End If
 
 Sub DoConvert(dFile)
 	Set inFile  = fso.OpenTextFile(dFile, 1)
 	Set ObjFile = fso.GetFile(dFile)
 	Set outFile = fso.CreateTextFile(ObjFile.ParentFolder  & "\Clean " & ObjFile.Name, True)
 	Set ObjFile = Nothing
-	
+
 	'Loop file & copy info to new file
 	Do until inFile.AtEndOfStream
 		dLine = inFile.ReadLine
@@ -40,7 +40,7 @@ Sub DoConvert(dFile)
 		If Left(dLine,2) <> "@@" Then
 			outFile.WriteLine(dLine)
 		End If
-		
+
 		'dPos = InStr(dLine,"SetBiPdLimits")
 		'If dPos > 0 then
 		'	outFile.WriteLine(Mid(dLine, dPos ,Len(dLine)))
@@ -65,7 +65,7 @@ Sub DoConvertPlustoMin(dFile)
 		Else
 			outFile.WriteLine(dLine)
 		End If
-		
+
 		'dPos = InStr(dLine,"SetBiPdLimits")
 		'If dPos > 0 then
 		'	outFile.WriteLine(Mid(dLine, dPos ,Len(dLine)))
@@ -104,7 +104,7 @@ Function GetLast(strLine, chrSepa)
 		End If
 	Loop While (dChar <> chrSepa and I > 0)
 	GetLast = I
-End Function 
+End Function
 
 Sub DoConvert3(dFile)
 	Set inFile  = fso.OpenTextFile(dFile, 1)
@@ -138,13 +138,13 @@ Sub DoConvert4(dFile)
 		PrevLine = dLine
 		dLine = inFile.ReadLine
 		X2 = RIGHT(dLine,25)
-		If X1 <> X2 then 
-		'If PrevLine <> dLine then 
+		If X1 <> X2 then
+		'If PrevLine <> dLine then
 			'outFile.WriteLine(PrevLine)
 			outFile.WriteLine(dLine)
 		Else
 			outFile.WriteLine(Mid(PrevLine,7,4) & ".." & Trim(dLine))
-		End if		
+		End if
 	Loop
 	outFile.WriteLine(dLine)
 	outFile.Close
@@ -163,7 +163,7 @@ Sub DoConvert5(dFile)
 	Do until inFile.AtEndOfStream
 		PrevLine = dLine
 		dLine = inFile.ReadLine
-		If Left(Trim(PrevLine),4) = Left(Trim(dLine),4) then 
+		If Left(Trim(PrevLine),4) = Left(Trim(dLine),4) then
 			If Len(Trim(PrevLine)) > Len(Trim(dLine)) then
 				outFile.WriteLine(PrevLine)
 			else
@@ -173,7 +173,7 @@ Sub DoConvert5(dFile)
 			If Len(Trim(PrevLine)) < 35 then
 				outFile.WriteLine(PrevLine)
 			End If
-		End if		
+		End if
 	Loop
 	'outFile.WriteLine(dLine)
 	outFile.Close
@@ -186,11 +186,11 @@ Sub DoConvert6(dFile)
 	Set ObjFile = fso.GetFile(dFile)
 	Set outFile = fso.CreateTextFile(ObjFile.ParentFolder  & "\Clean " & ObjFile.Name, True)
 	Set ObjFile = Nothing
-	
+
 	'Loop file & do not output blank lines
 	Do until inFile.AtEndOfStream
 		dLine = Trim(inFile.ReadLine)
-		If (dLine <> "") and (Left(dLine,1) <> "F") then 
+		If (dLine <> "") and (Left(dLine,1) <> "F") then
 			outFile.WriteLine(dLine)
 		End if
 	Loop
@@ -204,24 +204,24 @@ Sub DoConvert7(dFile)
 	Set ObjFile = fso.GetFile(dFile)
 	Set outFile = fso.CreateTextFile(ObjFile.ParentFolder  & "\Clean " & ObjFile.Name, True)
 	Set ObjFile = Nothing
-	
+
 	dLine = Trim(inFile.ReadLine)
 	'Loop file & do not output blank lines
 	Do until inFile.AtEndOfStream
-		If (Left(dLine,1) <> ":") then 
+		If (Left(dLine,1) <> ":") then
 			If not inFile.AtEndOfStream then
 				dNextLine = Trim(inFile.ReadLine)
 			End If
-			If (Left(dNextLine,1)  <> ":") then 
+			If (Left(dNextLine,1)  <> ":") then
 				outFile.WriteLine(dLine &  ", ")
 				dLine = dNextLine
 			Else
 				outFile.WriteLine(dLine & " " & myTrap)
-				dLine = dNextLine 
-			End If			
+				dLine = dNextLine
+			End If
 		Else
 			'outFile.WriteLine("")
-			myTrap = dLine 
+			myTrap = dLine
 			dLine = Trim(inFile.ReadLine)
 		End if
 	Loop
@@ -241,7 +241,7 @@ Sub DoConvert8(dFile)
 	'Loop file & do not output small lines
 	Do until inFile.AtEndOfStream
 		dLine = inFile.ReadLine
-		
+
 		If right(dLine,1) = ";" then
 			outFile.WriteLine(dConLine)
 			dConLine = ""
@@ -249,8 +249,8 @@ Sub DoConvert8(dFile)
 		Else
 			dConLine = dConLine & dLine
 		End If
-		
-		If (len(dConLine) > 40) then 
+
+		If (len(dConLine) > 40) then
 			outFile.WriteLine(dConLine)
 			dConLine = ""
 		End if
@@ -266,15 +266,15 @@ Sub FixLines(dFile)
 	Set ObjFile = fso.GetFile(dFile)
 	Set outFile = fso.CreateTextFile(ObjFile.ParentFolder  & "\Clean " & ObjFile.Name, True)
 	Set ObjFile = Nothing
-	
+
 	dLine = Trim(inFile.ReadLine)
 	'Loop file & do not output blank lines
 	Do until inFile.AtEndOfStream
         chr8Left = UCase(Left(dLine,8))
         chr1Left = Left(dLine,1)
-        
+
 		If ((chr1Left = " ") or (chr1Left = "[") or _
-        (chr8Left = "NUMBERFI") or (chr8Left = "COMMENTS") or (chr8Left = "FIELDNUM")) then 
+        (chr8Left = "NUMBERFI") or (chr8Left = "COMMENTS") or (chr8Left = "FIELDNUM")) then
 			outFile.WriteLine(dLine)
 		Else
             outFile.WriteLine(" "  & dLine)

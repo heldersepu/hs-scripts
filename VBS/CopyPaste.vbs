@@ -37,7 +37,7 @@ oShell.SendKeys " "
 Sub doPaste
 	wscript.sleep 500
 	oShell.SendKeys "+{INSERT}"	 'Paste
-	oShell.SendKeys "{ENTER}" 
+	oShell.SendKeys "{ENTER}"
 	oShell.SendKeys "{DOWN}"
 	oShell.SendKeys "{DOWN}"
 End Sub

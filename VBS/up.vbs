@@ -1,11 +1,11 @@
 '// Update Public directory will create a folder with the current Date < Ex: Dec04 >
-'// 
+'//
 '// UP [FL] [GA] [TX]
-'//   
+'//
 '//   FL	Update only Florida
 '//   GA	Update only Georgia
 '//   TX	Update only Texas
-'//   All	"ALL" can be used to process all states  
+'//   All	"ALL" can be used to process all states
 '//   PAS      Update all .pas files from all states
 
 'On Error Resume Next
@@ -24,24 +24,24 @@ If iNum > 0 Then
 	if a < 10 then a = "0"&a
 	Select Case UCase(WScript.Arguments.Item(0)) '//  Declare all directory Variables
 		Case "SVN", "/SVN"
-			' Update the SubVercion files from the HEAD revision 
+			' Update the SubVercion files from the HEAD revision
 			strCommand = "TortoiseProc /command:update " & _
 			             "/path:C:\newqq95*C:\qqfleng*C:\NEWQQGA*C:\qqenginems*C:\Quick95*C:\qqtxeng " & _
 						 "/notempfile /closeonend"
 			If iNum >= 2 then 'auto close if no errors, conflicts and merges
 			  objShell.Run strCommand & ":3"
-			else              'don't close the dialog 
-			  objShell.Run strCommand 
+			else              'don't close the dialog
+			  objShell.Run strCommand
 			end if
 			Wscript.Quit
-		Case "ALL", "/ALL" 
+		Case "ALL", "/ALL"
 			objShell.Run "up.vbs GA NoRemi"
 			Wscript.Sleep 3000
 			objShell.Run "up.vbs FL NoRemi"
 			Wscript.Sleep 3000
-			objShell.Run "up.vbs TX" 
+			objShell.Run "up.vbs TX"
 			Wscript.Quit
-		Case "GA", "/GA" 
+		Case "GA", "/GA"
 			Pub    = "C:\Public\Georgia"
 			Source = "C:\NEWQQGA\allcomp"
 			Engine = "qqenginems.exe"
@@ -71,17 +71,17 @@ If iNum > 0 Then
 			Dlls   = "GACompDll"
 			Call Sources
 			PubSo  = "C:\Public\Texas\Source\"
-			Source = "C:\QUICK95\allcomp"								
+			Source = "C:\QUICK95\allcomp"
 			Dlls   = "TXCompDll"
 			Call Sources
 			PubSo  = "C:\Public\Florida\Source\"
 			Source = "C:\newqq95\allcomp"
-			Dlls   = "CompDll"										  
+			Dlls   = "CompDll"
 			Call Sources
 			Wscript.Sleep 1000
 			Wscript.Quit
 		Case "TESTVER", "/TESTVER", "TEST", "/TEST", "ACE", "/ACE"
-			If objFSO.FolderExists("C:\WINDOWS\UpTestVer\") then 
+			If objFSO.FolderExists("C:\WINDOWS\UpTestVer\") then
 				objShell.Run """C:\WINDOWS\UpTestVer\"""
 			End If
 			Wscript.Quit
@@ -89,7 +89,7 @@ If iNum > 0 Then
 			objShell.Run "notepad up.vbs"
 			Wscript.Quit
 	End Select
-	
+
 	'Create the folder if it does not exist
 	If Not objFSO.FolderExists("C:\Public\") then objFSO.CreateFolder("C:\Public\")
 	If Not objFSO.FolderExists(Pub) then objFSO.CreateFolder(Pub)
@@ -103,13 +103,13 @@ If iNum > 0 Then
 	On Error Resume Next
 	if objFSO.FolderExists(PubCF)then objFSO.DeleteFolder(PubCF)
 	objFSO.CreateFolder(PubCF)
-	If Err.Number <> 0 Then 
+	If Err.Number <> 0 Then
 		MsgBox "Unable to delete folder" & VbCrlf & PubCF & VbCrlf & _
 		       "Make sure is not in use and try again."
 		Wscript.Quit
 	End If
 	PubCF  = PubCF&"\"
-    
+
 	'//  Copy all Files & Folders
     if Engine = "QQTXEngine.exe" then 'Special Underwriting question OCX
         objFSO.CopyFile   Common & "TxClientIntfXControl.ocx" , PubCF , true
@@ -120,13 +120,13 @@ If iNum > 0 Then
 	objFSO.CopyFile   InterC		, PubCF       , true
 	objFSO.CopyFolder Common &Dlls	, PubCF &Dlls , true
 	Set Fldr = objFSO.GetFolder(Common &Zips)
-	objFSO.CreateFolder(PubCF &Zips)	
-	For Each File In Fldr.Files      
-        if UCase(Right(File,4)) <> ".NDX" then 
+	objFSO.CreateFolder(PubCF &Zips)
+	For Each File In Fldr.Files
+        if UCase(Right(File,4)) <> ".NDX" then
 		objFSO.CopyFile   File , PubCF &Zips&"\" , true
         end if
 	Next
-	
+
 	Call TestVerReminder(dRemin)
 	Call Sources
 
@@ -139,14 +139,14 @@ If iNum > 0 Then
 		End IF
 	Next
 Else
-	objShell.Run "notepad up.vbs"		
+	objShell.Run "notepad up.vbs"
 End If
 
 Sub Sources
 '//  Copy all .PAS Files that have changed   "Sources"
-	If Not objFSO.FolderExists(Source) then objFSO.CreateFolder(Source) 
+	If Not objFSO.FolderExists(Source) then objFSO.CreateFolder(Source)
 	Set Fldr = objFSO.GetFolder(Source)
-	If Not objFSO.FolderExists(PubSo &b &a) then objFSO.CreateFolder(PubSo &b &a) 
+	If Not objFSO.FolderExists(PubSo &b &a) then objFSO.CreateFolder(PubSo &b &a)
 	Set appShell = CreateObject("Shell.Application")
 	Set objFolder = appShell.NameSpace(PubSo &b &a)
 	For Each File In Fldr.Files
@@ -178,5 +178,5 @@ Sub TestVerReminder(dFlag)
 		If dResp = VbYes Then
 			objShell.Run """C:\WINDOWS\UpTestVer\"""
 		End if
-	End If	
-End Sub 
+	End If
+End Sub

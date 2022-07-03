@@ -14,7 +14,7 @@ For Each File In Fldr.Files
 		outFile.Writeline("IconLocation - " & oShLink.IconLocation)
 		outFile.Writeline("TargetPath   - " & oShLink.TargetPath)
 		Set oShLink = Nothing
-		
+
 		Set inFile 	= objFSO.OpenTextFile(File, 1)
 		Do until inFile.AtEndOfStream
 			ThisLine = inFile.ReadLine

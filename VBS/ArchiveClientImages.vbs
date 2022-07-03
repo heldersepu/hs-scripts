@@ -17,17 +17,17 @@ Set objFSO = Nothing
 Function CheckClientsInFileRC(ByVal filePath)
     logFileName = "MainLogFile_"& Replace((Replace((Replace(now,"/","")),":",""))," ","")& ".txt"
     logFilePath = "C:\archiveImageProg\" & logFileName
-     
+
     Set objFile = objFSO.OpenTextFile(filePath, ForReading)
     Set objFileLog = objFSO.CreateTextFile(logFilePath)
     Do Until objFile.AtEndOfStream
         objFileLog.WriteLine("********************************************")
         strClientID = objFile.ReadLine
         objfileLog.WriteLine(strClientID)
-        
+
         'call RoboCopyImages function and set intRoboCopyErr
         intRoboCopyErr = RoboCopyImages(strClientID)
-        
+
         Select Case intRoboCopyErr
             Case RCERR_NOCHANGE, RCERR_OKCOPY, RCERR_XTRA, RCERR_OKCOPY_XTRA
                 objFileLog.WriteLine("RoboCopy Returned " & intRoboCopyErr & " Rename The Directory")

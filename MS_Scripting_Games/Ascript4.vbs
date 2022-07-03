@@ -9,17 +9,17 @@ If (posSlash <> 0) and (Len(myDate) < 8) then
     dYear = Mid(myDate,posSlash+1)
     dOutput = dOutput & MonthName(dMont)  & " " & dYear & VbCrLf & VbCrLf
     'Days of the week
-    For I = 1 to 7 
+    For I = 1 to 7
         dOutput = dOutput & WeekdayName(I,true) & dSepa
     Next
     dOutput = dOutput & VbCrLf
-    
+
     myDate = (dMont & "/1/" & dYear)
     LendMont = Len(dMont)
     For I = 0 to 31
         NewDate = DateAdd("D", I, myDate)
         If Left(NewDate,LendMont) = dMont then
-            'WScript.Echo "True " & WeekDay(NewDate) & " " & NewDate 
+            'WScript.Echo "True " & WeekDay(NewDate) & " " & NewDate
             If I = 0  then
                 For J = 1 to WeekDay(NewDate)-1
                     dOutput = dOutput & "   " & dSepa
@@ -29,7 +29,7 @@ If (posSlash <> 0) and (Len(myDate) < 8) then
             If WeekDay(NewDate) = 7 then
                 dOutput = dOutput & VbCrLf
             End If
-        Else 
+        Else
             Exit For
         End If
     Next
@@ -37,4 +37,4 @@ If (posSlash <> 0) and (Len(myDate) < 8) then
     Wscript.Echo dOutput
 Else
     Wscript.Echo "Incorrect Date Format"
-End If 
+End If

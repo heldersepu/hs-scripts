@@ -5,7 +5,7 @@ ExtArray = Array("ocx", "dll")
 
 AskDo = MsgBox("Do you want to add a right-click context menu item to " &_
    vbcrlf &"Register and Unregister .dll and .ocx files?",4,"Context Menu")
-If AskDo = VbYes Then 
+If AskDo = VbYes Then
 	'Set path for Regsvr32.exe and make sure it exists.
 	RegSvr = fso.GetSpecialFolder(1) & "\REGSVR32.EXE"
 	If not fso.FileExists(RegSvr) Then
@@ -22,5 +22,5 @@ If AskDo = VbYes Then
 			WshShell.RegWrite DllReg & "UnRegister\command\",_
 			  RegSvr & " /u " & Chr(34) &  "%1" & Chr(34)
 		Next
-	End If  
-End If  
+	End If
+End If

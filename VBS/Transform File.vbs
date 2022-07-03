@@ -20,7 +20,7 @@ If fso.FileExists(myFile) Then
         End if
         If count = 10 then
             resp = MsgBox("Continue with the next group?", vbYesNo, "Pause...")
-            If resp = vbYes then 
+            If resp = vbYes then
                 count = 0
             Else
                 Exit Do

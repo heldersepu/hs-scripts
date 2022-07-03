@@ -32,9 +32,9 @@ End If
 'Loop through all the files in the folder
 Sub ProcFolder(dFolder)
     For Each File In dFolder.Files
-        If Ucase(Right(File.Name,4)) = ".TXT" then 
+        If Ucase(Right(File.Name,4)) = ".TXT" then
             Call ProcFile(File.Path)
-        End If 
+        End If
     Next
 End Sub
 
@@ -43,7 +43,7 @@ Sub ProcFile(dFile)
     Set inFile     = fso.OpenTextFile(dFile, 1)
     Do until inFile.AtEndOfStream
         dLine = inFile.ReadLine
-        If (Right(dLine, 9) = "identical") Then	
+        If (Right(dLine, 9) = "identical") Then
 			dLine = Replace(dLine, "Files ","")
 			dLine = Replace(dLine, " are identical","")
 			arrFiles = Split(dLine," and ")
@@ -51,5 +51,5 @@ Sub ProcFile(dFile)
             outFile.WriteLine("%dACTION% %dOPTIONS% """ & strFile & """ """ & strFile & ".ToDEL"" >> %logFile%")
         End If
     Loop
-    inFile.Close    
+    inFile.Close
 End Sub

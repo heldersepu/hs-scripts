@@ -2,7 +2,7 @@ myFile = "C:\Scripts\Vertical.txt"
 'Call the Convert Procedure
 If myFile <> "" Then
     Wscript.Echo doConvert(myFile)
-End If     
+End If
 
 Function doConvert(dFile)
     Set fso = CreateObject("Scripting.FileSystemObject")
@@ -19,7 +19,7 @@ Function doConvert(dFile)
         Next
     Loop
     inFile.Close
-    
+
     dMessage = ""
     For I = 1 to Ubound(arLine)
         dMessage = dMessage & arLine(I)

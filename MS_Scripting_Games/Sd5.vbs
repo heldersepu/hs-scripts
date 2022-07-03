@@ -17,7 +17,7 @@ Do
                     If dAsc <= (dLast - dMin) Then
                         If (arrNames(dAsc) = "") Then
                             arrNames(dAsc) = strItem.name & _
-                            String(35 - dLen," ") & vbTab & .Class 
+                            String(35 - dLen," ") & vbTab & .Class
                             I = I + 1
                             Exit For
                         End IF

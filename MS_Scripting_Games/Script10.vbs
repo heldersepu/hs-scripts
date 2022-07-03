@@ -3,7 +3,7 @@ arrFrames = Array(2,5,7,"/",8,1,"X",9,"/",5,3,7,0,4,5,"X",2,0)
 
 dTotal = 0
 count = 0
-For Each item In arrFrames    
+For Each item In arrFrames
     Select case UCase(item)
         Case "X"
             intPoints = 10 + Bonus(count + 1) + Bonus(count + 2)

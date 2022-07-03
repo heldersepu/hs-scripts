@@ -8,7 +8,7 @@ Function isRunning(strProcName)
     Set objWMI = GetObject("winmgmts:{impersonationLevel=impersonate}!\\.\root\cimv2")
     Set cProc  = objWMI.ExecQuery("Select * from Win32_Process")
     strProcName = UCase(Trim(strProcName))
-    
+
     For Each objProc in cProc
         If (strProcName = UCase(objProc.Name)) then
             isRunning = True
@@ -16,7 +16,7 @@ Function isRunning(strProcName)
         End If
     Next
     isRunning = False
-    
+
     Set cProc = Nothing
     Set objWMI = Nothing
 End Function

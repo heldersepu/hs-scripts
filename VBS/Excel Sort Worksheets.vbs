@@ -4,12 +4,12 @@ Set fso = CreateObject("Scripting.FileSystemObject")
 myFile = ""
 ' Input via Arguments
 If WScript.Arguments.Count > 0 then
-	If fso.FileExists(WScript.Arguments.Item(0)) Then 
+	If fso.FileExists(WScript.Arguments.Item(0)) Then
 		myFile = WScript.Arguments.Item(0)
 	End If
 End if
 'Input via Explorer
-If myFile = "" Then 
+If myFile = "" Then
 	Set ObjFSO = CreateObject("UserAccounts.CommonDialog")
 	ObjFSO.Filter = "Excel File|*.xls"
 	ObjFSO.FilterIndex = 3
@@ -19,14 +19,14 @@ End If
 'Call the Sort Procedure
 If myFile <> "" Then
 	Answ = MsgBox("Out put to a file",VbYesNo,"VbQuestion")
-	If Answ = VbYes then 
+	If Answ = VbYes then
 		Set outFile = fso.CreateTextFile(myFile & ".txt", True)
 		outFile.WriteLine(SortWorksheets(MyFile))
 		outFile.Close
 	Else
 		WScript.Echo SortWorksheets(MyFile)
 	End If
-End If 
+End If
 
 Function SortWorksheets(MyFile)
 	On Error Resume Next
@@ -39,17 +39,17 @@ Function SortWorksheets(MyFile)
 		objExcel.Workbooks.open MyFile, false, true
 	    LastWS = objExcel.Worksheets.Count
 		ReDim mySheets(LastWS)
-	    For I = 1 To LastWS 
+	    For I = 1 To LastWS
 			mySheets(I) = objExcel.Worksheets(I).Name
 	    Next
 		objExcel.Workbooks(1).Close
 		objExcel.Quit
 		'Sort the Sheets
-		n = LastWS 
+		n = LastWS
 		Do
 			swapped = false
 			n = n - 1
-			For i = 1 to n 
+			For i = 1 to n
 				if Ucase(mySheets(I)) > Ucase(mySheets(I+1)) then
 					temp = mySheets(I)
 					mySheets(I) = mySheets(I+1)
@@ -57,10 +57,10 @@ Function SortWorksheets(MyFile)
 					swapped = true
 				End if
 			Next
-		Loop While swapped	
-		
-		For I = 1 To LastWS 
-			SortWorksheets = SortWorksheets & VbCrLf & mySheets(I) 
+		Loop While swapped
+
+		For I = 1 To LastWS
+			SortWorksheets = SortWorksheets & VbCrLf & mySheets(I)
 	    Next
 	End if
 End Function

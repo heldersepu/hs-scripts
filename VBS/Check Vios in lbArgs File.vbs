@@ -4,14 +4,14 @@ myFile = "C:\QuickFL\hsepulveda\lbArgs.txt"
 
 'Call the Convert Procedure
 If myFile <> "" Then
-	
+
 	strFinal = DoConvert(myFile)
-	
+
 	Set objShell = CreateObject("WScript.Shell")
 	objShell.Run "notepad++ " & strFinal
 	Set objShell = Nothing
-	
-End If 	
+
+End If
 
 Function DoConvert(dFile)
 	Set fso = CreateObject("Scripting.FileSystemObject")
@@ -19,16 +19,16 @@ Function DoConvert(dFile)
 	strAlltxtFile = inFile.ReadAll
 	inFile.Close
 	Set inFile = Nothing
-	
+
 	Set ObjFile = fso.GetFile(dFile)
 	strOutFile = ObjFile.ParentFolder  & "\Clean " & ObjFile.Name & ".ini"
 	Set ObjFile = Nothing
-	
-	Set outFile = fso.CreateTextFile(strOutFile, True)	
-	
+
+	Set outFile = fso.CreateTextFile(strOutFile, True)
+
 	For I = 1 to 4
 		intPos = InStr(1, strAlltxtFile, "Driver" & I & "_record")
-		If intPos > 0  then 
+		If intPos > 0  then
 			intEOL = InStr(intPos, strAlltxtFile, VbCrLf)
 			outFile.WriteLine(" ")
 			outFile.WriteLine(Mid(strAlltxtFile, intPos, (intEOL-intPos)))
@@ -41,11 +41,11 @@ Function DoConvert(dFile)
 					outFile.WriteLine("     " & Mid(strAlltxtFile, intPos, (intEOL-intPos)))
 				End If
 			Loop While intPos > 0
-		End If			
+		End If
 	Next
-	
+
 	outFile.Close
 	Set outFile = Nothing
-	Set fso = Nothing	
+	Set fso = Nothing
 	DoConvert = strOutFile
 End Function

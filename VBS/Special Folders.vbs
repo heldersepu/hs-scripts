@@ -1,6 +1,6 @@
 ' Returns all the Special Folders
 
-set WshShell = WScript.CreateObject("WScript.Shell") 
+set WshShell = WScript.CreateObject("WScript.Shell")
 For I = 1 to 17
     strSF = strSF & VbCrLf & I & " - " & WshShell.SpecialFolders(I)
 Next

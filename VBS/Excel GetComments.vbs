@@ -6,7 +6,7 @@ If Err.Number <> 0 Then
 End If
 
 Set fso = CreateObject("Scripting.FileSystemObject")
-Set WshShell = CreateObject("WScript.Shell") 
+Set WshShell = CreateObject("WScript.Shell")
 Set outFile = fso.CreateTextFile(WshShell.SpecialFolders("Desktop") & "\NU.TXT",True)
 Set WshShell = Nothing
 
@@ -23,12 +23,12 @@ With objExcel
         End If
         I = I + 1
     Loop While (dValue <> "")
-    	
+
     outFile.Close
-    Set outFile = Nothing 
-     
+    Set outFile = Nothing
+
     .Workbooks(1).Close
-    .Quit   
+    .Quit
 End With
 
 Set fso = Nothing

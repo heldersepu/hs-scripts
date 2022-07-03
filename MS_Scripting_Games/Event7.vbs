@@ -11,5 +11,5 @@ x = x + d
 Wscript.Echo x
 
 If Err.Number <> 0 Then
-	Wscript.Echo "An error has occurred." 
-End If 
+	Wscript.Echo "An error has occurred."
+End If

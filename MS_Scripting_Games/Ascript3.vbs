@@ -8,7 +8,7 @@ Do
     Set inFile = fso.OpenTextFile(dFile, 1)
     TotalVotes = 0
     ReDim myCandid(intCandidates,2)
-    
+
     Do until (inFile.AtEndOfStream)
         TotalVotes = TotalVotes + 1
         dLine = trim(inFile.ReadLine)
@@ -30,15 +30,15 @@ Do
         Next
     Loop
     inFile.Close
-    
+
     Call doSort(myCandid)
-    
+
     'my Debuging...
-    'For I = 1 to intCandidates 
+    'For I = 1 to intCandidates
     '    Wscript.Echo I & " - " & myCandid(I,1) & " - " & myCandid(I,2)
     'Next
     'Wscript.Echo " " & TotalVotes
-    
+
     dPerc = (myCandid(1,2)*100)/TotalVotes
     If dPerc > 50 then
         dWinner = myCandid(1,1)
@@ -58,12 +58,12 @@ Function doSort(dArray)
     For I = 1 to intCandidates - 1
         For J = I + 1 to intCandidates
             'Compare the counted votes
-            If (dArray(I,2) < dArray(J,2)) then 
+            If (dArray(I,2) < dArray(J,2)) then
                 'Swap Items
                 Temp1 = dArray(I,1)
                 dArray(I,1) = dArray(J,1)
                 dArray(J,1) = Temp1
-                
+
                 Temp2 = dArray(I,2)
                 dArray(I,2) = dArray(J,2)
                 dArray(J,2) = Temp2

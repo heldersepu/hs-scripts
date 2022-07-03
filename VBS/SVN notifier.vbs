@@ -13,7 +13,7 @@ Set objShell = CreateObject("WScript.Shell")
 Set objFSO   = CreateObject("Scripting.FileSystemObject")
 
 For each dFolder in ArrFolders
-    If objFSO.FolderExists(dFolder) Then 
+    If objFSO.FolderExists(dFolder) Then
         objShell.Run dCommand & dFolder & " >> " & dLogFile
     End If
 Next

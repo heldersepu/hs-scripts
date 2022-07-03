@@ -17,7 +17,7 @@ Sub splitFile(strFolder, strFileName, strDestFolder)
 	intPos = 1
 	strFile2 = strDestFolder & replace(strFileName, ".xml", "-")
 
-	Do 
+	Do
 		intPos = InStr(intPos + 2, txtFile, "<doc>")
 		if (intPos > 0) then
 			count = count + 1
@@ -25,7 +25,7 @@ Sub splitFile(strFolder, strFileName, strDestFolder)
 				count = 0
 				fileNum = fileNum + 1
 				CALL writeFile(strFile2 & fileNum & ".xml", Mid(txtFile, iniPos, intPos - iniPos) & "</add>")
-			else 
+			else
 				if count = 1 then iniPos = intPos
 			end if
 		end if

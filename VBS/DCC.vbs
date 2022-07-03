@@ -21,16 +21,16 @@ Else
     For Each objProc in cProc
         If (LCase(objProc.Name) = "notepad++.exe") then
             nFound = True
-            Sepa   = InStr(objProc.CommandLine, Chr(34) & " " & Chr(34)) 
-            dFile  = Mid(objProc.CommandLine, Sepa + 2, len(objProc.CommandLine)) 
+            Sepa   = InStr(objProc.CommandLine, Chr(34) & " " & Chr(34))
+            dFile  = Mid(objProc.CommandLine, Sepa + 2, len(objProc.CommandLine))
         End If
     Next
 
     If nFound Then
         If Ucase(Left( Right(dFile ,5) ,4 )) = ".PAS" Then
-            ' DCC32 %%D -B -w- -h- >> c:\newqq95\allcomp\Compile.txt 
-            oShell.Run "%ComSpec% /k DCC32 " & dFile & " -B -w- -h-  & echo.  & pause & exit" 
-            'oShell.Run "%ComSpec% /k DCC32 " & dFile & " -B -w- -h- " 
-        End If 
-    End If 
-End If 
+            ' DCC32 %%D -B -w- -h- >> c:\newqq95\allcomp\Compile.txt
+            oShell.Run "%ComSpec% /k DCC32 " & dFile & " -B -w- -h-  & echo.  & pause & exit"
+            'oShell.Run "%ComSpec% /k DCC32 " & dFile & " -B -w- -h- "
+        End If
+    End If
+End If

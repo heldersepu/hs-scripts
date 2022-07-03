@@ -1,5 +1,5 @@
 'If has args then get the first
-If (WScript.Arguments.Count > 0) then 
+If (WScript.Arguments.Count > 0) then
     dPassw = WScript.Arguments.Item(0)
 Else
     'Ask  for a Password
@@ -7,7 +7,7 @@ Else
 End If
 
 If (dPassw <> "") then
-  dMessage = ""    
+  dMessage = ""
   dScore = dComplex(dPassw, dMessage )
   Select Case dScore
     Case 11, 12, 13
@@ -17,9 +17,9 @@ If (dPassw <> "") then
     Case Else
        dMessage = dMessage & VbCrLf & "A password score of " & dScore & " indicates a weak password."
   End Select
-  
+
   Wscript.Echo dMessage
-  
+
 End If
 
 'Function that check complexity
@@ -38,13 +38,13 @@ Function dComplex(strWord, strMessage)
     srtComp4 = Replace(Ucase(strWord),"0","O")
     wordFound5 = False
     srtComp5 = Replace(Ucase(strWord),"1","L")
-    
+
     Do until (inFile.AtEndOfStream )
         dLine = Ucase(inFile.ReadLine)
         'Make sure that the password is not an actual word.
         If dLine = srtComp1 then
             wordFound1 = True
-        end if 
+        end if
         'Make sure that the password, minus the last letter, is not an actual word.
         If dLine = srtComp2 then
             wordFound2 = True
@@ -52,28 +52,28 @@ Function dComplex(strWord, strMessage)
         'Make sure that the password, minus the first letter, is not an actual word
          If dLine = srtComp3 then
             wordFound3 = True
-        end if 
-        'Make sure that the password does not simply substitute 0 (zero) for the letter o 
+        end if
+        'Make sure that the password does not simply substitute 0 (zero) for the letter o
         If (dLine = srtComp4) and (srtComp4 <> srtComp1) then
             wordFound4 = True
-        end if 
-        'Make sure that the password does not simply substitute 1 (one) for the letter l 
+        end if
+        'Make sure that the password does not simply substitute 1 (one) for the letter l
         If dLine = srtComp5 and (srtComp5 <> srtComp1) then
             wordFound5 = True
-        end if         
+        end if
     Loop
     inFile.Close
-    
+
     If (wordFound1) then
         strMessage = strMessage & "Password is an actual word." & VbCrLf
         Temp = Temp - 1
     End If
-    
+
     If (wordFound2) then
         strMessage = strMessage & "Password minus the last letter, is an actual word." & VbCrLf
         Temp = Temp - 1
     End If
-    
+
     If (wordFound3) then
         strMessage = strMessage & "Password minus the first letter, is an actual word." & VbCrLf
         Temp = Temp - 1
@@ -83,17 +83,17 @@ Function dComplex(strWord, strMessage)
         strMessage = strMessage & "Password simply substitute 0 (zero) for the letter o." & VbCrLf
         Temp = Temp - 1
     End If
-    
+
     If (wordFound5) then
         strMessage = strMessage & "Password simply substitute 1 (one) for the letter l." & VbCrLf
         Temp = Temp - 1
     End If
-    
-    If Len(strWord)<10 or Len(strWord)>20 then 
+
+    If Len(strWord)<10 or Len(strWord)>20 then
         strMessage = strMessage & "Password is NOT at least 10 characters long and no more than 20 long." & VbCrLf
         Temp = Temp - 1
     End If
-    
+
     hasNumber = False
     hasLowerLetter = False
     hasUpperLetter = False
@@ -102,10 +102,10 @@ Function dComplex(strWord, strMessage)
     hasSymbol = False
     UpChar = 0
     LoChar = 0
-    
+
     For I = 1 to Len(strWord)
         dChar = Asc(Mid(strWord,I,1))
-        
+
         If ((dChar >= 48) and (dChar =< 57)) then
             hasNumber = True
             UpChar = 0
@@ -124,7 +124,7 @@ Function dComplex(strWord, strMessage)
                     LoChar = LoChar + 1
                     If LoChar >= 4 then
                         has4LowerChar = True
-                    End If                    
+                    End If
                     UpChar = 0
                 Else
                     hasSymbol = True
@@ -134,7 +134,7 @@ Function dComplex(strWord, strMessage)
             End If
         End If
     Next
-    
+
     If not hasNumber then
         strMessage = strMessage & "Password does NOT include at least one number." & VbCrLf
         Temp = Temp - 1
@@ -170,11 +170,11 @@ Function dComplex(strWord, strMessage)
         Next
         If DupChars then Exit For
     Next
-    
+
     If DupChars then
         strMessage = strMessage & "Password includes duplicate characters." & VbCrLf
         Temp = Temp - 1
-    End If    
-    
+    End If
+
     dComplex = Temp
 End Function

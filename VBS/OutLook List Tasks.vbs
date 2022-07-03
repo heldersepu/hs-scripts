@@ -10,7 +10,7 @@ For Each Task In objFolder.Items
 	Wscript.echo Task.Subject
 	'Wscript.echo Task.Body
 	Wscript.echo Task.DueDate
-Next          
+Next
 
 
 'objOutlook.Quit

@@ -2,7 +2,7 @@ Set objFSO = CreateObject("FileSystemObject")
 Set objFolder = objFSO.GetFolder("C:\scripts")
 
 dtmOld = DateAdd("m", -10, Now)
- 
+
 AllFolders objFolder
 
 CopyTextFiles objFolder

@@ -13,7 +13,7 @@ Set colServ   = objWMISrv.ExecQuery (Left(strQuery,Len(strQuery)-3))
 
 dMsg = "DisplayName    Name    StartMode" & VbCrLf
 For Each objServ in colServ
-	dMsg = dMsg & objServ.DisplayName & "   " & objServ.Name & "    " & objServ.StartMode & VbCrLf 
+	dMsg = dMsg & objServ.DisplayName & "   " & objServ.Name & "    " & objServ.StartMode & VbCrLf
 Next
 
 Wscript.Echo dMsg

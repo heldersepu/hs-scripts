@@ -8,7 +8,7 @@ TotLatte = 0
     dLine = trim(inFile.ReadLine)
 	dAmount = Right(dLine,len(dLine) - instr(dLine," "))
 	dCoffe = UCase(Left(dLine,instr(dLine," ")-1))
-	
+
 	Select Case dCoffe
 		Case "ESPRESSO"
 			TotEspr = TotEspr + dAmount
@@ -17,9 +17,9 @@ TotLatte = 0
 		Case "LATTE"
 			TotLatte = TotLatte + dAmount
 	End Select
-	
-Loop 
+
+Loop
 
 Wscript.Echo "ESPRESSO = "  & TotEspr & VbCrLf & _
-             "CAPPUCCINO = "  & TotCapp & VbCrLf & _ 
-             "LATTE = "  & TotLatte 
+             "CAPPUCCINO = "  & TotCapp & VbCrLf & _
+             "LATTE = "  & TotLatte

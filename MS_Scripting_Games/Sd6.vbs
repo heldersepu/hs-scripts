@@ -2,7 +2,7 @@ myFile = "C:\Scripts\Lettercase.txt"
 'Call the Convert Procedure
 If myFile <> "" Then
 	Wscript.Echo doConvert(myFile)
-End If 	
+End If
 
 Function doConvert(dFile)
 	Set fso = CreateObject("Scripting.FileSystemObject")

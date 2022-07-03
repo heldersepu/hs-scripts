@@ -14,9 +14,9 @@ Sub ShowSubFolders(Folder)
     For Each Subfolder in Folder.SubFolders
 		For Each File In Subfolder.Files
 			If (UCase(fso.GetExtensionName(file)) = "PAS") then
-				outFile.WriteLine( file )	
-			end if 
-			
+				outFile.WriteLine( file )
+			end if
+
 		Next
         ShowSubFolders Subfolder
     Next

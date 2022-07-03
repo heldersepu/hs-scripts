@@ -5,17 +5,17 @@ dSepa = " vs. "
 ReDim arrTeams(dMaxTeams)
 For I = 1 to dMaxTeams
     arrTeams(I) = Chr(64 + I)
-Next 
+Next
 
 'Every team plays each of the other teams once
 match = 0
-For I = 1 to dMaxTeams - 1 
+For I = 1 to dMaxTeams - 1
     For J = I + 1 to dMaxTeams
         match = match + 1
         ReDim Preserve arrGames(match)
         arrGames(match) = arrTeams(I) & dSepa & arrTeams(J)
-    Next 
-Next 
+    Next
+Next
 
 'randomly schedule the games
 ReDim arrRndGames(match)
@@ -28,7 +28,7 @@ For I = 1 to match
             dRnd = ((Timer*Rnd) Mod match) +1
             intRep = intRep + 1
         End If
-        'Avoid the same team 
+        'Avoid the same team
         isBlank = arrGames(dRnd) = ""
         If (I > 1) and (I < match\2) and Not isBlank then
             dCurr = Split(arrGames(dRnd), dSepa)
@@ -39,7 +39,7 @@ For I = 1 to match
             SameTeam = False
         End If
     Loop While isBlank or SameTeam
-    
+
     arrRndGames(I) = arrGames(dRnd)
     arrGames(dRnd) = ""
 Next

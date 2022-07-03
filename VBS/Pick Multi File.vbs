@@ -14,4 +14,4 @@ If InitFSO = False Then
     Wscript.Quit
 Else
     Wscript.Echo "You selected the file: " & ObjFSO.FileName
-End If 
+End If

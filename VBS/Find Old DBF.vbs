@@ -5,7 +5,7 @@ dirPAS = "C:\Quick95\ALLCOMP\"
 Set fso  = CreateObject("Scripting.FileSystemObject")
 
 IF fso.FolderExists(dirDBF) and fso.FolderExists(dirPAS) then
-	dFile = dirDBF & "OLD.DIFF"	
+	dFile = dirDBF & "OLD.DIFF"
 	Set outFile = fso.CreateTextFile(dFile, True)
 	outFile.writeLine("+++ Begin "  & now)
 	Set Fldr = fso.GetFolder(dirDBF)
@@ -27,7 +27,7 @@ IF fso.FolderExists(dirDBF) and fso.FolderExists(dirPAS) then
 		For Each File In Fldr.Files
 			ucName = Ucase(File.Name)
 			If ((Len(File.Name) <= 8) and (Right(ucName, 4) = ".PAS") and (Mid(ucName,4,1) <> "I")) then
-				If (cnt > 0) Then 
+				If (cnt > 0) Then
 					For I = 1 to cnt
 						Set inFile = fso.OpenTextFile(File.Path, 1)
 						txtFile = InFile.ReadAll
@@ -40,7 +40,7 @@ IF fso.FolderExists(dirDBF) and fso.FolderExists(dirPAS) then
 								cnt = cnt - 1
 								Redim Preserve arFiles(cnt)
 							End If
-						End If						
+						End If
 					Next
 				Else
 					MsgBox "No Old DBF found"
@@ -50,7 +50,7 @@ IF fso.FolderExists(dirDBF) and fso.FolderExists(dirPAS) then
 		Next
 		outFile.writeLine(VbCrLf & "--- Final Results "  & dirDBF)
 		outFile.writeLine("@@ We found " & cnt & " old DBF files " )
-		If (cnt > 0) Then 
+		If (cnt > 0) Then
 			For I = 1 to cnt
 				outFile.writeLine("@ " & arFiles(I) & ".DBF" )
 			Next

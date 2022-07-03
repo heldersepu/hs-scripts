@@ -2,7 +2,7 @@ Dim objShell, i, j, x, c
 
 x = inputbox("      Enter a Number","   Question",5)
 
-'// Data validation 
+'// Data validation
 '// In case is not a numeric value, is a negative #
 '//   or is bigger than 50
 '//   continue the execution of the program with 5
@@ -10,7 +10,7 @@ x = inputbox("      Enter a Number","   Question",5)
 
 if not IsNumeric(x) then
   x = 5
-else if x < 1 or x > 50  then 
+else if x < 1 or x > 50  then
        x = 5
      else x = (x*2)\2
      end if
@@ -42,13 +42,13 @@ loop
 objShell.SendKeys "{ENTER}"
 
 c = 1
-x = x*2 +1 
+x = x*2 +1
 do until x < 1
-  for i = 1 to x  
+  for i = 1 to x
     objShell.SendKeys "*"
   next
   objShell.SendKeys "{ENTER}"
-  for j = 1 to c	
+  for j = 1 to c
     objShell.SendKeys " "
   next
   c = c + 1

@@ -13,6 +13,6 @@ if filesys.FileExists(mfile) Then
 		ThisLine = NextLine
 	Loop
 	outFile.Close
-else 
+else
 	msgbox "File not Found"
 end if

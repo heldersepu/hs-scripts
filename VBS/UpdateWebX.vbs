@@ -8,9 +8,9 @@ If filesys.FolderExists("\\jazaretpc\public\QQFL\WebxControl\") then  '// Check 
 	set SubFold = sFolder.Subfolders
 	first = true
 	For Each SubF in SubFold	'//Loop Loop through all folders
-		If first then 
-			set sFolder = SubF 
-		else 
+		If first then
+			set sFolder = SubF
+		else
 			If (now - SubF.DateCreated) < (now - sFolder.DateCreated) then set sFolder = SubF  '//Get the latest folder
 		End if
 		first = false
@@ -28,29 +28,29 @@ If filesys.FolderExists("\\jazaretpc\public\QQFL\WebxControl\") then  '// Check 
 				set SvrFile = filesys.GetFile(SvrStr)
 				If LocFile.DateLastModified = SvrFile.DateLastModified then
 					R = MsgBox ("    The WebxControl.ocx on your pc is the latest           "& vbcrlf &_
-								"             No further action is required.         ",64, "  No Action Required !")		
+								"             No further action is required.         ",64, "  No Action Required !")
 				else
-					objShell.Run "regsvr32 /s """ & LocStr & """ -u" 
+					objShell.Run "regsvr32 /s """ & LocStr & """ -u"
 					LocFile.delete
-					If filesys.FileExists(LocStr) then    '// if File exist deletion was not successful 
+					If filesys.FileExists(LocStr) then    '// if File exist deletion was not successful
 						R = MsgBox ("       Unable to delete file WebxControl.ocx              "& vbcrlf &_
 									" Make sure that the file is not in use and try again.              ",16, "  Can not delete File !")
 					End if
 				End if
-			End if 
-			If not filesys.FileExists(LocStr) then  '// check again to make sure that it was deleted 
+			End if
+			If not filesys.FileExists(LocStr) then  '// check again to make sure that it was deleted
 				filesys.CopyFile SvrStr, LocStr, true
-				objShell.Run "regsvr32 """ & LocStr & """" 
-			End if 
+				objShell.Run "regsvr32 """ & LocStr & """"
+			End if
 		End if
 	else
 		R = MsgBox ("    The file WebxControl.ocx was not found on:              "& vbcrlf &_
-					"\\jazaretpc\public\QQFL\WebxControl\" & sFolder.Name &"\" & vbcrlf & vbcrlf &_ 
-	    		    "     Make sure that the file exists and try again.              ",16, "  File not Found !")		
+					"\\jazaretpc\public\QQFL\WebxControl\" & sFolder.Name &"\" & vbcrlf & vbcrlf &_
+	    		    "     Make sure that the file exists and try again.              ",16, "  File not Found !")
 	End if
 else
 	R = MsgBox ("  The Folder WebxControl was not found on:          "& vbcrlf &_
-				"               \\jazaretpc\public\QQFL       "& vbcrlf & vbcrlf &_ 
+				"               \\jazaretpc\public\QQFL       "& vbcrlf & vbcrlf &_
 	    	    "      Check the network path and try again   ",16,"  Folder not Found !")
 End if
 '	msgbox sFolder.Name &" ** "& SFolder.DateCreated

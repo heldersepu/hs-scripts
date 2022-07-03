@@ -7,7 +7,7 @@ Set fso  = CreateObject("Scripting.FileSystemObject")
 IF fso.FolderExists(dir1) and fso.FolderExists(dir2) then
 	Set objShell = CreateObject("WScript.Shell")
 	strOutFile = objShell.SpecialFolders("Desktop") & "\DelOld.bat"
-	
+
 	'Read Files form first Directory & put in Array
 	cnt = 0
 	Set Fldr = fso.GetFolder(dir1)
@@ -20,7 +20,7 @@ IF fso.FolderExists(dir1) and fso.FolderExists(dir2) then
 			arFiles(cnt) = dbFile
 		End IF
 	Next
-	
+
 	Set outFile = fso.CreateTextFile(strOutFile, True)
 	'Read Files from second Directory
 	Set Fldr = fso.GetFolder(dir2)
@@ -35,10 +35,10 @@ IF fso.FolderExists(dir1) and fso.FolderExists(dir2) then
 					Exit For
 				End If
 			Next
-			
+
 			If NotFound then
 				outFile.writeLine(File.Name)
-			End If 
+			End If
 		End If
 	Next
 	outFile.Close

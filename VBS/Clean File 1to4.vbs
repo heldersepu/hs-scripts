@@ -13,7 +13,7 @@ If WScript.Arguments.Count > 0 then
 End If
 
 'Input via Explorer
-If myFile = "" Then 
+If myFile = "" Then
 	Set ObjFSO = CreateObject("UserAccounts.CommonDialog")
 	ObjFSO.Filter = "File|*.*"
 	ObjFSO.FilterIndex = 3
@@ -26,7 +26,7 @@ If myFile <> "" Then
 	'Call DoConvert(myFile)
 	Call DoConvert(myFile)
 	MsgBox "Done"
-End If 	
+End If
 
 Sub DoConvert(dFile)
 	Set inFile  = fso.OpenTextFile(dFile, 1)
@@ -36,7 +36,7 @@ Sub DoConvert(dFile)
 	Set outFileCou = fso.CreateTextFile(ObjFile.ParentFolder  & "\COUNTY " & ObjFile.Name, True)
 	Set outFileTer = fso.CreateTextFile(ObjFile.ParentFolder  & "\TERR "   & ObjFile.Name, True)
 	Set ObjFile = Nothing
-	
+
 	'Loop file & copy info to new files
 	Do until inFile.AtEndOfStream
 		dLine = inFile.ReadLine
@@ -58,7 +58,7 @@ Sub DoConvert(dFile)
 						dLine = inFile.ReadLine
 					End if
 				End if
-			End if	
+			End if
 		End If
 		Select Case doFile
 			Case "ZIP"
@@ -75,7 +75,7 @@ Sub DoConvert(dFile)
 	outFileCit.Close
 	outFileCou.Close
 	outFileTer.Close
-	
+
 	inFile.Close
 End Sub
 

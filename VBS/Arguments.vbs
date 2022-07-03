@@ -6,4 +6,4 @@ For I = 0 to iNum -1
 	Args = Args & I & " - " & WScript.Arguments.Item(I) & VbCrLf
 Next
 
-Wscript.Echo " You Enter " & iNum & " arguments " & VbCrLf & Args 
+Wscript.Echo " You Enter " & iNum & " arguments " & VbCrLf & Args

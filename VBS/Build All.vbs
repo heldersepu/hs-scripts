@@ -6,7 +6,7 @@ Set objShell = CreateObject("WScript.Shell")
 ' Input via Arguments
 If WScript.Arguments.Count > 0 then
 	Select Case UCase(WScript.Arguments.Item(0))
-		Case "GA", "/GA" 
+		Case "GA", "/GA"
 			Call myCompile("c:\NewqqGA\allcomp")
 			Call CheckCompile
 		Case "TX", "/TX"
@@ -15,12 +15,12 @@ If WScript.Arguments.Count > 0 then
 		Case "FL", "/FL"
 			Call myCompile("c:\newqq95\allcomp")
 			Call CheckCompile
-		Case "ALL", "/ALL" 
+		Case "ALL", "/ALL"
 			Call myCompile("c:\NewqqGA\allcomp")
 			Call myCompile("c:\newqq95\allcomp")
 			Call myCompile("c:\Quick95\allcomp")
 			Call CheckCompile
-		Case "-?", "/?" 
+		Case "-?", "/?"
 			objShell.Run "notepad C:\bat\Joe\Commands\Build All.vbs"
 		Case Else
 			objShell.Run "C:\bat\Joe\Commands\CompileAll.bat"
@@ -43,12 +43,12 @@ Sub myCompile (dFolder)
 		If Ucase(Right(File.Name, 4)) = ".PAS" Then
 			dFiles = dFiles & File.Name & " "
 		End if
-		If Len(dFiles) > 1500 then 
+		If Len(dFiles) > 1500 then
 			objShell.Run "dcc32 " & dFiles & " -B -w- -h-  >> " & cmplog
 			dFiles = ""
 		End if
 	Next
-	
+
 	If dFiles <> "" then
 		objShell.Run "dcc32 " & dFiles & " -B -w- -h-  >> " & cmplog
 	End If
@@ -56,7 +56,7 @@ End Sub
 
 Sub CheckCompile
 	' // Wait until Job is done
-	Do 
+	Do
 	  Wscript.Sleep 1000
 	  WaitExp = objShell.AppActivate("dcc32.exe")
 	Loop While WaitExp = False

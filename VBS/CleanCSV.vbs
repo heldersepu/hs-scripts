@@ -47,7 +47,7 @@ Sub DoConvert(dFile, strBatFile)
 	Set ObjFile = Nothing
 	Set outFile = fso.CreateTextFile(newFile, True)
     outFile.WriteLine(getHeaders())
-	
+
 
 	'Loop file & copy info to new file
 	Do until inFile.AtEndOfStream
@@ -85,7 +85,7 @@ Sub DoConvert(dFile, strBatFile)
 	If (jsCount > 0) Then
 		outFile.WriteLine(getJSWarning())
 	End If
-    
+
     outFile.WriteLine(getFooter())
 	outFile.Close
 End Sub
@@ -320,7 +320,7 @@ Function CleanHTML(dLine)
     For each item in Split(srtItems, ",")
         dLine = Replace(dLine, item, "C:\SecretAgent")
     Next
-	
+
     intPos = InStr(dLine, "  ")
     If (intPos > 0) Then
         dLine = Trim(Left(dLine, intPos))

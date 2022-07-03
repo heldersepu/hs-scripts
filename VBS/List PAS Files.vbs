@@ -34,10 +34,10 @@ objShell.SendKeys "{ENTER}"
 For i = 1 to cnt
    Set f = fso.GetFile(arFiles(i))
    If ((UCase(fso.GetExtensionName(f)) = "PAS") and (f.attributes = 32)) then
-       If (now - f.DateLastModified < 5) then 
-          objShell.SendKeys arFiles(i) 
-          objShell.SendKeys "{ENTER}" 
+       If (now - f.DateLastModified < 5) then
+          objShell.SendKeys arFiles(i)
+          objShell.SendKeys "{ENTER}"
        End If
      '  f.attributes = f.attributes - 32
-   End If 
+   End If
 Next

@@ -5,7 +5,7 @@ ReadFile("wo.txt")
 Sub ReadFile(dfile)
 	If filesys.FileExists(dfile) Then
 		Set ObjFile = filesys.OpenTextFile(dfile, 1)
-		
+
 		Do until (objFile.AtEndOfStream)
 			dLine = objFile.ReadLine
 			Redim A(Len(Dline))
@@ -21,9 +21,9 @@ Sub ReadFile(dfile)
 				Next
 				x = x + 1
 				Wscript.Echo Temp
-			Loop 
+			Loop
 			Wscript.Echo " ------"
 		Loop
 		ObjFile.Close
 	End If
-End Sub 
+End Sub

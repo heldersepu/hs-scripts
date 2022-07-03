@@ -6,7 +6,7 @@
 
 
 Set shell = createobject("WScript.shell")
-Set objNet = CreateObject("WScript.NetWork") 
+Set objNet = CreateObject("WScript.NetWork")
 
 dbLocation = "c:\CitizensUnderwritingUpdateChecker_db.txt"
 
@@ -21,7 +21,7 @@ Sub checkScriptLocation()
 	Set objFolderItem = objFolder.Self
 	Set objFSO = CreateObject("Scripting.FileSystemObject")
 	Set objFileCopy = objFSO.GetFile(Wscript.ScriptFullName)
-	
+
 	strComputer = "."
 	Set objWMIService = GetObject("winmgmts:" & "{impersonationLevel=impersonate}!\\" & strComputer & "\root\cimv2")
 
@@ -34,7 +34,7 @@ Sub checkScriptLocation()
 			osVersion = "XP"
 		end if
 	Next
-	
+
 	if NOT objFSO.FileExists(objFolderItem.path & "\Programs\Startup\" & Wscript.ScriptName) then
 		objFileCopy.Copy (objFolderItem.path & "\Programs\Startup\" & Wscript.ScriptName)
 		MsgBox ("Installation successful! You may delete this file.")
@@ -44,14 +44,14 @@ Sub checkScriptLocation()
 End Sub
 Sub sendNotification(subject, message)
 	Set objEmail = CreateObject("CDO.Message")
-	
+
 	objEmail.From = "jgriffin@qqonline.com"
 	'objEmail.To = objNet.UserName & "@qqonline.com"														'issue: in some cases, username is configured differently than the username on exchange
 	objEmail.To = mid(objNet.ComputerName,1,len(objNet.ComputerName)-2) & "@qqonline.com"	'fix
 	objEmail.Subject = "Citizens Update"
 	objEmail.HTMLBody = subject & "<BR>" & message
 	objEmail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/sendusing") = 2
-	objEmail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/smtpserver") = "webmail.qqonline.com" 
+	objEmail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/smtpserver") = "webmail.qqonline.com"
 	objEmail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/smtpserverport") = 25
 	objEmail.Configuration.Fields.Update
 	objEmail.Send
@@ -60,10 +60,10 @@ End Sub
 Sub writeToFile(strFilePath, strData)
 	Set objFSO=CreateObject("Scripting.FileSystemObject")
 	Set objFile=objFSO.OpenTextFile(strFilePath,8,true)
-	
+
 	objFile.WriteLine(strData)
 	objFile.Close
-   
+
 	Set objFile=Nothing
 	Set objFSO=Nothing
 End Sub
@@ -82,10 +82,10 @@ Function readFromFile(strFilePath, strData)
 		end if
 	end if
 	objFile.Close
-   
+
 	Set objFile=Nothing
 	Set objFSO=Nothing
-	
+
 	readfromfile=retval
 End Function
 

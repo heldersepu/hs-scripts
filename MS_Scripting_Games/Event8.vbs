@@ -9,11 +9,11 @@ For ToPick = 1 to Max
 		TotalPicks = TotalPicks + 1
 		'wscript.echo ToPick
 	Loop
-	If JacksLeft > 0 Then 
+	If JacksLeft > 0 Then
 		TotalPicks = TotalPicks + 1
 		TotalJacks = TotalJacks + JacksLeft
 		'wscript.echo JacksLeft
-	End If 
+	End If
 	'wscript.echo " ="&TotalJacks&" ="&TotalPicks
 Next
 wscript.echo "Total jacks: " & TotalJacks &_

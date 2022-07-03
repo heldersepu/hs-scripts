@@ -10,7 +10,7 @@ If myFolder <> "" Then
     WSCRIPT.ECHO "All Done"
 End If
 
-'Recursively loop through all folders 
+'Recursively loop through all folders
 Sub ShowSubFolders(Folder)
     For Each Subfolder in Folder.SubFolders
         Call ProcFolder(Subfolder)

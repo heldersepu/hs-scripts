@@ -22,7 +22,7 @@ Else
     End If
   Next
   'Input via Explorer
-  If myTxtFile = "" Then 
+  If myTxtFile = "" Then
     Set ObjFSO = CreateObject("UserAccounts.CommonDialog")
     ObjFSO.Filter = "Text File|*.txt"
     ObjFSO.FilterIndex = 3
@@ -33,7 +33,7 @@ Else
   If (myTxtFile <> "") and (myXlsFile = "") Then
     dResp = MsgBox("Whould you like to create a new Excel file?", VbYesNo, "lbArgs to Excel.")
     If dResp = vbNo then
-        If myXlsFile = "" Then 
+        If myXlsFile = "" Then
           Set ObjFSO = CreateObject("UserAccounts.CommonDialog")
           ObjFSO.Filter = "Excel File|*.xls"
           ObjFSO.FilterIndex = 3
@@ -44,11 +44,11 @@ Else
     End If
   End If
   'Call the Convert Procedure
-  If myTxtFile <> "" Then    
+  If myTxtFile <> "" Then
     If myXlsFile = "" Then myXlsFile = strDesktop & "\inputTest.xls"
-    Call DoConvert(myTxtFile,myXlsFile) 
-    MsgBox("File Created:" & VBCrLf & myXlsFile)    
-  End If   
+    Call DoConvert(myTxtFile,myXlsFile)
+    MsgBox("File Created:" & VBCrLf & myXlsFile)
+  End If
   Set fso = Nothing
 End If
 Set ObjExcel = Nothing
@@ -89,8 +89,8 @@ Sub DoConvert(txtFile,xlsFile)
             col = col + 1
         Next
         row = 2
-        ObjExcel.Cells(row,1).Value = "Quote" & Row-1        
-        
+        ObjExcel.Cells(row,1).Value = "Quote" & Row-1
+
         objexcel.ActiveWorkbook.SaveAs(xlsFile)
         'Set objWorkbook  = ObjExcel.Workbooks.Open(xlsFile)
     else
@@ -101,7 +101,7 @@ Sub DoConvert(txtFile,xlsFile)
           row = row + 1
         Loop
         ObjExcel.Cells(row,1).Value = "Quote" & Row-1
-        'Get all the info in Row 1 
+        'Get all the info in Row 1
         Do Until ObjExcel.Cells(1,col).Value = ""
           Redim Preserve dHead(col)
           dHead(col-1) = Ucase(ObjExcel.Cells(1,col).Value)
@@ -112,7 +112,7 @@ Sub DoConvert(txtFile,xlsFile)
     'Loop file & copy info to Excel
     Do until inFile.AtEndOfStream
       dLine = inFile.ReadLine
-      'Get info from line, Separator is the = 
+      'Get info from line, Separator is the =
       EqualPos = InStr(dLine,"=")
       dIni = Ucase(Mid(dLine, 1, EqualPos-1))
       dEnd = Mid(dLine, EqualPos+1, Len(dLine) - EqualPos + 1)
@@ -120,7 +120,7 @@ Sub DoConvert(txtFile,xlsFile)
       If Left(dIni,6) = "DVDATE" Then
         vVioDate(CInt(Right(dIni,1))) = vVioDate(CInt(Right(dIni,1))) & ValidStrDate(dEnd) & ";"
       End If
-      
+
       If Left(dIni,5) = "VCTM_" Then
         If CInt(dEnd) > 0 then
           Select Case Left(dIni,7)
@@ -143,7 +143,7 @@ Sub DoConvert(txtFile,xlsFile)
       else
         Select Case Left(dIni,7)
           Case "DPRIORL" 'Add and "A"
-            dIni = Left(dIni,7) & "A" & Mid(dIni,8,Len(dIni)) 
+            dIni = Left(dIni,7) & "A" & Mid(dIni,8,Len(dIni))
           Case "VIN_NUM" 'Remove the "_1"
             dIni = Left(dIni,10) & Right(dIni,1)
           Case "VBI_LIM" 'Remove the "_1"
@@ -168,26 +168,26 @@ Sub DoConvert(txtFile,xlsFile)
         End If
         'Check if it exists in the headers
         For I = 0 to UBound(dHead)
-          If dIni = dHead(I) Then 
+          If dIni = dHead(I) Then
             ObjExcel.Cells(row,I+1).Value = dEnd
             Exit For
           End If
         Next
       End If
-    Loop    
+    Loop
     inFile.Close
     Set inFile = Nothing
-    
+
     'Check if Custom_Type exists in the headers
     For J = 1 to 4
       dLabel1 = "VCUSTOM_TYPE" & J
       dLabel2 = "DVDATE" & J
       For I = 1 to col - 1
         if I <= Ubound(dHead) then
-            If dLabel1 = dHead(I) Then 
+            If dLabel1 = dHead(I) Then
               ObjExcel.Cells(row,I).Value = vCtm(J)
             End If
-            If dLabel2 = dHead(I) Then 
+            If dLabel2 = dHead(I) Then
               ObjExcel.Cells(row,I).Value = vVioDate(J)
             End If
         End If
@@ -200,7 +200,7 @@ Sub DoConvert(txtFile,xlsFile)
       .Range("A1").Select
       'Save Excel File & Close Excel Object
       '.ActiveWorkbook.SaveAs(txtFile & ".xls")
-      .ActiveWorkbook.Save 
+      .ActiveWorkbook.Save
       .Workbooks(1).Close
       .Quit
     End With

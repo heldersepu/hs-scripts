@@ -4,7 +4,7 @@ dFile1 = "\\AppSrvA\QQData\quick95c\COMPZIPS\TXZIP.DBF"
 dFile2 = "C:\Quick95\COMPZIPS\TXZIP.DBF"
 Set fso  = CreateObject("Scripting.FileSystemObject")
 
-If fso.FileExists(dFile1) and fso.FileExists(dFile2) then	
+If fso.FileExists(dFile1) and fso.FileExists(dFile2) then
 	txtFile1 = "C:\temp\TXZIP1.TXT"
 	txtFile2 = "C:\temp\TXZIP2.TXT"
 	Call GetHeaders(dFile1, txtFile1)
@@ -26,7 +26,7 @@ Sub GetHeaders(dbfFile, dOutFile)
 		Wscript.Echo "You must have Excel installed to perform this operation."
 		Wscript.Quit
 	Else
-		Set objWorkbook  = objExcel.Workbooks.Open(dbfFile)	
+		Set objWorkbook  = objExcel.Workbooks.Open(dbfFile)
 		'Output the values to a TXT file
 		Set outFile = fso.CreateTextFile(dOutFile, True)
 		col = 2

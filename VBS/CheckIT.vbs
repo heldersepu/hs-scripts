@@ -1,5 +1,5 @@
 'Check files for SVN conflicts or Delphi compiling Errors
-'  [cscript] CHECKIT.VBS [SVN] [drive:][path] 
+'  [cscript] CHECKIT.VBS [SVN] [drive:][path]
 ' SVN - can be used to check SVN log file for conflicts
 '
 
@@ -9,7 +9,7 @@ Set outFile	= filesys.CreateTextFile(ErrorLog, True)
 strSVNout = ""
 
 'Check all the files in the Args
-If WScript.Arguments.Count > 1 then 
+If WScript.Arguments.Count > 1 then
     For I = 1 to WScript.Arguments.Count - 1
         if UCase(WScript.Arguments.Item(0)) = "SVN" then
             strSVNout = CheckSVN(WScript.Arguments.Item(I))
@@ -17,12 +17,12 @@ If WScript.Arguments.Count > 1 then
             CheckDebug(WScript.Arguments.Item(I))
         end if
     Next
-else 
+else
     'if no Args then Check all text files in the current foder
     Set Fldr = filesys.GetFolder(".")
     For Each File In Fldr.Files
     	If UCase(Right(File,4)) = ".TXT" then
-    		CheckDebug(File) 
+    		CheckDebug(File)
     	End If
     	'wscript.echo File
     Next
@@ -31,7 +31,7 @@ outFile.Close
 
 'Check the Error Log file
 set DiffFile = filesys.GetFile(ErrorLog)
-If  ( DiffFile.size > 0 ) then 
+If  ( DiffFile.size > 0 ) then
     On Error Resume Next
 	Set objShell = CreateObject("WScript.Shell")
 	objShell.Run "notepad.exe " & ErrorLog
@@ -44,22 +44,22 @@ If  ( DiffFile.size > 0 ) then
     End If
 Else
     '// If the file is Size = 0 delete it!!!
-    DiffFile.Delete true   
-    
+    DiffFile.Delete true
+
 	If strSVNout <> "" then
-        'Show OK message 
+        'Show OK message
     	Wscript.echo vbcrlf & vbcrlf & _
     		"       **************************************       " & vbcrlf & _
     		"          All Files Updated Successfully!           " & vbcrlf & _
     		"       **************************************       " & _
-    		vbcrlf & vbcrlf & vbcrlf & vbcrlf 
+    		vbcrlf & vbcrlf & vbcrlf & vbcrlf
     else
-    	'Show OK message 
+    	'Show OK message
     	Wscript.echo vbcrlf & vbcrlf & _
     		"       **************************************       " & vbcrlf & _
     		"          All Files Compiled Successfully!          " & vbcrlf & _
     		"       **************************************       " & _
-    		vbcrlf & vbcrlf & vbcrlf & vbcrlf 
+    		vbcrlf & vbcrlf & vbcrlf & vbcrlf
         'Wscript.Sleep 5000
     end if
 End If
@@ -95,7 +95,7 @@ Sub CheckDebug(strFile)
 				outFile.WriteLine(dFile & VbCrLf & ThisLine & VbCrLf)
 			Else 'Look for "Fatal:" - add to outfile if found
 				If InStr(ThisLine, "Fatal:") > 0 Then
-					outFile.WriteLine(dFile & VbCrLf & ThisLine & VbCrLf) 
+					outFile.WriteLine(dFile & VbCrLf & ThisLine & VbCrLf)
 				End If
 			End If
 		Loop

@@ -1,11 +1,11 @@
 '// Check a Directory for read only files
-'// 
+'//
 '// CASE [+] [-] [!] source
-'//   
+'//
 '//   +   Sets Read-only file attribute.
 '//   -   Clears Read-only file attribute.
 '//   !   Information about Current directory
-'//   source	Specifies the directory to be inspected 
+'//   source	Specifies the directory to be inspected
 
 
 Set objShell    = CreateObject("WScript.Shell")
@@ -24,12 +24,12 @@ end if
 
 Sub checkFolder(Param, directory)
 	Set Fldr = fso.GetFolder(directory)
-	if Param = "!" then	
+	if Param = "!" then
 		Set outFile 	= fso.CreateTextFile(directory & "\Attrib.ini", True)
 		For Each File In Fldr.Files
 			outFile.WriteLine(File.attributes & "	" & File)
 		next
-		
+
 		outFile.WriteLine(" ")
 		outFile.WriteLine("  Value		Description                                               ")
 		outFile.WriteLine("     0		Normal file. No attributes are set.                           ")

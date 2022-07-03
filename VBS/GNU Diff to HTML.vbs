@@ -9,7 +9,7 @@ If WScript.Arguments.Count > 0 then
 	End If
 End If
 'Input via Explorer
-If myTxtFile = "" Then 
+If myTxtFile = "" Then
 	Set ObjFSO = CreateObject("UserAccounts.CommonDialog")
 	ObjFSO.Filter = "GNU Diff File|*.*"
 	ObjFSO.ShowOpen
@@ -18,34 +18,34 @@ End If
 'Call the Write Procedure
 If myTxtFile <> "" Then
 	Call DoWrite(myTxtFile)
-End If 	
+End If
 
 Sub DoWrite(txtFile)
 	'Create a template HTML file with all the Style
 	Call WriteStyle(txtFile & ".html")
-	
+
 	'InFile is the GNU diff file (input file)
 	Set inFile  = fso.OpenTextFile(txtFile, 1)
 	'Append the rest of the info to the HTML file
 	'OutFile HTML file (OutPut File)
 	Set outFile = fso.OpenTextFile(txtFile & ".html", 8)
-	
+
 	'Write the Summary
-	' First line contains the file & date 
+	' First line contains the file & date
 	dLine  = inFile.ReadLine
 	IntPos = inStr(dLine,"	")
     outFile.WriteLine("<td>" &   Mid(dLine,4,IntPos-4)      & "</td>")
     outFile.WriteLine("<td>" & Mid(dLine,IntPos,Len(dLine)) & "</td>")
 	outFile.WriteLine("</tr>")
 	outFile.WriteLine("<tr>")
-	' Second line contains the file & date 
+	' Second line contains the file & date
 	dLine  = inFile.ReadLine
 	IntPos = inStr(dLine,"	")
     outFile.WriteLine("<td>" & Mid(dLine,4,IntPos-4) & "</td>")
     outFile.WriteLine("<td>" & Mid(dLine,IntPos,Len(dLine)) & "</td>")
 	outFile.WriteLine("</tr>")
 	outFile.WriteLine("</table>")
-	
+
 	'Write the Comparison details
 	outFile.WriteLine("<h2>Comparison details</h2>")
 	outFile.WriteLine("<a name=" & chr(34) & "report00000000" & chr(34) & ">")
@@ -60,10 +60,10 @@ Sub DoWrite(txtFile)
 	Do until inFile.AtEndOfStream
 		dLine = inFile.ReadLine
 		dChar = Left(dLine,1)
-		If dChar = "@" Then 
+		If dChar = "@" Then
 			IntPosS = inStr(5,dLine," ")
 			IntPosC = inStr(5,dLine,",")
-			If IntPosC = 0 then 
+			If IntPosC = 0 then
 				IntPos = IntPosS
 			Else
 				If IntPosC > IntPosS then
@@ -72,37 +72,37 @@ Sub DoWrite(txtFile)
 					IntPos = IntPosc
 				End IF
 			End If
-				
+
 			IntLine = Mid(dLine,5,IntPos-5)
 			'outFile.WriteLine("<tr><td class="&chr(34)&"lineNo"&chr(34)&"></td><td><PRE>Year, Vin        , Make  , Model & Symbols</td></tr>")
 		Else
-			If dChar = "+" Then 
+			If dChar = "+" Then
 				IntPlus = IntPlus + 1
 				outFile.WriteLine("<tr><td class=" & chr(34) & "lineNo" & chr(34) & ">" & IntLine & _
-								  "</td><td class=" & chr(34) & "lineadd" & chr(34) & "><span>" & _ 
+								  "</td><td class=" & chr(34) & "lineadd" & chr(34) & "><span>" & _
 								  Mid(dLine,2,len(dline)) & "</span></td></tr>")
 			Else
-				If dChar = "-" Then 
+				If dChar = "-" Then
 					IntMinus = IntMinus + 1
 					outFile.WriteLine("<tr><td class=" & chr(34) & "lineNo" & chr(34) & ">" & IntLine & _
-									  "</td><td class=" & chr(34) & "linedel" & chr(34) & "><span>" & _ 
+									  "</td><td class=" & chr(34) & "linedel" & chr(34) & "><span>" & _
 									  Mid(dLine,2,len(dline)) & "</span></td></tr>")
 				Else
 					outFile.WriteLine("<tr><td class=" & chr(34) & "lineNo" & chr(34) & ">" & IntLine & _
 									  "</td><td class=" & chr(34) & "line" & chr(34) & "><span>" & _
 									  dLine & "</span></td></tr>")
 				End If
-			End If 
-			
+			End If
+
 			IntLine = IntLine + 1
-		End If 
+		End If
 	Loop
-	
+
 	outFile.Close
 	inFile.Close
 	'Write the end of the file with the Statistics & Legend
 	Call AppendFinal(txtFile & ".html" , IntPlus, IntMinus, IntModif)
-	
+
 End Sub
 
 'Create a template HTML file with all the Style
@@ -297,11 +297,11 @@ Sub WriteStyle(dFile)
 End Sub
 
 'Write the end of the file with the Statistics & Legend
-' 
+'
 Sub AppendFinal(dFile,dAdded,dRemov,dModif)
 	Set outFile = fso.OpenTextFile(dFile, 8)
-	
-	outFile.WriteLine("</table>")	
+
+	outFile.WriteLine("</table>")
 	outFile.WriteLine("<h2>Comparison statistics</h2>")
 	outFile.WriteLine("<table class=" & chr(34) & "summary" & chr(34) & ">")
 	outFile.WriteLine("<tbody><tr>")
@@ -320,9 +320,9 @@ Sub AppendFinal(dFile,dAdded,dRemov,dModif)
     outFile.WriteLine("<td>Lines modified</td>")
     outFile.WriteLine("<td class=" & chr(34) & "val" & chr(34) & ">" & dModif & "</td>")
 	outFile.WriteLine("</tr>")
-	outFile.WriteLine("</tbody>")	
+	outFile.WriteLine("</tbody>")
 	outFile.WriteLine("</table>")
-	
+
 	outFile.WriteLine("<h2>Legend</h2>")
 	outFile.WriteLine("<TABLE class=" & chr(34) & "report" & chr(34) & " border=1>")
 	outFile.WriteLine("<tr>")
@@ -338,7 +338,7 @@ Sub AppendFinal(dFile,dAdded,dRemov,dModif)
 	outFile.WriteLine("<TD class=" & chr(34) & "nostyle" & chr(34) & ">Modified line</TD><TD class=" & chr(34) & "linemod" & chr(34) & ">Example of modified line</TD>")
 	outFile.WriteLine("</TR>")
 	outFile.WriteLine("</TABLE>")
-	outFile.WriteLine("<BR>")	
+	outFile.WriteLine("<BR>")
 	outFile.WriteLine("<TABLE class=" & chr(34) & "report" & chr(34) & " border=1>")
 	outFile.WriteLine("<tr>")
 	outFile.WriteLine("<TH colspan=" & chr(34) & "2" & chr(34) & ">Character (inline) changes</TH>")
@@ -348,10 +348,10 @@ Sub AppendFinal(dFile,dAdded,dRemov,dModif)
 	outFile.WriteLine("</TR>")
 	outFile.WriteLine("<tr>")
 	outFile.WriteLine("<TD class=" & chr(34) & "nostyle" & chr(34) & ">Deleted characters</TD><TD class=" & chr(34) & "linemod" & chr(34) & ">Some <span class=" & chr(34) & "chardel" & chr(34) & ">deleted</SPAN> characters</TD>")
-	outFile.WriteLine("</TR>")	
+	outFile.WriteLine("</TR>")
 	outFile.WriteLine("</TABLE>")
 	outFile.WriteLine("</BODY>")
 	outFile.WriteLine("</HTML>")
-	
+
 	outFile.Close
 End Sub

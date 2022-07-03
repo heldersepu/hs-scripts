@@ -1,4 +1,4 @@
-' BackUp "MainNt2" to keep a safe copy in case of a disaster 
+' BackUp "MainNt2" to keep a safe copy in case of a disaster
 
  'Storage Folder needs Write access
  myFldBackUp = "C:\BackUp\"
@@ -16,12 +16,12 @@ If WScript.Arguments.Count > 0  Then
 	objShell.Run "notepad BackUp.vbs"
 Else
 	Set objFSO = CreateObject("Scripting.FileSystemObject")
-	With objFSO 
+	With objFSO
 		If Not .FolderExists(myFldBackUp) then .CreateFolder(myFldBackUp)
 		'Create a new folder name it using current Date & Time
 		FldBackUp = myFldBackUp & "Update " & Replace(Replace(NOW,"/","-"),":",".")
 		.CreateFolder(FldBackUp)
-		
+
 		For Each FldItem In FldArray
 			If .FolderExists(FldItem) then
 				'Create the same folder on the local backup
@@ -36,11 +36,11 @@ Else
 							For Each ExtItem In ExtArray
 								'Only Copy the given ext
 								If (ExtItem = ucFile) then
-									If Not .FolderExists(FldBackUp  & FldLocal & SubFldItem) then 
+									If Not .FolderExists(FldBackUp  & FldLocal & SubFldItem) then
 										.CreateFolder(FldBackUp & FldLocal & SubFldItem)
 									End if
 									'Wscript.Echo File.Path & ", " & FldBackUp  & FldLocal & SubFldItem
-									.CopyFile File.Path, FldBackUp  & FldLocal & SubFldItem & "\", true  
+									.CopyFile File.Path, FldBackUp  & FldLocal & SubFldItem & "\", true
 									'.CopyFolder FldItem & SubFldItem, FldBackUp  & FldLocal & SubFldItem , true
 								End if
 							Next
@@ -51,7 +51,7 @@ Else
 				MsgBox "Folder not Found" & VbCrLf & FldItem
 			End If
 		Next
-		MsgBox "     BackUp Completed!     " 
+		MsgBox "     BackUp Completed!     "
 		Call RemoveSVN(.GetFolder(FldBackUp))
 
 	End With
@@ -59,13 +59,13 @@ Else
 End If
 
 'Remove all the SVN folders recursively
-Sub RemoveSVN(dFolder) 
+Sub RemoveSVN(dFolder)
 	For Each Subfolder in dFolder.SubFolders
 		dSubFolder = UCase(Subfolder.Name)
-		If (dSubFolder = ".SVN") or (dSubFolder = "_SVN") then 
+		If (dSubFolder = ".SVN") or (dSubFolder = "_SVN") then
 			Subfolder.Delete(True)
 		Else
 			Call RemoveSVN(Subfolder)
-		End If 
+		End If
     Next
 End Sub

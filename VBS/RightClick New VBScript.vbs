@@ -17,10 +17,9 @@ End If
 Const HKEY_CLASSES_ROOT = &H80000000
 
 Set objRegistry=GetObject("winmgmts:\\.\root\default:StdRegProv")
- 
+
 strKeyPath = "VBSFile\Shell\Open2\Command"
 strValueName = ""
-strValue = "cmd.exe /K cscript.exe " & Chr(34) & "%1" & Chr(34) & " %*" 
+strValue = "cmd.exe /K cscript.exe " & Chr(34) & "%1" & Chr(34) & " %*"
 
 Call objRegistry.SetExpandedStringValue(HKEY_CLASSES_ROOT, strKeyPath, strValueName, strValue)
- 

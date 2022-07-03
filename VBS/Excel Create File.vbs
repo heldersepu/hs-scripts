@@ -1,9 +1,9 @@
-' Create Excel file in the desktop 
+' Create Excel file in the desktop
 
-set WshShell = WScript.CreateObject("WScript.Shell") 
+set WshShell = WScript.CreateObject("WScript.Shell")
 strDesktop = WshShell.SpecialFolders("Desktop")
 On Error Resume Next
-Set objExcel = createobject("Excel.application")  
+Set objExcel = createobject("Excel.application")
 If Err.Number <> 0 Then
    Wscript.Echo "You must have Excel installed to perform this operation."
 Else

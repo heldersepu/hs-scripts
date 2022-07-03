@@ -6,7 +6,7 @@ If fso.FileExists("C:\Program Files\Borland\Database Desktop\dbd32.exe") then
 	Success  = False
 	' Input via Arguments
 	If WScript.Arguments.Count > 0 then
-		If fso.FolderExists(WScript.Arguments.Item(0)) Then 
+		If fso.FolderExists(WScript.Arguments.Item(0)) Then
 			myFolder = WScript.Arguments.Item(0)
 		Else
 			If fso.FileExists(WScript.Arguments.Item(0)) Then
@@ -15,7 +15,7 @@ If fso.FileExists("C:\Program Files\Borland\Database Desktop\dbd32.exe") then
 		End If
 	End if
 	'Input via Explorer
-	If myFolder = "" Then 
+	If myFolder = "" Then
 		Set SA = CreateObject("Shell.Application")
 		Set f = SA.BrowseForFolder(0, "Choose a folder", 0, "c:\")
 		If (Not f Is Nothing) Then
@@ -40,9 +40,9 @@ End If
 'Loop through all the files in the folder
 Sub ProcFolder(dFolder)
 	For each File in dFolder.Files
-		If Ucase(Right(File.Path,4)) = ".DBF" then 
+		If Ucase(Right(File.Path,4)) = ".DBF" then
 			Wscript.Sleep 100
-			oShell.SendKeys "%+T" 
+			oShell.SendKeys "%+T"
 			oShell.SendKeys "U"
 			oShell.SendKeys "S"
 			oShell.SendKeys File.Path
@@ -59,5 +59,5 @@ Sub ProcFolder(dFolder)
 		End If
 	Next
 	Wscript.Sleep 1000
-	oShell.SendKeys "%{F4}" 
+	oShell.SendKeys "%{F4}"
 End Sub

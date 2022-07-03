@@ -2,7 +2,7 @@ myFile = "C:\Scripts\Symbols.txt"
 'Call the Convert Procedure
 If myFile <> "" Then
     Wscript.Echo doConvert(myFile)
-End If     
+End If
 
 Function doConvert(dFile)
     Set fso = CreateObject("Scripting.FileSystemObject")
@@ -16,7 +16,7 @@ Function doConvert(dFile)
 
         For I = 1 to dLen
             dChar = Mid(dLine,I,1)
-            If IsNumeric(dChar) or dChar = " " or _ 
+            If IsNumeric(dChar) or dChar = " " or _
                (UCase(dChar) <> LCase(dChar)) then
                 dMessage = dMessage & dChar
             End If

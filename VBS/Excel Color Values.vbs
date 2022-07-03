@@ -12,4 +12,3 @@ For i = 1 to 100
     objExcel.Cells(i, 1).Value = i
     objExcel.Cells(i, 2).Interior.ColorIndex = i
 Next
-	

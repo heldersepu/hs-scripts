@@ -2,18 +2,18 @@ myFile = "C:\Scripts\Alice.txt"
 'Call the Convert Procedure
 If myFile <> "" Then
     Wscript.Echo doConvert(myFile)
-End If     
+End If
 
 Function doConvert(dFile)
     Set fso = CreateObject("Scripting.FileSystemObject")
     Set inFile  = fso.OpenTextFile(dFile, 1)
     dMessage = ""
-    
-    'Loop file 
+
+    'Loop file
     Do until inFile.AtEndOfStream
         dLine = inFile.ReadLine
         arrWords = Split(dLine," ")
-        
+
         For I = 0 to Ubound(arrWords)
             strRever = ""
             dLen = Len(arrWords(I))
@@ -23,10 +23,10 @@ Function doConvert(dFile)
             Next
             dMessage = dMessage & strRever & " "
         Next
-        
+
         dMessage = dMessage & VbCrLf
     Loop
     inFile.Close
-    
+
     doConvert = dMessage
 End Function

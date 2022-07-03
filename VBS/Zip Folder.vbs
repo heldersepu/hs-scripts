@@ -25,7 +25,7 @@ If (myFolder <> "") then
 		For Each objItem in SrcFldr.Items
 			DestFldr.CopyHere objItem, 8
 		Next
-		
+
 		Do Until SrcFldr.Items.Count = DestFldr.Items.Count
 			WScript.Sleep 200
 		Loop

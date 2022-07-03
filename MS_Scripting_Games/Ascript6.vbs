@@ -9,7 +9,7 @@ Next
 'Function that check if is a Prime #
 Function IsPrime(intNum)
     blnTemp = True
-    If intNum > 2 then 
+    If intNum > 2 then
         For J = 2 to intNum\2
             If (intNum mod J = 0 ) then
                 blnTemp = False

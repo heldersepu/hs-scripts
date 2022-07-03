@@ -12,5 +12,5 @@ If f.attributes = 32 Then
       MsgBox "Archive bit is cleared."
   Else
       MsgBox "Archive bit remains set."
-  End If  
+  End If
 End if

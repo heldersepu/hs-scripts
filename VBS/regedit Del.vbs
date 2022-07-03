@@ -1,7 +1,7 @@
 Const HKEY_LOCAL_MACHINE = &H80000002
 
 Set objReg = GetObject("winmgmts:\\.\root\default:StdRegProv")
- 
+
 strKeyPath = "SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
 Call objReg.EnumValues(HKEY_LOCAL_MACHINE, strKeyPath,arrStrNames)
 

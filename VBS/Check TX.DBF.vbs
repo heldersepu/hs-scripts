@@ -6,7 +6,7 @@ Set fso  = CreateObject("Scripting.FileSystemObject")
 
 IF fso.FolderExists(directory) and fso.FileExists(dFile) then
 	GetHeaders(dFile)
-	dFile = dFile & ".TXT"	
+	dFile = dFile & ".TXT"
 	Set objShell = CreateObject("WScript.Shell")
 	Set outFile = fso.CreateTextFile(directory & "\DelOld.bat", True)
 	Set inFile = fso.OpenTextFile(dFile, 1)
@@ -18,12 +18,12 @@ IF fso.FolderExists(directory) and fso.FileExists(dFile) then
 		If (Right(dbFile, 4) = ".DBF") And (LendbFile <= 8 ) then
 			If InStr(txtFile, Mid(dbFile, 1, LendbFile - 4)) = 0  then
 				outFile.writeLine("@Del /S " & File)
-			End If 
+			End If
 		End If
 	Next
-	
-	outFile.writeLine("")	
-	outFile.writeLine("@Echo.")                   
+
+	outFile.writeLine("")
+	outFile.writeLine("@Echo.")
 	outFile.writeLine("@if ""%1"" == ""/s"" GOTO END")
 	outFile.writeLine("@Pause")
 	outFile.writeLine(":END")
@@ -43,7 +43,7 @@ Sub GetHeaders(dbfFile)
 		Wscript.Echo "You must have Excel installed to perform this operation."
 		Wscript.Quit
 	Else
-		Set objWorkbook  = objExcel.Workbooks.Open(dbfFile)	
+		Set objWorkbook  = objExcel.Workbooks.Open(dbfFile)
 		'Output the values to a TXT file
 		Set outFile = fso.CreateTextFile(dbfFile & ".TXT", True)
 		col = 2

@@ -13,4 +13,4 @@ Else
         strMessage = strMessage & objProc.Name & VbCrLf
     Next
     Wscript.Echo strMessage
-End If 
+End If

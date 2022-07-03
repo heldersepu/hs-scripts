@@ -22,7 +22,7 @@ Sub ReadFile(dfile)
 			VBcrlf& "Do you want to look for the file", _
 			VbYesNo," File not found!")
 		If Resp = vbYes then
-			Set oDLG=CreateObject("MSComDlg.CommonDialog") 
+			Set oDLG=CreateObject("MSComDlg.CommonDialog")
 			oDLG.DialogTitle="Open"
 			oDLG.Filter= "Text Files|*.txt|All files|*.*"
 			oDLG.MaxFileSize=255
@@ -33,4 +33,4 @@ Sub ReadFile(dfile)
 			Set oDLG=Nothing
 		End If
 	End If
-End Sub 
+End Sub

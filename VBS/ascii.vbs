@@ -2,7 +2,7 @@
 
 Set objShell = CreateObject("WScript.Shell")
 'Wscript.Sleep 1000
-For k = 1 To 255	
+For k = 1 To 255
 	'Wscript.Sleep 10
 	Wscript.Echo k & "	" & chr(k)
 Next

@@ -5,7 +5,7 @@ X = Len(strOper)
 Op = 0
 J = 0
 Redim dNum(X)
-'Extract the numbers 
+'Extract the numbers
 For I = 1 to X
     dChar = mid(strOper,I,1)
     If IsNumeric(dChar) then
@@ -28,19 +28,19 @@ For I = 0 to Op^Op - 1
 		X = (I \ Op^J ) mod 4
 		Select Case X
 			Case 0
-				Temp = Temp & " + " & dNum(J+2) 
+				Temp = Temp & " + " & dNum(J+2)
 			Case 1
-				Temp = Temp & " - " & dNum(J+2) 
+				Temp = Temp & " - " & dNum(J+2)
 			Case 2
-				Temp = Temp & " * " & dNum(J+2) 
+				Temp = Temp & " * " & dNum(J+2)
 			Case 3
-				Temp = Temp & " / " & dNum(J+2) 
+				Temp = Temp & " / " & dNum(J+2)
 		End Select
 	Next
 	Execute "total="&Temp
-	If total = dNum(J+2) then   
+	If total = dNum(J+2) then
 		Wscript.echo temp &" = "& dNum(J+2)
-	End If 
+	End If
 	'Wscript.echo temp & "	-> " & total
 Next
 

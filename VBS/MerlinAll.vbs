@@ -82,7 +82,7 @@ objCharacter.Play "WriteContinued"
 objCharacter.Play "WriteReturn"
 'objCharacter.Play "Writing"
 
-objCharacter.Hide  
+objCharacter.Hide
 
 Do While objCharacter.Visible = TRUE
     Wscript.Sleep 100

@@ -1,6 +1,6 @@
 'Recursively loop through all folders in drive C: and Ouput all folders into "allFldr.txt"
 
-On Error Resume Next 
+On Error Resume Next
 
 strFile = "C:\allFldr.txt"
 

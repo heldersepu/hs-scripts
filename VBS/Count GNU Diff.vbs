@@ -12,7 +12,7 @@ Else
 		myTxtFile = WScript.Arguments.Item(0)
 	End If
 	'Input via Explorer
-	If myTxtFile = "" Then 
+	If myTxtFile = "" Then
 		Set ObjFSO = CreateObject("UserAccounts.CommonDialog")
 		ObjFSO.Filter = "File to count|*.*"
 		ObjFSO.ShowOpen
@@ -21,7 +21,7 @@ Else
 	'Call the Count Procedure
 	If myTxtFile <> "" Then
 		Call DoCount(myTxtFile)
-	End If 	
+	End If
 End If
 
 Sub DoCount(txtFile)
@@ -32,14 +32,14 @@ Sub DoCount(txtFile)
 	Do until inFile.AtEndOfStream
 		dLine = inFile.ReadLine
 		dChar = Left(dLine,1)
-		If dChar = "+" Then 
+		If dChar = "+" Then
 			IntPlus = IntPlus + 1
 		Else
-			If dChar = "-" Then 
+			If dChar = "-" Then
 				IntMinus = IntMinus + 1
 			End If
-		End If 
+		End If
 	Loop
 	inFile.Close
-	MsgBox txtFile & VbCrLf & "IntPlus " & IntPlus & VbCrLf & "IntMinus " & IntMinus 
+	MsgBox txtFile & VbCrLf & "IntPlus " & IntPlus & VbCrLf & "IntMinus " & IntMinus
 End Sub

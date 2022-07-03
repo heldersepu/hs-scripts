@@ -9,10 +9,9 @@ For Each File In Fldr.Files
    If Ucase(Right(File,4)) = ".TXT" then
      Set inFile = objFSO.OpenTextFile(File, 1)
      dline = inFile.readline
-     objOutputFile.writeline dline 
+     objOutputFile.writeline dline
      inFile.close
    end  if
 next
 objOutputFile.close
 
- 

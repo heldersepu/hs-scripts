@@ -8,7 +8,7 @@ For i = 1 to 20
 Next
 Call msgBox("   All DoNe!!   ")
 
-Sub DoType()    
+Sub DoType()
     wscript.sleep 10
     obShell.SendKeys "{F3}"
     wscript.sleep 10
