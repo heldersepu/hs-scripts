@@ -13,7 +13,7 @@ FETCH NEXT FROM desc_cursor INTO @table, @field, @descr
 
 WHILE @@FETCH_STATUS = 0
 BEGIN
-	EXEC sp_addextendedproperty 
+	EXEC sp_addextendedproperty
 		@name = N'MS_Description', @value = @descr,
 		@level0type = N'User', @level0name = 'dbo',
 		@level1type = N'Table',  @level1name = @table,

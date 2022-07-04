@@ -1,8 +1,8 @@
 
 
-DECLARE @FilePath VARCHAR(250) = '\\serverSolr01\solr\OpenHouse.csv' 
+DECLARE @FilePath VARCHAR(250) = '\\serverSolr01\solr\OpenHouse.csv'
 
---DROP TABLE [dbo].[tmpOpenHouseListings] 
+--DROP TABLE [dbo].[tmpOpenHouseListings]
 CREATE TABLE [dbo].[tmpOpenHouseListings] (ListingID BIGINT)
 
 DECLARE @strSQL VARCHAR(500)

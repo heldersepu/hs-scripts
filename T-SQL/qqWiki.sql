@@ -1,5 +1,5 @@
 INSERT INTO `wikidb`.`qq_user_groups`(ug_user, ug_group)
-SELECT user_id, 'autoconfirmed' 
+SELECT user_id, 'autoconfirmed'
 FROM `wikidb`.`qq_user`
 WHERE user_email_authenticated is NULL;
 

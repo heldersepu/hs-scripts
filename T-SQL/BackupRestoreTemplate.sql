@@ -8,8 +8,8 @@ SET @strFileName = '\\external.prod.qq\SQLBackupDATA\Template\QFWinData_Template
 
 -- Make backup of the template database in 13B
 DECLARE @strBackup nvarchar(512)
-SET @strBackup = 'BACKUP DATABASE QFWinData_Template_OLAM ' + 
-	'TO DISK = '''+ @strFileName + ''' WITH FORMAT;' 
+SET @strBackup = 'BACKUP DATABASE QFWinData_Template_OLAM ' +
+	'TO DISK = '''+ @strFileName + ''' WITH FORMAT;'
 EXEC DBC13BLNK.master.dbo.sp_executesql @strBackup
 PRINT ' - - - '
 
@@ -26,7 +26,7 @@ DECLARE @LogDirectory nvarchar(256)
 SET	@LogDirectory = dbo.SQLServerDefault('Log')
 IF RIGHT(@LogDirectory, 1) <> '\'
 	SET		@LogDirectory = @LogDirectory + '\'
-SET	@LogDirectory = @LogDirectory + 'QFWinData_Template_OLAM_Log.ldf'	
+SET	@LogDirectory = @LogDirectory + 'QFWinData_Template_OLAM_Log.ldf'
 
 RESTORE DATABASE QFWinData_Template_OLAM
   FROM DISK = @strFileName

@@ -4,7 +4,7 @@ DECLARE @dbname VARCHAR(64),
 	@logfile VARCHAR(128)
 
 DECLARE c1 CURSOR FOR
-SELECT d.NAME, mf.NAME AS logfile 
+SELECT d.NAME, mf.NAME AS logfile
 FROM sys.master_files mf
 INNER JOIN sys.databases d
 	ON mf.database_id = d.database_id
@@ -17,14 +17,14 @@ FETCH NEXT FROM c1 INTO @dbname, @logfile
 
 WHILE @@fetch_status <> - 1
 BEGIN
-	BEGIN TRY  
+	BEGIN TRY
 		EXEC('ALTER DATABASE [' + @dbname + '] SET RECOVERY SIMPLE')
 		EXEC('USE [' + @dbname + '] checkpoint')
 		EXEC('USE [' + @dbname + '] DBCC SHRINKFILE (' + @logfile + ', 1)')
-	END TRY  
-	BEGIN CATCH  
+	END TRY
+	BEGIN CATCH
 		 PRINT 'ERROR W/ DB: ' + @dbname
-	END CATCH 
+	END CATCH
 	FETCH NEXT FROM c1 INTO @dbname, @logfile
 END
 
