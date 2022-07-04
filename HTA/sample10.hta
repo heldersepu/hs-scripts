@@ -2,7 +2,7 @@
 <HEAD>
 <TITLE>Pick a Color, Any Color</TITLE>
 <HTA:Application
-SELECTION="NO"/> 
+SELECTION="NO"/>
 </HEAD>
 <SCRIPT language="VBScript">
 Dim A, Resp, RndNR
@@ -20,12 +20,12 @@ Sub window_onload
 End Sub
 
 Sub Click_Submit
-	'Randomly draw the card 
+	'Randomly draw the card
 	If tries.innerHTML = 20 Then
 		Resp = MsgBox ("You have taken all 20 Cards"_
 					&vbcrlf&"Do you want to try again?"_
 					, vbYesNO, "Pick a Color, Any Color")
-		If Resp = vbYes then 
+		If Resp = vbYes then
 			window_onload
 		End If
 	Else
@@ -35,10 +35,10 @@ Sub Click_Submit
 		Loop
 		two.bgColor = A(RndNR)
 		If one.bgColor = two.bgColor then
-			MsgBox  " You are CORRECT :) ", vbOkOnly, "Try again" 
+			MsgBox  " You are CORRECT :) ", vbOkOnly, "Try again"
 			score.innerHTML = score.innerHTML + 1
 		Else
-			MsgBox  " You are WRONG :( ", vbOkOnly, "Try again"  
+			MsgBox  " You are WRONG :( ", vbOkOnly, "Try again"
 		End IF
 		tries.innerHTML = tries.innerHTML + 1
 		two.bgColor = "white"
@@ -46,22 +46,22 @@ Sub Click_Submit
 	End If
 End Sub
 
-Sub Click_Yellow 
-	one.bgColor = "Yellow" 
+Sub Click_Yellow
+	one.bgColor = "Yellow"
 End Sub
 Sub Click_Red
-	one.bgColor = "Red" 
+	one.bgColor = "Red"
 End Sub
 Sub Click_Blue
-	one.bgColor = "Blue" 
+	one.bgColor = "Blue"
 End Sub
 Sub Click_Green
-	one.bgColor = "Green" 
+	one.bgColor = "Green"
 End Sub
 </SCRIPT>
 <BODY>
 <Table Border=2 CELLSPACING=5 width="60%" HEIGHT="40%" ALIGN=center>
-<TR ALIGN=center> 
+<TR ALIGN=center>
 <TD  ID="one" width="50%" bgColor="Yellow"><H1>Your Guess</H1></TD>
 <TD  ID="two" width="50%"><H1>Actual</H1></TD>
 </TR>
