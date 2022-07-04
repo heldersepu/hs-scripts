@@ -59,7 +59,7 @@
 				"descrizione": {
 					"description": "Descrizione",
 					"type": "string"
-				},				
+				},
 				"flgAgri": {
 					"description": "Agricoltura",
 					"type": "number"

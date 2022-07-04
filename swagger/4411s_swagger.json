@@ -658,7 +658,7 @@
 		},
 		"Identifier":
 		{
-			"allOf": [				
+			"allOf": [
 				{
 					"description": "A technical identifier - identifies some entity uniquely and unambiguously.",
 					"properties":
@@ -1217,7 +1217,7 @@
 		},
 		"HumanName":
 		{
-			"allOf": [				
+			"allOf": [
 				{
 					"description": "A human\u0027s name with the ability to identify parts and usage.",
 					"properties":
@@ -1236,7 +1236,7 @@
 							],
 							"type": "string"
 						},
-						
+
 						"text":
 						{
 							"description": "A full text representation of the name.",
@@ -1274,7 +1274,7 @@
 								"type": "string"
 							}
 						}
-						
+
 					}
 				}
 			]
@@ -17602,7 +17602,7 @@
 						{
 							"description": "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.",
 							"$ref": "#/definitions/Narrative"
-						},						
+						},
 						"extension":
 						{
 							"description": "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
@@ -32274,7 +32274,7 @@
 		},
 		"Practitioner":
 		{
-			"allOf": [				
+			"allOf": [
 				{
 					"description": "A person who is directly or indirectly involved in the provisioning of healthcare.",
 					"properties":
@@ -32300,7 +32300,7 @@
 						{
 							"description": "Whether this practitioner\u0027s record is in active use.",
 							"type": "boolean"
-						},						
+						},
 						"name":
 						{
 							"description": "The name(s) associated with the practitioner.",
@@ -32309,7 +32309,7 @@
 							{
 								"$ref": "#/definitions/HumanName"
 							}
-						},						
+						},
 						"gender":
 						{
 							"description": "Administrative Gender - the gender that the person is considered to have for administration and record keeping purposes.",
@@ -32327,7 +32327,7 @@
 							"type": "string",
 							"pattern": "-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?"
 						}
-						
+
 					},
 					"required": [
 						"resourceType"
