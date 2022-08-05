@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        div { padding: 1em;}
+        #source { border: 2px solid blue; }
+        #target { border: 1px solid black; overflow-wrap: break-word;}
+    </style>
+    <body>
+        <div><canvas id="source" ondragstart="dragstart_handler(event);" draggable="true"></canvas></div>
+        <div id="target" ondrop="drop_handler(event);" ondragover="dragover_handler(event);">Drop Zone</div>
+    </body>
+    <script>
+        const canvas = document.getElementById('source');
+        const ctx = canvas.getContext('2d');
+        canvas.width = canvas.height = 100;
+        ctx.translate(50, 50);
+        delta = 0
+
+        function drawStar(size, angle, color) {
+            ctx.beginPath();
+            size = size * 8
+            for (j = 0; j < 3; j++) {
+                a = angle * Math.PI / 180
+                angle += 360 / 3
+                ctx.lineTo(size * Math.sin(a), size * Math.cos(a));
+            }
+            ctx.fillStyle = color;
+            ctx.fill();
+        }
+        function drawStars() {
+            delta++
+            for (i = 11; i > 0; i--) {
+                color = (i % 2 == 0 ? "black" : "white")
+                drawStar(i, i - delta, color)
+            }
+        }
+        setInterval(drawStars, 1000 / 24);
+
+        function dragstart_handler(ev) {
+            ev.dataTransfer.setData("text/plain", canvas.toDataURL())
+        }
+
+        function dragover_handler(ev) {
+            ev.preventDefault()
+        }
+
+        function drop_handler(ev) {
+            ev.preventDefault()
+            ev.target.innerHTML = ev.dataTransfer.getData("text")
+            ev.dataTransfer.clearData()
+        }
+    </script>
+</html>
+

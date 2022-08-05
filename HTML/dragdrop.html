@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        div { padding: 2em; width: 150px;}
+        #source { border: 2px solid blue; }
+        #target { border: 1px solid black; }
+    </style>
+    <script>
+        function dragstart_handler(ev) {
+            ev.dataTransfer.setData("text/plain", new Date().getTime())
+        }
+
+        function dragover_handler(ev) {
+            ev.preventDefault()
+        }
+
+        function drop_handler(ev) {
+            ev.preventDefault()
+            ev.target.innerHTML += "<br>" + ev.dataTransfer.getData("text")
+            ev.dataTransfer.clearData()
+        }
+    </script>
+    <body>
+        <div><p id="source" ondragstart="dragstart_handler(event);" draggable="true">Drag me</p></div>
+        <div id="target" ondrop="drop_handler(event);" ondragover="dragover_handler(event);">Drop Zone</div>
+    </body>
+</html>
+
