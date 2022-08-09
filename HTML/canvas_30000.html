@@ -1,0 +1,12 @@
+<div style="display: block; width: 30000px">
+    <canvas id="canvas" width="30050" height="500"> </canvas>
+</div>
+<script>
+    var canvas = document.getElementById("canvas")
+    var ctx = canvas.getContext("2d")
+    for (let i = 10; i < canvas.width; i++) {
+        if (i % 100 == 0) ctx.fillText(i, i, 10)
+        ctx.lineTo(i, 250 + Math.sin(i / 10) * Math.sqrt(i))
+    }
+    ctx.stroke()
+</script>
