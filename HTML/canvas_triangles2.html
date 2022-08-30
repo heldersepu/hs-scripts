@@ -1,0 +1,23 @@
+<canvas id="c"></canvas>
+
+<script>
+    const canvas = document.getElementById("c")
+    const ctx = canvas.getContext("2d")
+    canvas.width = canvas.height = 400
+    ctx.translate(200, 200)
+
+    ctx.beginPath()
+    size = 60
+    angle = 90
+    for (j = 0; j < 4; j++) {
+        a = (angle * Math.PI) / 180
+        x = size * Math.sin(a)
+        y = size * Math.cos(a)
+        ctx.lineTo(x, y)
+        angle += 120
+    }
+    ctx.stroke()
+    ctx.beginPath()
+    ctx.arc(0, 0, 90, 0, 8)
+    ctx.stroke()
+</script>
