@@ -1,0 +1,37 @@
+<canvas id="canvas" width="400" height="100"></canvas>
+
+<script>
+    var canvas = document.getElementById("canvas")
+    var ctx = canvas.getContext("2d")
+
+    let y = 50
+    let x = 50
+    ctx.globalAlpha = 1
+    for (let i = 1; i < 5; i++) {
+        ctx.beginPath()
+        ctx.arc(y, x, 55, 0, 2 * Math.PI)
+        ctx.fill()
+        y += 80
+    }
+
+    ctx.globalAlpha = 0.5
+    y = 60
+    x = 50
+    for (let i = 1; i < 5; i++) {
+        ctx.beginPath()
+        let gradient = ctx.createRadialGradient(y, x, 40, y, x, 0)
+        gradient.addColorStop(0, "red")
+        gradient.addColorStop(0.1, "yellow")
+        gradient.addColorStop(0.2, "green")
+        gradient.addColorStop(0.4, "blue")
+        gradient.addColorStop(0.5, "purple")
+        gradient.addColorStop(1, "white")
+
+        ctx.arc(y, x, 45, 0, 2 * Math.PI)
+        ctx.fillStyle = gradient
+        ctx.fill()
+        ctx.closePath()
+
+        y += 80
+    }
+</script>
