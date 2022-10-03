@@ -21,16 +21,16 @@ resource "aws_route53_zone" "zone" {
 
 resource "aws_route53_record" "cert_validation" {
   count   = 0
-  name    = lookup(aws_acm_certificate.default.domain_validation_options[count.index], "resource_record_name")
-  type    = lookup(aws_acm_certificate.default.domain_validation_options[count.index], "resource_record_type")
-  zone_id = aws_route53_zone.zone.id
-  records = ["${lookup(aws_acm_certificate.default.domain_validation_options[count.index], "resource_record_value")}"]
+  name    = lookup(aws_acm_certificate.default[0].domain_validation_options[count.index], "resource_record_name")
+  type    = lookup(aws_acm_certificate.default[0].domain_validation_options[count.index], "resource_record_type")
+  zone_id = aws_route53_zone.zone[0].id
+  records = ["${lookup(aws_acm_certificate.default[0].domain_validation_options[count.index], "resource_record_value")}"]
   ttl     = 60
 }
 
 resource "aws_acm_certificate_validation" "cert" {
   count           = 0
-  certificate_arn = aws_acm_certificate.default.arn
+  certificate_arn = aws_acm_certificate.default[0].arn
 
   timeouts {
     create = "20m"
@@ -39,7 +39,7 @@ resource "aws_acm_certificate_validation" "cert" {
 
 resource "aws_route53_record" "elb_external_p" {
   count   = var.enabled
-  zone_id = aws_route53_zone.zone.id
+  zone_id = aws_route53_zone.zone[0].id
   name    = "pi-3.test.azurewebsites.net"
   type    = "A"
 
@@ -52,7 +52,7 @@ resource "aws_route53_record" "elb_external_p" {
 
 resource "aws_route53_record" "elb_external_s" {
   count   = var.enabled
-  zone_id = aws_route53_zone.zone.id
+  zone_id = aws_route53_zone.zone[0].id
   name    = "s4-3.test.azurewebsites.net"
   type    = "A"
 
