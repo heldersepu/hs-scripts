@@ -10,7 +10,7 @@ module "bucket11" {
 }
 
 resource "null_resource" "reference_test" {
-  triggers {
+  triggers = {
     one = module.bucket11.enabled
     two = aws_ebs_volume.data.id
   }

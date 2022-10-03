@@ -9,7 +9,7 @@ variable "vpc_ids" {
 resource "null_resource" "tion" {
   count = length(compact(var.vpc_ids))
 
-  triggers {
+  triggers = {
     vpcs = join(",", var.vpc_ids)
   }
 
