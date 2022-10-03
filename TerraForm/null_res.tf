@@ -7,7 +7,7 @@ variable "vpc_ids" {
 }
 
 resource "null_resource" "tion" {
-  for_each = toset(compact(var.vpc_ids))
+  for_each = var.vpc_ids == null ? toset([]) : toset(compact(var.vpc_ids))
 
   triggers = {
     vpcs = join(",", var.vpc_ids)
