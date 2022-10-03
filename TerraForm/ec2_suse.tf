@@ -25,7 +25,7 @@ resource "aws_instance" "suse12" {
     Name        = "suse12"
   }
 
-  volume_tags {
+  volume_tags = {
     Terraformed = "true"
     Name        = "suse12 volume root"
   }

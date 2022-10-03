@@ -17,7 +17,7 @@ resource "aws_instance" "win2016" {
     Name        = "win2016"
   }
 
-  volume_tags {
+  volume_tags = {
     Terraformed = "true"
     Name        = "win2016 volume root"
   }
