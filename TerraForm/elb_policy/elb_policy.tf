@@ -10,7 +10,7 @@ resource "aws_load_balancer_policy" "policy_tls_1_1" {
   }
 
   lifecycle {
-    ignore_changes = ["policy_attribute"]
+    ignore_changes = [policy_attribute]
   }
 }
 
@@ -24,6 +24,6 @@ resource "aws_load_balancer_listener_policy" "vault_server_listener_policies" {
   ]
 
   lifecycle {
-    ignore_changes = ["policy_names"]
+    ignore_changes = [policy_names]
   }
 }

@@ -90,8 +90,6 @@ locals {
 }
 
 variable "complex_map" {
-  type = list(string)
-
   default = [
     {
       name   = "staging"

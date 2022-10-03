@@ -4,7 +4,7 @@ provider "aws" {
 }
 
 module "bucket11" {
-  source    = "environment"
+  source    = "./environment"
   enabled   = 0
   ip_ranges = var.ip_ranges
 }

@@ -14,7 +14,7 @@ resource "sumologic_role" "example_role" {
   description = "Testing resource sumologic_role"
 
   lifecycle {
-    ignore_changes = ["users"]
+    ignore_changes = [users]
   }
 }
 

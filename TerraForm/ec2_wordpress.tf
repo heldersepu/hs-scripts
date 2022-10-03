@@ -11,7 +11,7 @@ resource "aws_instance" "wordpress" {
   }
 
   lifecycle {
-    ignore_changes  = ["ami", "user_data"]
+    ignore_changes  = [ami, user_data]
     prevent_destroy = false
   }
 

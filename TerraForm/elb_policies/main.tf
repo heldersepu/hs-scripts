@@ -33,7 +33,7 @@ resource "aws_load_balancer_policy" "policy_tls_1_1" {
   }
 
   lifecycle {
-    ignore_changes = ["policy_attribute"]
+    ignore_changes = [policy_attribute]
   }
 }
 

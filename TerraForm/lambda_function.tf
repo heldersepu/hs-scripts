@@ -34,7 +34,7 @@ resource "aws_lambda_function" "test_lambda" {
   reserved_concurrent_executions = local.concurrent_exec
 
   lifecycle {
-    ignore_changes = ["reserved_concurrent_executions"]
+    ignore_changes = [reserved_concurrent_executions]
   }
 
   environment {

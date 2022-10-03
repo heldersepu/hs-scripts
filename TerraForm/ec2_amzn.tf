@@ -11,7 +11,7 @@ resource "aws_instance" "amzn" {
   }
 
   lifecycle {
-    ignore_changes  = ["ami", "user_data"]
+    ignore_changes  = [ami, user_data]
     prevent_destroy = false
   }
 
@@ -23,6 +23,6 @@ resource "aws_instance" "amzn" {
 
   provisioner "local-exec" {
     command    = "echo ${self.public_ip}"
-    on_failure = "continue"
+    on_failure = continue
   }
 }

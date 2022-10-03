@@ -37,7 +37,7 @@ resource "aws_ecs_service" "test" {
   task_definition = aws_ecs_task_definition.test.arn
   desired_count   = 1
   launch_type     = "FARGATE"
-  depends_on      = ["aws_iam_role.role"]
+  depends_on      = [aws_iam_role.role]
 
   network_configuration {
     #security_groups = ["${aws_security_group.allow_all.id}"]

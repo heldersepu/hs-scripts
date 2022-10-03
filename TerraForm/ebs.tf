@@ -10,7 +10,7 @@ resource "aws_ebs_volume" "datav" {
   }
 
   lifecycle {
-    ignore_changes  = ["type"]
+    ignore_changes  = [type]
     prevent_destroy = false
   }
 }
