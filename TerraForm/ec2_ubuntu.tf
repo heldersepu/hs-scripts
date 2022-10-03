@@ -7,7 +7,7 @@ resource "aws_instance" "ubuntu" {
   availability_zone      = data.aws_availability_zones.available.names[0]
   user_data              = file("${path.module}/userdata.sh")
 
-  tags {
+  tags = {
     Terraformed = "true"
     Name        = "ubuntu"
   }

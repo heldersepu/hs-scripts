@@ -15,7 +15,7 @@ resource "aws_elb" "elb" {
   connection_draining         = true
   connection_draining_timeout = 400
 
-  tags {
+  tags = {
     Terraformed = "true"
     Name        = "elb"
   }

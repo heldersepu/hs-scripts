@@ -30,7 +30,7 @@ resource "aws_s3_bucket" "sample_bucket12629" {
     }
   }
 
-  tags {
+  tags = {
     Name        = "My bucket"
     Environment = "Dev"
   }

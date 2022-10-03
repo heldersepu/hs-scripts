@@ -5,7 +5,7 @@ resource "aws_instance" "wordpress" {
   vpc_security_group_ids = ["${aws_security_group.allow_all.id}"]
   availability_zone      = data.aws_availability_zones.available.names[0]
 
-  tags {
+  tags = {
     Terraformed = "true"
     Name        = "wordpress"
   }

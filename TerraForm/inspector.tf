@@ -1,5 +1,5 @@
 resource "aws_inspector_resource_group" "scheduled_inspector" {
-  tags {
+  tags = {
     Inspector   = "True"
     Terraformed = "true"
   }

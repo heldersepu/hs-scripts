@@ -4,7 +4,7 @@ resource "aws_customer_gateway" "gate" {
   ip_address = "172.83.124.10"
   type       = "ipsec.1"
 
-  tags {
+  tags = {
     Name = "the gate"
   }
 }
@@ -23,7 +23,7 @@ resource "aws_vpn_connection" "west" {
   customer_gateway_id = aws_customer_gateway.gate.id
   type                = "ipsec.1"
 
-  tags {
+  tags = {
     Name = "The VPN West"
   }
 }
@@ -42,7 +42,7 @@ resource "aws_vpn_connection" "east" {
   customer_gateway_id = aws_customer_gateway.gate.id
   type                = "ipsec.1"
 
-  tags {
+  tags = {
     Name = "The VPN East"
   }
 }

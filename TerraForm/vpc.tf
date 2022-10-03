@@ -5,7 +5,7 @@ resource "aws_vpc" "myvpc" {
   enable_dns_hostnames = true
   enable_classiclink   = false
 
-  tags {
+  tags = {
     Name = "aws_vpc"
   }
 }
@@ -29,7 +29,7 @@ resource "aws_default_network_acl" "default" {
     ignore_changes = [subnet_ids]
   }
 
-  tags {
+  tags = {
     Name = "default_network_acl"
   }
 }
@@ -37,7 +37,7 @@ resource "aws_default_network_acl" "default" {
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.myvpc.id
 
-  tags {
+  tags = {
     Name        = "my_igw"
     Terraformed = "true"
   }

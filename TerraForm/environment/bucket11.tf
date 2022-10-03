@@ -3,7 +3,7 @@ resource "aws_s3_bucket" "sample_bucket1111" {
   bucket = "my-tf-test-bucket1111"
   acl    = "private"
 
-  tags {
+  tags = {
     Name        = "My bucket"
     Environment = "Dev"
   }

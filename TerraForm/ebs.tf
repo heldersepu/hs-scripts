@@ -4,7 +4,7 @@ resource "aws_ebs_volume" "datav" {
   size              = 110 + count.index
   availability_zone = data.aws_availability_zones.available.names[0]
 
-  tags {
+  tags = {
     Name  = "suse12-data"
     Count = count.index
   }

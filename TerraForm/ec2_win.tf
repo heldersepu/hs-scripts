@@ -12,7 +12,7 @@ resource "aws_instance" "win2016" {
     no_device    = false
   }
 
-  tags {
+  tags = {
     Terraformed = "true"
     Name        = "win2016"
   }

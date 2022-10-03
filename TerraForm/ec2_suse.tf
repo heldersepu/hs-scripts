@@ -20,7 +20,7 @@ resource "aws_instance" "suse12" {
     no_device    = false
   }
 
-  tags {
+  tags = {
     Terraformed = "true"
     Name        = "suse12"
   }

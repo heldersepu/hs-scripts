@@ -21,7 +21,7 @@ resource "aws_ebs_volume" "data" {
   availability_zone = "us-east-1a"
   size              = "5"
 
-  tags {
+  tags = {
     Name = "Test volume"
   }
 }
