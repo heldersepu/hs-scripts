@@ -7,7 +7,7 @@ variable "vpc_ids" {
 }
 
 resource "null_resource" "tion" {
-  count = length(compact(var.vpc_ids))
+  for_each = toset(compact(var.vpc_ids))
 
   triggers = {
     vpcs = join(",", var.vpc_ids)
@@ -15,7 +15,7 @@ resource "null_resource" "tion" {
 
   provisioner "local-exec" {
     when    = create
-    command = "echo create ${var.vpc_ids[count.index]}"
+    command = "echo create ${each.key}"
   }
 
   provisioner "local-exec" {
