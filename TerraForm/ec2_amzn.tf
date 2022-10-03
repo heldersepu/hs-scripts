@@ -1,7 +1,7 @@
 resource "aws_instance" "amzn" {
   ami                    = data.aws_ami.amzn.id
   instance_type          = "c5d.4xlarge"
-  key_name               = aws_key_pair.sshkey.key_name
+  key_name               = aws_key_pair.sshkey[0].key_name
   vpc_security_group_ids = ["${aws_security_group.allow_all.id}"]
   availability_zone      = data.aws_availability_zones.available.names[0]
 

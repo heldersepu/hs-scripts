@@ -20,7 +20,7 @@ resource "aws_load_balancer_listener_policy" "vault_server_listener_policies" {
   load_balancer_port = 443
 
   policy_names = [
-    "${aws_load_balancer_policy.policy_tls_1_1.policy_name}",
+    "${aws_load_balancer_policy.policy_tls_1_1[0].policy_name}",
   ]
 
   lifecycle {

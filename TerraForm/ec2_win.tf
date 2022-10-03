@@ -2,7 +2,7 @@ resource "aws_instance" "win2016" {
   count                  = var.win_ec2_enabled
   ami                    = data.aws_ami.win2016.id
   instance_type          = "m5.large"
-  key_name               = aws_key_pair.sshkey.key_name
+  key_name               = aws_key_pair.sshkey[0].key_name
   vpc_security_group_ids = ["${aws_security_group.allow_all.id}"]
   get_password_data      = true
 

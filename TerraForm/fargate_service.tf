@@ -33,8 +33,8 @@ resource "aws_ecs_cluster" "test" {
 resource "aws_ecs_service" "test" {
   count           = 0
   name            = "aws_ecs_service"
-  cluster         = aws_ecs_cluster.test.id
-  task_definition = aws_ecs_task_definition.test.arn
+  cluster         = aws_ecs_cluster.test[0].id
+  task_definition = aws_ecs_task_definition.test[0].arn
   desired_count   = 1
   launch_type     = "FARGATE"
   depends_on      = [aws_iam_role.role]

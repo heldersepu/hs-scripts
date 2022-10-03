@@ -19,8 +19,8 @@ resource "aws_vpn_gateway" "west" {
 
 resource "aws_vpn_connection" "west" {
   count               = var.vpn_enabled
-  vpn_gateway_id      = aws_vpn_gateway.west.id
-  customer_gateway_id = aws_customer_gateway.gate.id
+  vpn_gateway_id      = aws_vpn_gateway.west[0].id
+  customer_gateway_id = aws_customer_gateway.gate[0].id
   type                = "ipsec.1"
 
   tags = {
@@ -38,8 +38,8 @@ resource "aws_vpn_gateway" "east" {
 
 resource "aws_vpn_connection" "east" {
   count               = var.vpn_enabled
-  vpn_gateway_id      = aws_vpn_gateway.east.id
-  customer_gateway_id = aws_customer_gateway.gate.id
+  vpn_gateway_id      = aws_vpn_gateway.east[0].id
+  customer_gateway_id = aws_customer_gateway.gate[0].id
   type                = "ipsec.1"
 
   tags = {

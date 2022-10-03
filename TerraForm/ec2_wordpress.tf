@@ -1,7 +1,7 @@
 resource "aws_instance" "wordpress" {
   ami                    = data.aws_ami.wordpress.id
   instance_type          = "m5.large"
-  key_name               = aws_key_pair.sshkey.key_name
+  key_name               = aws_key_pair.sshkey[0].key_name
   vpc_security_group_ids = ["${aws_security_group.allow_all.id}"]
   availability_zone      = data.aws_availability_zones.available.names[0]
 
