@@ -136,7 +136,7 @@ resource "aws_instance" "ubuntu" {
 data "template_file" "nslookup_check" {
   template = file("${path.module}/nslookup_check.sh")
 
-  vars {
+  vars = {
     nslookup_record = var.nslookup_record
     nslookup_server = count.index
   }
