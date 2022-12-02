@@ -1,0 +1,32 @@
+<canvas id="canvas" width="150" height="150"></canvas>
+
+<script>
+    class Shape {
+        constructor(x, y) {
+            this.path = new Path2D()
+            this.path.arc(x, y, 20, 0, 2 * Math.PI)
+        }
+
+        draw(ctx, x, y) {
+            ctx.beginPath()
+            ctx.fillStyle = ctx.isPointInPath(this.path, x, y) ? "red" : "green"
+            ctx.fill(this.path)
+        }
+    }
+
+    var canvas = document.getElementById("canvas")
+    var ctx = canvas.getContext("2d")
+
+    shapes = []
+    shapes.push(new Shape(40, 70))
+    shapes.push(new Shape(90, 70))
+
+    canvas.addEventListener("mousemove", function (evt) {
+        var rect = canvas.getBoundingClientRect()
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        shapes.forEach((s) => {
+            s.draw(ctx, evt.clientX - rect.left, evt.clientY - rect.top)
+        })
+    })
+    shapes.forEach((s) => { s.draw(ctx, 0, 0) })
+</script>
