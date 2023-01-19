@@ -31,7 +31,7 @@ data = Data()
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-print("MEM_USAGE", dict(((name, sys.getsizeof(value)) for name, value in globals().items())))
+print("MEM_USAGE", filter(lambda x: x[0][:1] != "_", ((n, sys.getsizeof(v)) for n, v in globals().items())))
 print("data", get_size(data))
 print("logger", get_size(logger))
 
