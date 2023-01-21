@@ -1,11 +1,12 @@
 locals {
   json = {
-      "4" = {
-        "no_alert_for_skipped_runs" = false
-        "on_failure" = [
-          "foo1@foo.com",
-          "foo2@foo.com",
+      "3" = {
+        "on_start" = [
+          "foo1@aligntech.com",
+          "foo2@aligntech.com",
         ]
+      },
+      "4" = {
         "on_start" = [
           "foo1@foo.com",
           "foo2@foo.com",
@@ -15,5 +16,5 @@ locals {
 }
 
 output "data" {
-    value = element(values(local.json), 1).on_start
+    value = flatten(values(local.json)[*].on_start)
 }
