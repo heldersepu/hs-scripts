@@ -1,13 +1,14 @@
 provider "aws" {
   region      = "us-east-1"
 }
+
 variable "buckets" {
   type = map(any)
   default = {
-    "in" : 180,
-    "out" : 120,
-    "in-archive" : 200,
-    "out-archive" : 360
+    "in" : {expiration: 180, transition: 0},
+    "out" : {expiration: 120, transition: 0},
+    "in-archive" : {expiration: 200, transition: 180},
+    "out-archive" : {expiration: 360, transition: 180}
   }
 }
 
@@ -23,7 +24,15 @@ resource "aws_s3_bucket_lifecycle_configuration" "lifecycle" {
     status = "Enabled"
     id     = "bucket-lifecycle-rule"
     expiration {
-      days = each.value
+      days = each.value.expiration
+    }
+  }
+  rule {
+    status = each.value.transition > 0 ? "Enabled" : "Disabled"
+    id     = "archive-bucket-lifecycle-rule"
+    transition {
+      days = each.value.transition
+      storage_class = "GLACIER"
     }
   }
 }
