@@ -14,7 +14,7 @@ resource "aws_sns_topic" "topic" {
 
 data "aws_iam_policy_document" "iam_policy" {
   statement {
-    effect = "Allow"r
+    effect = "Allow"
     actions = [
       "SNS:Publish"
     ]
