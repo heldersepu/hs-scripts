@@ -1,5 +1,3 @@
-data "aws_caller_identity" "current" {}
-
 data "archive_file" "lambda" {
   type        = "zip"
   source_file = "lambda.py"
