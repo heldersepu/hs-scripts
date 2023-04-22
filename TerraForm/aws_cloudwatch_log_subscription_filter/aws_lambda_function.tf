@@ -22,7 +22,7 @@ resource "aws_lambda_permission" "allow_cloudwatch" {
   for_each      = aws_lambda_function.lambda
   function_name = each.value.function_name
   action        = "lambda:InvokeFunction"
-  principal     = data.aws_caller_identity.current.account_id
+  principal     = "*"
 }
 
 resource "aws_cloudwatch_log_group" "logs" {
