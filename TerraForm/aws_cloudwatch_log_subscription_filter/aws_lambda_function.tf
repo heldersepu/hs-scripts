@@ -24,3 +24,8 @@ resource "aws_lambda_permission" "allow_cloudwatch" {
   action        = "lambda:InvokeFunction"
   principal     = data.aws_caller_identity.current.account_id
 }
+
+resource "aws_cloudwatch_log_group" "logs" {
+  for_each = aws_lambda_function.lambda
+  name     = "/aws/lambda/${each.value.function_name}"
+}
