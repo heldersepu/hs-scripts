@@ -14,7 +14,7 @@ resource "aws_iam_role" "iam_for_lambda" {
 }
 
 resource "aws_iam_role_policy_attachment" "CloudWatchLogsFullAccess" {
-  role       = aws_iam_role.assume_role.name
+  role       = aws_iam_role.iam_for_lambda.name
   policy_arn = "arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"
 }
 
