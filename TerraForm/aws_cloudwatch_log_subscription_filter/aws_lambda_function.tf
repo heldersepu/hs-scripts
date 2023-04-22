@@ -1,3 +1,5 @@
+data "aws_caller_identity" "current" {}
+
 data "archive_file" "lambda" {
   type        = "zip"
   source_file = "lambda.py"
@@ -17,9 +19,8 @@ resource "aws_lambda_function" "lambda" {
 }
 
 resource "aws_lambda_permission" "allow_cloudwatch" {
-  for_each      = toset(["reader", "writer"])
-  statement_id  = "AllowExecutionFromCloudWatch"
+  for_each      = aws_lambda_function.lambda
+  function_name = each.value.name
   action        = "lambda:InvokeFunction"
-  function_name = each.value
-  principal     = "events.amazonaws.com"
+  principal     = data.aws_caller_identity.current.account_id
 }
