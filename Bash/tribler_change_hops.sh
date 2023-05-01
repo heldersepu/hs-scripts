@@ -1,5 +1,5 @@
 #!/bin/bash
-## Script to change the hops if download speed is 0
+## Script to change tribler hops if download speed is 0
 
 H=http://localhost:52194
 IFS=$'\n'
@@ -29,5 +29,5 @@ while [ $running -gt 0 ]; do
             ((running++))
         fi
     done
-    sleep 5
+    sleep 50
 done

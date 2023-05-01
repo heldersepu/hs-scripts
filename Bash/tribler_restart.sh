@@ -1,5 +1,5 @@
 #!/bin/bash
-## Script to restart tribbler
+## Script to restart tribler
 
 MAX_QUEUE=1
 H=http://localhost:52194

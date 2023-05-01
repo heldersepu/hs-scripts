@@ -1,5 +1,5 @@
 #!/bin/bash
-## Script to keep a queue on tribbler
+## Script to keep a queue on tribler
 
 MAX_QUEUE=1
 H=http://localhost:52194/downloads
