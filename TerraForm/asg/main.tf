@@ -9,11 +9,21 @@ data "aws_ami_ids" "ubuntu" {
   }
 }
 
+data "aws_subnet" "x" {
+  filter {
+    name   = "tag:Name"
+    values = ["test"]
+  }
+}
+
 resource "aws_launch_template" "foo" {
   name          = "foo"
   image_id      = data.aws_ami_ids.ubuntu.ids[0]
   instance_type = "t2.micro"
 
+  network_interfaces {
+    subnet_id = data.aws_subnet.x.id
+  }
 
   metadata_options {
     http_endpoint = "disabled"
