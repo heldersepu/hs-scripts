@@ -19,7 +19,7 @@ data "aws_subnet" "x" {
 resource "aws_launch_template" "foo" {
   name          = "foo"
   image_id      = data.aws_ami_ids.ubuntu.ids[0]
-  instance_type = "t2.micro"
+  instance_type = "t2.small"
 
   network_interfaces {
     subnet_id = data.aws_subnet.x.id
