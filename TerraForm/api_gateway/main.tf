@@ -79,8 +79,15 @@ resource "aws_api_gateway_deployment" "deploy" {
   }
 }
 
+resource "aws_cloudwatch_log_group" "logs" {
+  name     = "/aws/api_gateway/test"
+}
+
 resource "aws_api_gateway_stage" "deploy" {
   deployment_id = aws_api_gateway_deployment.deploy.id
   rest_api_id   = aws_api_gateway_rest_api.x.id
   stage_name    = "test"
+  access_log_settings {
+    destination_arn = aws_cloudwatch_log_group.logs.arn
+  }
 }
