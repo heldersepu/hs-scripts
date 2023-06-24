@@ -88,5 +88,6 @@ resource "aws_api_gateway_stage" "deploy" {
   stage_name    = "test"
   access_log_settings {
     destination_arn = aws_cloudwatch_log_group.logs.arn
+    format = "JSON"
   }
 }
