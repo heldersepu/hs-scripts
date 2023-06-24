@@ -7,8 +7,7 @@ data "archive_file" "lambda" {
 }
 
 resource "aws_lambda_function" "lambda" {
-  for_each      = toset(["reader", "writer"])
-  function_name = each.value
+  function_name = "test"
 
   filename = "lambda.zip"
   role     = aws_iam_role.iam_for_lambda.arn
