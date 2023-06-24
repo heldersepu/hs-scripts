@@ -83,6 +83,9 @@ resource "aws_cloudwatch_log_group" "logs" {
 }
 
 resource "aws_api_gateway_stage" "deploy" {
+  depends_on = [
+    aws_api_gateway_account.demo
+  ]
   deployment_id = aws_api_gateway_deployment.deploy.id
   rest_api_id   = aws_api_gateway_rest_api.x.id
   stage_name    = "test"
@@ -90,4 +93,28 @@ resource "aws_api_gateway_stage" "deploy" {
     destination_arn = aws_cloudwatch_log_group.logs.arn
     format = "JSON"
   }
+}
+
+resource "aws_api_gateway_account" "demo" {
+  cloudwatch_role_arn = aws_iam_role.cloudwatch.arn
+}
+
+resource "aws_iam_role" "cloudwatch" {
+  name = "api_gateway_cloudwatch_global"
+
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "apigateway.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+EOF
 }
