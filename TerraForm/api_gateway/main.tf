@@ -1,4 +1,4 @@
-provider "aws" { region = "us-east-2" }
+provider "aws" { region = "us-east-1" }
 
 data "archive_file" "lambda" {
   type        = "zip"
