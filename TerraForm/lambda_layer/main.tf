@@ -17,6 +17,8 @@ resource "aws_lambda_layer_version" "layer" {
   layer_name               = "test_layer"
   compatible_runtimes      = ["python3.9"]
   compatible_architectures = ["x86_64"]
+
+  source_code_hash = data.archive_file.layer.output_base64sha256
 }
 
 resource "aws_lambda_function" "lambda" {
