@@ -13,7 +13,7 @@ data "archive_file" "layer" {
 }
 
 resource "aws_lambda_layer_version" "layer" {
-  filename                 = data.archive_file.layer.name
+  filename                 = data.archive_file.layer.filename
   layer_name               = "test_layer"
   compatible_runtimes      = ["python3.9"]
   compatible_architectures = ["x86_64"]
