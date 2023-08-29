@@ -1,6 +1,6 @@
 provider "aws" { region = "us-east-1" }
 
-data "aws_iam_policy_document" "iam_policy_document" {
+data "aws_iam_policy_document" "test" {
   statement {
     effect = "Deny"
     actions = ["backup:*"]
@@ -24,4 +24,8 @@ data "aws_iam_policy_document" "iam_policy_document" {
       variable = "aws:SourceArn"
     }
   }
+}
+
+output "policy" {
+    value = data.aws_iam_policy_document.test.json
 }
