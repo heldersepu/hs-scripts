@@ -16,3 +16,9 @@ resource "aws_iam_role" "iam_for_lambda" {
 }
 EOF
 }
+
+
+resource "aws_iam_role_policy_attachment" "role" {
+  role       = aws_iam_role.iam_for_lambda.name
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+}
