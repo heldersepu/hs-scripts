@@ -1,5 +1,6 @@
 resource "aws_sns_topic" "sns" {
-  name = "test_sns"
+  name   = "test_sns"
+  policy = data.aws_iam_policy_document.sns_topic_policy.json
 }
 
 resource "aws_sns_topic_subscription" "orders_to_process_subscription" {
@@ -9,5 +10,16 @@ resource "aws_sns_topic_subscription" "orders_to_process_subscription" {
   protocol  = "sqs"
 
   raw_message_delivery = true
+}
 
+data "aws_iam_policy_document" "sns_topic_policy" {
+  statement {
+    effect = "Allow"
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+    actions   = ["SNS:*"]
+    resources = ["*"]
+  }
 }
