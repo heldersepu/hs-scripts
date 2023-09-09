@@ -19,7 +19,16 @@ data "aws_iam_policy_document" "sns_topic_policy" {
       type        = "AWS"
       identifiers = ["*"]
     }
-    actions   = ["SNS:*"]
+    actions = [
+      "SNS:GetTopicAttributes",
+      "SNS:SetTopicAttributes",
+      "SNS:AddPermission",
+      "SNS:RemovePermission",
+      "SNS:DeleteTopic",
+      "SNS:Subscribe",
+      "SNS:ListSubscriptionsByTopic",
+      "SNS:Publish"
+    ]
     resources = ["*"]
   }
 }
