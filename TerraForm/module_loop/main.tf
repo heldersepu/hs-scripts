@@ -9,8 +9,8 @@ locals {
       hostname_02 = "bar_prod"
     },
     development = {
-      "hostname_01" = "foo_dev"
-      "hostname_02" = "bar_dev"
+      hostname_01 = "foo_dev"
+      hostname_02 = "bar_dev"
     }
   }
 }
