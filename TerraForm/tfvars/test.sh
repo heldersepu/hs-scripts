@@ -1,0 +1,2 @@
+export TF_VAR_checkpoint_username=abc
+terraform plan
