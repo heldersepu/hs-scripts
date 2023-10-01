@@ -22,9 +22,14 @@ locals {
 
 }
 
+module "test" {
+  source = "./module"
+  data   = local.data[0]
+}
+
 output "day_of_week" {
   value = formatdate("EEEE", timestamp())
 }
 output "data" {
-  value = local.data[0]
+  value = module.test.data
 }
