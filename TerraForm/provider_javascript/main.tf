@@ -5,10 +5,11 @@ terraform {
 }
 
 data "javascript" "MiXcAsE" {
+  for_each = fileset("${path.module}/..", "**")
   source = file("mixcase.js")
-  vars = { input = "abcdefgh" }
+  vars = { input = each.key }
 }
 
 output "result" {
-  value = data.javascript.MiXcAsE.result
+  value = [for x in data.javascript.MiXcAsE : x.result]
 }
