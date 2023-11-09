@@ -13,7 +13,7 @@ locals {
 }
 
 data "javascript" "MiXcAsE" {
-  for_each = local.files
+  for_each = local.parent_folders
   source = file("mixcase.js")
   vars = { input = each.key }
 }
