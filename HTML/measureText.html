@@ -1,0 +1,23 @@
+<canvas id="x" height="200" width="600" style="border: 1px solid #000"> </canvas>
+
+<script>
+    function fillText(ctx, x, y, txt, font) {
+        ctx.font = font
+        ctx.fillText(txt, x, y)
+        const tm = ctx.measureText(txt)
+        const h = tm.actualBoundingBoxAscent + tm.actualBoundingBoxDescent
+        ctx.rect(x, y, tm.width, -h)
+        ctx.stroke()
+        return tm
+    }
+
+    const canvas = document.getElementById("x")
+    const context = canvas.getContext("2d")
+    context.strokeStyle = "red"
+
+    x = fillText(context, 10, 30, "HELLO", "20px monospace")
+    //console.log(x)
+    x = fillText(context, 10, 85, "WORLD", "60px monospace")
+    //console.log(x)
+    x = fillText(context, 120, 35, "123.456-7890", "40px monospace")
+</script>
