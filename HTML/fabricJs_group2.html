@@ -16,6 +16,18 @@
     canvas.renderAll()
 
     canvas.on('mouse:dblclick', (evt) => {
-        canvas.add(new fabric.Rect({left: evt.pointer.x, top: evt.pointer.y, height: 40, width: 40, stroke: "black", fill: "" }))
+        rect = new fabric.Rect({
+            left: evt.pointer.x,
+            top: evt.pointer.y,
+            height: 40,
+            width: 40,
+            stroke: "black",
+            fill: ""
+        })
+        canvas.add(rect)
+        canvas.setActiveObject(rect);
+    })
+    canvas.on('object:moving', (evt) => {
+        evt.target.fill = "red"
     })
 </script>
