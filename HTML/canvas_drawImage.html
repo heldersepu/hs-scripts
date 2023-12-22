@@ -1,0 +1,27 @@
+<canvas id="canvas" width=500></canvas>
+
+<script>
+    var x = 0
+    var pixelated = null
+    var imageloaded = false
+    var image = new Image();
+    image.src = "http://i.stack.imgur.com/UFBxY.png";
+    image.onload = () => {imageloaded = true};
+
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath()
+        if (imageloaded) {
+            ctx.drawImage(image, 0, 0, 150, 150);
+        }
+        ctx.arc(x, 40 + Math.sin(x)*5, 20, 0, 8);
+        ctx.fill();
+        ctx.closePath()
+        x = x + 1
+    }
+
+    setInterval(draw, 50);
+</script>
