@@ -25,7 +25,7 @@ variable "list_of_subnets" {
 
 module "subnets" {
   source   = "./subnets"
-  for_each = var.list_of_subnets
+  for_each = toset(var.list_of_subnets)
   vpc_id   = "vpc-0627130d668a04f24"
   data     = each.value
 }
