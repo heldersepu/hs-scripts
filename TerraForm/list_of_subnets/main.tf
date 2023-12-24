@@ -12,7 +12,7 @@ variable "list_of_subnets" {
     },
     {
       subnet_type = "private"
-      cidr_block  = "1172.31.3.0/24"
+      cidr_block  = "172.31.3.0/24"
       av_zone     = "us-east-1a"
     },
     {
