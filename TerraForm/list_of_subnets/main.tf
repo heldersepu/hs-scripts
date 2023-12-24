@@ -2,22 +2,22 @@ variable "list_of_subnets" {
   default = [
     {
       subnet_type = "public"
-      cidr_block  = "10.0.101.0/24"
+      cidr_block  = "172.31.1.0/24"
       av_zone     = "us-east-1a"
     },
     {
       subnet_type = "public"
-      cidr_block  = "10.0.102.0/24"
+      cidr_block  = "172.31.2.0/24"
       av_zone     = "us-east-1b"
     },
     {
       subnet_type = "private"
-      cidr_block  = "10.0.1.0/24"
+      cidr_block  = "1172.31.3.0/24"
       av_zone     = "us-east-1a"
     },
     {
       subnet_type = "private"
-      cidr_block  = "10.0.2.0/24"
+      cidr_block  = "172.31.4.0/24"
       av_zone     = "us-east-1b"
     }
   ]
