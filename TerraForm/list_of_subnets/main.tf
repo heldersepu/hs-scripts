@@ -29,3 +29,7 @@ module "subnets" {
   vpc_id   = "vpc-0627130d668a04f24"
   data     = each.value
 }
+
+output "subnets" {
+    value = module.subnets
+}
