@@ -1,5 +1,5 @@
 variable "vpc_id" {
-  description = "vpc_id"
+  description = "the vpc_id"
 }
 
 variable "data" {
@@ -8,8 +8,8 @@ variable "data" {
 
 resource "aws_subnet" "subnet" {
   vpc_id            = var.vpc_id
-  cidr_block        = var.data.sub_cidr
-  availability_zone = var.data.sub_av_zone
+  cidr_block        = var.data.cidr_block
+  availability_zone = var.data.av_zone
   tags = {
     subnet_type = var.data.subnet_type
   }
