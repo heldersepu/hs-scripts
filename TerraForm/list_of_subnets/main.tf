@@ -31,5 +31,8 @@ module "subnets" {
 }
 
 output "subnets" {
-  value = module.subnets
+  value = [
+    for k, v in module.subnets : v.subnet.id
+    if v.subnet.tags_all["subnet_type"] == "public"
+  ]
 }
