@@ -1,9 +1,13 @@
 variable "objects" {
-  default = 12
+  default = 9
+}
+
+variable "items" {
+  default = ["red", "blue", "cyan"]
 }
 
 locals {
-    distrib = [ for i in range(var.objects) : (i % 3) + 1 ]
+  distrib = [for i in range(var.objects) : element(var.items, (i % length(var.items)))]
 }
 
 resource "random_shuffle" "random" {
@@ -12,5 +16,5 @@ resource "random_shuffle" "random" {
 }
 
 output "test" {
-    value = random_shuffle.random.result
+  value = random_shuffle.random.result
 }
