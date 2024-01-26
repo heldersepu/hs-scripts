@@ -1,7 +1,3 @@
-terraform {
-  experiments = [variable_validation]
-}
-
 variable "image_id" {
   type = string
 
