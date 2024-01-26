@@ -11,55 +11,55 @@
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-400 2436.71,-400 2436.71,4 -4,4"/>
 <!-- [root] module.security_group_rules.aws_security_group_rule.sg (expand) -->
 <g id="node1" class="node">
-<title>[root] module.security_group_rules.aws_security_group_rule.sg (expand)</title>
+<title>[root] module.security_group_rules.aws_security_group_rule.sg </title>
 <polygon fill="none" stroke="black" points="1504.88,-252 1079.88,-252 1079.88,-216 1504.88,-216 1504.88,-252"/>
 <text text-anchor="middle" x="1292.38" y="-230.3" font-family="Times,serif" font-size="14.00">module.security_group_rules.aws_security_group_rule.sg</text>
 </g>
-<!-- [root] provider[&quot;registry.terraform.io/hashicorp/aws&quot;] -->
+<!-- [root] provider[&quot;aws&quot;] -->
 <g id="node2" class="node">
-<title>[root] provider[&quot;registry.terraform.io/hashicorp/aws&quot;]</title>
+<title>[root] provider[&quot;aws&quot;]</title>
 <polygon fill="none" stroke="black" points="325.38,-180 0.12,-162 325.38,-144 650.65,-162 325.38,-180"/>
-<text text-anchor="middle" x="325.38" y="-158.3" font-family="Times,serif" font-size="14.00">provider[&quot;registry.terraform.io/hashicorp/aws&quot;]</text>
+<text text-anchor="middle" x="325.38" y="-158.3" font-family="Times,serif" font-size="14.00">provider[&quot;aws&quot;]</text>
 </g>
-<!-- [root] module.security_group_rules.aws_security_group_rule.sg (expand)&#45;&gt;[root] provider[&quot;registry.terraform.io/hashicorp/aws&quot;] -->
+<!-- [root] module.security_group_rules.aws_security_group_rule.sg (expand)&#45;&gt;[root] provider[&quot;aws&quot;] -->
 <g id="edge6" class="edge">
-<title>[root] module.security_group_rules.aws_security_group_rule.sg (expand)&#45;&gt;[root] provider[&quot;registry.terraform.io/hashicorp/aws&quot;]</title>
+<title>[root] module.security_group_rules.aws_security_group_rule.sg (expand)&#45;&gt;[root] provider[&quot;aws&quot;]</title>
 <path fill="none" stroke="black" d="M1079.87,-217.62C894.29,-204.18 630.05,-185.05 468.56,-173.36"/>
 <polygon fill="black" stroke="black" points="468.78,-169.87 458.55,-172.64 468.27,-176.85 468.78,-169.87"/>
 </g>
 <!-- [root] module.security_group_rules.var.security_group_id (expand) -->
 <g id="node6" class="node">
-<title>[root] module.security_group_rules.var.security_group_id (expand)</title>
+<title>[root] module.security_group_rules.var.security_group_id </title>
 <ellipse fill="none" stroke="black" cx="988.38" cy="-162" rx="319.24" ry="18"/>
-<text text-anchor="middle" x="988.38" y="-158.3" font-family="Times,serif" font-size="14.00">[root] module.security_group_rules.var.security_group_id (expand)</text>
+<text text-anchor="middle" x="988.38" y="-158.3" font-family="Times,serif" font-size="14.00">[root] module.security_group_rules.var.security_group_id </text>
 </g>
 <!-- [root] module.security_group_rules.aws_security_group_rule.sg (expand)&#45;&gt;[root] module.security_group_rules.var.security_group_id (expand) -->
 <g id="edge3" class="edge">
-<title>[root] module.security_group_rules.aws_security_group_rule.sg (expand)&#45;&gt;[root] module.security_group_rules.var.security_group_id (expand)</title>
+<title>[root] module.security_group_rules.aws_security_group_rule.sg (expand)&#45;&gt;[root] module.security_group_rules.var.security_group_id </title>
 <path fill="none" stroke="black" d="M1218.4,-215.97C1173.62,-205.65 1116.44,-192.49 1070.3,-181.86"/>
 <polygon fill="black" stroke="black" points="1070.86,-178.4 1060.33,-179.57 1069.29,-185.22 1070.86,-178.4"/>
 </g>
 <!-- [root] module.security_group_rules.var.sg_data (expand) -->
 <g id="node7" class="node">
-<title>[root] module.security_group_rules.var.sg_data (expand)</title>
+<title>[root] module.security_group_rules.var.sg_data </title>
 <ellipse fill="none" stroke="black" cx="1597.38" cy="-162" rx="272.15" ry="18"/>
-<text text-anchor="middle" x="1597.38" y="-158.3" font-family="Times,serif" font-size="14.00">[root] module.security_group_rules.var.sg_data (expand)</text>
+<text text-anchor="middle" x="1597.38" y="-158.3" font-family="Times,serif" font-size="14.00">[root] module.security_group_rules.var.sg_data </text>
 </g>
 <!-- [root] module.security_group_rules.aws_security_group_rule.sg (expand)&#45;&gt;[root] module.security_group_rules.var.sg_data (expand) -->
 <g id="edge4" class="edge">
-<title>[root] module.security_group_rules.aws_security_group_rule.sg (expand)&#45;&gt;[root] module.security_group_rules.var.sg_data (expand)</title>
+<title>[root] module.security_group_rules.aws_security_group_rule.sg (expand)&#45;&gt;[root] module.security_group_rules.var.sg_data </title>
 <path fill="none" stroke="black" d="M1366.6,-215.97C1411.78,-205.6 1469.53,-192.34 1515.96,-181.69"/>
 <polygon fill="black" stroke="black" points="1517.02,-185.03 1525.98,-179.39 1515.46,-178.21 1517.02,-185.03"/>
 </g>
 <!-- [root] module.security_group_rules.var.sg_type (expand) -->
 <g id="node8" class="node">
-<title>[root] module.security_group_rules.var.sg_type (expand)</title>
+<title>[root] module.security_group_rules.var.sg_type </title>
 <ellipse fill="none" stroke="black" cx="2160.38" cy="-162" rx="272.15" ry="18"/>
-<text text-anchor="middle" x="2160.38" y="-158.3" font-family="Times,serif" font-size="14.00">[root] module.security_group_rules.var.sg_type (expand)</text>
+<text text-anchor="middle" x="2160.38" y="-158.3" font-family="Times,serif" font-size="14.00">[root] module.security_group_rules.var.sg_type </text>
 </g>
 <!-- [root] module.security_group_rules.aws_security_group_rule.sg (expand)&#45;&gt;[root] module.security_group_rules.var.sg_type (expand) -->
 <g id="edge5" class="edge">
-<title>[root] module.security_group_rules.aws_security_group_rule.sg (expand)&#45;&gt;[root] module.security_group_rules.var.sg_type (expand)</title>
+<title>[root] module.security_group_rules.aws_security_group_rule.sg (expand)&#45;&gt;[root] module.security_group_rules.var.sg_type </title>
 <path fill="none" stroke="black" d="M1503.33,-215.99C1650.93,-204.08 1845.79,-188.37 1984.9,-177.15"/>
 <polygon fill="black" stroke="black" points="1985.55,-180.61 1995.24,-176.32 1984.99,-173.63 1985.55,-180.61"/>
 </g>
@@ -71,55 +71,55 @@
 </g>
 <!-- [root] module.security_group_rules (close)&#45;&gt;[root] module.security_group_rules.aws_security_group_rule.sg (expand) -->
 <g id="edge1" class="edge">
-<title>[root] module.security_group_rules (close)&#45;&gt;[root] module.security_group_rules.aws_security_group_rule.sg (expand)</title>
+<title>[root] module.security_group_rules (close)&#45;&gt;[root] module.security_group_rules.aws_security_group_rule.sg </title>
 <path fill="none" stroke="black" d="M1094.22,-288.76C1131.68,-278.6 1180.2,-265.44 1219.84,-254.68"/>
 <polygon fill="black" stroke="black" points="1220.99,-258 1229.72,-252 1219.15,-251.24 1220.99,-258"/>
 </g>
 <!-- [root] module.security_group_rules (expand) -->
 <g id="node4" class="node">
-<title>[root] module.security_group_rules (expand)</title>
+<title>[root] module.security_group_rules </title>
 <ellipse fill="none" stroke="black" cx="1597.38" cy="-90" rx="217.16" ry="18"/>
-<text text-anchor="middle" x="1597.38" y="-86.3" font-family="Times,serif" font-size="14.00">[root] module.security_group_rules (expand)</text>
+<text text-anchor="middle" x="1597.38" y="-86.3" font-family="Times,serif" font-size="14.00">[root] module.security_group_rules </text>
 </g>
 <!-- [root] local.sg (expand) -->
 <g id="node5" class="node">
-<title>[root] local.sg (expand)</title>
+<title>[root] local.sg </title>
 <ellipse fill="none" stroke="black" cx="1597.38" cy="-18" rx="118.08" ry="18"/>
-<text text-anchor="middle" x="1597.38" y="-14.3" font-family="Times,serif" font-size="14.00">[root] local.sg (expand)</text>
+<text text-anchor="middle" x="1597.38" y="-14.3" font-family="Times,serif" font-size="14.00">[root] local.sg </text>
 </g>
 <!-- [root] module.security_group_rules (expand)&#45;&gt;[root] local.sg (expand) -->
 <g id="edge2" class="edge">
-<title>[root] module.security_group_rules (expand)&#45;&gt;[root] local.sg (expand)</title>
+<title>[root] module.security_group_rules (expand)&#45;&gt;[root] local.sg </title>
 <path fill="none" stroke="black" d="M1597.38,-71.7C1597.38,-63.98 1597.38,-54.71 1597.38,-46.11"/>
 <polygon fill="black" stroke="black" points="1600.88,-46.1 1597.38,-36.1 1593.88,-46.1 1600.88,-46.1"/>
 </g>
 <!-- [root] module.security_group_rules.var.security_group_id (expand)&#45;&gt;[root] module.security_group_rules (expand) -->
 <g id="edge7" class="edge">
-<title>[root] module.security_group_rules.var.security_group_id (expand)&#45;&gt;[root] module.security_group_rules (expand)</title>
+<title>[root] module.security_group_rules.var.security_group_id (expand)&#45;&gt;[root] module.security_group_rules </title>
 <path fill="none" stroke="black" d="M1122.03,-145.64C1224.19,-133.9 1364.29,-117.79 1465.91,-106.11"/>
 <polygon fill="black" stroke="black" points="1466.4,-109.58 1475.93,-104.96 1465.6,-102.62 1466.4,-109.58"/>
 </g>
 <!-- [root] module.security_group_rules.var.sg_data (expand)&#45;&gt;[root] module.security_group_rules (expand) -->
 <g id="edge8" class="edge">
-<title>[root] module.security_group_rules.var.sg_data (expand)&#45;&gt;[root] module.security_group_rules (expand)</title>
+<title>[root] module.security_group_rules.var.sg_data (expand)&#45;&gt;[root] module.security_group_rules </title>
 <path fill="none" stroke="black" d="M1597.38,-143.7C1597.38,-135.98 1597.38,-126.71 1597.38,-118.11"/>
 <polygon fill="black" stroke="black" points="1600.88,-118.1 1597.38,-108.1 1593.88,-118.1 1600.88,-118.1"/>
 </g>
 <!-- [root] module.security_group_rules.var.sg_type (expand)&#45;&gt;[root] module.security_group_rules (expand) -->
 <g id="edge9" class="edge">
-<title>[root] module.security_group_rules.var.sg_type (expand)&#45;&gt;[root] module.security_group_rules (expand)</title>
+<title>[root] module.security_group_rules.var.sg_type (expand)&#45;&gt;[root] module.security_group_rules </title>
 <path fill="none" stroke="black" d="M2038.57,-145.85C1945.13,-134.24 1816.63,-118.26 1722.41,-106.54"/>
 <polygon fill="black" stroke="black" points="1722.6,-103.04 1712.25,-105.28 1721.74,-109.99 1722.6,-103.04"/>
 </g>
-<!-- [root] provider[&quot;registry.terraform.io/hashicorp/aws&quot;] (close) -->
+<!-- [root] provider[&quot;aws&quot;] (close) -->
 <g id="node9" class="node">
-<title>[root] provider[&quot;registry.terraform.io/hashicorp/aws&quot;] (close)</title>
+<title>[root] provider[&quot;aws&quot;] (close)</title>
 <ellipse fill="none" stroke="black" cx="1551.38" cy="-306" rx="291.65" ry="18"/>
-<text text-anchor="middle" x="1551.38" y="-302.3" font-family="Times,serif" font-size="14.00">[root] provider[&quot;registry.terraform.io/hashicorp/aws&quot;] (close)</text>
+<text text-anchor="middle" x="1551.38" y="-302.3" font-family="Times,serif" font-size="14.00">[root] provider[&quot;aws&quot;] (close)</text>
 </g>
-<!-- [root] provider[&quot;registry.terraform.io/hashicorp/aws&quot;] (close)&#45;&gt;[root] module.security_group_rules.aws_security_group_rule.sg (expand) -->
+<!-- [root] provider[&quot;aws&quot;] (close)&#45;&gt;[root] module.security_group_rules.aws_security_group_rule.sg (expand) -->
 <g id="edge10" class="edge">
-<title>[root] provider[&quot;registry.terraform.io/hashicorp/aws&quot;] (close)&#45;&gt;[root] module.security_group_rules.aws_security_group_rule.sg (expand)</title>
+<title>[root] provider[&quot;aws&quot;] (close)&#45;&gt;[root] module.security_group_rules.aws_security_group_rule.sg </title>
 <path fill="none" stroke="black" d="M1489.67,-288.32C1452.29,-278.22 1404.42,-265.28 1365.19,-254.68"/>
 <polygon fill="black" stroke="black" points="1365.98,-251.27 1355.42,-252.04 1364.16,-258.02 1365.98,-251.27"/>
 </g>
@@ -135,9 +135,9 @@
 <path fill="none" stroke="black" d="M1250.07,-365.52C1210.56,-354.8 1150.87,-338.61 1104.29,-325.97"/>
 <polygon fill="black" stroke="black" points="1105.13,-322.57 1094.56,-323.33 1103.3,-329.32 1105.13,-322.57"/>
 </g>
-<!-- [root] root&#45;&gt;[root] provider[&quot;registry.terraform.io/hashicorp/aws&quot;] (close) -->
+<!-- [root] root&#45;&gt;[root] provider[&quot;aws&quot;] (close) -->
 <g id="edge12" class="edge">
-<title>[root] root&#45;&gt;[root] provider[&quot;registry.terraform.io/hashicorp/aws&quot;] (close)</title>
+<title>[root] root&#45;&gt;[root] provider[&quot;aws&quot;] (close)</title>
 <path fill="none" stroke="black" d="M1334.86,-365.52C1374.12,-354.91 1433.23,-338.93 1479.78,-326.35"/>
 <polygon fill="black" stroke="black" points="1480.77,-329.71 1489.51,-323.72 1478.94,-322.95 1480.77,-329.71"/>
 </g>
