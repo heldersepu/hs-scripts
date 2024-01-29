@@ -6,7 +6,7 @@
   "paths": {
     "/api/test0": {
       "get": {
-        "operationId": "test_Get",
+        "operationId": "test_Get0",
         "consumes": [],
         "produces": ["application/json"],
         "parameters": [],
@@ -20,7 +20,7 @@
     },
     "/api/test1": {
       "get": {
-        "operationId": "test_Get",
+        "operationId": "test_Get1",
         "consumes": [],
         "produces": ["application/json"],
         "parameters": [],
@@ -34,7 +34,7 @@
     },
     "/api/test2": {
       "get": {
-        "operationId": "test_Get",
+        "operationId": "test_Get2",
         "consumes": [],
         "produces": ["application/json"],
         "parameters": [],
