@@ -4,7 +4,7 @@
   "host": "swagger-net-test.azurewebsites.net",
   "schemes": ["http"],
   "paths": {
-    "/api/test": {
+    "/api/test0": {
       "get": {
         "operationId": "test_Get",
         "consumes": [],
@@ -14,6 +14,34 @@
           "200": {
             "description": "OK",
             "schema": { "$ref": "#/definitions/Test0" }
+          }
+        }
+      }
+    },
+    "/api/test1": {
+      "get": {
+        "operationId": "test_Get",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/Test1" }
+          }
+        }
+      }
+    },
+    "/api/test2": {
+      "get": {
+        "operationId": "test_Get",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/Test1" }
           }
         }
       }
