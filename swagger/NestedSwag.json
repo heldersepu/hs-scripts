@@ -41,7 +41,21 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/Test1" }
+            "schema": { "$ref": "#/definitions/Test2" }
+          }
+        }
+      }
+    },
+    "/api/test3": {
+      "get": {
+        "operationId": "test_Get3",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/Test3" }
           }
         }
       }
