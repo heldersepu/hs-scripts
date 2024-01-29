@@ -1,0 +1,127 @@
+{
+  "swagger": "2.0",
+  "info": { "version": "V1", "title": "Test" },
+  "host": "swagger-net-test.azurewebsites.net",
+  "schemes": ["http"],
+  "paths": {
+    "/api/test": {
+      "get": {
+        "operationId": "test_Get",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/Test0" }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Location": {
+      "properties": {
+        "Lat": { "type": "number", "format": "float" },
+        "Lon": { "type": "number", "format": "float" }
+      },
+      "xml": { "name": "Location" }
+    },
+    "Test0": {
+      "properties": {
+        "val0": { "$ref": "#/definitions/Test1" },
+        "val1": { "$ref": "#/definitions/Test1" },
+        "val2": { "$ref": "#/definitions/Test1" },
+        "val3": { "$ref": "#/definitions/Test1" },
+        "val4": { "$ref": "#/definitions/Test1" },
+        "val": { "$ref": "#/definitions/Location" }
+      },
+      "xml": { "name": "Test0" },
+      "type": "object"
+    },
+    "Test1": {
+      "properties": {
+        "val0": { "$ref": "#/definitions/Test2" },
+        "val1": { "$ref": "#/definitions/Test2" },
+        "val2": { "$ref": "#/definitions/Test2" },
+        "val3": { "$ref": "#/definitions/Test2" },
+        "val4": { "$ref": "#/definitions/Test2" },
+        "val": { "$ref": "#/definitions/Location" }
+      },
+      "xml": { "name": "Test1" },
+      "type": "object"
+    },
+    "Test2": {
+      "properties": {
+        "val0": { "$ref": "#/definitions/Test3" },
+        "val1": { "$ref": "#/definitions/Test3" },
+        "val2": { "$ref": "#/definitions/Test3" },
+        "val3": { "$ref": "#/definitions/Test3" },
+        "val4": { "$ref": "#/definitions/Test3" },
+        "val": { "$ref": "#/definitions/Location" }
+      },
+      "xml": { "name": "Test2" },
+      "type": "object"
+    },
+    "Test3": {
+      "properties": {
+        "val0": { "$ref": "#/definitions/Test4" },
+        "val1": { "$ref": "#/definitions/Test4" },
+        "val2": { "$ref": "#/definitions/Test4" },
+        "val3": { "$ref": "#/definitions/Test4" },
+        "val4": { "$ref": "#/definitions/Test4" },
+        "val": { "$ref": "#/definitions/Location" }
+      },
+      "xml": { "name": "Test3" },
+      "type": "object"
+    },
+    "Test4": {
+      "properties": {
+        "val0": { "$ref": "#/definitions/Test5" },
+        "val1": { "$ref": "#/definitions/Test5" },
+        "val2": { "$ref": "#/definitions/Test5" },
+        "val3": { "$ref": "#/definitions/Test5" },
+        "val4": { "$ref": "#/definitions/Test5" },
+        "val": { "$ref": "#/definitions/Location" }
+      },
+      "xml": { "name": "Test4" },
+      "type": "object"
+    },
+    "Test5": {
+      "properties": {
+        "val0": { "$ref": "#/definitions/Test6" },
+        "val1": { "$ref": "#/definitions/Test6" },
+        "val2": { "$ref": "#/definitions/Test6" },
+        "val3": { "$ref": "#/definitions/Test6" },
+        "val4": { "$ref": "#/definitions/Test6" },
+        "val": { "$ref": "#/definitions/Location" }
+      },
+      "xml": { "name": "Test5" },
+      "type": "object"
+    },
+    "Test6": {
+      "properties": {
+        "val0": { "$ref": "#/definitions/Test7" },
+        "val1": { "$ref": "#/definitions/Test7" },
+        "val2": { "$ref": "#/definitions/Test7" },
+        "val3": { "$ref": "#/definitions/Test7" },
+        "val4": { "$ref": "#/definitions/Test7" },
+        "val": { "$ref": "#/definitions/Location" }
+      },
+      "xml": { "name": "Test6" },
+      "type": "object"
+    },
+    "Test7": {
+      "properties": {
+        "val0": { "$ref": "#/definitions/Location" },
+        "val1": { "$ref": "#/definitions/Location" },
+        "val2": { "$ref": "#/definitions/Location" },
+        "val3": { "$ref": "#/definitions/Location" },
+        "val4": { "$ref": "#/definitions/Location" },
+        "val": { "$ref": "#/definitions/Location" }
+      },
+      "xml": { "name": "Test7" },
+      "type": "object"
+    }
+  }
+}
