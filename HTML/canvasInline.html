@@ -1,0 +1,28 @@
+<canvas id="c" width=400 height=400></canvas>
+
+<script>
+    var s = 30 // thickness scale
+
+    var img = new Image;
+    img.onload = draw;
+    img.src = "https://i.imgur.com/eKKoWVT.png"
+
+    var canvas = document.getElementById('c')
+    var t_canvas = document.createElement('canvas');
+    t_canvas.width = canvas.width
+    t_canvas.height = canvas.height
+
+    var ctx = canvas.getContext('2d')
+    var t_ctx = t_canvas.getContext('2d')
+
+    function draw() {
+        for (i = 0; i < 8; i += Math.PI/64) {
+            t_ctx.globalCompositeOperation = "source-over";
+            t_ctx.drawImage(img, 0, 0, 400, 400);
+            t_ctx.globalCompositeOperation = "destination-out";
+            t_ctx.drawImage(img, Math.sin(i) * s, Math.cos(i) * s, 400, 400);
+            ctx.drawImage(t_canvas, 0, 0, 400, 400);
+        }
+    }
+</script>
+
