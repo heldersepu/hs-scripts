@@ -1,3 +1,17 @@
+
+run "ok" {
+  command = plan
+
+  variables {
+    environment   = "prod"
+    instance_type = "t2.xlarge"
+  }
+  assert {
+    condition     = output.validation == "Environment prod and instance t2.xlarge"
+    error_message = "Environment and instance test"
+  }
+}
+
 run "bad_environment" {
   command = plan
 
@@ -13,17 +27,4 @@ run "bad_instance_type" {
     instance_type = "test"
   }
   expect_failures = [var.instance_type]
-}
-
-run "ok" {
-  command = plan
-
-  variables {
-    environment   = "prod"
-    instance_type = "t2.xlarge"
-  }
-  assert {
-    condition     = output.validation == "Environment prod and instance t2.xlarge"
-    error_message = "Environment and instance test"
-  }
 }
