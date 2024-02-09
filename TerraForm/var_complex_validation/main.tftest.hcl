@@ -23,6 +23,7 @@ run "bad_environment" {
 
 run "bad_instance_type" {
   command = plan
+
   variables {
     instance_type = "test"
   }
@@ -30,14 +31,11 @@ run "bad_instance_type" {
 }
 
 run "bad_instance__large_in_dev" {
-  command = apply
+  command = plan
 
   variables {
     environment   = "dev"
     instance_type = "t2.large"
   }
-  expect_failures = [
-    var.environment,
-    var.instance_type
-  ]
+  expect_failures = [output.validation]
 }
