@@ -28,3 +28,16 @@ run "bad_instance_type" {
   }
   expect_failures = [var.instance_type]
 }
+
+run "bad_instance__large_in_dev" {
+  command = apply
+
+  variables {
+    environment   = "dev"
+    instance_type = "t2.large"
+  }
+  expect_failures = [
+    var.environment,
+    var.instance_type
+  ]
+}
