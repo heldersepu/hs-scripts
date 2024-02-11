@@ -23,9 +23,13 @@ EOF
 locals {
   tshirtsize = jsondecode(var.prod).tshirt_size
   cpucount   = jsondecode(var.global).tshirtsizes[local.tshirtsize].cpucount
+  srvName    = jsondecode(file("config.json")).serviceName
 }
 
 output "cpucount" {
   value = local.cpucount
 }
 
+output "name" {
+  value = local.srvName
+}
