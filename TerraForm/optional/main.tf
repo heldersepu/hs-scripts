@@ -1,10 +1,10 @@
 variable "test" {
   type = list(object({
     name = string
-    data = optional(number, 0)
+    data = optional(map(string), {})
   }))
 }
 
 output "test" {
-  value = var.test
+  value = [for x in var.test: try(x.data.foo, "") ]
 }
