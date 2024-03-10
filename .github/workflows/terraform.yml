@@ -29,7 +29,8 @@ jobs:
 
     - name: Terraform Init
       run: |
-        cd TerraForm/time_sleep;
+        cd TerraForm/time_sleep/
+        ls -la
         terraform init"
 
     - name: Terraform Apply
