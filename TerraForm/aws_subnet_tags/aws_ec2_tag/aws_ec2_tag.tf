@@ -11,10 +11,10 @@ variable "resource_tags" {
 }
 
 locals {
-  a = [for k, v in var.all_tags : {"${k}":v}]
-  b = [for k, v in var.resource_tags : {"${k}":v}]
+  a        = [for k, v in var.all_tags : { "${k}" : v }]
+  b        = [for k, v in var.resource_tags : { "${k}" : v }]
   subtract = setsubtract(local.a, local.b)
-  tags = {for k, v in var.resource_tags : k =>v}
+  tags     = { for k, v in var.resource_tags : k => v }
 }
 
 resource "aws_ec2_tag" "subnet_tags" {
