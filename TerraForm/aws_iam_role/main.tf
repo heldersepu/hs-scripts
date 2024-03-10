@@ -4,8 +4,8 @@ provider "aws" {
 }
 
 variable "role_name" {
-    type = string
-    default = "123"
+  type    = string
+  default = "123"
 }
 
 resource "aws_iam_role" "iam_for_lambda" {

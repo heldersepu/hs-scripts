@@ -2,8 +2,8 @@ variable "base_name" {
   default = "foo"
 }
 
-variable "region"{
-  default ="us-east-1"
+variable "region" {
+  default = "us-east-1"
 }
 
 provider "aws" {
@@ -25,13 +25,13 @@ data "aws_availability_zones" "available" {
 resource "aws_subnet" "app" {
   count                   = 2
   vpc_id                  = aws_vpc.myvpc.id
-  cidr_block              = "10.0.2.${count.index*64}/26"
+  cidr_block              = "10.0.2.${count.index * 64}/26"
   availability_zone       = data.aws_availability_zones.available.names[count.index]
   map_public_ip_on_launch = true
 }
 
 resource "aws_db_subnet_group" "app" {
-  name = "test"
+  name       = "test"
   subnet_ids = aws_subnet.app.*.id
 }
 

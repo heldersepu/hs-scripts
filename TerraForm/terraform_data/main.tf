@@ -6,5 +6,5 @@ resource "terraform_data" "test" {
 }
 
 output "test" {
-    value = terraform_data.test.output
+  value = terraform_data.test.output
 }

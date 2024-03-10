@@ -7,15 +7,15 @@ terraform {
 locals {
   files = fileset("${path.module}/..", "**")
   parent_folders = toset([
-    for x in local.files: split("/", x)[0]
+    for x in local.files : split("/", x)[0]
     if strcontains(x, "/") && !startswith(x, ".")
   ])
 }
 
 data "javascript" "MiXcAsE" {
   for_each = local.parent_folders
-  source = file("mixcase.js")
-  vars = { input = each.key }
+  source   = file("mixcase.js")
+  vars     = { input = each.key }
 }
 
 output "result" {

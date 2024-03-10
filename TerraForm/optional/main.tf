@@ -6,5 +6,5 @@ variable "test" {
 }
 
 output "test" {
-  value = [for x in var.test: try(x.data.foo, "") ]
+  value = [for x in var.test : try(x.data.foo, "")]
 }

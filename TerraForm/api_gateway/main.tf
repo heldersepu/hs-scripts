@@ -79,7 +79,7 @@ resource "aws_api_gateway_deployment" "deploy" {
 }
 
 resource "aws_cloudwatch_log_group" "logs" {
-  name     = "/aws/api_gateway/test"
+  name = "/aws/api_gateway/test"
 }
 
 resource "aws_api_gateway_stage" "deploy" {
@@ -91,6 +91,6 @@ resource "aws_api_gateway_stage" "deploy" {
   stage_name    = "test"
   access_log_settings {
     destination_arn = aws_cloudwatch_log_group.logs.arn
-    format = "{ \"requestId\":\"$context.requestId\" }"
+    format          = "{ \"requestId\":\"$context.requestId\" }"
   }
 }

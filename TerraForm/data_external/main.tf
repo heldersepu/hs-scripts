@@ -3,5 +3,5 @@ data "external" "test" {
 }
 
 output "test" {
-    value = data.external.test.result
+  value = data.external.test.result
 }

@@ -2,8 +2,8 @@ provider "aws" { region = "us-east-1" }
 
 data "aws_iam_policy_document" "test" {
   statement {
-    effect = "Deny"
-    actions = ["backup:*"]
+    effect    = "Deny"
+    actions   = ["backup:*"]
     resources = ["*"]
 
     condition {
@@ -27,5 +27,5 @@ data "aws_iam_policy_document" "test" {
 }
 
 output "policy" {
-    value = data.aws_iam_policy_document.test.json
+  value = data.aws_iam_policy_document.test.json
 }

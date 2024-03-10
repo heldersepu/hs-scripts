@@ -5,7 +5,7 @@ locals {
         for diskKey, disk in vm.Disks.Data : {
           VmId   = vmKey
           DiskId = diskKey
-          disk  = disk
+          disk   = disk
           Lun    = 1 + index(keys(vm.Disks.Data), diskKey)
         }
       ]
@@ -15,7 +15,7 @@ locals {
 }
 
 output "test" {
-    value = local.vmDisks
+  value = local.vmDisks
 }
 
 variable "VirtualMachine" {

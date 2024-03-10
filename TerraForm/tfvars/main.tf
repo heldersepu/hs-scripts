@@ -1,8 +1,8 @@
 variable "checkpoint_username" {
-  type = string
+  type    = string
   default = "test"
 }
 
 output "user" {
-    value = var.checkpoint_username
+  value = var.checkpoint_username
 }

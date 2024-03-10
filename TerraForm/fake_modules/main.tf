@@ -6,17 +6,17 @@ provider "aws" {
 variable "vpcs" {
   type = map(any)
   default = {
-    a = {x = 1}
-    b = {x = 2}
+    a = { x = 1 }
+    b = { x = 2 }
   }
 }
 
 variable "instances" {
   type = map(any)
   default = {
-    x = {vpc = "a"}
-    y = {vpc = "b"}
-    z = {vpc = "a"}
+    x = { vpc = "a" }
+    y = { vpc = "b" }
+    z = { vpc = "a" }
   }
 }
 

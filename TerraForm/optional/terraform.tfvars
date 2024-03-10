@@ -1,6 +1,6 @@
 test = [
   {
-    data = {"foo": "bar"}
+    data = { "foo" : "bar" }
     name = "value"
   },
   {
