@@ -34,4 +34,5 @@ jobs:
 
     - name: Terraform Apply
       run: |
+        cd TerraForm/time_sleep/
         terraform apply -auto-approve
