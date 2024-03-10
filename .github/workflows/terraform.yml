@@ -30,8 +30,7 @@ jobs:
     - name: Terraform Init
       run: |
         cd TerraForm/time_sleep/
-        ls -la
-        terraform init"
+        terraform init
 
     - name: Terraform Apply
       run: |
