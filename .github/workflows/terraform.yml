@@ -1,0 +1,37 @@
+name: 'Terraform'
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+
+    - name: Terraform Version
+      run: terraform version -json
+
+    - name: Terraform Init
+      run: |
+        cd TerraForm/time_sleep;
+        terraform init"
+
+    - name: Terraform Apply
+      run: |
+        terraform apply -auto-approve
