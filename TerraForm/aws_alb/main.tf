@@ -35,5 +35,5 @@ resource "aws_lb_listener" "x" {
 }
 
 output "elb_arn" {
-    value = aws_alb.lb.arn
+  value = aws_alb.lb.arn
 }

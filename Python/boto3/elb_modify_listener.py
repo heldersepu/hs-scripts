@@ -8,11 +8,12 @@ def change_ssl_policy(elb_name,  ssl_policy):
         LoadBalancerArn=response['LoadBalancers'][0]['LoadBalancerArn']
     )
 
-    if (response['Listeners'][0]['SslPolicy'] != ssl_policy):
-        elb_client.modify_listener(
-            ListenerArn=response['Listeners'][0]['ListenerArn'],
-            SslPolicy=ssl_policy
-        )
+    for listener in response['Listeners']:
+        if (listener['Protocol'] in ["HTTPS", "TLS"] and listener['SslPolicy'] != ssl_policy):
+            elb_client.modify_listener(
+                ListenerArn=listener['ListenerArn'],
+                SslPolicy=ssl_policy
+            )
 
 
 elb_name= 'test'
