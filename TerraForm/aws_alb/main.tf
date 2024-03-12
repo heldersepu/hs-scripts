@@ -34,6 +34,31 @@ resource "aws_lb_listener" "x" {
   }
 }
 
+resource "aws_s3_bucket" "test" {
+  bucket = "test456345245"
+}
+
+data "aws_elb_service_account" "lb" {}
+data "aws_iam_policy_document" "lb_access_logs_policy" {
+  statement {
+    actions   = ["s3:PutObject"]
+    resources = ["${aws_s3_bucket.test.arn}/*"]
+    principals {
+      type        = "AWS"
+      identifiers = [data.aws_elb_service_account.lb.arn]
+    }
+  }
+}
+
+resource "aws_s3_bucket_policy" "lb_access_logs_bucket_policy" {
+  bucket = aws_s3_bucket.test.id
+  policy = data.aws_iam_policy_document.lb_access_logs_policy.json
+}
+
 output "elb_arn" {
   value = aws_alb.lb.arn
+}
+
+output "s3_arn" {
+  value = aws_s3_bucket.test.arn
 }
