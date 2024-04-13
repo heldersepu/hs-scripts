@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+<body>
+    <canvas id="plotCanvas" width="400" height="400"></canvas>
+    <script>
+        var canvas = document.getElementById('plotCanvas');
+        var ctx = canvas.getContext('2d');
+
+        var startX = -20;
+        var endX = 20;
+        var scaleFactor = 25;
+
+        ctx.beginPath();
+        for (var x = startX + 0.01; x <= endX; x += 0.01) {
+            xP = (x - startX) * (canvas.width / (endX - startX));
+            yP = canvas.height / 2 - Math.tan(x) * scaleFactor
+            if (xP > -canvas.width && yP > -canvas.height && xP < canvas.width && yP < canvas.height) {
+                ctx.lineTo(xP, yP);
+            } else {
+                ctx.moveTo(xP, yP)
+            }
+        }
+        ctx.strokeStyle = 'blue';
+        ctx.stroke();
+    </script>
+</body>
+</html>
