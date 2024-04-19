@@ -79,7 +79,7 @@ function loadGoogleMap(div_name, lat, lon, z)
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		disableDefaultUI: true}
 	);
-	var ctaLayer = new google.maps.KmlLayer('http://hs-scripts.googlecode.com/svn/trunk/HTML/PolyContainsPoint/PUK_MAP.KML.XML');
+	var ctaLayer = new google.maps.KmlLayer('https://raw.githubusercontent.com/heldersepu/hs-scripts/master/HTML/PolyContainsPoint/PUK_MAP.KML.XML');
 	ctaLayer.setMap(map);
 }
 
