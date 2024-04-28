@@ -1,13 +1,15 @@
 terraform {
   required_providers {
-    python = { source = "joaqquin89/python" }
+    python = {
+      source = "registry.terraform.io/joaqquin89/python"
+    }
   }
 }
 
 resource "python_exec" "MiXcAsE" {
   pyversion = "v3"
-  script    = "hello.py"
-  args      = "hello_world_test2"
+  script    = "mixcase.py"
+  args      = "hello_test111"
 }
 
 output "result" {
