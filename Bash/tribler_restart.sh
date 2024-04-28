@@ -6,7 +6,7 @@ H=http://localhost:52194
 IFS=$'\n'
 
 
-key=$(cat ~/.Tribler/7.10/triblerd.conf | grep "key =")
+key=$(cat ~/.Tribler/7.14/triblerd.conf | grep "key =")
 key="${key/"key = "/""}"
 downloads=$(curl -H "X-Api-Key: $key" -s $H/downloads | jq -c .downloads[])
 for row in $downloads; do

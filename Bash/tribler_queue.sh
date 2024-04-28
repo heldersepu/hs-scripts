@@ -7,7 +7,7 @@ IFS=$'\n'
 
 running=0
 arr_queue=()
-key=$(cat ~/.Tribler/7.10/triblerd.conf | grep "key =")
+key=$(cat ~/.Tribler/7.14/triblerd.conf | grep "key =")
 key="${key/"key = "/""}"
 downloads=$(curl -H "X-Api-Key: $key" -s $H | jq -c .downloads[])
 for row in $downloads; do
