@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    aws = {
+        source = "hashicorp/aws"
+        version = ">=5.0"
+    }
+  }
+}
+
 resource "aws_iam_policy_attachment" "policy_attachment" {
   for_each = var.attachments
 

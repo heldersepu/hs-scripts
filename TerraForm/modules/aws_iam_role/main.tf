@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    aws = {
+        source = "hashicorp/aws"
+        version = ">=4.0"
+    }
+  }
+}
+
 resource "aws_iam_role" "iam_role" {
   for_each = var.roles
 
