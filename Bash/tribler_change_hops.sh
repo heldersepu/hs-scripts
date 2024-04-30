@@ -29,5 +29,7 @@ while [ $running -gt 0 ]; do
             ((running++))
         fi
     done
-    sleep 50
+    if [ $running != 0 ] ; then
+        sleep 5
+    fi
 done

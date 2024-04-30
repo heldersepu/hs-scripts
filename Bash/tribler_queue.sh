@@ -5,9 +5,9 @@ MAX_QUEUE=1
 H=http://localhost:52194/downloads
 IFS=$'\n'
 
-
 key=$(cat ~/.Tribler/7.14/triblerd.conf | grep "key =")
 key="${key/"key = "/""}"
+running=1
 
 while [ $running -gt 0 ]; do
     running=0
@@ -48,7 +48,7 @@ while [ $running -gt 0 ]; do
             if [ $running -ge $MAX_QUEUE ] ; then break; fi
         done
     fi
-    if [ $running -gt 0 ] ; then
-        sleep 50
+    if [ $running != 0 ] ; then
+        sleep 5
     fi
 done
