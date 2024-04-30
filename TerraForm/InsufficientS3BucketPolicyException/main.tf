@@ -70,6 +70,7 @@ resource "aws_cloudtrail" "trail" {
   is_multi_region_trail      = true
   kms_key_id                 = aws_kms_key.cloudtrail_kms_key.arn
   enable_log_file_validation = true
+  s3_key_prefix              = "prefix"
 }
 
 resource "aws_s3_bucket" "cloudtrail_bucket" {
@@ -113,7 +114,7 @@ data "aws_iam_policy_document" "cloudtrail_bucket_policy" {
     }
 
     actions   = ["s3:PutObject"]
-    resources = ["${aws_s3_bucket.cloudtrail_bucket.arn}/*"]
+    resources = ["${aws_s3_bucket.cloudtrail_bucket.arn}/prefix/AWSLogs/${var.aws_account_id}/*"]
 
     condition {
       test     = "StringEquals"
