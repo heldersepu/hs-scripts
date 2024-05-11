@@ -3,10 +3,7 @@
 
 IFS=$'\n'
 
-key=$(cat ~/.Tribler/7.14/triblerd.conf | grep "key =")
-key="${key/"key = "/""}"
+sed -i -e 's/ = /=/g' ~/.Tribler/7.14/triblerd.conf
+. ~/.Tribler/7.14/triblerd.conf
 
-port=$(cat ~/.Tribler/7.14/triblerd.conf | grep "port =")
-port="${port/"port = "/""}"
-
-curl -H "X-Api-Key: $key" -s http://localhost:$port/downloads
+curl -H "X-Api-Key: $key" -s http://localhost:$http_port/downloads

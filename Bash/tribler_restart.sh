@@ -1,14 +1,13 @@
 #!/bin/bash
 ## Script to restart tribler
 
-MAX_QUEUE=1
-H=http://localhost:52194
 IFS=$'\n'
+MAX_QUEUE=1
 
+sed -i -e 's/ = /=/g' ~/.Tribler/7.14/triblerd.conf
+. ~/.Tribler/7.14/triblerd.conf
 
-key=$(cat ~/.Tribler/7.14/triblerd.conf | grep "key =")
-key="${key/"key = "/""}"
-downloads=$(curl -H "X-Api-Key: $key" -s $H/downloads | jq -c .downloads[])
+downloads=$(curl -H "X-Api-Key: $key" -s http://localhost:$http_port/downloads | jq -c .downloads[])
 for row in $downloads; do
     status=$(echo ${row} | jq .status)
     id=$(echo ${row} | jq .infohash | sed 's/^"\(.*\)"$/\1/')
@@ -16,7 +15,7 @@ for row in $downloads; do
         speed_down=$(echo ${row} | jq .speed_down)
         echo $status  $speed_down
         if [ $speed_down -eq 0  ] ; then
-            curl -H "X-Api-Key: $key" -sX PUT $H/shutdown
+            curl -H "X-Api-Key: $key" -sX PUT http://localhost:$http_port/shutdown
             sleep 5
             pkill --signal SIGTERM tribler
             sleep 5
