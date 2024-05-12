@@ -8,13 +8,13 @@ data "archive_file" "lambda" {
 
 data "archive_file" "layer" {
   type        = "zip"
-  source_file = "layer.py"
+  source_dir  = "layer"
   output_path = "layer.zip"
 }
 
 resource "aws_lambda_layer_version" "layer" {
   filename                 = data.archive_file.layer.output_path
-  layer_name               = "test_layer"
+  layer_name               = "my_test_layer"
   compatible_runtimes      = ["python3.9"]
   compatible_architectures = ["x86_64"]
 
