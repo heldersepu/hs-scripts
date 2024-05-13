@@ -3,13 +3,16 @@ variable "hcloud_server" {
     this = list(object({
       name = string
       ipv4 = string
+      network = set(object({
+        ip = string
+      }))
     }))
   })
   default = {
     this : [
-      { name : "a", ipv4 : "10.0.0.1" },
-      { name : "b", ipv4 : "10.0.0.2" },
-      { name : "c", ipv4 : "10.0.0.3" },
+      { name : "a", ipv4 : "10.0.0.1", network: [{ip : "10.0.1.11"}] },
+      { name : "b", ipv4 : "10.0.0.2", network: [{ip : "10.0.2.22"}] },
+      { name : "c", ipv4 : "10.0.0.3", network: [{ip : "10.0.3.33"}] },
     ]
   }
 }
@@ -19,14 +22,9 @@ output "name" {
   value       = var.hcloud_server.this[*].name
 }
 
-output "public_ip" {
-  description = "List with public IPv4 IPs of the instances"
-  value       = var.hcloud_server.this[*].ipv4
-}
-
 output "test" {
   value = [
     for x in var.hcloud_server.this :
-    "${x.name} + ${x.ipv4}"
+    "${x.name} + ${x.ipv4} + ${tolist(x.network)[0].ip}"
   ]
 }
