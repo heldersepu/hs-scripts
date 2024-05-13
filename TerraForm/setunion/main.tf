@@ -1,5 +1,5 @@
 variable "stages" {
-  default = []
+  default = ["dev", "stg"]
 }
 
 locals {
