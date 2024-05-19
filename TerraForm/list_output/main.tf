@@ -25,6 +25,6 @@ output "name" {
 output "test" {
   value = [
     for x in var.hcloud_server.this :
-    "${x.name} + ${x.ipv4} + ${tolist(x.network)[0].ip}"
+    "${x.name} + ${x.ipv4} + ${one(x.network).ip}"
   ]
 }
