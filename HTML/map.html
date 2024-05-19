@@ -1,0 +1,46 @@
+<html>
+
+<body>
+	<h2>map</h2>
+    <pre id="map" style="zoom: 4;"></pre>
+
+	<script>
+        mapElement = document.getElementById('map')
+        map = [
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1,  ,  , 4,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  , 1],
+            [1,  , 1,  , 1, 1, 1,  , 1, 1, 1,  , 1, 1, 1,  , 1,  , 1],
+            [1,  , 1,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  , 1,  , 1],
+            [1,  , 1,  , 1,  , 1, 1, 1,  , 1, 1, 1,  , 1,  , 1,  , 1],
+            [1,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  , 1],
+            [1,  , 1,  , 1, 1, 1, 1,  , 1,  , 1, 1, 1, 1,  , 1,  , 1],
+            [1,  , 1,  , 1, 1,  ,  ,  , 1,  ,  ,  , 1, 1,  , 1,  , 1],
+            [1,  , 1,  , 1, 1,  , 1,  ,  ,  , 1,  , 1, 1,  , 1,  , 1],
+            [1,  , 1,  , 1, 1,  ,  ,  , 1,  ,  ,  , 1, 1,  , 1,  , 1],
+            [1, 0, 1,  , 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,  , 1,  , 1],
+            [1,  , 1,  ,  ,  , 1,  ,  ,  , 1,  ,  ,  ,  ,  , 1,  , 1],
+            [1,  , 1,  , 1,  , 1,  , 1,  , 1,  , 1,  , 1, 1, 1,  , 1],
+            [1,  ,  ,  , 1,  ,  ,  , 1,  ,  ,  , 1,  ,  ,  ,  ,  , 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        ];
+
+        function draw() {
+            data = ""
+            empty = []
+            for (let row = 0; row < map.length; row++) {
+                data += JSON.stringify(map[row]).replaceAll("null", " ") + "\n"
+                for (let column = 0; column < map[row].length; column++) {
+                    if (map[row][column] == null) empty.push({row, column})
+                }
+            }
+            if (empty.length > 0) {
+                e = empty[Math.floor(Math.random() * empty.length)]
+                map[e.row][e.column] =  0
+            }
+            mapElement.innerHTML = data
+        }
+        setInterval(draw, 500)
+	</script>
+</body>
+</html>
+
