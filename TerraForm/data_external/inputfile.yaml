@@ -1,0 +1,6 @@
+sa_type: 6
+input_name: "cloudiac"
+input_env: 1
+input_assigned_project_ids: ""
+input_scopes: ""
+jenkins_path: "BusinessUnit"
