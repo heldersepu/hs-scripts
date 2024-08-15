@@ -23,4 +23,8 @@ def rds():
     print(response)
     print("---")
 
+    response = client.describe_db_instances(DBInstanceIdentifier="test")
+    print(response)
+    print("---")
+
 rds()
