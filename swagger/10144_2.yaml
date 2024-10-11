@@ -7,8 +7,6 @@ paths:
   /projects:
     get:
       $ref: '#/components/schemas/ProjectsQuery'
-    post:
-      $ref: '#/components/schemas/ProjectsQuery'
 
 
 components:
@@ -22,15 +20,3 @@ components:
           description: number of projects
           schema:
             type: integer
-            default: 10
-            maximum: 100
-      responses:
-        200:
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  projects:
-                    type: array
-                    description: an array of projects
