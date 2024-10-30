@@ -1,0 +1,6 @@
+test:
+  - name: foo
+    conditions::
+        starts_with:
+          - abc
+          - def
