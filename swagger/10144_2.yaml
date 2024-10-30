@@ -1,0 +1,22 @@
+swagger: '2.0'
+info:
+  title: Minimal example
+  version: 1.0.0
+
+paths:
+  /projects:
+    get:
+      $ref: '#/components/schemas/ProjectsQuery'
+
+
+components:
+  schemas:
+    ProjectsQuery:
+      summary: Get a list of projects
+      tags:
+        - projects
+      parameters:
+        - name: limit
+          description: number of projects
+          schema:
+            type: integer
