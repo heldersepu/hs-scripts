@@ -1,0 +1,1 @@
+gcloud projects get-iam-policy "terraform-sandbox-441212" --flatten="bindings[].members" --format='table(bindings.role)' --filter="bindings.members:foo"
