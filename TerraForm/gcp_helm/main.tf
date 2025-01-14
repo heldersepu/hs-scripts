@@ -58,7 +58,7 @@ module "eks_cluster" {
   project_id                 = var.project
   region                     = var.region
   name                       = "cluster-one"
-  kubernetes_version         = "1.30.5-gke.1443001"
+  kubernetes_version         = "1.30.5-gke.1713000"
   zones                      = ["asia-southeast1-a", "asia-southeast1-b", "asia-southeast1-c"]
   network                    = google_compute_network.vpc.name
   subnetwork                 = google_compute_subnetwork.subnet.name
