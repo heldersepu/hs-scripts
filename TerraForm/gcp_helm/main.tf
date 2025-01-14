@@ -1,5 +1,5 @@
 variable "project" {
-  default = "terraform-sandbox"
+  default = "terraform-sandbox-441212"
 }
 
 variable "region" {
@@ -112,5 +112,5 @@ resource "helm_release" "nginx" {
 }
 
 output "endpoint" {
-    value = module.eks_cluster.endpoint
+    value = nonsensitive(module.eks_cluster.endpoint)
 }
