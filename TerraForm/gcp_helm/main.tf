@@ -3,7 +3,7 @@ variable "project" {
 }
 
 variable "region" {
-  default = "asia-southeast1"
+  default = "us-central1"
 }
 
 provider "google" {
@@ -59,7 +59,7 @@ module "eks_cluster" {
   region                     = var.region
   name                       = "cluster-one"
   kubernetes_version         = "1.30.5-gke.1713000"
-  zones                      = ["asia-southeast1-a", "asia-southeast1-b", "asia-southeast1-c"]
+  zones                      = ["us-central1-a", "us-central1-b", "us-central1-c"]
   network                    = google_compute_network.vpc.name
   subnetwork                 = google_compute_subnetwork.subnet.name
   ip_range_pods              = "pod-range"
@@ -76,7 +76,7 @@ module "eks_cluster" {
     {
       name               = "pool"
       machine_type       = "n1-standard-2"
-      node_locations     = "asia-southeast1-a,asia-southeast1-b,asia-southeast1-c"
+      node_locations     = "us-central1-a,us-central1-b,us-central1-c"
       min_count          = 1
       max_count          = 5
       local_ssd_count    = 0
@@ -122,5 +122,5 @@ resource "helm_release" "nginx" {
 }
 
 output "endpoint" {
-    value = nonsensitive(module.eks_cluster.endpoint)
+  value = nonsensitive(module.eks_cluster.endpoint)
 }
