@@ -54,7 +54,7 @@ resource "google_project_iam_member" "gke_sa_roles" {
 
 module "eks_cluster" {
   source                     = "terraform-google-modules/kubernetes-engine/google//modules/beta-public-cluster"
-  version                    = "~> 24.1"
+  version                    = "~> 35.0"
   project_id                 = var.project
   region                     = var.region
   name                       = "cluster-one"
