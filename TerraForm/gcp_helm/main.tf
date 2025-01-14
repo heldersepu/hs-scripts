@@ -75,7 +75,7 @@ module "eks_cluster" {
   node_pools = [
     {
       name               = "pool"
-      machine_type       = "n1-standard-16"
+      machine_type       = "n1-standard-2"
       node_locations     = "asia-southeast1-a,asia-southeast1-b,asia-southeast1-c"
       min_count          = 1
       max_count          = 5
