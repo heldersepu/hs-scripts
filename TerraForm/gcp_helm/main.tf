@@ -96,6 +96,18 @@ module "eks_cluster" {
       "https://www.googleapis.com/auth/cloud-platform",
     ]
   }
+
+  node_pools_labels = {
+    all = {}
+    pool = {
+      node_pool = "pool"
+    }
+  }
+
+  node_pools_taints = {
+    all  = []
+    pool = []
+  }
 }
 
 
