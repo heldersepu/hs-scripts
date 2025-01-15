@@ -110,16 +110,13 @@ module "eks_cluster" {
   }
 }
 
+data "google_client_config" "current" {}
 
 provider "helm" {
   kubernetes {
     host                   = module.eks_cluster.endpoint
+    token                  = data.google_client_config.current.access_token
     cluster_ca_certificate = base64decode(module.eks_cluster.ca_certificate)
-    exec {
-      api_version = "client.authentication.k8s.io/v1beta1"
-      args        = ["eks", "get-token", "--cluster-name", module.eks_cluster.name]
-      command     = "aws"
-    }
   }
 }
 
