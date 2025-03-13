@@ -1,0 +1,5 @@
+data
+bar=2
+a in 3
+b ; 4
+c| 5

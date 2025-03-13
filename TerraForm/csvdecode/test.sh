@@ -1,0 +1,1 @@
+jq -n --arg a "1" --arg s "2" '{"one":$a,"two":$s}'

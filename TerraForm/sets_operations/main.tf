@@ -1,10 +1,10 @@
 variable "dev" {
-  type    = set(string)
+  type    = list(string)
   default = ["a", "b", "c", "d"]
 }
 
 variable "prd" {
-  type    = set(string)
+  type    = list(string)
   default = ["c", "d", "e", "f"]
 }
 
