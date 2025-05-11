@@ -1,0 +1,22 @@
+{
+  "validationState": "Succeeded",
+  "workflows": {
+    "simpletest123321": {
+      "validationState": "Succeeded",
+      "workflowOperations": {
+        "Current_time": {
+          "validationState": "Succeeded"
+        },
+        "Recurrence": {
+          "validationState": "Succeeded"
+        }
+      },
+      "connections": {},
+      "parameters": {
+        "abc": {
+          "validationState": "Succeeded"
+        }
+      }
+    }
+  }
+}
