@@ -1,0 +1,35 @@
+{
+  "kind": "Stateful",
+  "definition": {
+    "metadata": {
+      "ExportMetadata": {
+        "ExportCorrelationId": "0535a709-8296-4ba1-a833-1fc98eca4ef7",
+        "ExportDate": "2025-05-11T19:04:44"
+      }
+    },
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "triggers": {
+      "Recurrence": {
+        "recurrence": {
+          "interval": 3,
+          "frequency": "Day"
+        },
+        "evaluatedRecurrence": {
+          "interval": 3,
+          "frequency": "Day"
+        },
+        "type": "Recurrence"
+      }
+    },
+    "actions": {
+      "Current_time": {
+        "runAfter": {},
+        "type": "Expression",
+        "kind": "CurrentTime",
+        "inputs": {}
+      }
+    },
+    "outputs": {}
+  }
+}
