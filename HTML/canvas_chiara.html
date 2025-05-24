@@ -1,0 +1,67 @@
+<canvas id="c" width=1000 height=1000></canvas>
+
+<script>
+  var canvas = document.getElementById("c");
+  var ctx = canvas.getContext("2d");
+  ctx.lineWidth = 0.5;
+  var i = 0;
+  var hash = "CHIARA";
+
+  function draw(text, font, x, y) {
+    ctx.beginPath();
+    ctx.font = font;
+    ctx.textAlign = "center";
+    ctx.strokeText(text, canvas.width / 2 + x, y);
+  }
+  draw(hash, "210px Arial", 0, 230);
+
+  pos = {x:270, y:80}
+  dir = {x:0, y:3}
+  ctx.moveTo(pos.x, pos.y)
+
+  function loop() {
+    ctx.lineTo(pos.x, pos.y)
+
+    if (i == 50) {
+      dir = {x:0, y:3}
+      pos = {x:370, y:80}
+      ctx.moveTo(pos.x, pos.y)
+    }
+    if (i == 100) {
+      dir = {x:0, y:3}
+      pos = {x:425, y:80}
+      ctx.moveTo(pos.x, pos.y)
+    }
+    if (i == 150) {
+      dir = {x:1.2, y:-3}
+      pos = {x:470, y:230}
+      ctx.moveTo(pos.x, pos.y)
+    }
+    if (i == 200) {
+      dir = {x:1.2, y:3}
+      pos = {x:530, y:80}
+      ctx.moveTo(pos.x, pos.y)
+    }
+    if (i == 250) {
+      dir = {x:0, y:3}
+      pos = {x:620, y:80}
+      ctx.moveTo(pos.x, pos.y)
+    }
+    if (i == 300) {
+      dir = {x:1.2, y:-3}
+      pos = {x:720, y:230}
+      ctx.moveTo(pos.x, pos.y)
+    }
+    if (i == 350) {
+      dir = {x:1.2, y:3}
+      pos = {x:820, y:80}
+      ctx.moveTo(pos.x, pos.y)
+    }
+    ctx.stroke();
+    i += 1;
+    pos.x += dir.x
+    pos.y += dir.y
+  }
+
+  setInterval(loop, 10);
+</script>
