@@ -5,7 +5,19 @@
   var ctx = canvas.getContext("2d");
   ctx.lineWidth = 0.5;
   var i = 0;
-  var hash = "CHIARA";
+  var moves = {
+    0:   { dir: {x:0, y:3}, pos: {x:270, y:80}},     // H
+    50:  { dir: {x:0, y:3}, pos: {x:370, y:80} },    // H
+    100: { dir: {x:0, y:3}, pos: {x:425, y:80} },    // I
+    150: { dir: {x:1.2, y:-3}, pos: {x:470, y:230} },// A
+    200: { dir: {x:1.2, y:3}, pos: {x:530, y:80} },  // A
+    250: { dir: {x:0, y:3}, pos: {x:620, y:80} },    // R
+    300: { dir: {x:1.2, y:1.2}, pos: {x:620, y:80} },  // R
+    350: { dir: {x:1.8, y:1.8}, pos: {x:620, y:140} }, // R
+    400: { dir: {x:1.2, y:-3}, pos: {x:765, y:230} },// A
+    450: { dir: {x:1.2, y:3}, pos: {x:825, y:80} },  // A
+    500: { dir: {x:16, y:0}, pos: {x:120, y:140} }   // -
+  }
 
   function draw(text, font, x, y) {
     ctx.beginPath();
@@ -13,55 +25,22 @@
     ctx.textAlign = "center";
     ctx.strokeText(text, canvas.width / 2 + x, y);
   }
-  draw(hash, "210px Arial", 0, 230);
-
-  pos = {x:270, y:80}
-  dir = {x:0, y:3}
-  ctx.moveTo(pos.x, pos.y)
+  draw( "CHIARA", "210px Arial", 0, 230);
 
   function loop() {
-    ctx.lineTo(pos.x, pos.y)
-
-    if (i == 50) {
-      dir = {x:0, y:3}
-      pos = {x:370, y:80}
+    if (i in moves) {
+      dir = moves[i].dir
+      pos = moves[i].pos
       ctx.moveTo(pos.x, pos.y)
-    }
-    if (i == 100) {
-      dir = {x:0, y:3}
-      pos = {x:425, y:80}
-      ctx.moveTo(pos.x, pos.y)
-    }
-    if (i == 150) {
-      dir = {x:1.2, y:-3}
-      pos = {x:470, y:230}
-      ctx.moveTo(pos.x, pos.y)
-    }
-    if (i == 200) {
-      dir = {x:1.2, y:3}
-      pos = {x:530, y:80}
-      ctx.moveTo(pos.x, pos.y)
-    }
-    if (i == 250) {
-      dir = {x:0, y:3}
-      pos = {x:620, y:80}
-      ctx.moveTo(pos.x, pos.y)
-    }
-    if (i == 300) {
-      dir = {x:1.2, y:-3}
-      pos = {x:720, y:230}
-      ctx.moveTo(pos.x, pos.y)
-    }
-    if (i == 350) {
-      dir = {x:1.2, y:3}
-      pos = {x:820, y:80}
-      ctx.moveTo(pos.x, pos.y)
+    } else if (i == 550) {
+      clearInterval(x)
     }
     ctx.stroke();
     i += 1;
     pos.x += dir.x
     pos.y += dir.y
+    ctx.lineTo(pos.x, pos.y)
   }
 
-  setInterval(loop, 10);
+  x = setInterval(loop, 10);
 </script>
