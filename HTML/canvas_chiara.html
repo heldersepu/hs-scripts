@@ -6,7 +6,7 @@
   ctx.lineCap = "round";
   ctx.globalAlpha = 0.2
   ctx.lineWidth = 8;
-  var i = -1;
+
   const moves = {
     0:   { dir: {x:0,   y:3},    pos: {x:270, y:80}},    // H
     50:  { dir: {x:0,   y:3},    pos: {x:370, y:80} },   // H
@@ -18,26 +18,32 @@
     350: { dir: {x:1.3, y:1.68}, pos: {x:565, y:150} },  // R
     400: { dir: {x:1.2, y:-3},   pos: {x:640, y:230} },  // A
     450: { dir: {x:1.2, y:3},    pos: {x:700, y:80} },   // A
-    500: { dir: {x:14,  y:0},    pos: {x:110, y:150} }  // --
+    500: { dir: {x:14,  y:0},    pos: {x:110, y:150} }, // -- 
+    550: { dir: {x:0,   y:0},    pos: {x:800, y:150} }  // 
   }
+
+  var i = -1;
+  var dir = {x:0,   y:0}
 
   function loop() {
     if (i in moves) {
-      dir = moves[i].dir
+      dir = moves[i].dir 
       pos = moves[i].pos
       ctx.moveTo(pos.x, pos.y)
     } else if (i == -1) {
       ctx.arc(200,155,75, 1,5.2)
-    } else if (i == 550 || i == 0) {
+    } else if (i == 650) {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       ctx.beginPath()
       i=-2
     }
-    ctx.stroke();
     i += 1;
-    pos.x += dir.x
-    pos.y += dir.y
-    ctx.lineTo(pos.x, pos.y)
+    if (dir.x + dir.y != 0) {
+      ctx.stroke();
+      pos.x += dir.x
+      pos.y += dir.y
+      ctx.lineTo(pos.x, pos.y)
+    }
   }
 
   x = setInterval(loop, 10);
