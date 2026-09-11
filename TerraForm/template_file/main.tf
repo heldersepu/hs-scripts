@@ -1,15 +1,22 @@
 variable "platform" {
-  type    = string
-  default = "gcp"
+  type      = string
+  sensitive = true
+  default   = "gcp"
 }
 
-data "template_file" "init" {
-  template = file("./test.sh")
-  vars = {
-    platform = var.platform
-  }
+locals {
+  template_file = templatefile(
+    "./test.sh",
+    { platform = var.platform }
+  )
+}
+
+resource "local_file" "example" {
+  filename = "./test.sh"
+  content  = local.template_file
 }
 
 output "file" {
-  value = data.template_file.init.rendered
+  value     = local.template_file
+  sensitive = true
 }
