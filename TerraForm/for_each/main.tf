@@ -17,8 +17,13 @@ resource "null_resource" "test" {
   }
 
   provisioner "local-exec" {
-    when    = "create"
-    command = "echo ${each.key} = ${each.value[0]}, ${each.value[1].key};"
+    when    = create
+    command = <<-EOT
+    echo ${each.key} = ${each.value[0]}, ${each.value[1].key};
+    if [ "${each.key}" == "a.2" ]; then
+      exit 1
+    fi
+    EOT
   }
 }
 
