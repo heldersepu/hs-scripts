@@ -17,3 +17,7 @@ locals {
 output "test" {
   value = local.expanded_names
 }
+
+output "Employees_Department" {
+  value = yamldecode(file("employees.yaml")).Employees[0].Department[0]
+}
